@@ -1,0 +1,23 @@
+version: "3" # Version of docker-compose
+
+services:
+  angular: # Name of service
+    build: angular-client # Specify directory of Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./angular-client:/app # Persist data and trigger recompilation in container on angular code change 
+
+  express: # Name of service
+    build: express-server
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./express-server:/usr/src/app # Persist data and trigger recompilation in container on server-side code change
+    links: 
+      - mongo
+
+  mongo: # Name of service
+    image: mongo # Image to build container from
+    ports:
+      - "27017:27017"
