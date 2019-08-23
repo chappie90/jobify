@@ -14,28 +14,38 @@
     margin: 0 1rem;
     font-size: $heading-small;
   }
+
+  &__list-item-link {
+    color: $black;
+  }
 }
 
 .header-secondary-jobseeker {
   display: flex;
   background-color: $jobseeker-red;
-  justify-content: flex-start;
 
   &__list-item {
     display: inline-block;
     margin: 0 1rem;
     font-size: $heading-small;
   }
+
+  &__list-item-link {
+    color: $white;
+  }
 }
 
 .header-secondary-employer {
   display: flex;
   background-color: $employer-green;
-  justify-content: flex-start;
 
   &__list-item {
     display: inline-block;
     margin: 0 1rem;
     font-size: $heading-small;
+  }
+
+  &__list-item-link {
+    color: $white;
   }
 }
