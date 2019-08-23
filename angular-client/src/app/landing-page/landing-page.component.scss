@@ -1,1 +1,30 @@
 @import '~src/styles.scss';
+
+.landing-page {
+  position: relative;
+
+  &__bg-top {
+    height: 80vh;
+    min-height: 60rem;
+    width: 100%;
+    background-color: $grey-light;
+  }
+
+  &__bg-bottom {
+    height: 20vh;
+    background-color: $grey-dark;
+  }
+
+  &__main {
+    position: absolute;
+    top: 14.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 70vh;
+    min-height: 40rem;
+    background-color: $white;
+    border-radius: 4px;
+  }
+}
+

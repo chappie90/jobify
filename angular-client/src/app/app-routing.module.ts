@@ -6,7 +6,7 @@ import { EmployerComponent } from './employer/employer.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent },
+  { path: '', component: LandingPageComponent, pathMatch: 'full' },
   { path: 'jobs', component: JobsComponent },
   { path: 'employer', component: EmployerComponent }
 ];

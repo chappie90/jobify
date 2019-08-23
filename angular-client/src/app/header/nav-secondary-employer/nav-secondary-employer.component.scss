@@ -1,6 +1,10 @@
 @import '~src/styles.scss';
 
 .nav-secondary-employer {
+  position: fixed;
+  top: 7.2rem;
+  left: 0;
+  width: 100%;
   display: flex;
   background-color: $employer-green;
 
