@@ -1,0 +1,16 @@
+@import '~src/styles.scss';
+
+.nav-secondary-employer {
+  display: flex;
+  background-color: $employer-green;
+
+  &__list-item {
+    display: inline-block;
+    margin: 0 1rem;
+    font-size: $heading-small;
+  }
+
+  &__list-item-link {
+    color: $white;
+  }
+}

@@ -1,0 +1,21 @@
+@import '~src/styles.scss';
+
+.nav-primary {
+  display: flex;
+  background-color: $white;
+  justify-content: flex-end;
+
+  &__list {
+    padding: 1rem 4rem;
+  }
+
+  &__list-item {
+    display: inline-block;
+    margin: 0 1rem;
+    font-size: $heading-small;
+  }
+
+  &__list-item-link {
+    color: $black;
+  }
+}
