@@ -1,0 +1,41 @@
+@import '~src/styles.scss';
+
+.header-primary {
+  display: flex;
+  background-color: $white;
+  justify-content: flex-end;
+
+  &__list {
+    padding: 1rem 4rem;
+  }
+
+  &__list-item {
+    display: inline-block;
+    margin: 0 1rem;
+    font-size: $heading-small;
+  }
+}
+
+.header-secondary-jobseeker {
+  display: flex;
+  background-color: $jobseeker-red;
+  justify-content: flex-start;
+
+  &__list-item {
+    display: inline-block;
+    margin: 0 1rem;
+    font-size: $heading-small;
+  }
+}
+
+.header-secondary-employer {
+  display: flex;
+  background-color: $employer-green;
+  justify-content: flex-start;
+
+  &__list-item {
+    display: inline-block;
+    margin: 0 1rem;
+    font-size: $heading-small;
+  }
+}

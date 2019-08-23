@@ -1,3 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~normalize.css';
 @import './sass/variables';
+
+html {
+  font-size: 62.5%; 
+}
+body {
+  font-family: $roboto;
+  font-size: 1.6rem;
+}
