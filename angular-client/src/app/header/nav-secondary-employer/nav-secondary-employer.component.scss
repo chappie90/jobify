@@ -8,13 +8,40 @@
   display: flex;
   background-color: $employer-green;
 
+  &__list {
+    margin: 0;
+  }
+
   &__list-item {
     display: inline-block;
-    margin: 0 1rem;
+    position: relative;
     font-size: $heading-small;
+   // cursor: pointer;
+
+    &:hover {
+      background-color: $employer-green-dark;
+    }
+
+    &:hover .caret-active {
+      border-top: 8px solid $employer-green-dark;
+    }
   }
 
   &__list-item-link {
+    padding: 1.5rem;
+    display: block;
     color: $white;
   }
+}
+.caret-active {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translate(-50%);
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid $employer-green;
 }

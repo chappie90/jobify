@@ -6,14 +6,13 @@
       <div class="landing-page__jobs-bg-small"></div>
       <div class="landing-page__jobs-bg-big"></div>
       <h2 class="heading-big jobseeker-heading">Get matched with a job you love</h2>
-      <button class="button button-jobseeker">Find jobs</button>
+      <a (mouseenter)="buttonRipple($event)" routerLink="/jobs" class="button button-jobseeker">Find jobs</a>
     </div>
-    <div class="landing-page__divider"></div>
     <div class="landing-page__employer">
       <div class="landing-page__employer-bg-small"></div>
       <div class="landing-page__employer-bg-big"></div>
       <h2 class="heading-big employer-heading">Hire the best and brightest talent</h2>
-      <button class="button button-employer">Post jobs</button>
+      <a routerLink="/employer" class="button button-employer">Post jobs</a>
     </div>
   </div>
 </div>

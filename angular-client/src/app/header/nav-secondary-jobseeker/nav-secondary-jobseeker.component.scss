@@ -8,13 +8,30 @@
   display: flex;
   background-color: $jobseeker-red;
 
+  &__list {
+    margin: 0;
+  }
+
   &__list-item {
     display: inline-block;
-    margin: 0 1rem;
     font-size: $heading-small;
+
+    &:last-of-type {
+      background-color: #702DBC;
+      
+      &:hover {
+        background-color: #503075;
+      }
+    }
+
+    &:hover {
+      background-color: $jobseeker-red-dark;
+    }
   }
 
   &__list-item-link {
+    padding: 1.5rem;
+    display: block;
     color: $white;
   }
 }
