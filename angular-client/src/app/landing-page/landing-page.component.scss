@@ -3,6 +3,28 @@
 .landing-page {
   position: relative;
 
+  .heading-big {
+    font-size: $heading-big;
+    color: $grey-dark;
+  }
+
+  .jobseeker-heading {
+    color: $jobseeker-red;
+
+    &::first-line {
+        color: $grey-dark;
+      }
+  }
+
+  .employer-heading {
+    color: $employer-green;
+
+    &::first-line {
+       color: $grey-dark;
+      }
+  }
+
+
   &__bg-top {
     height: 80vh;
     min-height: 60rem;
@@ -25,6 +47,131 @@
     min-height: 40rem;
     background-color: $white;
     border-radius: 4px;
+    border-bottom: none;
+    display: flex;
+    align-items: center;
+  }
+
+  &__jobs {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    flex: 1;
+    padding: 0 2rem;
+    height: 100%;
+    border-top: 8px solid $jobseeker-red-dark;
+   border-bottom: 8px solid transparent;
+  }
+
+  &__jobs-bg-small {
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+    left: 0;
+    height: 55%;
+    width: 100%;
+    background-color: $jobseeker-red-dark;
+    -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    -webkit-clip-path: polygon(50% 39%, 0% 100%, 100% 100%);
+clip-path: polygon(50% 39%, 0% 100%, 100% 100%);
+-webkit-clip-path: polygon(0 55%, 100% 24%, 100% 100%, 0% 100%);
+clip-path: polygon(0 55%, 100% 24%, 100% 100%, 0% 100%);
+
+  }
+
+  &__jobs-bg-big {
+    position: absolute;
+    z-index: -1;
+    bottom: 0;
+    left: 0;
+    height: 75%;
+    width: 100%;
+    background-color: $jobseeker-red-light;
+    -webkit-clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    -webkit-clip-path: polygon(50% 51%, 0% 100%, 100% 100%);
+clip-path: polygon(50% 51%, 0% 100%, 100% 100%);
+-webkit-clip-path: polygon(0 100%, 100% 24%, 100% 100%, 0% 100%);
+clip-path: polygon(0 100%, 100% 24%, 100% 100%, 0% 100%);
+-webkit-clip-path: polygon(0 100%, 63% 45%, 100% 100%, 0% 100%);
+clip-path: polygon(0 100%, 63% 45%, 100% 100%, 0% 100%);
+// -webkit-clip-path: polygon(46% 79%, 100% 37%, 100% 100%, 0% 100%);
+// clip-path: polygon(46% 79%, 100% 37%, 100% 100%, 0% 100%);
+// -webkit-clip-path: polygon(83% 76%, 100% 37%, 100% 100%, 0% 100%);
+// clip-path: polygon(83% 76%, 100% 37%, 100% 100%, 0% 100%);
+-webkit-clip-path: polygon(100% 44%, 0 67%, 30% 100%);
+clip-path: polygon(100% 44%, 0 67%, 30% 100%);
+  }
+
+  &__divider {
+    // width: 2px;
+    // height: 100%;
+    // background-color: $grey-medium;
+  }
+
+  &__employer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    flex: 1;
+    height: 100%;
+    border-bottom: 8px solid $employer-green-dark;
+    border-top: 8px solid transparent;
+  }
+
+  &__employer-bg-small {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    height: 45%;
+    width: 100%;  
+    background-color: $employer-green;
+    -webkit-clip-path: circle(50% at 94% 5%);
+    clip-path: circle(50% at 94% 5%);
+    -webkit-clip-path: circle(28.8% at 94% 5%);
+clip-path: circle(28.8% at 94% 5%);
+  }
+
+  &__employer-bg-big {
+    position: absolute;
+    z-index: -2;
+    top: 0;
+    left: 0;
+    height: 45%;
+    width: 100%;  
+    background-color: $employer-green-light;
+    -webkit-clip-path: circle(47.0% at 94% 5%);
+clip-path: circle(47.0% at 94% 5%);
+
+
+  }
+
+  .button {
+    width: 20rem; 
+    padding: 1rem;
+    border: none;
+    border-radius: 4px;
+    outline: 0;
+    cursor: pointer;
+    color: $white;
+  }
+
+  .button-jobseeker {
+    background-color: $grey-light;
+    border: 2px solid $grey-medium;
+    color: $grey-dark;
+  }
+
+  .button-employer {
+    background-color: $employer-green-dark;
   }
 }
 

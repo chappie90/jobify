@@ -9,6 +9,12 @@ body {
   font-family: $roboto;
   font-size: 1.6rem;
 }
+h1, h2, h3, h4 {
+  font-family: $roboto-slab;
+}
 a {
   text-decoration: none;
+}
+button {
+  font-weight: $roboto-bold;
 }
