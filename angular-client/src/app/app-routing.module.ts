@@ -10,9 +10,13 @@ import { PremiumComponent } from './jobseeker/premium/premium.component';
 import { ProductsComponent } from './employer/products/products.component';
 import { PricingComponent } from './employer/pricing/pricing.component';
 import { PostJobComponent } from './employer/post-job/post-job.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent, pathMatch: 'full' },
+  { path: 'login', component: LoginComponent},
+  { path: 'signup', component: SignupComponent },
   { path: 'jobs', component: JobsComponent },
   { path: 'cv', component: UploadCVComponent },
   { path: 'market-insights', component: MarketInsightsComponent },

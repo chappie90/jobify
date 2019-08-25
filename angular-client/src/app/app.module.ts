@@ -16,6 +16,8 @@ import { EmployerComponent } from './employer/employer.component';
 import { ProductsComponent } from './employer/products/products.component';
 import { PricingComponent } from './employer/pricing/pricing.component';
 import { PostJobComponent } from './employer/post-job/post-job.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { PostJobComponent } from './employer/post-job/post-job.component';
     EmployerComponent,
     ProductsComponent,
     PricingComponent,
-    PostJobComponent
+    PostJobComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
