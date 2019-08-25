@@ -16,11 +16,13 @@ export class NavPrimaryComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Show loading indicator
-        this.jobsSection = event.url === '/jobs';
-        this.employerSection = event.url === '/employer';
-        console.log(this.jobsSection);
-        console.log(this.employerSection);
-        console.log(event.url);
+        this.jobsSection = event.url === '/jobs'
+                          || event.url === '/cv' 
+                          || event.url === '/market-insights' 
+                          || event.url === '/premium';
+        this.employerSection = event.url === '/employer/products' 
+                              || event.url === '/employer/pricing' 
+                              || event.url === '/employer/post-job';
       }
 
       if (event instanceof NavigationEnd) {

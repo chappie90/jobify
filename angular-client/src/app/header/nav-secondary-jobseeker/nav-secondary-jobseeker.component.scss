@@ -33,5 +33,24 @@
     padding: 1.5rem;
     display: block;
     color: $white;
+
+    &-active {
+      background-color: $jobseeker-red-dark;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translate(-50%);
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid $jobseeker-red-dark;
+      }
+    }
   }
 }

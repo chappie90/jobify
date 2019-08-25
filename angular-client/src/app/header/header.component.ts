@@ -13,11 +13,18 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
+    console.log(2 || 3);
+
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Show loading indicator
-        this.jobsSection = event.url === '/jobs';
-        this.employerSection = event.url === '/employer';
+        this.jobsSection = event.url === '/jobs'
+                          || event.url === '/cv' 
+                          || event.url === '/market-insights' 
+                          || event.url === '/premium';
+        this.employerSection = event.url === '/employer/products' 
+                              || event.url === '/employer/pricing' 
+                              || event.url === '/employer/post-job';
       }
 
       if (event instanceof NavigationEnd) {

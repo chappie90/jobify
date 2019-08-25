@@ -1,14 +1,22 @@
 <nav class="nav-secondary-employer">
   <ul class="nav-secondary-employer__list">
     <li class="nav-secondary-employer__list-item">
-      <a class="nav-secondary-employer__list-item-link" href="#">Post an ad</a>
-      <div class="caret-active"></div>
+      <a 
+        routerLink="/employer/products"
+        routerLinkActive="nav-secondary-employer__list-item-link-active"
+        class="nav-secondary-employer__list-item-link">Products</a>
     </li>
     <li class="nav-secondary-employer__list-item">
-      <a class="nav-secondary-employer__list-item-link" href="#">Products</a>
+      <a 
+        routerLink="/employer/pricing"
+        routerLinkActive="nav-secondary-employer__list-item-link-active"
+        class="nav-secondary-employer__list-item-link">Pricing</a>
     </li>
     <li class="nav-secondary-employer__list-item">
-      <a class="nav-secondary-employer__list-item-link" href="#">Pricing</a>
+      <a 
+        routerLink="/employer/post-job"
+        routerLinkActive="nav-secondary-employer__list-item-link-active"
+        class="nav-secondary-employer__list-item-link">Post a job</a>
     </li>
   </ul>
 </nav>
