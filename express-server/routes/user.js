@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
@@ -43,9 +44,15 @@ router.post('/login', (req, res, next) => {
           message: 'Invalid user'
         });
       }
+      const token = jwt.sign(
+        { email: fetchedUser.email, userId: fetchedUser._id },
+        '$2a$10$6W2pTUnnytF1pnTBdgQm9e',
+        { expiresIn: '1h' }
+      );
       res.status(200).json({
-        message: 'Logged in',
-        data: fetchedUser
+        token: token,
+        expiresIn: 3600,
+        userId: fetchedUser._id
       });
     })
     .catch(err => {

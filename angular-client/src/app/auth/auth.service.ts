@@ -30,7 +30,7 @@ export class AuthService {
         console.log(response);
         this.isAuthenticated = true;
         this.authStatusListener.next(true);
-     //   this.router.navigate(['/']);
+        this.router.navigate(['/']);
       },
       error => {
         console.log(error);
@@ -45,8 +45,7 @@ export class AuthService {
       response => {
         this.isAuthenticated = true;
         this.authStatusListener.next(true);
-        console.log(response);
-     //   this.router.navigate(['/']);
+        this.router.navigate(['/']);
       },
       error => {
         this.authStatusListener.next(false);
