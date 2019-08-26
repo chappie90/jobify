@@ -25,4 +25,34 @@ router.post('/signup', (req, res, next) => {
     });
 });
 
+router.post('/login', (req, res, next) => {
+  let fetchedUser;
+  User.findOne({ email: req.body.email })
+    .then(user => {
+      if (!user) {
+        return res.status(401).json({
+          message: 'Invalid user'
+        });
+      }
+      fetchedUser = user;
+      return bcrypt.compare(req.body.password, user.password);
+    })
+    .then(result => {
+      if (!result) {
+        return res.status(401).json({
+          message: 'Invalid user'
+        });
+      }
+      res.status(200).json({
+        message: 'Logged in',
+        data: fetchedUser
+      });
+    })
+    .catch(err => {
+      res.status(401).json({
+        message: 'Invalid user'
+      });
+    })
+});
+
 module.exports = router;
