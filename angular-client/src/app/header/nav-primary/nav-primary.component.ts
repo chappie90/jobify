@@ -12,6 +12,7 @@ import { AuthService } from '../../auth/auth.service';
 export class NavPrimaryComponent implements OnInit, OnDestroy {
   jobsSection: boolean;
   employerSection: boolean;
+  token;
   isAuthenticated = false;
   private authStatusSub: Subscription;
 
@@ -42,12 +43,24 @@ export class NavPrimaryComponent implements OnInit, OnDestroy {
         console.log(event.error);
       }
     });
-    this.isAuthenticated = this.authService.getIsAuth();
+    this.checkToken();
+  //  this.isAuthenticated = this.authService.getIsAuth();
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
       authStatus => {
         this.isAuthenticated = authStatus;
       }
     );
+  }
+
+  checkToken() {
+    this.token = this.authService.getAuthData();
+    if (this.token) {
+      this.isAuthenticated = true;
+    }
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 
   ngOnDestroy() {

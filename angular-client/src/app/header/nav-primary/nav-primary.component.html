@@ -22,5 +22,10 @@
         routerLink="/signup"
         class="nav-primary__list-item-link nav-primary__list-item-link--signup">Sign up</a>
     </li>
+    <li *ngIf="isAuthenticated" class="nav-primary__list-item">
+      <a 
+        (click)='onLogout()'
+        class="nav-primary__list-item-link">Log out</a>
+    </li>
   </ul>
 </nav>
