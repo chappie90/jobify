@@ -10,10 +10,11 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./nav-primary.component.scss']
 })
 export class NavPrimaryComponent implements OnInit, OnDestroy {
-  jobsSection: boolean;
-  employerSection: boolean;
-  token;
-  isAuthenticated = false;
+  private jobsSection: boolean;
+  private employerSection: boolean;
+  private token;
+  private isAuthenticated = false;
+  private openDropdown = false;
   private authStatusSub: Subscription;
 
   constructor(private router: Router,
@@ -58,7 +59,7 @@ export class NavPrimaryComponent implements OnInit, OnDestroy {
       this.isAuthenticated = true;
     }
   }
-
+  
   onLogout() {
     this.authService.logout();
   }

@@ -10,6 +10,10 @@
   background-color: $white;
   justify-content: flex-end;
 
+  ul {
+    list-style-type: none;
+  }
+
   &__list {
     padding: 1rem 4rem;
   }
@@ -17,7 +21,7 @@
   &__list-item {
     display: inline-block;
     margin: 0 1rem;
-    font-size: $heading-small;
+    position: relative;
   }
 
   &__list-item-link {
@@ -25,19 +29,51 @@
     padding: .8rem 1.2rem;
     border-radius: 4px;
     cursor: pointer;
+
+    &--profile::before {
+      font-family: "Font Awesome 5 Free";
+      content:  "\f007";
+      font-weight: 900;
+      margin-right: .5rem;
+      color: $grey-dark;
+    }
+    &--profile::after {
+     font-family: "Font Awesome 5 Free";
+     font-weight: 900;
+     content:  "\f0d7";
+     color: $grey-dark;
+    }
   }
-
-  // &__list-item-link-switch-jobseeker {
-  //   border: 2px solid $jobseeker-red;
-  //   padding: .7rem;
-  // }
-
-  // &__list-item-link-switch-employer {
-  //   border: 2px solid $employer-green;
-  //   padding: .7rem;
-  // }
 
   &__list-item-link--signup {
     background-color: $unifier-orange;
   }
+
+  &__profile-list {
+    position: absolute;
+    text-align: center;
+    width: 12rem;
+    bottom: -11rem;
+    left: -5rem;
+    padding: 0.8rem 0;
+    -webkit-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
+    -moz-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
+    box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
+    border-radius: 4px;
+    background-color: $grey-dark;
+    display: none;
+  }
+
+   &__profile-list-open {
+    display: block;  
+    }
+
+  &__profile-list-item {
+    padding: .5rem 1rem;
+  }
+
+  &__profile-list-item-link {
+    color: $white;
+    cursor: pointer;
+  } 
 }

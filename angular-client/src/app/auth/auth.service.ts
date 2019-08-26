@@ -11,7 +11,7 @@ const API_URL = environment.API + '/user';
 export class AuthService {
   private isAuthenticated = false;
   private token: string;
-  private tokenTimer: string;
+  private tokenTimer: any;
   private userId: string;
   private authStatusListener = new Subject<boolean>();
 
@@ -44,7 +44,8 @@ export class AuthService {
 
   login(email: string, password: string) {
     const loginData = { email: email, password: password };
-    this.http.post(API_URL + '/login', loginData).subscribe(
+    this.http.post<{ token: string; expiresIn: number; userId: string; }>
+      (API_URL + '/login', loginData).subscribe(
       response => {
         this.token = response.token;
         if (this.token) {

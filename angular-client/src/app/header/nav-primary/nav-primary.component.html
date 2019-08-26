@@ -23,9 +23,26 @@
         class="nav-primary__list-item-link nav-primary__list-item-link--signup">Sign up</a>
     </li>
     <li *ngIf="isAuthenticated" class="nav-primary__list-item">
-      <a 
-        (click)='onLogout()'
-        class="nav-primary__list-item-link">Log out</a>
+      <a
+        class="nav-primary__list-item-link nav-primary__list-item-link--profile">User 
+        <ul appDropdown class="nav-primary__profile-list">
+          <li class="nav-primary__profile-list-item">
+            <a 
+              routerLink="/jobs"
+              class="nav-primary__profile-list-item-link">Saved jobs</a>
+          </li>
+          <li class="nav-primary__profile-list-item">
+            <a
+              routerLink="/jobs" 
+              class="nav-primary__profile-list-item-link">My profile</a>
+          </li>
+          <li class="nav-primary__profile-list-item">
+            <a 
+              (click)='onLogout()'
+              class="nav-primary__profile-list-item-link">Log out</a>
+          </li>
+        </ul>
+        </a>
     </li>
   </ul>
 </nav>
