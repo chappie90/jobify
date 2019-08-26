@@ -53,8 +53,8 @@
     position: absolute;
     text-align: center;
     width: 12rem;
-    bottom: -11rem;
-    left: -5rem;
+    bottom: -13.6rem;
+    left: -4.4rem;
     padding: 0.8rem 0;
     -webkit-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
     -moz-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
@@ -64,16 +64,18 @@
     display: none;
   }
 
-   &__profile-list-open {
+  &__profile-list-open {
     display: block;  
-    }
-
-  &__profile-list-item {
-    padding: .5rem 1rem;
   }
 
   &__profile-list-item-link {
-    color: $white;
+    color: $grey-light;
     cursor: pointer;
+    display: block;
+    padding: .9rem;
+
+    &:hover {
+      color: $unifier-orange;
+    }
   } 
 }
