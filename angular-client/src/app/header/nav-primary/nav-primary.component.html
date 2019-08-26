@@ -12,12 +12,12 @@
         class="nav-primary__list-item-link nav-primary__list-item-link-switch-jobseeker" 
         >Jobseekers</a>
     </li>
-    <li class="nav-primary__list-item">
+    <li *ngIf="!isAuthenticated" class="nav-primary__list-item">
       <a 
         routerLink="/login"
         class="nav-primary__list-item-link">Log in</a>
     </li>
-    <li class="nav-primary__list-item">
+    <li *ngIf="!isAuthenticated" class="nav-primary__list-item">
       <a 
         routerLink="/signup"
         class="nav-primary__list-item-link nav-primary__list-item-link--signup">Sign up</a>

@@ -9,10 +9,15 @@ const API_URL = environment.API + '/user';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  private isAuthenticated = false;
   private authStatusListener = new Subject<boolean>();
 
   constructor(private http: HttpClient,
               private router: Router) {}
+
+  getIsAuth() {
+    return this.isAuthenticated;
+  }
 
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
@@ -23,8 +28,9 @@ export class AuthService {
     this.http.post(API_URL + '/signup', signupData).subscribe(
       (response) => {
         console.log(response);
+        this.isAuthenticated = true;
         this.authStatusListener.next(true);
-        this.router.navigate(['/']);
+     //   this.router.navigate(['/']);
       },
       error => {
         console.log(error);
@@ -37,9 +43,10 @@ export class AuthService {
     const loginData = { email: email, password: password };
     this.http.post(API_URL + '/login', loginData).subscribe(
       response => {
+        this.isAuthenticated = true;
         this.authStatusListener.next(true);
         console.log(response);
-        this.router.navigate(['/']);
+     //   this.router.navigate(['/']);
       },
       error => {
         this.authStatusListener.next(false);
