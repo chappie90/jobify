@@ -32,4 +32,18 @@ export class AuthService {
       }
     );
   }
+
+  login(email: string, password: string) {
+    const loginData = { email: email, password: password };
+    this.http.post(API_URL + '/login', loginData).subscribe(
+      response => {
+        this.authStatusListener.next(true);
+        console.log(response);
+        this.router.navigate(['/']);
+      },
+      error => {
+        this.authStatusListener.next(false);
+      }
+    ); 
+  }
 }

@@ -1,5 +1,18 @@
-<form>
-  <input type="email" name="email" placeholder="Email" required>
-  <input type="password" name="password" placeholder="Password" required>
+<form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+  <input 
+    type="email" 
+    name="email" 
+    placeholder="Email" 
+    ngModel
+    #emailInput="ngModel"
+    required
+    email>
+  <input 
+    type="password" 
+    name="password" 
+    placeholder="Password" 
+    ngModel
+    #passwordInput="ngModel"
+    required>
   <button>Log in</button>
 </form>
