@@ -3,18 +3,42 @@
 @import './sass/variables';
 
 html {
-  font-size: 62.5%; 
+  font-size: 62.5%; // 1rem = 10px
+  box-sizing: border-box; 
 }
 body {
   font-family: $roboto;
   font-size: 1.6rem;
+  color: $grey-dark;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 h1, h2, h3, h4 {
   font-family: $roboto-slab;
+}
+.heading-big {
+  font-size: $heading-big;
+}
+.heading-medium {
+  font-size: $heading-medium;
+}
+.heading-small {
+  font-size: $heading-small;
+}
+.heading-extra-small {
+  font-size: $heading-extra-small;
 }
 a {
   text-decoration: none;
 }
 button {
   font-weight: $roboto-bold;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
