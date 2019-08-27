@@ -15,25 +15,28 @@
     <form class="signup__form" (submit)="onSignup(signupForm)" #signupForm="ngForm">
       <div class="signup__input-group">
         <input 
+          id="emailJob"
           type="email" 
           name="email" 
           class="signup__form-input"
           ngModel
-          (change)="getEmailValue(emailInput.value)"
+          (change)="getEmailValueJob(emailInput.value)"
           #emailInput="ngModel"
           required
           email>
-        <label class="signup__label" for="email">Email</label>
+        <label [ngClass]="{'signup__label--not-empty': emailInputEmptyJob}" class="signup__label" for="emailJob">Email</label>
       </div>
       <div class="signup__input-group">
         <input 
+          id="passJob"
           type="password" 
           name="password" 
           class="signup__form-input"
           ngModel
+          (change)="getPassValueJob(passwordInput.value)"
           #passwordInput="ngModel"
           required>
-        <label class="signup__label" for="password">Password</label>
+        <label [ngClass]="{'signup__label--not-empty': passInputEmptyJob}" class="signup__label" for="passJob">Password</label>
       </div>
       <button class="button signup__button">Sign up</button>
     </form>
@@ -54,28 +57,32 @@
     <form class="signup__form" (submit)="onSignup(signupForm)" #signupForm="ngForm">
       <div class="signup__input-group">
         <input 
+          id="emailEmp"
           type="email" 
           name="email" 
           class="signup__form-input"
           ngModel
-          (change)="getEmailValue(emailInput.value)"
+          (change)="getEmailValueEmp(emailInput.value)"
           #emailInput="ngModel"
           required
           email>
-        <label class="signup__label" for="email">Email</label>
+        <label  [ngClass]="{'signup__label--not-empty': emailInputEmptyEmp}" class="signup__label" for="emailEmp">Email</label>
       </div>
       <div class="signup__input-group">
         <input 
+          id="passEmp"
           type="password" 
           name="password" 
           class="signup__form-input"
           ngModel
+          (change)="getPassValueEmp(passwordInput.value)"
           #passwordInput="ngModel"
           required>
-        <label class="signup__label" for="password">Password</label>
+        <label  [ngClass]="{'signup__label--not-empty': passInputEmptyEmp}" class="signup__label" for="passEmp">Password</label>
       </div>
       <button class="button signup__button">Sign up</button>
     </form>
   </div>
+  <p>Already have an account? <a class="signup__login-link" routerLink="/login">Log in</a></p>
 </div>
     

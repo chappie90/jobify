@@ -12,6 +12,10 @@ import { AuthService } from '../auth.service';
 })
 export class SignupComponent implements OnInit, OnDestroy {
   private jobsSection: boolean = true;
+  private emailInputEmptyJob: boolean;
+  private emailInputEmptyEmp: boolean;
+  private passInputEmptyJob: boolean;
+  private passInputEmptyEmp: boolean;
   private authStatusSub: Subscription;
 
   constructor(private router: Router,
@@ -27,7 +31,26 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   switchTab() {
     this.jobsSection = !this.jobsSection;
-    console.log(this.jobsSection);
+    this.emailInputEmptyJob = false;
+    this.passInputEmptyJob = false;
+    this.passInputEmptyEmp = false;
+    this.emailInputEmptyEmp = false;
+  }
+
+  getEmailValueJob(value) {
+    this.emailInputEmptyJob = value ? true : false;
+  }
+
+  getEmailValueEmp(value) {
+    this.emailInputEmptyEmp = value ? true : false;
+  }
+
+  getPassValueJob(value) {
+    this.passInputEmptyJob = value ? true : false;
+  }
+
+  getPassValueEmp(value) {
+    this.passInputEmptyEmp = value ? true : false;
   }
 
   ngOnDestroy() {

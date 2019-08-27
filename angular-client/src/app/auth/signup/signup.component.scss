@@ -22,13 +22,13 @@
       padding: 1.5rem;
       text-align: center;
       background-color: $white;
+      font-weight: bold;
       color: $grey-dark;
     }
 
     .signup__employer-tab {
       flex: 1;
       padding: 1.5rem;    
-      font-weight: bold;
       text-align: center;
       background-color: $grey-medium;
       color: $grey-dark;
@@ -154,6 +154,17 @@
 
   p {
     margin: 1rem;
+  }
+
+
+  &__login-link {
+    color: $unifier-orange;
+    font-weight: bold;
+
+    &:hover {
+      opacity: .8;
+      text-decoration: underline;
+    }
   }
 
 }
