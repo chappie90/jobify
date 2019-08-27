@@ -10,6 +10,8 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit, OnDestroy {
+  private emailInputEmpty: boolean;
+  private passInputEmpty: boolean;
   private authStatusSub: Subscription;
 
   constructor(private authService: AuthService) {}
@@ -20,6 +22,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
       }
     );
+  }
+
+  getEmailValue(value) {
+    this.emailInputEmpty = value ? true : false;
+  }
+
+  getPassValue(value) {
+    this.passInputEmpty = value ? true : false;
   }
 
   onLogin(form: NgForm) {
