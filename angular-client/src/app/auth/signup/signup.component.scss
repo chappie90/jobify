@@ -156,6 +156,20 @@
     margin: 1rem;
   }
 
+  &__form-input-checkbox {
+    width: auto;
+  }
+
+  &__terms-link {
+    color: #2AA3DD;
+    
+    &:hover {
+      opacity: .8;
+      text-decoration: underline;
+    }
+
+  }
+
 
   &__login-link {
     color: $unifier-orange;

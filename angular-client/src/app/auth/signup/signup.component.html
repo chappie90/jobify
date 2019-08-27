@@ -38,6 +38,15 @@
           required>
         <label [ngClass]="{'signup__label--not-empty': passInputEmptyJob}" class="signup__label" for="passJob">Password</label>
       </div>
+      <div class="signup__input-group">
+        <input 
+          type="checkbox" 
+          name="terms" 
+          class="signup__form-input signup__form-input-checkbox" 
+          ngModel
+          #termsInput="ngModel"
+          required>I have read and agree to Jobify's <a class="signup__terms-link" routerLink="/">terms of use</a> and <a class="signup__terms-link" routerLink="/">privacy policy</a>. 
+      </div>
       <button class="button signup__button">Sign up</button>
     </form>
   </div>
@@ -79,6 +88,15 @@
           #passwordInput="ngModel"
           required>
         <label  [ngClass]="{'signup__label--not-empty': passInputEmptyEmp}" class="signup__label" for="passEmp">Password</label>
+      </div>
+      <div class="signup__input-group">
+        <input 
+          type="checkbox" 
+          name="terms" 
+          class="signup__form-input signup__form-input-checkbox" 
+          ngModel
+          #termsInput="ngModel"
+          required>I have read and agree to Jobify's <a class="signup__terms-link" routerLink="/">terms of use</a> and <a class="signup__terms-link" routerLink="/">privacy policy</a>. 
       </div>
       <button class="button signup__button">Sign up</button>
     </form>
