@@ -1,18 +1,81 @@
-<form (submit)="onSignup(signupForm)" #signupForm="ngForm">
-  <input 
-    type="email" 
-    name="email" 
-    placeholder="Email" 
-    ngModel
-    #emailInput="ngModel"
-    required
-    email>
-  <input 
-    type="password" 
-    name="password" 
-    placeholder="Password" 
-    ngModel
-    #passwordInput="ngModel"
-    required>
-  <button>Sign up</button>
-</form>
+<div class="signup">
+  <div *ngIf="jobsSection" class="signup__form-container--jobseeker">
+    <div class="signup__tabs">
+      <a         
+        class="heading-small signup__jobseeker-tab">
+        Jobseeker
+      </a>
+      <a 
+        (click)="switchTab()"
+        class="heading-small signup__employer-tab">
+        Employer
+      </a>
+    </div>
+    <h2 class="heading-medium">Sign up</h2>
+    <form class="signup__form" (submit)="onSignup(signupForm)" #signupForm="ngForm">
+      <div class="signup__input-group">
+        <input 
+          type="email" 
+          name="email" 
+          class="signup__form-input"
+          ngModel
+          (change)="getEmailValue(emailInput.value)"
+          #emailInput="ngModel"
+          required
+          email>
+        <label class="signup__label" for="email">Email</label>
+      </div>
+      <div class="signup__input-group">
+        <input 
+          type="password" 
+          name="password" 
+          class="signup__form-input"
+          ngModel
+          #passwordInput="ngModel"
+          required>
+        <label class="signup__label" for="password">Password</label>
+      </div>
+      <button class="button signup__button">Sign up</button>
+    </form>
+  </div>
+  <div *ngIf="!jobsSection" class="signup__form-container--employer">
+    <div class="signup__tabs">
+      <a 
+        (click)="switchTab()"
+        class="heading-small signup__jobseeker-tab">
+        Jobseeker
+      </a>
+      <a 
+        class="heading-small signup__employer-tab">
+        Employer
+      </a>
+    </div>
+    <h2 class="heading-medium">Sign up</h2>
+    <form class="signup__form" (submit)="onSignup(signupForm)" #signupForm="ngForm">
+      <div class="signup__input-group">
+        <input 
+          type="email" 
+          name="email" 
+          class="signup__form-input"
+          ngModel
+          (change)="getEmailValue(emailInput.value)"
+          #emailInput="ngModel"
+          required
+          email>
+        <label class="signup__label" for="email">Email</label>
+      </div>
+      <div class="signup__input-group">
+        <input 
+          type="password" 
+          name="password" 
+          class="signup__form-input"
+          ngModel
+          #passwordInput="ngModel"
+          required>
+        <label class="signup__label" for="password">Password</label>
+      </div>
+      <button class="button signup__button">Sign up</button>
+    </form>
+  </div>
+</div>
+    

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '../auth.service';
@@ -10,9 +11,11 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit, OnDestroy {
+  private jobsSection: boolean = true;
   private authStatusSub: Subscription;
 
-  constructor(private authService: AuthService) {}
+  constructor(private router: Router,
+              private authService: AuthService) {}
 
   ngOnInit() {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
@@ -22,12 +25,9 @@ export class SignupComponent implements OnInit, OnDestroy {
     );  
   }
 
-  onSignup(form: NgForm) {
-    if (form.invalid) {
-      return;
-    }
-    console.log(form);
-    this.authService.createUser(form.value.email, form.value.password);
+  switchTab() {
+    this.jobsSection = !this.jobsSection;
+    console.log(this.jobsSection);
   }
 
   ngOnDestroy() {
