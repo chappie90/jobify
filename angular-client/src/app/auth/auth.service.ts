@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 import { environment } from '../../environments/environment';
+import { User } from './user.model';
 
 const API_URL = environment.API + '/user'; 
 
@@ -26,9 +27,9 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  createUser(email: string, password: string) {
-    const signupData = { email: email, password: password };
-    this.http.post(API_URL + '/signup', signupData).subscribe(
+  createUser(email: string, password: string, type: string) {
+    const userData = { email: email, password: password, type: 'jobseeker' };
+    this.http.post(API_URL + '/signup', userData).subscribe(
       (response) => {
         console.log(response);
         this.isAuthenticated = true;

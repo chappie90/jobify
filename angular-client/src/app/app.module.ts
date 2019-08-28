@@ -21,6 +21,7 @@ import { PostJobComponent } from './employer/post-job/post-job.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { DropdownDirective } from './shared/dropdown.directive';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { DropdownDirective } from './shared/dropdown.directive';
     PostJobComponent,
     LoginComponent,
     SignupComponent,
-    DropdownDirective
+    DropdownDirective,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
