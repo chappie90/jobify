@@ -11,9 +11,11 @@
           ngModel
           (change)="getEmailValue(emailInput.value)"
           #emailInput="ngModel"
+          [ngClass]="{'ng-invalid ng-dirty': emailInput.invalid && formSubmitted}"
           required
           email>
         <label [ngClass]="{'login__label--not-empty': emailInputEmpty}" class="login__label" for="email">Email</label>
+        <span *ngIf="(emailInput.invalid && emailInput.dirty) || (emailInput.invalid && formSubmitted)" class="login__error">Enter valid email</span>
       </div>
       <div class="login__input-group">
         <input
@@ -24,8 +26,10 @@
           ngModel
           (change)="getPassValue(passwordInput.value)"
           #passwordInput="ngModel"
+          [ngClass]="{'ng-invalid ng-dirty': passwordInput.invalid && formSubmitted}"
           required>
         <label [ngClass]="{'login__label--not-empty': passInputEmpty}" class="login__label" for="password">Password</label>
+        <span *ngIf="(passwordInput.invalid && passwordInput.dirty) || (passwordInput.invalid && formSubmitted)" class="login__error">Enter valid password</span>
       </div>
       <button class="button login__button">Log in</button>
     </form>

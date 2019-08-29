@@ -16,9 +16,6 @@
     background-color: $white;
     border: 1px solid $grey-medium;
     border-radius: 4px;
-    // -webkit-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
-    // -moz-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
-    // box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
   }
 
   .heading-medium {
@@ -104,6 +101,13 @@
     transform: translateX(-2rem) translateY(-3.5rem);
     font-size: 1.4rem;
     font-weight: bold;
+  }
+
+  &__error {
+    text-align: left;
+    display: block;
+    margin-left: 2rem;
+    color: $jobseeker-red-dark;
   }
 
   &__button {

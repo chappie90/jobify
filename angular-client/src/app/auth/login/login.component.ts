@@ -12,6 +12,7 @@ import { AuthService } from '../auth.service';
 export class LoginComponent implements OnInit, OnDestroy {
   private emailInputEmpty: boolean;
   private passInputEmpty: boolean;
+  private formSubmitted: boolean = false;
   private authStatusSub: Subscription;
 
   constructor(private authService: AuthService) {}
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onLogin(form: NgForm) {
     if (form.invalid) {
+      this.formSubmitted = true;
       return;
     }
     this.authService.login(form.value.email, form.value.password);
