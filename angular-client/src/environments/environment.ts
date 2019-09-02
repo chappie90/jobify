@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  API: 'http://localhost:3000/api'
+  API: 'http://localhost:3000/api',
+  googleAuthClientId: '512923305156-97lqdnfddn8ilnf7qemr6lj36dig8830.apps.googleusercontent.com',
+  googleAuthClientSecret: 'kT-G5rsXEdGT0Fw5QkyMLT02'
 };
 
 /*

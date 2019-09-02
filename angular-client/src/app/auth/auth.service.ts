@@ -11,10 +11,12 @@ const API_URL = environment.API + '/user';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private isAuthenticated = false;
+  // private isGoogleAuth: boolean = false;
   private token: string;
   private tokenTimer: any;
   private userId: string;
   private authStatusListener = new Subject<boolean>();
+  // private googleAuthStatusListener = new Subject<boolean>();
 
   constructor(private http: HttpClient,
               private router: Router) {}
@@ -26,6 +28,15 @@ export class AuthService {
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
   }
+
+  // getGoogleAuthStatusListener() {
+  //   return this.googleAuthStatusListener.asObservable();
+  // }
+
+  // checkGoogleAuth(isGoogleAuth) {
+  //   this.isGoogleAuth = isGoogleAuth;
+  //   console.log(this.isGoogleAuth);
+  // }
 
   createUser(email: string, password: string, type: string) {
     const userData = { email: email, password: password, type: 'jobseeker' };
@@ -67,6 +78,16 @@ export class AuthService {
         this.authStatusListener.next(false);
       }
     ); 
+  }
+
+  googleSignIn(email: string, token: string, type: string) {
+    const googleSigninData = { email: email, token: token, type: 'jobseeker' };
+    this.http.post<{ token: string; expiresIn: number; userId: string; }>
+      (API_URL + '/google-login', googleSigninData).subscribe(
+        response => {
+          console.log(response);
+        }
+      );
   }
 
   logout() {
@@ -111,4 +132,6 @@ export class AuthService {
     localStorage.removeItem('tokenExpirationDate');
     localStorage.removeItem('userId');
   }
+
+
 }

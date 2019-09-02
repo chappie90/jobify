@@ -6,9 +6,9 @@
   background-color: $grey-light;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  padding: 20rem 2rem;
+  padding: 15rem 2rem;
 
   &__form-container--jobseeker {
     width: 100%;
@@ -152,6 +152,13 @@
     font-weight: bold;
   }
 
+  &__error {
+    text-align: left;
+    display: block;
+    margin-left: 2rem;
+    color: $jobseeker-red-dark;
+  }
+
   p {
     margin: 1rem;
   }
@@ -170,6 +177,18 @@
 
   }
 
+  .google-button {
+    background-color: $jobseeker-red;
+    color: $white;
+    display: block;
+    margin: 0 auto 2rem;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+  }
+
+  .g-signin2 {
+    padding: 2rem;
+  }
 
   &__login-link {
     color: $unifier-orange;

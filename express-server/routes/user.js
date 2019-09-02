@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const {OAuth2Client} = require('google-auth-library');
 
 const User = require('../models/user');
 
@@ -61,6 +62,48 @@ router.post('/login', (req, res, next) => {
         message: 'Invalid user'
       });
     })
+});
+
+router.post('/google-login', (req, res, next) => {
+  const client = new OAuth2Client('512923305156-97lqdnfddn8ilnf7qemr6lj36dig8830.apps.googleusercontent.com');
+  async function verify() {
+  const ticket = await client.verifyIdToken({
+      idToken: req.body.token,
+      audience: '512923305156-97lqdnfddn8ilnf7qemr6lj36dig8830.apps.googleusercontent.com'
+  });
+  const payload = ticket.getPayload();
+  const userid = payload['sub'];
+  if (userid) {
+    User.findOne({ email: req.body.email }).
+      then(user => {
+        if (!user) {
+          const user = new User({
+            email: req.body.email,
+            password: req.body.token,
+            type: req.body.type
+          });
+          user.save()
+          .then(response => {
+            return res.status(200).json({
+              message: 'New user created'
+            })
+          });
+        } else if (user) {
+          return res.status(200).json({
+            message: 'User successfully logged in',
+            user: user
+          })
+        }
+      })
+      .catch(err => {
+        res.status(401).json({
+          message: 'Could not create user'
+        })
+      })
+  } 
+
+  }
+  verify().catch(console.error);
 });
 
 module.exports = router;
