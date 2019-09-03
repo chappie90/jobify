@@ -8,6 +8,8 @@ import { environment } from "../../../environments/environment";
 
 const googleAuthClientId = environment.googleAuthClientId;
 
+declare const gapi: any;
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -23,7 +25,6 @@ export class SignupComponent implements OnInit, AfterViewInit, OnDestroy {
   private companyInputEmpty: boolean;
   private formSubmitted: boolean = false;
   private authStatusSub: Subscription;
-  // private googleAuthStatusSub: Subscription;
 
   constructor(private router: Router,
               private authService: AuthService) {}
@@ -34,11 +35,6 @@ export class SignupComponent implements OnInit, AfterViewInit, OnDestroy {
         console.log(authStatus);
       }
     );
-    // this.googleAuthStatusSub = this.authService.getGoogleAuthStatusListener().subscribe(
-    //   googleAuthStatus => {
-    //     console.log('yay');
-    //   }
-    // );  
   }
 
   googleInit() {
@@ -57,7 +53,7 @@ export class SignupComponent implements OnInit, AfterViewInit, OnDestroy {
       let profile = googleUser.getBasicProfile();
       let googleToken = googleUser.getAuthResponse().id_token;
       let googleEmail = profile.getEmail(); 
-      this.authService.googleSignIn(googleEmail, googleToken);
+      this.authService.googleSignIn(googleEmail, googleToken, 'jobseeker');
 
         // console.log('Token || ' + googleUser.getAuthResponse().id_token);
          console.log('ID: ' + profile.getId());
@@ -66,23 +62,15 @@ export class SignupComponent implements OnInit, AfterViewInit, OnDestroy {
         // console.log('Email: ' + profile.getEmail());
     });
     // console.log(this.auth2.isSignedIn.get());
-    // this.authService.googleAuthStatusListener.next(true);
-    // this.setGoogleAuthStatus();
   }
 
-  // setGoogleAuthStatus() {
-  //   if (this.auth2.isSignedIn.get()) {
-  //     this.authService.checkGoogleAuth(true);
-  //   } 
-  // }
-
-  // signOut() {
-  //   if (this.auth2.isSignedIn.get()) {
-  //     this.auth2.signOut().then(() => {
-  //       console.log("User is signed out");
-  //     });
-  //   }
-  // }
+  signOut() {
+    if (this.auth2.isSignedIn.get()) {
+      this.auth2.signOut().then(() => {
+        console.log("User is signed out");
+      });
+    }
+  }
 
   switchTab() {
     this.jobsSection = !this.jobsSection;

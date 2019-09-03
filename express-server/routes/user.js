@@ -73,6 +73,7 @@ router.post('/google-login', (req, res, next) => {
   });
   const payload = ticket.getPayload();
   const userid = payload['sub'];
+  console.log(payload);
   if (userid) {
     User.findOne({ email: req.body.email }).
       then(user => {
@@ -85,13 +86,18 @@ router.post('/google-login', (req, res, next) => {
           user.save()
           .then(response => {
             return res.status(200).json({
+              token: req.body.token,
+              expiresIn: 3600,
+              userId: user._id,
               message: 'New user created'
             })
           });
         } else if (user) {
           return res.status(200).json({
-            message: 'User successfully logged in',
-            user: user
+            token: req.body.token,
+            expiresIn: 3600,
+            userId: user._id,
+            message: 'User successfully logged in'
           })
         }
       })

@@ -11,12 +11,10 @@ const API_URL = environment.API + '/user';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private isAuthenticated = false;
-  // private isGoogleAuth: boolean = false;
   private token: string;
   private tokenTimer: any;
   private userId: string;
   private authStatusListener = new Subject<boolean>();
-  // private googleAuthStatusListener = new Subject<boolean>();
 
   constructor(private http: HttpClient,
               private router: Router) {}
@@ -28,15 +26,6 @@ export class AuthService {
   getAuthStatusListener() {
     return this.authStatusListener.asObservable();
   }
-
-  // getGoogleAuthStatusListener() {
-  //   return this.googleAuthStatusListener.asObservable();
-  // }
-
-  // checkGoogleAuth(isGoogleAuth) {
-  //   this.isGoogleAuth = isGoogleAuth;
-  //   console.log(this.isGoogleAuth);
-  // }
 
   createUser(email: string, password: string, type: string) {
     const userData = { email: email, password: password, type: 'jobseeker' };
@@ -85,7 +74,23 @@ export class AuthService {
     this.http.post<{ token: string; expiresIn: number; userId: string; }>
       (API_URL + '/google-login', googleSigninData).subscribe(
         response => {
-          console.log(response);
+          this.token = response.token;
+          if (this.token) {
+            const tokenExpiration = response.expiresIn;
+            this.logoutOnTokenExpire(tokenExpiration);
+            this.isAuthenticated = true;
+            this.authStatusListener.next(true);
+            this.userId = response.userId;
+            const date = new Date();
+            const tokenExpireDate = new Date(
+              date.getTime() + tokenExpiration * 1000
+            );
+            this.saveAuthData(this.token, tokenExpireDate, this.userId);
+            this.router.navigate(['/']);
+          }
+        },
+        error => {
+          this.authStatusListener.next(false);
         }
       );
   }
@@ -97,6 +102,7 @@ export class AuthService {
     this.userId = null;
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
+
     this.router.navigate(['/']);
   }
 

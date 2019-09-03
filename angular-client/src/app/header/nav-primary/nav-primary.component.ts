@@ -55,9 +55,11 @@ export class NavPrimaryComponent implements OnInit, OnDestroy {
 
   checkToken() {
     this.token = this.authService.getAuthData();
+    console.log(this.token);
     if (this.token) {
       this.isAuthenticated = true;
     }
+    console.log(this.isAuthenticated);
   }
   
   onLogout() {
