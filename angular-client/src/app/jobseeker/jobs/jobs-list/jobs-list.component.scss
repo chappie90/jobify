@@ -1,1 +1,27 @@
 @import '~src/styles.scss';
+
+.jobs-list {
+  
+  &__list {
+    list-style-type: none;
+  }
+
+  &__list-item {
+    padding: .8rem;
+    border-bottom: 1px solid $grey-medium;
+    cursor: pointer;
+  }
+
+  &__company-title {
+    margin-bottom: .8rem;
+  }
+}
+
+.heading-small {
+  font-size: 1.6rem;
+  color: $jobseeker-red-dark
+}
+
+.heading-extra-small {
+  font-weight: 400;
+}

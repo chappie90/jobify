@@ -4,17 +4,17 @@
 
   &__container {
     margin-top: 12rem;
+    padding: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   &__list-container {
-
   }
 
   &__item-container {
-
+    flex: 1;
   }
   
 }

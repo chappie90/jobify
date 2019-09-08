@@ -1,5 +1,8 @@
-<div class="jobs">
-  <ul *ngFor="let job of jobs">
-    <li>{{ job.job_title }}</li>
-  </ul>
-</div>
+<ul class="jobs-list__list" *ngFor="let job of jobs">
+  <li class="jobs-list__list-item">
+    <h3 class="heading-small">{{ job.job_title }}</h3>
+    <h4 class="jobs-list__company-title">{{ job.company_name}}</h4>
+    <h5 class="heading-extra-small">{{ job.location }}</h5>
+    <h5 class="heading-extra-small">{{ job.date_posted }}</h5>
+  </li>
+</ul>
