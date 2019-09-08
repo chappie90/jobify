@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const userRoutes = require('./routes/user');
+const jobsRoutes = require('./routes/jobs');
 
 const app = express();
 
@@ -22,7 +23,9 @@ mongoose.connect('mongodb+srv://stoyangarov:Daspak12@emaily-w8ewa.mongodb.net/jo
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     next();  
   });
-
+  
+  app.use('/api/jobs', jobsRoutes);
   app.use('/api/user', userRoutes);
+
 
 module.exports = app;

@@ -1,1 +1,20 @@
 @import '~src/styles.scss';
+
+.jobs {
+
+  &__container {
+    margin-top: 12rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__list-container {
+
+  }
+
+  &__item-container {
+
+  }
+  
+}

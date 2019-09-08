@@ -64,7 +64,7 @@ export class SignupComponent implements OnInit, AfterViewInit, OnDestroy {
     // console.log(this.auth2.isSignedIn.get());
   }
 
-  signOut() {
+  signOut() {20
     if (this.auth2.isSignedIn.get()) {
       this.auth2.signOut().then(() => {
         console.log("User is signed out");

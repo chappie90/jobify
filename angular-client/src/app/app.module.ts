@@ -22,6 +22,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { JobsListComponent } from './jobseeker/jobs/jobs-list/jobs-list.component';
+import { JobsItemComponent } from './jobseeker/jobs/jobs-list/jobs-item/jobs-item.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     LoginComponent,
     SignupComponent,
     DropdownDirective,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    JobsListComponent,
+    JobsItemComponent
   ],
   imports: [
     BrowserModule,
