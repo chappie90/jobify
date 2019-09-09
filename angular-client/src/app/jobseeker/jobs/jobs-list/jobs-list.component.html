@@ -1,8 +1,13 @@
-<ul class="jobs-list__list" *ngFor="let job of jobs">
-  <li class="jobs-list__list-item">
-    <h3 class="heading-small">{{ job.job_title }}</h3>
-    <h4 class="jobs-list__company-title">{{ job.company_name}}</h4>
-    <h5 class="heading-extra-small">{{ job.location }}</h5>
-    <h5 class="heading-extra-small">{{ job.date_posted }}</h5>
+<ul class="jobs-list__list">
+  <li class="jobs-list__list-item" (click)="onGetJobsItem(job)" *ngFor="let job of jobs">
+    <div class="jobs-list__list-item--left">
+  <!--    <img src="./assets/images/1.png" class="jobs-list__img" /> -->
+    </div>
+    <div class="jobs-list__list-item--right">
+      <h3 class="heading-small">{{ job.job_title }}</h3>
+      <h4 class="jobs-list__company-title">{{ job.company_name}}</h4>
+      <h5 class="heading-extra-small">{{ job.location }}</h5>
+      <h5 class="heading-extra-small">{{ job.date_posted }}</h5>
+    </div>
   </li>
 </ul>

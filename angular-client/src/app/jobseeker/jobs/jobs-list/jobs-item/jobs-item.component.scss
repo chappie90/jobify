@@ -1,1 +1,74 @@
 @import '~src/styles.scss';
+
+.heading-medium {
+  font-weight: 400; 
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.heading-small {
+  text-align: center;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  font-size: 1.9rem;
+  color: $grey;
+}
+
+.jobs-item {
+
+  &__header {
+    display: flex;
+    border-bottom: 1px solid $grey-medium;
+  }
+
+  &__header--left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  &__header--right {
+    flex: 1;
+  }
+
+  &__heading-small {
+    font-weight: 400;
+    font-size: 1.5rem;
+  }
+
+  &__heading-small--bold {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  &__heading-medium--bold {
+    font-size: 1.8rem;
+    margin: 1rem 0;
+  }
+
+  &__button-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__body {
+    padding: 2rem;
+  }
+}
+.button {
+  border-radius: 4px;
+  padding: 1rem 2rem;
+  margin: 2rem .5rem;
+}
+
+.button-fill {
+  background-color: $jobseeker-red;
+  color: $white;
+}
+
+.button-nofill {
+  border: 1px solid $jobseeker-red;
+  color: $jobseeker-red;
+  background-color: $white;
+}

@@ -2,8 +2,9 @@ export interface Job {
   id: number;
   title: string;
   type: string;
-  description: string;
- // change to date object
+  job_overview: string;
+  job_responsibilities: string;
+  job_qualifications: string;
   datePosted: string;
   location: string;
   salary: number;

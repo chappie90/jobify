@@ -24,6 +24,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { JobsListComponent } from './jobseeker/jobs/jobs-list/jobs-list.component';
 import { JobsItemComponent } from './jobseeker/jobs/jobs-list/jobs-item/jobs-item.component';
+import { JobsSearchComponent } from './jobseeker/jobs/jobs-search/jobs-search.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { JobsItemComponent } from './jobseeker/jobs/jobs-list/jobs-item/jobs-ite
     DropdownDirective,
     LoadingSpinnerComponent,
     JobsListComponent,
-    JobsItemComponent
+    JobsItemComponent,
+    JobsSearchComponent
   ],
   imports: [
     BrowserModule,

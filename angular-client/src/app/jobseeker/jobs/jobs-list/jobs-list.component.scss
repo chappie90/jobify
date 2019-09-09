@@ -7,9 +7,19 @@
   }
 
   &__list-item {
+    display: flex;
     padding: .8rem;
     border-bottom: 1px solid $grey-medium;
     cursor: pointer;
+
+    &:hover {
+      background-color: $grey-light;
+    }
+  }
+
+  &__img {
+    width: 7rem;
+    height: 7rem;
   }
 
   &__company-title {
