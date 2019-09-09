@@ -3,15 +3,14 @@
 .jobs {
 
   &__container {
-    margin-top: 12rem;
-    padding: 3rem;
+    padding: 2rem 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   &__list-container {
-    height: calc(100vh - 18rem);
+    height: calc(100vh - 21rem);
     overflow-y: scroll;
   }
 
@@ -20,7 +19,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: calc(100vh - 18rem);
+    height: calc(100vh - 21rem);
     padding: 3rem;
   } 
 }

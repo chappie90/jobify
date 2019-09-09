@@ -1,19 +1,27 @@
 <div class="search">
   <form class="search__form" (submit)="onSearch(searchForm)" #searchForm="ngForm">
-    <input
-      class="search__form-input"
-      type="text"
-      name="title"
-      ngModel
-      #titleInput="ngModel"
-      required />
-    <input
-      class="search__form-input"
-      type="text"
-      name="location"
-      ngModel
-      #locationInput="ngModel"
-      required />
+    <div class="search__input-group">
+      <div class="search__input-icon search__input-icon--search"></div>
+      <input
+        class="search__form-input"
+        type="text"
+        name="title"
+        placeholder="Job title"
+        ngModel
+        #titleInput="ngModel"
+        required />
+    </div>
+    <div class="search__input-group">
+      <div class="search__input-icon search__input-icon--location"></div>
+      <input
+        class="search__form-input"
+        type="text"
+        name="location"
+        placeholder="Location"
+        ngModel
+        #locationInput="ngModel"
+        required />
+    </div>
     <button class="button search__button">Find jobs</button>
   </form>
 </div>

@@ -23,7 +23,6 @@ export class JobsListComponent implements OnInit {
     .subscribe(
       jobs => {
         this.jobs = jobs.jobs;
-        console.log(this.jobs);
       }
     );
   }
