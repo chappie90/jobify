@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
+import { environment } from '../../environments/environment';
 import { Job } from '../jobseeker/jobs/job.model';
+
+const API_URL = environment.API + '/jobs';
 
 @Injectable({ providedIn: 'root' })
 export class JobsService {
@@ -13,10 +16,11 @@ export class JobsService {
   constructor(private http: HttpClient) {}
 
   getJobs() {
-    this.http.get<any>(
-      './assets/data/jobify-data.json'
+    this.http.get<{ message: string; jobs: Job[] }>(
+      // './assets/data/jobify-data.json'
+      API_URL
     ).subscribe(jobs => {
-      this.jobs = jobs;
+      this.jobs = jobs.jobs;
       this.jobsUpdated.next({
         jobs: [...this.jobs]
       });
