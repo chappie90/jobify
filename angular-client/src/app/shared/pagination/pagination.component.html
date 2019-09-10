@@ -3,6 +3,7 @@
   <li 
     *ngFor="let page of pages; let i = index;" 
     class="pagination__item"
+    [class.pagination__active-item]="page === selectedPage"
     (click)="onGetPage(i + 1)">
     <a class="pagination__link">{{ page }}</a>
   </li>

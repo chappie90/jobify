@@ -9,10 +9,12 @@ import { JobsService} from '../../services/jobs.service';
 })
 export class PaginationComponent {
   private pages = [1, 2, 3, 4, 5, 6, 7, 8];
+  private selectedPage: number;
 
   constructor(private jobsService: JobsService) {}
 
   onGetPage(index) {
+    this.selectedPage = index;
     this.jobsService.getJobs(index);
   }
 }
