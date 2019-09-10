@@ -3,6 +3,49 @@
 .search {
   margin-top: 13rem;
   padding: 0 3rem;
+  height: auto;
+  background-color: $white;
+
+  &--pristine {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 13rem);
+    position: relative;
+  }
+
+  &__bg {
+     display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: $jobseeker-red-dark;
+    -webkit-clip-path: polygon(0 84%, 100% 17%, 100% 100%, 0% 100%);
+    clip-path: polygon(0 84%, 100% 17%, 100% 100%, 0% 100%);
+    -webkit-clip-path: polygon(0 84%, 100% 32%, 100% 100%, 0% 100%);
+    clip-path: polygon(0 84%, 100% 32%, 100% 100%, 0% 100%);
+    -webkit-clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
+clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
+  }
+
+  &__form {
+    position: relative;
+    z-index: 3;
+    transition: all .4s;
+  //  border-radius: 4px;
+  //  padding: 6rem 6rem 4rem 6rem;
+  //  background-color: $grey-medium; 
+  //  border: 1px solid $grey-dark;
+    // -webkit-box-shadow: 8px 8px 20px 0px rgba(0,0,0,0.32);
+    // -moz-box-shadow: 8px 8px 20px 0px rgba(0,0,0,0.32);
+    // box-shadow: 8px 8px 20px 0px rgba(0,0,0,0.32);
+
+    &--pristine {
+      transform: translateY(-8rem);
+    }
+  }
 
   &__button {
     background-color: $grey-dark;
@@ -10,12 +53,31 @@
     border-radius: 4px; 
     padding: .8rem 1.6rem;
     font-size: 1.6rem;
+
+    &--pristine {
+      font-size: 1.8rem;
+      padding: 1rem 1.8rem;
+    }
   }
 
   &__input-group {
     position: relative;
     display: inline-block;
     margin-right: 1rem;
+  }
+
+  &__input-label {
+    position: absolute;
+    top: -3rem;
+    left: 1rem;
+    color: $jobseeker-red-dark;
+    font-weight: bold;
+    font-size: 2rem;
+    display: none;
+
+    &--pristine {
+      display: block;
+    }
   }
 
   &__input-icon {
@@ -40,11 +102,16 @@
   }
 
   &__form-input {
-    padding: .7rem 1.6rem .7rem 3.6rem;
+    padding: .7rem 1.6rem .7rem 3.2rem;
     border-radius: 4px;
     border: 1px solid $grey;
     outline: none;
     font-size: 1.5rem;
+
+    &--pristine {
+      font-size: 1.8rem;
+      padding: 1rem 1.6rem 1rem 3.2rem;
+    }
 
     &:focus {
       background-color: $grey-light;

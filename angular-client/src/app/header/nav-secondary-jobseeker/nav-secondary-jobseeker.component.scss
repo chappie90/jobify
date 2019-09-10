@@ -6,6 +6,7 @@
   left: 0;
   padding: 0 4rem;
   width: 100%;
+  z-index: 10;
   display: flex;
   background-color: $jobseeker-red;
 
@@ -17,11 +18,12 @@
     display: inline-block;
 
     &:last-of-type {
-     // background-color: #702DBC;
-      
-      &:hover {
-    //    background-color: #503075;
-      }
+      // background: url('../../../assets/images/premium-red.svg');
+      // background-size: 16%;
+      // background-position: center left;
+      // background-repeat: no-repeat;
+      // padding-left: 2rem;
+
     }
 
     &:hover {

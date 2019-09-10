@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+import { JobsService } from '../../services/jobs.service';
 
 @Component({
   selector: 'app-jobs',
@@ -7,13 +9,18 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./jobs.component.scss']
 })
 export class JobsComponent implements OnInit {
+  private jobsSearch: boolean = false;
+  private jobsSub: Subscription;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private jobsService: JobsService) { }
 
   ngOnInit() {
-    // this.route.url.subscribe(url =>{
-    //  console.log(url);
-    // });
+    this.jobsSub = this.jobsService.getJobsUpdateListener()
+      .subscribe(
+        jobs => {
+          this.jobsSearch = true;
+        }
+      );
   }
 
 }

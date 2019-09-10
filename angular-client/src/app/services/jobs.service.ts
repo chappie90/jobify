@@ -14,9 +14,7 @@ export class JobsService {
 
   getJobs() {
     this.http.get<any>(
-    //  '../../../express-server/media/data/jobify-data.json'
       './assets/data/jobify-data.json'
-  //    'http://localhost:3000/api/jobs'
     ).subscribe(jobs => {
       this.jobs = jobs;
       this.jobsUpdated.next({
