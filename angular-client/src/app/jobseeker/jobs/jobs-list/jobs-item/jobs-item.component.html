@@ -1,7 +1,7 @@
 <div *ngIf="job" class="jobs-item">
   <div class="jobs-item__header">
     <div class="jobs-item__header--left">
-      <h2 class="heading-medium">{{ job.job_title }}</h2>
+      <h2 class="heading-medium">{{ job.title }}</h2>
       <h3 class="heading-small">{{ job.company_name }}</h3>
       <h3>£{{ job.salary }}</h3>
       <div class="jobs-item__button-container">
@@ -13,19 +13,19 @@
       <h3 class="jobs-item__heading-small">Location</h3>
       <h3 class="jobs-item__heading-small--bold">{{ job.location }}</h3>
       <h3 class="jobs-item__heading-small">Job type</h3>
-      <h3 class="jobs-item__heading-small--bold">{{ job.job_type }}</h3>
+      <h3 class="jobs-item__heading-small--bold">{{ job.type }}</h3>
       <h3 class="jobs-item__heading-small">Date posted</h3>
-      <h3 class="jobs-item__heading-small--bold">{{ job.date_posted }}</h3>
+      <h3 class="jobs-item__heading-small--bold">{{ job.datePosted }}</h3>
       <h3 class="jobs-item__heading-small">Industry</h3>
       <h3 class="jobs-item__heading-small--bold">{{ job.industry }}</h3>
     </div>
   </div>
   <div class="jobs-item__body">
     <h3 class="jobs-item__heading-medium--bold">Job Overview</h3>
-    <p>{{ job.job_overview }}</p>
+    <p>{{ job.overview }}</p>
     <h3 class="jobs-item__heading-medium--bold">Responsibilities and Duties</h3>
-    <p>{{ job.job_responsibilities }}</p>
+    <p>{{ job.responsible }}</p>
     <h3 class="jobs-item__heading-medium--bold">Qualifications</h3>
-    <p>{{ job.job_qualifications }}</p>  
+    <p>{{ job.qualify }}</p>  
   </div>
 </div>
