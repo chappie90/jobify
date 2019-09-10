@@ -15,10 +15,11 @@ export class JobsService {
 
   constructor(private http: HttpClient) {}
 
-  getJobs() {
+  getJobs(page: number) {
+    const queryParams = `?page=${page}`;
     this.http.get<{ message: string; jobs: Job[] }>(
       // './assets/data/jobify-data.json'
-      API_URL
+      API_URL + queryParams
     ).subscribe(jobs => {
       this.jobs = jobs.jobs;
       this.jobsUpdated.next({

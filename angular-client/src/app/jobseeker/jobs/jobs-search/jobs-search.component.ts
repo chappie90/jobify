@@ -23,7 +23,7 @@ export class JobsSearchComponent implements OnInit {
       return;
     }
     this.jobsSearch = true;
-    this.jobsService.getJobs();
+    this.jobsService.getJobs(1);
   }
 
 }

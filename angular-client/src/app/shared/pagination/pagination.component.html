@@ -1,0 +1,10 @@
+<ul class="pagination__list">
+<!--  <li class="pagination__item pagination__left-chevron"></li> -->
+  <li 
+    *ngFor="let page of pages; let i = index;" 
+    class="pagination__item"
+    (click)="onGetPage(i + 1)">
+    <a class="pagination__link">{{ page }}</a>
+  </li>
+ <!-- <li class="pagination__item pagination__right-chevron"></li> -->
+</ul>
