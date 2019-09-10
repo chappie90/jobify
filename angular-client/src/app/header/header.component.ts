@@ -9,12 +9,12 @@ import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '
 export class HeaderComponent implements OnInit {
   jobsSection: boolean;
   employerSection: boolean;
+  loginPage: boolean;
+  signupPage: boolean;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    console.log(2 || 3);
-
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Show loading indicator
@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit {
         this.employerSection = event.url === '/employer/products' 
                               || event.url === '/employer/pricing' 
                               || event.url === '/employer/post-job';
+        this.loginPage = event.url ==='/login';
+        this.signupPage = event.url === '/signup';
       }
 
       if (event instanceof NavigationEnd) {

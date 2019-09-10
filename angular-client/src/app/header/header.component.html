@@ -1,5 +1,5 @@
 <header>
-  <app-nav-primary></app-nav-primary>
+  <app-nav-primary *ngIf="!loginPage && !signupPage"></app-nav-primary>
   <app-nav-secondary-jobseeker *ngIf="jobsSection"></app-nav-secondary-jobseeker>
   <app-nav-secondary-employer *ngIf="employerSection"></app-nav-secondary-employer>
 </header>
