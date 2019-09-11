@@ -11,20 +11,25 @@ const API_URL = environment.API + '/jobs';
 @Injectable({ providedIn: 'root' })
 export class JobsService {
   private jobs: Job[] = [];
+  private jobsCount: number;
   private jobsUpdated = new Subject<{ jobs: Job[] }>();
+  private jobsCountUpdated = new Subject<{ jobsCount: number }>();
   private jobSelected = new Subject<{ job: Job }>();
 
   constructor(private http: HttpClient) {}
 
   getJobs(page: number) {
     const queryParams = `?page=${page}`;
-    this.http.get<{ message: string; jobs: Job[] }>(
+    this.http.get<{ message: string; jobs: Job[]; totalJobs: string }>(
       // './assets/data/jobify-data.json'
+
       API_URL + queryParams
     )
     .pipe(
       map(jobsData => {
         return {
+          message: jobsData.message,
+          totalJobs: jobsData.totalJobs,
           jobs: jobsData.jobs.map(job => {
             return {
               id: job._id,
@@ -45,10 +50,13 @@ export class JobsService {
     )
     .subscribe(transformedJobsData => {
       this.jobs = transformedJobsData.jobs;
+      this.jobsCount = transformedJobsData.totalJobs; 
       this.jobsUpdated.next({
         jobs: [...this.jobs]
       });
-      console.log(this.jobs);
+      this.jobsCountUpdated.next({
+        jobsCount: this.jobsCount
+      });
     });
   }
 
