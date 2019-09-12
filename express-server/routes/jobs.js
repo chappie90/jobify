@@ -23,7 +23,8 @@ router.get('', (req, res, next) => {
       res.status(200).json({
         message: 'Jobs sent from server successfully',
         jobs: fetchedJobs,
-        totalJobs: count
+        totalJobs: count,
+        currentPage: currentPage
       });
     });  
 });

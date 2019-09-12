@@ -22,6 +22,7 @@ export class JobsListComponent implements OnInit {
    this.jobsSub = this.jobsService.getJobsUpdateListener()
     .subscribe(
       jobs => {
+        console.log(jobs);
         this.jobs = jobs.jobs;
       }
     );

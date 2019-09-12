@@ -12,15 +12,16 @@ const API_URL = environment.API + '/jobs';
 export class JobsService {
   private jobs: Job[] = [];
   private jobsCount: number;
-  private jobsUpdated = new Subject<{ jobs: Job[] }>();
-  private jobsCountUpdated = new Subject<{ jobsCount: number }>();
+  private currentPage: number;
+  private jobsUpdated = new Subject<{ jobs: Job[]; count: number }>();
   private jobSelected = new Subject<{ job: Job }>();
+  private pageSelected = new Subject<number>();
 
   constructor(private http: HttpClient) {}
 
   getJobs(page: number) {
     const queryParams = `?page=${page}`;
-    this.http.get<{ message: string; jobs: Job[]; totalJobs: string }>(
+    this.http.get<{ message: string; jobs: Job[]; totalJobs: string; currentPage: string }>(
       // './assets/data/jobify-data.json'
 
       API_URL + queryParams
@@ -30,6 +31,7 @@ export class JobsService {
         return {
           message: jobsData.message,
           totalJobs: jobsData.totalJobs,
+          currentPage: jobsData.currentPage,
           jobs: jobsData.jobs.map(job => {
             return {
               id: job._id,
@@ -51,12 +53,13 @@ export class JobsService {
     .subscribe(transformedJobsData => {
       this.jobs = transformedJobsData.jobs;
       this.jobsCount = transformedJobsData.totalJobs; 
+      this.currentPage = transformedJobsData.currentPage;
       this.jobsUpdated.next({
-        jobs: [...this.jobs]
+        jobs: [...this.jobs],
+        count: this.jobsCount,
+        currentPage: this.currentPage
       });
-      this.jobsCountUpdated.next({
-        jobsCount: this.jobsCount
-      });
+      this.pageSelected.next(this.currentPage);
     });
   }
 
@@ -70,5 +73,13 @@ export class JobsService {
 
   getJobsItemUpdateListener() {
     return this.jobSelected.asObservable();
+  }
+
+  updatePage(page) {
+    this.pageSelected.next(page);
+  }
+
+  getPageUpdateListener() {
+    return this.pageSelected.asObservable();
   }
 }

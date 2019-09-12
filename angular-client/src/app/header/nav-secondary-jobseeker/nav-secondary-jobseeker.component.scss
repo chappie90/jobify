@@ -8,7 +8,7 @@
   width: 100%;
   z-index: 10;
   display: flex;
-  background-color: $jobseeker-red;
+  background-color: $jobseeker-red-dark;
 
   &__list {
     margin: 0;
@@ -27,7 +27,7 @@
     }
 
     &:hover {
-      background-color: $jobseeker-red-dark;
+      background-color: $jobseeker-red;
     }
   }
 
@@ -38,7 +38,7 @@
     font-weight: 700;
 
     &-active {
-      background-color: $jobseeker-red-dark;
+      background-color: $jobseeker-red;
       position: relative;
 
       &::before {
