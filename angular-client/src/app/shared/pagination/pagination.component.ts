@@ -14,7 +14,7 @@ export class PaginationComponent implements OnInit {
   private numberPages: number;
   private moreJobs: string = '...';
   private pages = [];
-  private pageOutput = [];
+  private pagesOutput = [];
   private selectedPage: number;
   private nextPage: number;
   private previousPage: number;
@@ -28,13 +28,6 @@ export class PaginationComponent implements OnInit {
 
   ngOnInit() {
     this.selectedPage = this.pages[0];
-    // NOT SURE IF NEEDED
-    // this.pageSub = this.jobsService.getPageUpdateListener()
-    //   .subscribe(
-    //     page => {
-    //       this.selectedPage = page;
-    //     }
-    //   );
     this.jobsSub = this.jobsService.getJobsUpdateListener()
       .subscribe(
         jobs => {
@@ -55,7 +48,6 @@ export class PaginationComponent implements OnInit {
             this.pagesOutput.push(1);
             this.pagesOutput.push(this.moreJobs);
             let pagesRange = this.pages.slice(this.pages.slice(-1).pop() - 8, this.pages.slice(-1).pop());
-            console.log(pagesRange);
             for (let i = 0; i < pagesRange.length; i++) {
               this.pagesOutput.push(pagesRange[i]);
             }
@@ -79,17 +71,14 @@ export class PaginationComponent implements OnInit {
       this.nextPage = previousPage + 1;
       this.lastPage = this.nextPage + 2;
       this.currentPageindex = index;
-      this.jobsService.getJobs(this.nextPage);
+      this.jobsService.getJobs('Analyst', 'London', this.nextPage);
     } else if (index === 1 && page === this.moreJobs) {
-      console.log('fdsfs');
       this.firstPage = nextPage - 4;
-      console.log(this.firstPage);
       this.nextPage = nextPage - 1;
       this.lastPage = nextPage + 2;
-      console.log(this.lastPage);
-      this.jobsService.getJobs(this.nextPage);
+      this.jobsService.getJobs('Analyst', 'London', this.nextPage);
     } else {
-      this.jobsService.getJobs(page);  
+      this.jobsService.getJobs('Analyst', 'London', page);  
     }
   }
 }

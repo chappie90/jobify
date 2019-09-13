@@ -27,7 +27,7 @@
     }
 
     &:hover {
-      background-color: $jobseeker-red;
+      background-color: $jobseeker-red-darker;
     }
   }
 
@@ -38,7 +38,7 @@
     font-weight: 700;
 
     &-active {
-      background-color: $jobseeker-red;
+      background-color: $jobseeker-red-darker;
       position: relative;
 
       &::before {
@@ -52,7 +52,7 @@
         height: 0;
         border-left: 8px solid transparent;
         border-right: 8px solid transparent;
-        border-top: 8px solid $jobseeker-red-dark;
+        border-top: 8px solid $jobseeker-red-darker;
       }
     }
   }

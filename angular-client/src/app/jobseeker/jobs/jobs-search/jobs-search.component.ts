@@ -19,11 +19,8 @@ export class JobsSearchComponent implements OnInit {
   }
 
   onSearch(form: NgForm) {
-    // if (form.invalid) {
-    //   return;
-    // }
     this.jobsSearch = true;
-    this.jobsService.getJobs(1);
+    this.jobsService.getJobs(form.value.title, form.value.location, 1);
   }
 
 }

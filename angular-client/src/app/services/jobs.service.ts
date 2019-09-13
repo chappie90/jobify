@@ -15,13 +15,14 @@ export class JobsService {
   private currentPage: number;
   private jobsUpdated = new Subject<{ jobs: Job[]; count: number }>();
   private jobSelected = new Subject<{ job: Job }>();
-  private pageSelected = new Subject<number>();
 
   constructor(private http: HttpClient) {}
 
-  getJobs(page: number) {
-    const queryParams = `?page=${page}`;
-    this.http.get<{ message: string; jobs: Job[]; totalJobs: string; currentPage: string }>(
+  getJobs(title: string, location: string, page: number) {
+    console.log(title);
+    console.log(location);
+    const queryParams = `?page=${page}&title=${title}&location=${location}`;
+    this.http.get<{ message: string; jobs: Job[]; totalJobs: string; currentPage: string; }>(
       // './assets/data/jobify-data.json'
 
       API_URL + queryParams
@@ -59,7 +60,6 @@ export class JobsService {
         count: this.jobsCount,
         currentPage: this.currentPage
       });
-      this.pageSelected.next(this.currentPage);
     });
   }
 
@@ -73,13 +73,5 @@ export class JobsService {
 
   getJobsItemUpdateListener() {
     return this.jobSelected.asObservable();
-  }
-
-  updatePage(page) {
-    this.pageSelected.next(page);
-  }
-
-  getPageUpdateListener() {
-    return this.pageSelected.asObservable();
   }
 }

@@ -18,12 +18,12 @@ export class JobsListComponent implements OnInit {
               private jobsService: JobsService) { }
 
   ngOnInit() {
-   this.jobsService.getJobs(1);
+   this.jobsService.getJobs('Analyst', 'London', 1);
    this.jobsSub = this.jobsService.getJobsUpdateListener()
     .subscribe(
       jobs => {
-        console.log(jobs);
         this.jobs = jobs.jobs;
+        this.jobsService.getJobsItem(this.jobs[0]);
       }
     );
   }

@@ -5,9 +5,20 @@ const Job = require('../models/job');
 const router = express.Router();
 
 router.get('', (req, res, next) => {
+  console.log(req.query);
   const currentPage = +req.query.page;
+  console.log(currentPage);
+  const title = req.query.title;
+  const location = req.query.location;
   const pageSize = 20;
-  const jobsQuery = Job.find();
+  let jobsQuery;
+  if (title || location) {
+    jobsQuery = Job.find(
+       { job_title: { $regex: title, $options: 'i' } }
+    );
+  } else {
+    jobsQuery = Job.find();
+  }
   let fetchedJobs;
   if (currentPage) {
     jobsQuery

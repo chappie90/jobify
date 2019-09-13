@@ -16,6 +16,7 @@ mongoose.connect('mongodb+srv://stoyangarov:Daspak12@emaily-w8ewa.mongodb.net/jo
   });
 
   app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
 
   app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
