@@ -32,6 +32,9 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
 
   &__form {
     position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     z-index: 3;
     transition: all .4s;
   //  border-radius: 4px;
@@ -119,6 +122,68 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
     }
   }
 
+  &__filters-list {
+    list-style-type: none;
+  }
+
+  &__filters-item {
+    margin-left: .8rem;
+    position: relative;
+    display: inline-block;
+    border-radius: 4px;
+    background-color: $grey-light;
+    border: 1px solid $grey-medium;
+    padding: .6rem 1rem;
+    cursor: pointer;
+
+    &::after {
+     font-family: "Font Awesome 5 Free";
+     font-weight: 900;
+     content:  "\f0d7";
+     color: $grey-dark;
+    }
+
+    &:first-of-type {
+      margin-left: 3rem;
+    }
+  }
+
+  &__filters-content {
+      display: none;
+      position: absolute;
+      top: 3.1rem;
+      right: 0;
+      width: 17rem;
+      -webkit-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
+      -moz-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
+      box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
+      border-radius: 4px;
+      background-color: $grey-light;
+      border: 1px solid $grey-medium;
+      padding: 1.2rem 2rem;
+  }
+ 
+  &__input-group--filters {
+    margin-bottom: 1rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__input--filter {
+    margin-right: .6rem;
+  }
+  
+  &__input--filter,
+  &__input-label--filter {
+    cursor: pointer;
+  }
+
+  &__input-label--filter {
+    color: $grey-dark;
+  }
+
   ::-webkit-input-placeholder {
     font-size: 1.5rem;
   }
@@ -130,4 +195,8 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
   ::placeholder {
     font-size: 1.5rem;
   }
+}
+
+.open-dropdown {
+  display: block;
 }

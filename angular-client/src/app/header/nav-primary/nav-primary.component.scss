@@ -65,10 +65,6 @@
     display: none;
   }
 
-  &__profile-list-open {
-    display: block;  
-  }
-
   &__profile-list-item-link {
     color: $grey-light;
     cursor: pointer;
@@ -79,4 +75,8 @@
       color: $unifier-orange;
     }
   } 
+}
+
+.open-dropdown {
+  display: block;  
 }

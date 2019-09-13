@@ -6,9 +6,12 @@ import { Directive, ElementRef, HostListener, HostBinding } from '@angular/core'
 export class DropdownDirective {
   constructor(private elRef: ElementRef) {}
 
-  @HostBinding('class.nav-primary__profile-list-open') openDropdown = false;
+  @HostBinding('class.open-dropdown') openDropdown = false;
 
   @HostListener('document:click', ['$event']) toggleDropdown(event: Event) {
+    // console.log(this.elRef.nativeElement);
+    console.log(this.elRef.nativeElement.parentNode);
+    console.log(event.target);
    this.openDropdown = this.elRef.nativeElement.parentNode == event.target ? !this.openDropdown: false;
   }
 }

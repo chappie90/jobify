@@ -8,9 +8,15 @@
 
   &__list-item {
     display: flex;
-    padding: .8rem;
+    padding: 1.5rem;
     border-bottom: 1px solid $grey-medium;
     cursor: pointer;
+    border-left: 4px solid transparent;
+
+    &--active {
+      background-color: $grey-light;
+      border-left: 4px solid $jobseeker-red-darker;  
+    }
 
     &:hover {
       background-color: $grey-light;

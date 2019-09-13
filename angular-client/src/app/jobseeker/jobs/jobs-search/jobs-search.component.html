@@ -42,30 +42,146 @@
     <button 
       class="button search__button"
       [ngClass]="{'search__button--pristine': !jobsSearch}">Find jobs</button>
-    <ul class="search__filters-list">
+    <ul *ngIf="jobsSearch" class="search__filters-list">
       <li class="search__filters-item">
         Date Posted
-        <div class="search__filters-content">
-          <input
-            class="seach__form-input--filter"
-            type="radio"
-            name="date"
-            value="day">Past 24 hours
-          <input
-            class="seach__form-input--filter"
-            type="radio"
-            name="date"
-            value="week">Past week
-          <input
-            class="seach__form-input--filter"
-            type="radio"
-            name="date"
-            value="month">Past month
-          <input
-            class="seach__form-input--filter"
-            type="radio"
-            name="date"
-            value="all">All time
+        <div appDropdown class="search__filters-content">
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="radio"
+              name="date"
+              id="day"
+              value="day">
+              <label class="search__input-label--filter" for="day">Past 24 hours</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="radio"
+              name="date"
+              id="week"
+              value="week">
+              <label class="search__input-label--filter" for="week">Past week</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="radio"
+              name="date"
+              id="month"
+              value="month">
+            <label class="search__input-label--filter" for="month">Past month</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="radio"
+              name="date"
+              id="all-time"
+              value="all-time">
+            <label class="search__input-label--filter" for="all-time">All time</label>
+          </div>
+        </div>
+      </li>
+      <li class="search__filters-item">
+        Job type
+        <div appDropdown class="search__filters-content">
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="full"
+              id="full"
+              value="full-time">
+              <label class="search__input-label--filter" for="full">Full time</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="part"
+              id="part"
+              value="part-time">
+              <label class="search__input-label--filter" for="part">Part time</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="contract"
+              id="contract"
+              value="contract">
+            <label class="search__input-label--filter" for="contract">Contract</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="temporary"
+              id="temporary"
+              value="temporary">
+            <label class="search__input-label--filter" for="temporary">Temporary</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="apprenticeship"
+              id="apprenticeship"
+              value="apprenticeship">
+            <label class="search__input-label--filter" for="apprenticeship">Apprenticeship</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="volunteer"
+              id="volunteer"
+              value="volunteer">
+            <label class="search__input-label--filter" for="volunteer">Volunteer</label>
+          </div>
+        </div>
+      </li>
+      <li class="search__filters-item">
+        Salary range
+        <div appDropdown class="search__filters-content">
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="radio"
+              name="date"
+              id="day"
+              value="day">
+              <label class="search__input-label--filter" for="day">Past 24 hours</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="radio"
+              name="date"
+              id="week"
+              value="week">
+              <label class="search__input-label--filter" for="week">Past week</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="radio"
+              name="date"
+              id="month"
+              value="month">
+            <label class="search__input-label--filter" for="month">Past month</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="radio"
+              name="date"
+              id="all-time"
+              value="all-time">
+            <label class="search__input-label--filter" for="all-time">All time</label>
+          </div>
         </div>
       </li>
     </ul>

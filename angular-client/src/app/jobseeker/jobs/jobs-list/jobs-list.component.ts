@@ -13,6 +13,7 @@ import { JobsService } from '../../../services/jobs.service';
 export class JobsListComponent implements OnInit {
   private jobs: Job[] = [];
   private jobsSub: Subscription;
+  private selectedJob: Job;
 
   constructor(private route: ActivatedRoute,
               private jobsService: JobsService) { }
@@ -23,12 +24,14 @@ export class JobsListComponent implements OnInit {
     .subscribe(
       jobs => {
         this.jobs = jobs.jobs;
+        this.selectedJob = this.jobs[0];
         this.jobsService.getJobsItem(this.jobs[0]);
       }
     );
   }
 
   onGetJobsItem(job) {
+    this.selectedJob = job;
     this.jobsService.getJobsItem(job);
   }
 
