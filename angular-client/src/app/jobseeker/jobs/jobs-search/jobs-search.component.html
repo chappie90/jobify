@@ -42,5 +42,32 @@
     <button 
       class="button search__button"
       [ngClass]="{'search__button--pristine': !jobsSearch}">Find jobs</button>
+    <ul class="search__filters-list">
+      <li class="search__filters-item">
+        Date Posted
+        <div class="search__filters-content">
+          <input
+            class="seach__form-input--filter"
+            type="radio"
+            name="date"
+            value="day">Past 24 hours
+          <input
+            class="seach__form-input--filter"
+            type="radio"
+            name="date"
+            value="week">Past week
+          <input
+            class="seach__form-input--filter"
+            type="radio"
+            name="date"
+            value="month">Past month
+          <input
+            class="seach__form-input--filter"
+            type="radio"
+            name="date"
+            value="all">All time
+        </div>
+      </li>
+    </ul>
   </form>
 </div>
