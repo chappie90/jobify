@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, NgZone } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -27,12 +27,13 @@ export class SignupComponent implements OnInit, AfterViewInit, OnDestroy {
   private authStatusSub: Subscription;
 
   constructor(private router: Router,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private zone: NgZone) {}
 
   ngOnInit() {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
       authStatus => {
-        console.log(authStatus);
+      
       }
     );
   }
@@ -53,10 +54,10 @@ export class SignupComponent implements OnInit, AfterViewInit, OnDestroy {
       let profile = googleUser.getBasicProfile();
       let googleToken = googleUser.getAuthResponse().id_token;
       let googleEmail = profile.getEmail(); 
-      this.authService.googleSignIn(googleEmail, googleToken, 'jobseeker');
+     this.zone.run(() => this.authService.googleSignIn(googleEmail, googleToken, 'jobseeker'));
 
         // console.log('Token || ' + googleUser.getAuthResponse().id_token);
-         console.log('ID: ' + profile.getId());
+         // console.log('ID: ' + profile.getId());
         // // console.log('Name: ' + profile.getName());
         // // console.log('Image URL: ' + profile.getImageUrl());
         // console.log('Email: ' + profile.getEmail());

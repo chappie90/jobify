@@ -17,9 +17,15 @@ router.post('/signup', (req, res, next) => {
       });
       user.save()
       .then(response => {
+        const token = jwt.sign(
+          { email: response.email, userId: response._id },
+          '$2a$10$6W2pTUnnytF1pnTBdgQm9e',
+          { expiresIn: '1h' }
+        );
           res.status(201).json({
-            message: 'User created',
-            response: user
+            token: token,
+            expiresIn: 3600,
+            userId: response._id
           });  
       })
       .catch(err => {
@@ -88,16 +94,14 @@ router.post('/google-login', (req, res, next) => {
             return res.status(200).json({
               token: req.body.token,
               expiresIn: 3600,
-              userId: user._id,
-              message: 'New user created'
+              userId: user._id
             })
           });
         } else if (user) {
           return res.status(200).json({
             token: req.body.token,
             expiresIn: 3600,
-            userId: user._id,
-            message: 'User successfully logged in'
+            userId: user._id
           })
         }
       })

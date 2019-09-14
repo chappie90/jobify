@@ -29,15 +29,26 @@ export class AuthService {
 
   createUser(email: string, password: string, type: string) {
     const userData = { email: email, password: password, type: 'jobseeker' };
-    this.http.post(API_URL + '/signup', userData).subscribe(
+    this.http.post<{ token: string; expiresIn: number; userId: string; }>
+    (API_URL + '/signup', userData).subscribe(
       (response) => {
-        console.log(response);
-        this.isAuthenticated = true;
-        this.authStatusListener.next(true);
-        this.router.navigate(['/']);
+        this.token = response.token;
+        if (this.token) {
+          const tokenExpiration = response.expiresIn;
+          this.logoutOnTokenExpire(tokenExpiration);
+          this.isAuthenticated = true;
+          this.authStatusListener.next(true);
+          this.userId = response.userId;
+          const date = new Date();
+          const tokenExpireDate = new Date(
+            date.getTime() + tokenExpiration * 1000
+          );
+          this.saveAuthData(this.token, tokenExpireDate, this.userId);
+          this.router.navigate(['/'])
+        }
       },
       error => {
-        console.log(error);
+        // console.log(error);
         this.authStatusListener.next(false);
       }
     );
