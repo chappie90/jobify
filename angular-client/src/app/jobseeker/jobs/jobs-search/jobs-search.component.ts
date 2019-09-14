@@ -20,6 +20,7 @@ export class JobsSearchComponent implements OnInit {
   }
 
   onSearch(form: NgForm) {
+    console.log(form.value);
     this.jobsSearch = true;
     this.jobsService.getJobs(form.value.title, form.value.location, 1);
   }

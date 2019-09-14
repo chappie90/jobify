@@ -159,7 +159,7 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
       position: absolute;
       top: 3.1rem;
       right: 0;
-      width: 19rem;
+      width: 20rem;
       -webkit-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
       -moz-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
       box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
@@ -185,11 +185,9 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
     top: -9999px;
     left: -9999px;
 
-    &:checked + .search__input-label--filter-date::before {
-      border: 5px solid $grey-dark;
-    }
-
-     &:checked + .search__input-label--filter-type::before {
+    &:checked + .search__input-label--filter-date::before,
+    &:checked + .search__input-label--filter-type::before,
+    &:checked + .search__input-label--filter-salary::before {
       border: 5px solid $grey-dark;
     }
   }
@@ -224,6 +222,23 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
   }
 
   &__input-label--filter-type {
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: -2.2rem;
+      width: 1.8rem;
+      display: inline-block;
+      height: 1.8rem;
+      border: 1px solid $grey-dark;
+      border-radius: 4px;
+      transition: all .3s;
+    }
+  }
+
+  &__input-label--filter-salary {
     
     &::before {
       content: '';

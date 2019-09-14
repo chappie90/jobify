@@ -52,7 +52,10 @@
               type="radio"
               name="date"
               id="day"
-              value="day">
+              value="day"
+              ngModel
+              #dateInput="ngModel"
+              (change)="onSearch(searchForm)">
               <label class="search__input-label--filter search__input-label--filter-date" for="day">Past 24 hours</label>
           </div>
           <div class="search__input-group--filters">
@@ -61,7 +64,10 @@
               type="radio"
               name="date"
               id="week"
-              value="week">
+              value="week"
+              ngModel
+              #dateInput="ngModel"
+              (change)="onSearch(searchForm)">
               <label class="search__input-label--filter search__input-label--filter-date" for="week">Past week</label>
           </div>
           <div class="search__input-group--filters">
@@ -70,7 +76,10 @@
               type="radio"
               name="date"
               id="month"
-              value="month">
+              value="month"
+              ngModel
+              #dateInput="ngModel"
+              (change)="onSearch(searchForm)">
             <label class="search__input-label--filter search__input-label--filter-date" for="month">Past month</label>
           </div>
           <div class="search__input-group--filters">
@@ -79,7 +88,10 @@
               type="radio"
               name="date"
               id="all-time"
-              value="all-time">
+              value="all-time"
+              ngModel
+              #dateInput="ngModel"
+              (change)="onSearch(searchForm)">
             <label class="search__input-label--filter search__input-label--filter-date" for="all-time">All time</label>
           </div>
         </div>
@@ -93,7 +105,10 @@
               type="checkbox"
               name="full"
               id="full"
-              value="full-time">
+              value="full-time"
+              ngModel
+              #typeInput="ngModel"
+              (change)="onSearch(searchForm)">
               <label class="search__input-label--filter search__input-label--filter-type" for="full">Full time</label>
           </div>
           <div class="search__input-group--filters">
@@ -102,7 +117,10 @@
               type="checkbox"
               name="part"
               id="part"
-              value="part-time">
+              value="part-time"
+              ngModel
+              #typeInput="ngModel"
+              (change)="onSearch(searchForm)">
               <label class="search__input-label--filter search__input-label--filter-type" for="part">Part time</label>
           </div>
           <div class="search__input-group--filters">
@@ -111,7 +129,10 @@
               type="checkbox"
               name="contract"
               id="contract"
-              value="contract">
+              value="contract"
+              ngModel
+              #typeInput="ngModel"
+              (change)="onSearch(searchForm)">
             <label class="search__input-label--filter search__input-label--filter-type" for="contract">Contract</label>
           </div>
           <div class="search__input-group--filters">
@@ -120,7 +141,10 @@
               type="checkbox"
               name="temporary"
               id="temporary"
-              value="temporary">
+              value="temporary"
+              ngModel
+              #typeInput="ngModel"
+              (change)="onSearch(searchForm)">
             <label class="search__input-label--filter search__input-label--filter-type" for="temporary">Temporary</label>
           </div>
           <div class="search__input-group--filters">
@@ -129,7 +153,10 @@
               type="checkbox"
               name="apprenticeship"
               id="apprenticeship"
-              value="apprenticeship">
+              value="apprenticeship"
+              ngModel
+              #typeInput="ngModel"
+              (change)="onSearch(searchForm)">
             <label class="search__input-label--filter search__input-label--filter-type" for="apprenticeship">Apprenticeship</label>
           </div>
           <div class="search__input-group--filters">
@@ -138,7 +165,10 @@
               type="checkbox"
               name="volunteer"
               id="volunteer"
-              value="volunteer">
+              value="volunteer"
+              ngModel
+              #typeInput="ngModel"
+              (change)="onSearch(searchForm)">
             <label class="search__input-label--filter search__input-label--filter-type" for="volunteer">Volunteer</label>
           </div>
         </div>
@@ -149,38 +179,47 @@
           <div class="search__input-group--filters">
             <input
               class="search__input--filter"
-              type="radio"
-              name="date"
-              id="day"
-              value="day">
-              <label class="search__input-label--filter" for="day">Past 24 hours</label>
+              type="checkbox"
+              name="range-1"
+              id="range-1"
+              value="range-1"
+              ngModel
+              #salaryInput="ngModel"
+              (change)="onSearch(searchForm)">
+              <label class="search__input-label--filter search__input-label--filter-salary" for="range-1">£20K - £40K</label>
           </div>
           <div class="search__input-group--filters">
             <input
               class="search__input--filter"
-              type="radio"
-              name="date"
-              id="week"
-              value="week">
-              <label class="search__input-label--filter" for="week">Past week</label>
+              type="checkbox"
+              name="range-2"
+              id="range-2"
+              value="range-2"
+              ngModel
+              #salaryInput="ngModel"
+              (change)="onSearch(searchForm)">
+              <label class="search__input-label--filter search__input-label--filter-salary" for="range-2">£40K - £60K</label>
           </div>
           <div class="search__input-group--filters">
             <input
               class="search__input--filter"
-              type="radio"
-              name="date"
-              id="month"
-              value="month">
-            <label class="search__input-label--filter" for="month">Past month</label>
+              type="checkbox"
+              name="range-3"
+              id="range-3"
+              value="range-3">
+            <label class="search__input-label--filter search__input-label--filter-salary" for="range-3">£60K - £80K</label>
           </div>
           <div class="search__input-group--filters">
             <input
               class="search__input--filter"
-              type="radio"
-              name="date"
-              id="all-time"
-              value="all-time">
-            <label class="search__input-label--filter" for="all-time">All time</label>
+              type="checkbox"
+              name="range-4"
+              id="range-4"
+              value="range-4"
+              ngModel
+              #salaryInput="ngModel"
+              (change)="onSearch(searchForm)">
+            <label class="search__input-label--filter search__input-label--filter-salary" for="range-4">More than £80K</label>
           </div>
         </div>
       </li>
