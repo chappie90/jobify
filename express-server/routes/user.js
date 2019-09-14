@@ -79,7 +79,6 @@ router.post('/google-login', (req, res, next) => {
   });
   const payload = ticket.getPayload();
   const userid = payload['sub'];
-  console.log(payload);
   if (userid) {
     User.findOne({ email: req.body.email }).
       then(user => {

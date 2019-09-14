@@ -54,7 +54,7 @@ export class SignupComponent implements OnInit, AfterViewInit, OnDestroy {
       let profile = googleUser.getBasicProfile();
       let googleToken = googleUser.getAuthResponse().id_token;
       let googleEmail = profile.getEmail(); 
-     this.zone.run(() => this.authService.googleSignIn(googleEmail, googleToken, 'jobseeker'));
+      this.zone.run(() => this.authService.googleSignIn(googleEmail, googleToken, 'jobseeker'));
 
         // console.log('Token || ' + googleUser.getAuthResponse().id_token);
          // console.log('ID: ' + profile.getId());
