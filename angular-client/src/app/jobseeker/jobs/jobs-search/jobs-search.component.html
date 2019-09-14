@@ -44,7 +44,7 @@
       [ngClass]="{'search__button--pristine': !jobsSearch}">Find jobs</button>
     <ul *ngIf="jobsSearch" class="search__filters-list">
       <li class="search__filters-item">
-        Date Posted
+        <span class="search__filters-item-title">Date Posted</span>
         <div appDropdown class="search__filters-content">
           <div class="search__input-group--filters">
             <input
@@ -85,7 +85,7 @@
         </div>
       </li>
       <li class="search__filters-item">
-        Job type
+        <span class="search__filters-item-title">Job type</span>
         <div appDropdown class="search__filters-content">
           <div class="search__input-group--filters">
             <input
@@ -94,7 +94,7 @@
               name="full"
               id="full"
               value="full-time">
-              <label class="search__input-label--filter" for="full">Full time</label>
+              <label class="search__input-label--filter search__input-label--filter-type" for="full">Full time</label>
           </div>
           <div class="search__input-group--filters">
             <input
@@ -103,7 +103,7 @@
               name="part"
               id="part"
               value="part-time">
-              <label class="search__input-label--filter" for="part">Part time</label>
+              <label class="search__input-label--filter search__input-label--filter-type" for="part">Part time</label>
           </div>
           <div class="search__input-group--filters">
             <input
@@ -112,7 +112,7 @@
               name="contract"
               id="contract"
               value="contract">
-            <label class="search__input-label--filter" for="contract">Contract</label>
+            <label class="search__input-label--filter search__input-label--filter-type" for="contract">Contract</label>
           </div>
           <div class="search__input-group--filters">
             <input
@@ -121,7 +121,7 @@
               name="temporary"
               id="temporary"
               value="temporary">
-            <label class="search__input-label--filter" for="temporary">Temporary</label>
+            <label class="search__input-label--filter search__input-label--filter-type" for="temporary">Temporary</label>
           </div>
           <div class="search__input-group--filters">
             <input
@@ -130,7 +130,7 @@
               name="apprenticeship"
               id="apprenticeship"
               value="apprenticeship">
-            <label class="search__input-label--filter" for="apprenticeship">Apprenticeship</label>
+            <label class="search__input-label--filter search__input-label--filter-type" for="apprenticeship">Apprenticeship</label>
           </div>
           <div class="search__input-group--filters">
             <input
@@ -139,12 +139,12 @@
               name="volunteer"
               id="volunteer"
               value="volunteer">
-            <label class="search__input-label--filter" for="volunteer">Volunteer</label>
+            <label class="search__input-label--filter search__input-label--filter-type" for="volunteer">Volunteer</label>
           </div>
         </div>
       </li>
       <li class="search__filters-item">
-        Salary range
+        <span class="search__filters-item-title">Salary range</span>
         <div appDropdown class="search__filters-content">
           <div class="search__input-group--filters">
             <input

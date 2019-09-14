@@ -1,18 +1,22 @@
-<ul class="jobs-list__list">
-  <li 
-    [class.jobs-list__list-item--active]="job === selectedJob" 
-    class="jobs-list__list-item" 
-    (click)="onGetJobsItem(job)" 
-    *ngFor="let job of jobs">
-    <div class="jobs-list__list-item--left">
-  <!--    <img src="./assets/images/1.png" class="jobs-list__img" /> -->
-    </div>
-    <div class="jobs-list__list-item--right">
-      <h3 class="heading-small">{{ job.title }}</h3>
-      <h4 class="jobs-list__company-title">{{ job.company}}</h4>
-      <h5 class="heading-extra-small">{{ job.location }}</h5>
-      <h5 class="heading-extra-small">{{ job.datePosted }}</h5>
-    </div>
-  </li>
-</ul>
-<app-pagination></app-pagination>
+<div class="jobs-list__container">
+  <ul class="jobs-list__list">
+    <li 
+      [class.jobs-list__list-item--active]="job === selectedJob" 
+      class="jobs-list__list-item" 
+      (click)="onGetJobsItem(job)" 
+      *ngFor="let job of jobs">
+      <div class="jobs-list__list-item--left">
+    <!--    <img src="./assets/images/1.png" class="jobs-list__img" /> -->
+      </div>
+      <div class="jobs-list__list-item--right">
+        <h3 class="heading-small">{{ job.title }}</h3>
+        <h4 class="jobs-list__company-title">{{ job.company}}</h4>
+        <h5 class="heading-extra-small">{{ job.location }}</h5>
+        <h5 class="heading-extra-small">{{ job.datePosted }}</h5>
+      </div>
+    </li>
+  </ul>
+  <div class="pagination">
+    <app-pagination></app-pagination>
+  </div>
+</div>

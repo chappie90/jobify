@@ -20,7 +20,6 @@ export class PaginationComponent implements OnInit {
   private previousPage: number;
   private firstPage: number;
   private lastPage: number;
-  private currentPageindex: number;
   private jobsSub: Subscription;
   private pageSub: Subscription;
 
@@ -70,7 +69,6 @@ export class PaginationComponent implements OnInit {
       this.firstPage = previousPage - 3;
       this.nextPage = previousPage + 1;
       this.lastPage = this.nextPage + 2;
-      this.currentPageindex = index;
       this.jobsService.getJobs('Analyst', 'London', this.nextPage);
     } else if (index === 1 && page === this.moreJobs) {
       this.firstPage = nextPage - 4;

@@ -11,8 +11,8 @@ const API_URL = environment.API + '/jobs';
 @Injectable({ providedIn: 'root' })
 export class JobsService {
   private jobs: Job[] = [];
-  private jobsCount: number;
-  private currentPage: number;
+  private jobsCount: string;
+  private currentPage: string;
   private jobsUpdated = new Subject<{ jobs: Job[]; count: number }>();
   private jobSelected = new Subject<{ job: Job }>();
 

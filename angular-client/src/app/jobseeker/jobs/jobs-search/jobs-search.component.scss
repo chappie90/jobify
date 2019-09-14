@@ -133,18 +133,24 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
     border-radius: 4px;
     background-color: $grey-light;
     border: 1px solid $grey-medium;
-    padding: .6rem 1rem;
-    cursor: pointer;
 
-    &::after {
+    &:first-of-type {
+      margin-left: 3rem;
+    }
+  }
+
+  &__filters-item-title {
+    cursor: pointer;
+    padding: .6rem 1rem;
+    display: inline-block;
+
+   &::after {
      font-family: "Font Awesome 5 Free";
      font-weight: 900;
      content:  "\f0d7";
      color: $grey-dark;
-    }
-
-    &:first-of-type {
-      margin-left: 3rem;
+     display: inline-block;
+     margin-left: .6rem;
     }
   }
 
@@ -182,6 +188,10 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
     &:checked + .search__input-label--filter-date::before {
       border: 5px solid $grey-dark;
     }
+
+     &:checked + .search__input-label--filter-type::before {
+      border: 5px solid $grey-dark;
+    }
   }
   
   &__input--filter,
@@ -191,24 +201,41 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
 
   &__input-label--filter {
     color: $grey-dark;
+    position: relative;
+    margin-left: 2.2rem; 
+    padding: .6rem; 
   }
 
-  &__input-label--filter-date {
-    position: relative;
-    margin-left: 2.6rem; 
-    padding: .6rem; 
+  &__input-label--filter-date {   
 
     &::before {
       content: '';
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      left: -2.6rem;
+      left: -2.2rem;
       width: 1.8rem;
       display: inline-block;
       height: 1.8rem;
       border: 1px solid $grey-dark;
       border-radius: 50%;
+      transition: all .3s;
+    }
+  }
+
+  &__input-label--filter-type {
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: -2.2rem;
+      width: 1.8rem;
+      display: inline-block;
+      height: 1.8rem;
+      border: 1px solid $grey-dark;
+      border-radius: 4px;
       transition: all .3s;
     }
   }

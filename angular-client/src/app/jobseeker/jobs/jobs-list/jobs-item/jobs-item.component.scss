@@ -17,11 +17,11 @@
 
   &__header {
     display: flex;
+    justify-content: space-around;
     border-bottom: 1px solid $grey-medium;
   }
 
   &__header--left {
-    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,7 +29,6 @@
   }
 
   &__header--right {
-    flex: 1;
   }
 
   &__heading-small {

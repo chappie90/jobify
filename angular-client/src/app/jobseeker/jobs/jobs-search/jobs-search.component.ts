@@ -11,6 +11,7 @@ import { JobsService } from '../../../services/jobs.service';
 })
 export class JobsSearchComponent implements OnInit {
   private jobsSearch: boolean = false;
+  private openDropdown: boolean = false;
 
   constructor(private jobsService: JobsService) { }
 
