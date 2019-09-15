@@ -146,7 +146,8 @@ export class AuthService {
     const tokenExpirationDate = localStorage.getItem('tokenExpirationDate');
     const userId = localStorage.getItem('userId');
     const likedJobs = localStorage.getItem('likedJobs');
-    if (!token || !tokenExpirationDate) {
+    console.log(likedJobs);
+    if (!token || !tokenExpirationDate || !likedJobs) {
       return;
     }
     return {

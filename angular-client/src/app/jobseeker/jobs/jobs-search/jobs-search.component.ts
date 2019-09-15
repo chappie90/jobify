@@ -30,7 +30,6 @@ export class JobsSearchComponent implements OnInit {
   }
 
   onSearch(form: NgForm) {
-    console.log(form.value.range-1);
     this.filterDateActive = form.value.date ? true : false;
     // this.filterDateActive = form.value.date === 'all-time' ? false : true;
     this.filterTypeActive = form.value.full || 

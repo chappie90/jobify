@@ -14,7 +14,7 @@ export class JobsService {
   private jobs: Job[] = [];
   private jobsCount: string;
   private currentPage: string;
-  private jobsUpdated = new Subject<{ jobs: Job[]; count: number; currentPage: string }>();
+  private jobsUpdated = new Subject<{ jobs: Job[]; count: string; currentPage: string }>();
   private jobSelected = new Subject<{ job: Job }>();
 
   constructor(private http: HttpClient,
@@ -29,7 +29,14 @@ export class JobsService {
     )
     .pipe(
       map(jobsData => {
-        const likedJobs = this.authService.getAuthData().likedJobs.split(',');
+        const authData = this.authService.getAuthData();
+        console.log(authData);
+        let likedJobs;
+        if (authData) {
+          likedJobs = authData.likedJobs.split(',');
+        } else {
+          likedJobs = [];
+        }
         return {
           message: jobsData.message,
           totalJobs: jobsData.totalJobs,

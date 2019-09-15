@@ -19,6 +19,7 @@ import { ProductsComponent } from './employer/products/products.component';
 import { PricingComponent } from './employer/pricing/pricing.component';
 import { PostJobComponent } from './employer/post-job/post-job.component';
 import { LoginComponent } from './auth/login/login.component';
+import { LoginFormComponent } from './auth/login/login-form/login-form.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
@@ -44,6 +45,7 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
     PricingComponent,
     PostJobComponent,
     LoginComponent,
+    LoginFormComponent,
     SignupComponent,
     DropdownDirective,
     LoadingSpinnerComponent,

@@ -9,13 +9,13 @@ import { JobsService} from '../../services/jobs.service';
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent implements OnInit {
-  private jobsCount: number;
+  private jobsCount: string;
   private pageSize: number = 20;
   private numberPages: number;
   private moreJobs: string = '...';
   private pages = [];
   private pagesOutput = [];
-  private selectedPage: number;
+  private selectedPage: string;
   private nextPage: number;
   private previousPage: number;
   private firstPage: number;
@@ -32,7 +32,7 @@ export class PaginationComponent implements OnInit {
         jobs => {
           this.jobsCount = jobs.count;
           this.selectedPage = jobs.currentPage;
-          this.numberPages = Math.ceil(this.jobsCount / this.pageSize);
+          this.numberPages = Math.ceil(parseInt(this.jobsCount) / this.pageSize);
           this.pages = [...Array(this.numberPages).keys()].map(x => ++x);
           this.pagesOutput = [];
           let lastPage = this.pages.slice(-1).pop();

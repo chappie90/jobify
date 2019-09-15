@@ -1,12 +1,18 @@
 <div *ngIf="job" class="jobs-item">
+  <div *ngIf="showModal" (click)="showModal = !showModal" class="modal-bg"></div>
+  <div *ngIf="showModal" class="modal">
+    <div class="modal-content">
+      <app-login-form></app-login-form>
+    </div>
+  </div>
   <div class="jobs-item__header">
     <div class="jobs-item__header--left">
       <h2 class="heading-medium">{{ job.title }}</h2>
       <h3 class="heading-small">{{ job.company }}</h3>
       <h3>£{{ job.salary }}</h3>
       <div class="jobs-item__button-container">
-        <button class="button button-fill">Apply</button>
-        <button (click)="onLikeJob(job.id)" class="button button-nofill">Save</button>
+        <button (click)="onApply(job.id)" class="button button-fill">Apply</button>
+        <button (click)="onSaveJob(job.id)" class="button button-nofill">Save</button>
       </div>
     </div>
     <div class="jobs-item__header--right">

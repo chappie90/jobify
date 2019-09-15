@@ -27,8 +27,20 @@
     }
   }
 
+  &__like-container {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+  //  align-items: flex-end;
+  }
+
   &__list-item-like {
-    color: blue;
+    width: 2rem;
+    height: 2rem;
+    display: inline-block;
+    background: url('../../../../assets/images/like-2.svg');
+    background-repeat: no-repeat;
+    background-size: 100%;
   }
 
   &__img {

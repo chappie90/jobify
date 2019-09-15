@@ -5,15 +5,19 @@
       class="jobs-list__list-item" 
       (click)="onGetJobsItem(job)" 
       *ngFor="let job of jobs">
-      <div class="jobs-list__list-item--left">
-    <!--    <img src="./assets/images/1.png" class="jobs-list__img" /> -->
+      <div class="jobs-list__info-conainer">
+        <div class="jobs-list__list-item--left">
+      <!--    <img src="./assets/images/1.png" class="jobs-list__img" /> -->
+        </div>
+        <div class="jobs-list__list-item--right">
+          <h3 class="heading-small">{{ job.title }}</h3>
+          <h4 class="jobs-list__company-title">{{ job.company}}</h4>
+          <h5 class="heading-extra-small">{{ job.location }}</h5>
+          <h5 class="heading-extra-small">{{ job.datePosted }}</h5>
+        </div>
       </div>
-      <div class="jobs-list__list-item--right">
-        <h3 class="heading-small">{{ job.title }}</h3>
-        <h4 class="jobs-list__company-title">{{ job.company}}</h4>
-        <h5 class="heading-extra-small">{{ job.location }}</h5>
-        <h5 class="heading-extra-small">{{ job.datePosted }}</h5>
-        <span class="jobs-list__list-item-like">{{ job.likedJob }}</span>
+      <div class="jobs-list__like-container">
+        <span *ngIf="job.likedJob" class="jobs-list__list-item-like"></span>
       </div>
     </li>
   </ul>

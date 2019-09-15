@@ -1,5 +1,36 @@
 @import '~src/styles.scss';
 
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $black;
+  opacity: .3;
+  z-index: 10;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -70%);
+  z-index: 11;
+  background-color: $white;
+  border-radius: 4px;
+}
+
+.modal-content {
+  border-radius: 4px;
+  padding: 2rem;
+  border: .4rem solid $grey-dark;
+}
+
+.login__form-container {
+  background: blue;
+}
+
 .heading-medium {
   font-weight: 400; 
   margin-bottom: 1rem;
