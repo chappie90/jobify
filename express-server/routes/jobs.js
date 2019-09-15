@@ -1,7 +1,7 @@
 const express = require('express');
 
 const Job = require('../models/job');
-const checkAuth = require('../middleware/check-auth');
+//const checkAuth = require('../middleware/check-auth');
 
 const router = express.Router();
 

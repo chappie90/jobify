@@ -23,6 +23,10 @@ export class AuthService {
     return this.token;
   }
 
+  // getUserId() {
+  //   return this.userId;
+  // }
+
   getIsAuth() {
     return this.isAuthenticated;
   }
@@ -43,11 +47,12 @@ export class AuthService {
           this.isAuthenticated = true;
           this.authStatusListener.next(true);
           this.userId = response.userId;
+          const likedJobs = response.likedJobs;
           const date = new Date();
           const tokenExpireDate = new Date(
             date.getTime() + tokenExpiration * 1000
           );
-          this.saveAuthData(this.token, tokenExpireDate, this.userId);
+          this.saveAuthData(this.token, tokenExpireDate, this.userId, likedJobs);
           this.router.navigate(['/'])
         }
       },
@@ -70,11 +75,12 @@ export class AuthService {
           this.isAuthenticated = true;
           this.authStatusListener.next(true);
           this.userId = response.userId;
+          const likedJobs = response.likedJobs;
           const date = new Date();
           const tokenExpireDate = new Date(
             date.getTime() + tokenExpiration * 1000
           );
-          this.saveAuthData(this.token, tokenExpireDate, this.userId);
+          this.saveAuthData(this.token, tokenExpireDate, this.userId, likedJobs);
           this.router.navigate(['/']);
         }
       },
@@ -96,11 +102,12 @@ export class AuthService {
             this.isAuthenticated = true;
             this.authStatusListener.next(true);
             this.userId = response.userId;
+            const likedJobs = response.likedJobs;
             const date = new Date();
             const tokenExpireDate = new Date(
               date.getTime() + tokenExpiration * 1000
             );
-            this.saveAuthData(this.token, tokenExpireDate, this.userId);
+            this.saveAuthData(this.token, tokenExpireDate, this.userId, likedJobs);
             this.router.navigate(['/']);
           }
         },
@@ -127,24 +134,26 @@ export class AuthService {
     }, duration * 1000);
   }
 
-  saveAuthData(token: string, tokenExpirationDate: Date, userId: string) {
+  saveAuthData(token: string, tokenExpirationDate: Date, userId: string, likedJobs: any) {
     localStorage.setItem('token', token);
     localStorage.setItem('tokenExpirationDate', tokenExpirationDate.toISOString());
     localStorage.setItem('userId', userId);
-    console.log(localStorage.getItem('token'));
+    localStorage.setItem('likedJobs', likedJobs);
   }
 
   getAuthData() {
     const token = localStorage.getItem('token');
     const tokenExpirationDate = localStorage.getItem('tokenExpirationDate');
     const userId = localStorage.getItem('userId');
+    const likedJobs = localStorage.getItem('likedJobs');
     if (!token || !tokenExpirationDate) {
       return;
     }
     return {
       token: token,
       tokenExpirationDate: new Date(tokenExpirationDate),
-      userId: userId
+      userId: userId,
+      likedJobs: likedJobs
     };
   }
 
@@ -152,6 +161,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('tokenExpirationDate');
     localStorage.removeItem('userId');
+    localStorage.removeItem('likedJobs');
   }
 
 

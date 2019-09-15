@@ -10,4 +10,5 @@ export interface Job {
   overview: string;
   responsible: string;
   qualify: string;
+  likedJob: boolean;
 }

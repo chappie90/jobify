@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
       authStatus => {
-
+        console.log(authStatus);
       }
     );
   }

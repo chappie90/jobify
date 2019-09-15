@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { Job } from '../job.model';
 import { JobsService } from '../../../services/jobs.service';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-jobs-list',
@@ -16,7 +17,8 @@ export class JobsListComponent implements OnInit {
   private selectedJob: Job;
 
   constructor(private route: ActivatedRoute,
-              private jobsService: JobsService) { }
+              private jobsService: JobsService,
+              private authService: AuthService) { }
 
   ngOnInit() {
    this.jobsService.getJobs('Analyst', 'London', 1);
@@ -24,8 +26,10 @@ export class JobsListComponent implements OnInit {
     .subscribe(
       jobs => {
         this.jobs = jobs.jobs;
+        console.log(this.jobs);
         this.selectedJob = this.jobs[0];
         this.jobsService.getJobsItem(this.jobs[0]);
+     //   console.log(document.getElementById('jobs-list').scrollTop);
       }
     );
   }

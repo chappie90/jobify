@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { Job } from '../jobseeker/jobs/job.model';
+import { AuthService } from '../auth/auth.service';
 
 const API_URL = environment.API + '/jobs';
 
@@ -13,14 +14,13 @@ export class JobsService {
   private jobs: Job[] = [];
   private jobsCount: string;
   private currentPage: string;
-  private jobsUpdated = new Subject<{ jobs: Job[]; count: number }>();
+  private jobsUpdated = new Subject<{ jobs: Job[]; count: number; currentPage: string }>();
   private jobSelected = new Subject<{ job: Job }>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private authService: AuthService) {}
 
   getJobs(title: string, location: string, page: number) {
-    console.log(title);
-    console.log(location);
     const queryParams = `?page=${page}&title=${title}&location=${location}`;
     this.http.get<{ message: string; jobs: Job[]; totalJobs: string; currentPage: string; }>(
       // './assets/data/jobify-data.json'
@@ -29,13 +29,29 @@ export class JobsService {
     )
     .pipe(
       map(jobsData => {
+        const likedJobs = this.authService.getAuthData().likedJobs.split(',');
         return {
           message: jobsData.message,
           totalJobs: jobsData.totalJobs,
           currentPage: jobsData.currentPage,
           jobs: jobsData.jobs.map(job => {
-            return {
-              id: job._id,
+           if(likedJobs.includes(job._id)) {
+            return {  
+                id: job._id,
+                title: job.job_title,
+                type: job.job_type,
+                location: job.location,
+                company: job.company_name,
+                salary: job.salary,
+                industry: job.industry,
+                datePosted: job.date_posted,
+                overview: job.job_overview,
+                responsible: job.job_responsibilities,
+                qualify: job.job_qualifications,
+                likedJob: true
+             };
+           } else {
+            return {  id: job._id,
               title: job.job_title,
               type: job.job_type,
               location: job.location,
@@ -45,10 +61,12 @@ export class JobsService {
               datePosted: job.date_posted,
               overview: job.job_overview,
               responsible: job.job_responsibilities,
-              qualify: job.job_qualifications
+              qualify: job.job_qualifications,
+              likedJob: false
             };
+           }
           })
-        };
+        }
       })
     )
     .subscribe(transformedJobsData => {

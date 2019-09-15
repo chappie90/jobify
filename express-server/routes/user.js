@@ -25,7 +25,8 @@ router.post('/signup', (req, res, next) => {
           res.status(201).json({
             token: token,
             expiresIn: 3600,
-            userId: response._id
+            userId: response._id,
+            likedJobs: []
           });  
       })
       .catch(err => {
@@ -60,7 +61,8 @@ router.post('/login', (req, res, next) => {
       res.status(200).json({
         token: token,
         expiresIn: 3600,
-        userId: fetchedUser._id
+        userId: fetchedUser._id,
+        likedJobs: fetchedUser.likedJobs
       });
     })
     .catch(err => {
@@ -93,14 +95,16 @@ router.post('/google-login', (req, res, next) => {
             return res.status(200).json({
               token: req.body.token,
               expiresIn: 3600,
-              userId: user._id
+              userId: user._id,
+              likedJobs: []
             })
           });
         } else if (user) {
           return res.status(200).json({
             token: req.body.token,
             expiresIn: 3600,
-            userId: user._id
+            userId: user._id,
+            likesJobs: user.likedJobs
           })
         }
       })
@@ -113,6 +117,24 @@ router.post('/google-login', (req, res, next) => {
 
   }
   verify().catch(console.error);
+});
+
+router.patch('/like', (req, res, next) =>{
+  const userId = req.body.userId;
+  const likedJobs = req.body.likedJobs;
+  User.updateOne({ _id: userId }, {likedJobs: likedJobs })
+    .then(user => {
+      console.log(user);
+      res.status(200).json({
+        message: user
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(401).json({
+        message: 'Could not update liked jobs'
+      });
+    });
 });
 
 module.exports = router;

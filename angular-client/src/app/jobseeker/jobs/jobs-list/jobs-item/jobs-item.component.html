@@ -6,7 +6,7 @@
       <h3>£{{ job.salary }}</h3>
       <div class="jobs-item__button-container">
         <button class="button button-fill">Apply</button>
-        <button class="button button-nofill">Save</button>
+        <button (click)="onLikeJob(job.id)" class="button button-nofill">Save</button>
       </div>
     </div>
     <div class="jobs-item__header--right">
