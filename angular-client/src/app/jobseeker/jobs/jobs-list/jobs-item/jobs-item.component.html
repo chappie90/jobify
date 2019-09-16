@@ -2,6 +2,9 @@
   <div *ngIf="showModal" (click)="showModal = !showModal" class="modal-bg"></div>
   <div *ngIf="showModal" class="modal">
     <div class="modal-content">
+      <div class="modal-heading">
+        <h2 class="heading-small">You need to be a member to apply for a job</h2>
+      </div>
       <app-login-form></app-login-form>
     </div>
   </div>

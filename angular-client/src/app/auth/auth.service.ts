@@ -37,7 +37,7 @@ export class AuthService {
 
   createUser(email: string, password: string, type: string) {
     const userData = { email: email, password: password, type: 'jobseeker' };
-    this.http.post<{ token: string; expiresIn: number; userId: string; }>
+    this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any}>
     (API_URL + '/signup', userData).subscribe(
       (response) => {
         this.token = response.token;

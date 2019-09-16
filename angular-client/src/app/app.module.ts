@@ -21,6 +21,7 @@ import { PostJobComponent } from './employer/post-job/post-job.component';
 import { LoginComponent } from './auth/login/login.component';
 import { LoginFormComponent } from './auth/login/login-form/login-form.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { SignupFormComponent } from './auth/signup/signup-form/signup-form.component';
 import { DropdownDirective } from './shared/dropdown.directive';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { JobsListComponent } from './jobseeker/jobs/jobs-list/jobs-list.component';
@@ -47,6 +48,7 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
     LoginComponent,
     LoginFormComponent,
     SignupComponent,
+    SignupFormComponent,
     DropdownDirective,
     LoadingSpinnerComponent,
     JobsListComponent,

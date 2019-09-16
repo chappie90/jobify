@@ -22,9 +22,21 @@
 }
 
 .modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-radius: 4px;
-  padding: 2rem;
-  border: .4rem solid $grey-dark;
+  padding: 3rem;
+  background-color: $grey-dark;
+
+  .heading-small {
+    color: $white;
+    margin: 2rem;
+  }
+}
+
+p.login__paragraph {
+  color: $white !important;
 }
 
 .login__form-container {

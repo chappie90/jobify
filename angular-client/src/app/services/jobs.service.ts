@@ -22,7 +22,7 @@ export class JobsService {
 
   getJobs(title: string, location: string, page: number) {
     const queryParams = `?page=${page}&title=${title}&location=${location}`;
-    this.http.get<{ message: string; jobs: Job[]; totalJobs: string; currentPage: string; }>(
+    this.http.get<{ message: string; jobs: any; totalJobs: string; currentPage: string; }>(
       // './assets/data/jobify-data.json'
 
       API_URL + queryParams
@@ -41,34 +41,34 @@ export class JobsService {
           message: jobsData.message,
           totalJobs: jobsData.totalJobs,
           currentPage: jobsData.currentPage,
-          jobs: jobsData.jobs.map(job => {
-           if(likedJobs.includes(job._id)) {
+          jobs: jobsData.jobs.map(jobData => {
+           if(likedJobs.includes(jobData._id)) {
             return {  
-                id: job._id,
-                title: job.job_title,
-                type: job.job_type,
-                location: job.location,
-                company: job.company_name,
-                salary: job.salary,
-                industry: job.industry,
-                datePosted: job.date_posted,
-                overview: job.job_overview,
-                responsible: job.job_responsibilities,
-                qualify: job.job_qualifications,
+                id: jobData._id,
+                title: jobData.job_title,
+                type: jobData.job_type,
+                location: jobData.location,
+                company: jobData.company_name,
+                salary: jobData.salary,
+                industry: jobData.industry,
+                datePosted: jobData.date_posted,
+                overview: jobData.job_overview,
+                responsible: jobData.job_responsibilities,
+                qualify: jobData.job_qualifications,
                 likedJob: true
              };
            } else {
-            return {  id: job._id,
-              title: job.job_title,
-              type: job.job_type,
-              location: job.location,
-              company: job.company_name,
-              salary: job.salary,
-              industry: job.industry,
-              datePosted: job.date_posted,
-              overview: job.job_overview,
-              responsible: job.job_responsibilities,
-              qualify: job.job_qualifications,
+            return {  id: jobData._id,
+              title: jobData.job_title,
+              type: jobData.job_type,
+              location: jobData.location,
+              company: jobData.company_name,
+              salary: jobData.salary,
+              industry: jobData.industry,
+              datePosted: jobData.date_posted,
+              overview: jobData.job_overview,
+              responsible: jobData.job_responsibilities,
+              qualify: jobData.job_qualifications,
               likedJob: false
             };
            }
