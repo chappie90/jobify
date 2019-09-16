@@ -5,7 +5,9 @@
       <div class="modal-heading">
         <h2 class="heading-small">You need to be a member to apply for a job</h2>
       </div>
-      <app-login-form></app-login-form>
+      <app-login-form *ngIf="!toggleForm"></app-login-form>
+      <p *ngIf="!toggleForm" class="login__paragraph">Don't have an account? <a (click)="toggleForm = !toggleForm">Sign up fool</a></p>
+      <app-signup-form *ngIf="toggleForm"></app-signup-form>
     </div>
   </div>
   <div class="jobs-item__header">

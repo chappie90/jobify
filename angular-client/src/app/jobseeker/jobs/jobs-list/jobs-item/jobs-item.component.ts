@@ -19,6 +19,7 @@ export class JobsItemComponent implements OnInit {
   private isAuthenticated: boolean = false;
   private userId: string;
   private showModal: boolean;
+  private toggleForm: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private jobsService: JobsService,
