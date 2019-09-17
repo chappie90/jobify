@@ -69,4 +69,9 @@ export class JobsItemComponent implements OnInit {
     this.userService.likeJob(newLikedJobs, this.userId);
   }
 
+  onOutsideModal() {
+    this.showModal = false;
+    this.toggleForm = false;
+  }
+
 }

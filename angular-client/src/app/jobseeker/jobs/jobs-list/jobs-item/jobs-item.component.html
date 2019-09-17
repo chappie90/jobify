@@ -1,13 +1,14 @@
 <div *ngIf="job" class="jobs-item">
-  <div *ngIf="showModal" (click)="showModal = !showModal" class="modal-bg"></div>
+  <div *ngIf="showModal" (click)="onOutsideModal()" class="modal-bg"></div>
   <div *ngIf="showModal" class="modal">
     <div class="modal-content">
       <div class="modal-heading">
         <h2 class="heading-small">You need to be a member to apply for a job</h2>
       </div>
       <app-login-form *ngIf="!toggleForm"></app-login-form>
-      <p *ngIf="!toggleForm" class="login__paragraph">Don't have an account? <a (click)="toggleForm = !toggleForm">Sign up fool</a></p>
+      <p *ngIf="!toggleForm" class="login__paragraph">Don't have an account? <a class="login__link" (click)="toggleForm = !toggleForm">Sign up</a></p>
       <app-signup-form *ngIf="toggleForm"></app-signup-form>
+      <p class="login__paragraph" *ngIf="toggleForm">Already have an account? <a class="login__link" (click)="toggleForm = !toggleForm">Log in</a></p>
     </div>
   </div>
   <div class="jobs-item__header">

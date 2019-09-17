@@ -15,7 +15,7 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -70%);
+  transform: translate(-50%, -50%);
   z-index: 11;
   background-color: $white;
   border-radius: 4px;
@@ -36,6 +36,7 @@
 }
 
 p.login__paragraph {
+  margin: 1rem;
   color: $white !important;
 }
 
@@ -113,4 +114,14 @@ p.login__paragraph {
   border: 1px solid $jobseeker-red-dark;
   color: $jobseeker-red-dark;
   background-color: $white;
+}
+.login__link {
+  color: $unifier-orange;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    opacity: .8;
+    text-decoration: underline;
+  }
 }
