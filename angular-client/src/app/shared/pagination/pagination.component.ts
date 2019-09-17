@@ -15,7 +15,7 @@ export class PaginationComponent implements OnInit {
   private moreJobs: string = '...';
   private pages = [];
   private pagesOutput = [];
-  private selectedPage: string;
+  private selectedPage: number;
   private nextPage: number;
   private previousPage: number;
   private firstPage: number;
@@ -31,7 +31,7 @@ export class PaginationComponent implements OnInit {
       .subscribe(
         jobs => {
           this.jobsCount = jobs.count;
-          this.selectedPage = jobs.currentPage;
+          this.selectedPage = parseInt(jobs.currentPage);
           this.numberPages = Math.ceil(parseInt(this.jobsCount) / this.pageSize);
           this.pages = [...Array(this.numberPages).keys()].map(x => ++x);
           this.pagesOutput = [];

@@ -1,0 +1,48 @@
+@import '~src/styles.scss';
+
+.footer {
+  background-color: $black;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 8rem 8rem 10rem;
+  display: flex;
+}
+.logo {
+  width: 16rem;
+}
+.list {
+  list-style-type: none;
+  margin-top: 2rem;
+}
+.list-horizontal {
+
+  li {
+    display: inline-block;
+  }
+}
+h2 {
+  color: $grey;
+  font-size: 1.6rem;
+}
+.item {
+  margin-top: 1rem;
+
+  &:first-of-type {
+    margin-top: 2rem;
+  }
+}
+.link {
+  color: $white;
+
+  &:hover {
+    color: $unifier-orange;
+  }
+}
+.social-media {
+  width: 4rem;
+  margin: .6rem;
+
+  &:hover {
+    opacity: .7;
+  }
+}

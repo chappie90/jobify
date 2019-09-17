@@ -65,7 +65,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     const loginData = { email: email, password: password };
-    this.http.post<{ token: string; expiresIn: number; userId: string; }>
+    this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any }>
       (API_URL + '/login', loginData).subscribe(
       response => {
         this.token = response.token;
@@ -92,7 +92,7 @@ export class AuthService {
 
   googleSignIn(email: string, token: string, type: string) {
     const googleSigninData = { email: email, token: token, type: 'jobseeker' };
-    this.http.post<{ token: string; expiresIn: number; userId: string; }>
+    this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any }>
       (API_URL + '/google-login', googleSigninData).subscribe(
         response => {
           this.token = response.token;

@@ -15,7 +15,7 @@ import { UserService } from '../../../../services/user.service';
 export class JobsItemComponent implements OnInit {
   private jobsSub: Subscription;
   private authSub: Subscription;
-  private job: Job;
+  private job;
   private isAuthenticated: boolean = false;
   private userId: string;
   private showModal: boolean;

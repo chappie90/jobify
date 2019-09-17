@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 import { NavPrimaryComponent } from './header/nav-primary/nav-primary.component';
 import { NavSecondaryJobseekerComponent } from './header/nav-secondary-jobseeker/nav-secondary-jobseeker.component';
 import { NavSecondaryEmployerComponent } from './header/nav-secondary-employer/nav-secondary-employer.component';
@@ -33,6 +34,7 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
   declarations: [
     AppComponent,
     HeaderComponent,
+    FooterComponent,
     NavPrimaryComponent,
     NavSecondaryJobseekerComponent,
     NavSecondaryEmployerComponent,

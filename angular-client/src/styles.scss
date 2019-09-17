@@ -42,3 +42,11 @@ button {
   outline: none;
   cursor: pointer;
 }
+::-moz-selection {
+  color: $unifier-orange;
+  background-color: $grey-dark;
+}
+::selection {
+  color: $unifier-orange;
+  background-color: $grey-dark;
+}

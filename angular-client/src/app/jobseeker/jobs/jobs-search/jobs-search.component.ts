@@ -10,7 +10,7 @@ import { JobsService } from '../../../services/jobs.service';
   styleUrls: ['./jobs-search.component.scss']
 })
 export class JobsSearchComponent implements OnInit {
-  @ViewChild ('searchForm') form;
+  @ViewChild ('searchForm', {static: false}) form;
 
   private jobsSearch: boolean = false;
   private openDropdown: boolean = false;
