@@ -27,10 +27,11 @@ export class JobsItemComponent implements OnInit {
               private authService: AuthService) {}
 
   ngOnInit() {
+    this.checkToken();
     this.authSub = this.authService.getAuthStatusListener().subscribe(
       authStatus => {
         this.isAuthenticated = authStatus;
-        console.log(this.isAuthenticated);
+        console.log(this.isAuthenticated, '21');
       }
     );
     this.jobsSub = this.jobsService.getJobsItemUpdateListener().subscribe(
@@ -40,7 +41,15 @@ export class JobsItemComponent implements OnInit {
     );
   }
 
+  checkToken() {
+    this.token = this.authService.getAuthData();
+    if (this.token) {
+      this.isAuthenticated = true;
+    }
+  }
+
   onApply(jobId) {
+    console.log(this.isAuthenticated);
     if (this.isAuthenticated === false) {
       this.showModal = true;
     } else {
@@ -49,6 +58,7 @@ export class JobsItemComponent implements OnInit {
   }
 
   onSaveJob(jobId) {
+    console.log(this.isAuthenticated);
     if (this.isAuthenticated === false) {
       this.showModal = true;
     }
