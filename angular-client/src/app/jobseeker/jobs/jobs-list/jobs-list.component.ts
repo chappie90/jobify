@@ -36,10 +36,12 @@ export class JobsListComponent implements OnInit {
     );
     this.userSub = this.userService.getUserUpdateListener().subscribe(
       userStatus => {
-        // Update jobs array to show job was saved
-        let obj = this.jobs.find(o => o.id === userStatus.likedJobId);
-        let index = this.jobs.indexOf(obj);
-        this.jobs.fill(obj.likedJob = true, index, index++);      }
+        // // Update jobs array to show job was saved
+        // NOT SURE WHY I DON'T NEED THIS TO UPDATE THE UI??
+        // let obj = this.jobs.find(o => o.id === userStatus.likedJobId);
+        // let index = this.jobs.indexOf(obj);
+        // this.jobs.fill(obj.likedJob = true, index, index++);     
+      }
       );
   }
 

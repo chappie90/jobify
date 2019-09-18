@@ -9,20 +9,20 @@ const API_URL = environment.API + '/user';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private userUpdated = new Subject<{ status: boolean, likedJobId: string }>();
+  private userUpdated = new Subject<{ jobStatus: boolean, likedJobId: string }>();
 
   constructor(private http: HttpClient) {}
 
-  likeJob(jobId: string, likedJobs: any, userId: string) {
-    const likeJobData = { likedJobs: likedJobs, userId: userId, jobId: jobId };
+  likeJob(jobId: string, jobStatus: boolean, likedJobs: any, userId: string) {
+    const likeJobData = { likedJobs: likedJobs, userId: userId, jobId: jobId, jobStatus: jobStatus };
     this.http.patch<{ likedJobs: any; updatedJobId: string }>
       (API_URL + '/like', likeJobData).subscribe(
         response => {
-          console.log(response);
+          const jobStatus = response.jobStatus;
           const updatedLikedJobs = response.user.likedJobs;
           const updatedJobId = response.jobId;
           localStorage.setItem('likedJobs', updatedLikedJobs);
-          this.userUpdated.next({ status: true, likedJobId: updatedJobId });
+          this.userUpdated.next({ jobStatus: jobStatus, likedJobId: updatedJobId });
         }
       );
   }

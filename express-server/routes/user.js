@@ -123,12 +123,14 @@ router.patch('/like', (req, res, next) =>{
   const jobId = req.body.jobId;
   const userId = req.body.userId;
   const likedJobs = req.body.likedJobs;
+  const jobStatus = req.body.jobStatus;
   User.findByIdAndUpdate({ _id: userId }, {likedJobs: likedJobs}, {new: true})
     .then(user => {
       if (user) {
         return res.status(200).json({
           user: user,
-          jobId: jobId
+          jobId: jobId,
+          jobStatus: jobStatus
         });
       } else {
         return res.status(401).json({
