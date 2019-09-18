@@ -93,6 +93,7 @@ p.login__paragraph {
   &__button-container {
     display: flex;
     justify-content: center;
+    position: relative;
   }
 
   &__body {
@@ -124,4 +125,26 @@ p.login__paragraph {
     opacity: .8;
     text-decoration: underline;
   }
+}
+.save-notification {
+  position: absolute;
+  bottom: 2.1rem;
+  left: 30rem;
+  transform: translateX(-50%);
+  display: flex;
+  width: 18rem;
+  align-items: center;
+  border: 1px solid $employer-green-dark;
+  background-color: $grey-light;
+  color: $employer-green-dark;
+  padding: 1rem;
+  border-radius: 4px;
+  font-weight: 700;
+  -webkit-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
+  -moz-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
+  box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
+}
+.save-icon {
+  width: 1.5rem;
+  margin-right: .6rem;
 }

@@ -19,6 +19,10 @@
       <div class="jobs-item__button-container">
         <button (click)="onApply(job.id)" class="button button-fill">Apply</button>
         <button (click)="onSaveJob(job.id)" class="button button-nofill">{{ jobSaveStatus }}</button>
+        <div *ngIf="showSaveNotification" class="save-notification">
+          <img src="../../../../assets/images/checked.svg" class="save-icon" />
+          <p class="paragraph-small">You've saved this job!</p>
+      </div>
       </div>
     </div>
     <div class="jobs-item__header--right">

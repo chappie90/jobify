@@ -23,6 +23,7 @@ export class JobsItemComponent implements OnInit {
   private showModal: boolean;
   private toggleForm: boolean = false;
   private jobSaveStatus: string;
+  private showSaveNotification: string = false;
 
   constructor(private route: ActivatedRoute,
               private jobsService: JobsService,
@@ -47,6 +48,10 @@ export class JobsItemComponent implements OnInit {
         // Update job item to show job was saved
         this.job.likedJob = userStatus.jobStatus ? false : true;
         this.jobSaveStatus = this.job.likedJob ? 'Unsave' : 'Save';
+        this.showSaveNotification = true;
+        setTimeout(() => {
+          this.showSaveNotification = false;
+        }, 3000);
       }
     );
   }
