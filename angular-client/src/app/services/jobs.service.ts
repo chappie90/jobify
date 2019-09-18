@@ -30,7 +30,6 @@ export class JobsService {
     .pipe(
       map(jobsData => {
         const authData = this.authService.getAuthData();
-        console.log(authData);
         let likedJobs;
         if (authData) {
           likedJobs = authData.likedJobs.split(',');

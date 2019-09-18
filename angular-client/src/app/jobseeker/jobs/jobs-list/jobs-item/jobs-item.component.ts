@@ -15,11 +15,14 @@ import { UserService } from '../../../../services/user.service';
 export class JobsItemComponent implements OnInit {
   private jobsSub: Subscription;
   private authSub: Subscription;
+  private userSub: Subscription;
   private job;
+  private token: string;
   private isAuthenticated: boolean = false;
   private userId: string;
   private showModal: boolean;
   private toggleForm: boolean = false;
+  private jobSaveStatus: string;
 
   constructor(private route: ActivatedRoute,
               private jobsService: JobsService,
@@ -31,12 +34,19 @@ export class JobsItemComponent implements OnInit {
     this.authSub = this.authService.getAuthStatusListener().subscribe(
       authStatus => {
         this.isAuthenticated = authStatus;
-        console.log(this.isAuthenticated, '21');
       }
     );
     this.jobsSub = this.jobsService.getJobsItemUpdateListener().subscribe(
       job => {
         this.job = job;
+        this.jobSaveStatus = this.job.likedJob ? 'Unsave' : 'Save';
+      }
+    );
+    this.userSub = this.userService.getUserUpdateListener().subscribe(
+      userStatus => {
+        // Update job item to show job was saved
+        this.job.likedJob = true;
+        this.jobSaveStatus = this.job.likedJob ? 'Unsave' : 'Save';
       }
     );
   }
@@ -49,7 +59,6 @@ export class JobsItemComponent implements OnInit {
   }
 
   onApply(jobId) {
-    console.log(this.isAuthenticated);
     if (this.isAuthenticated === false) {
       this.showModal = true;
     } else {
@@ -58,15 +67,19 @@ export class JobsItemComponent implements OnInit {
   }
 
   onSaveJob(jobId) {
-    console.log(this.isAuthenticated);
     if (this.isAuthenticated === false) {
       this.showModal = true;
     }
     this.userId = this.authService.getAuthData().userId;
     const likedJobs = this.authService.getAuthData().likedJobs;
     const likedJobsArray = likedJobs.split(',');
-    const newLikedJobs = [...likedJobsArray, jobId];
-    this.userService.likeJob(newLikedJobs, this.userId);
+    let newLikedJobs;
+    if (this.job.likedJob) {
+      newLikedJobs = likedJobsArray.filter(id => id !== jobId);
+    } else {
+      newLikedJobs = [...likedJobsArray, jobId];
+    }
+    this.userService.likeJob(jobId, newLikedJobs, this.userId);
   }
 
   onOutsideModal() {

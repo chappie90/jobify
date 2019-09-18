@@ -120,14 +120,21 @@ router.post('/google-login', (req, res, next) => {
 });
 
 router.patch('/like', (req, res, next) =>{
+  const jobId = req.body.jobId;
   const userId = req.body.userId;
   const likedJobs = req.body.likedJobs;
-  User.updateOne({ _id: userId }, {likedJobs: likedJobs })
+  User.findByIdAndUpdate({ _id: userId }, {likedJobs: likedJobs}, {new: true})
     .then(user => {
-      console.log(user);
-      res.status(200).json({
-        message: user
-      });
+      if (user) {
+        return res.status(200).json({
+          user: user,
+          jobId: jobId
+        });
+      } else {
+        return res.status(401).json({
+          message: 'User not found'
+        });
+      }   
     })
     .catch(err => {
       console.log(err);

@@ -29,7 +29,7 @@ router.get('', (req, res, next) => {
   jobsQuery
     .then(jobs => {
       fetchedJobs = jobs;
-      return Job.count();
+      return Job.countDocuments();
     })
     .then(count => {
       res.status(200).json({

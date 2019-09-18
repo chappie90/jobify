@@ -18,7 +18,7 @@
       <h3>£{{ job.salary }}</h3>
       <div class="jobs-item__button-container">
         <button (click)="onApply(job.id)" class="button button-fill">Apply</button>
-        <button (click)="onSaveJob(job.id)" class="button button-nofill">Save</button>
+        <button (click)="onSaveJob(job.id)" class="button button-nofill">{{ jobSaveStatus }}</button>
       </div>
     </div>
     <div class="jobs-item__header--right">

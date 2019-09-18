@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Job } from '../job.model';
 import { JobsService } from '../../../services/jobs.service';
 import { AuthService } from '../../../auth/auth.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-jobs-list',
@@ -14,11 +15,13 @@ import { AuthService } from '../../../auth/auth.service';
 export class JobsListComponent implements OnInit {
   private jobs: Job[] = [];
   private jobsSub: Subscription;
+  private userSub: Subscription;
   private selectedJob: Job;
 
   constructor(private route: ActivatedRoute,
               private jobsService: JobsService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private userService: UserService) { }
 
   ngOnInit() {
    this.jobsService.getJobs('Analyst', 'London', 1);
@@ -26,12 +29,18 @@ export class JobsListComponent implements OnInit {
     .subscribe(
       jobs => {
         this.jobs = jobs.jobs;
-        console.log(this.jobs);
         this.selectedJob = this.jobs[0];
         this.jobsService.getJobsItem(this.jobs[0]);
      //   console.log(document.getElementById('jobs-list').scrollTop);
       }
     );
+    this.userSub = this.userService.getUserUpdateListener().subscribe(
+      userStatus => {
+        // Update jobs array to show job was saved
+        let obj = this.jobs.find(o => o.id === userStatus.likedJobId);
+        let index = this.jobs.indexOf(obj);
+        this.jobs.fill(obj.likedJob = true, index, index++);      }
+      );
   }
 
   onGetJobsItem(job) {
