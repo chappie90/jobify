@@ -17,13 +17,13 @@ export class JobsItemComponent implements OnInit {
   private authSub: Subscription;
   private userSub: Subscription;
   private job;
-  private token: string;
+  private token;
   private isAuthenticated: boolean = false;
   private userId: string;
   private showModal: boolean;
   private toggleForm: boolean = false;
   private jobSaveStatus: string;
-  private showSaveNotification: string = false;
+  private showSaveNotification: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private jobsService: JobsService,
@@ -39,6 +39,7 @@ export class JobsItemComponent implements OnInit {
     );
     this.jobsSub = this.jobsService.getJobsItemUpdateListener().subscribe(
       job => {
+        this.showSaveNotification = false;
         this.job = job;
         this.jobSaveStatus = this.job.likedJob ? 'Unsave' : 'Save';
       }

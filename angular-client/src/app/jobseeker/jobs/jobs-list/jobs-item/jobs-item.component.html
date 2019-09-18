@@ -19,9 +19,10 @@
       <div class="jobs-item__button-container">
         <button (click)="onApply(job.id)" class="button button-fill">Apply</button>
         <button (click)="onSaveJob(job.id)" class="button button-nofill">{{ jobSaveStatus }}</button>
-        <div *ngIf="showSaveNotification" class="save-notification">
-          <img src="../../../../assets/images/checked.svg" class="save-icon" />
-          <p class="paragraph-small">You've saved this job!</p>
+        <div *ngIf="showSaveNotification" [ngClass]="{'grey-border': !job.likedJob}" class="save-notification">
+          <img *ngIf="job.likedJob" src="../../../../assets/images/checked.svg" class="save-icon" />
+          <p *ngIf="job.likedJob" class="paragraph-small saved">You've saved this job!</p>
+          <p *ngIf="!job.likedJob" class="paragraph-small unsaved">This job is no longer saved!</p>
       </div>
       </div>
     </div>

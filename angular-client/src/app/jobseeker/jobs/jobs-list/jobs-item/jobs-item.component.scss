@@ -132,11 +132,9 @@ p.login__paragraph {
   left: 30rem;
   transform: translateX(-50%);
   display: flex;
-  width: 18rem;
   align-items: center;
   border: 1px solid $employer-green-dark;
   background-color: $grey-light;
-  color: $employer-green-dark;
   padding: 1rem;
   border-radius: 4px;
   font-weight: 700;
@@ -147,4 +145,18 @@ p.login__paragraph {
 .save-icon {
   width: 1.5rem;
   margin-right: .6rem;
+}
+.saved {
+  width: 14rem;
+  text-align: center;
+  color: $employer-green-dark;
+}
+.unsaved {
+  width: 19rem;
+  text-align: center;
+  color: $grey-dark;
+}
+.grey-border {
+  border: 1px solid $grey;
+  background-color: $grey-light;
 }
