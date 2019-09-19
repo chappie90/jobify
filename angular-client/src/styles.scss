@@ -46,10 +46,10 @@ button {
   cursor: pointer;
 }
 ::-moz-selection {
-  color: $unifier-orange;
-  background-color: $grey-dark;
+  color: $grey-dark;
+  background-color: $grey-medium;
 }
 ::selection {
-  color: $grey-light;
-  background-color: $grey-dark;
+  color: $grey-dark;
+  background-color: $grey-medium;
 }
