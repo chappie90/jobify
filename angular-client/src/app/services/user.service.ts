@@ -15,7 +15,7 @@ export class UserService {
 
   likeJob(jobId: string, jobStatus: boolean, likedJobs: any, userId: string) {
     const likeJobData = { likedJobs: likedJobs, userId: userId, jobId: jobId, jobStatus: jobStatus };
-    this.http.patch<{ likedJobs: any; updatedJobId: string }>
+    this.http.patch<{ likedJobs: any; jobStatus: boolean; jobId: string; updatedJobId: string }>
       (API_URL + '/like', likeJobData).subscribe(
         response => {
           const jobStatus = response.jobStatus;
