@@ -33,18 +33,23 @@
         <ul appDropdown class="nav-primary__profile-list">
           <li class="nav-primary__profile-list-item">
             <a 
-              routerLink="/jobs"
-              class="nav-primary__profile-list-item-link">Saved jobs</a>
+              routerLink="/profile"
+              class="nav-primary__profile-list-item-link">My Profile</a>
           </li>
           <li class="nav-primary__profile-list-item">
             <a
-              routerLink="/jobs" 
-              class="nav-primary__profile-list-item-link">My profile</a>
+              routerLink="/tracker" 
+              class="nav-primary__profile-list-item-link">Jobs Tracker</a>
+          </li>
+          <li class="nav-primary__profile-list-item">
+            <a
+              routerLink="/account" 
+              class="nav-primary__profile-list-item-link">Account Settings</a>
           </li>
           <li class="nav-primary__profile-list-item">
             <a 
               (click)='onLogout()'
-              class="nav-primary__profile-list-item-link">Log out</a>
+              class="nav-primary__profile-list-item-link">Log Out</a>
           </li>
         </ul>
         </a>

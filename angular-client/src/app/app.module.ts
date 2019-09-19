@@ -29,6 +29,16 @@ import { JobsListComponent } from './jobseeker/jobs/jobs-list/jobs-list.componen
 import { JobsItemComponent } from './jobseeker/jobs/jobs-list/jobs-item/jobs-item.component';
 import { JobsSearchComponent } from './jobseeker/jobs/jobs-search/jobs-search.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
+import { ProfileComponent } from './jobseeker/profile/profile.component';
+import { TrackerComponent } from './jobseeker/tracker/tracker.component';
+import { AccountComponent } from './jobseeker/account/account.component';
+import { SummaryComponent } from './jobseeker/profile/summary/summary.component';
+import { ViewCVComponent } from './jobseeker/profile/view-cv/view-cv.component';
+import { ExperienceComponent } from './jobseeker/profile/experience/experience.component';
+import { EducationComponent } from './jobseeker/profile/education/education.component';
+import { SkillsComponent } from './jobseeker/profile/skills/skills.component';
+import { AppliedJobsComponent } from './jobseeker/tracker/applied/applied.component';
+import { SavedJobsComponent } from './jobseeker/tracker/saved/saved.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +66,17 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
     JobsListComponent,
     JobsItemComponent,
     JobsSearchComponent,
-    PaginationComponent
+    PaginationComponent,
+    ProfileComponent,
+    TrackerComponent,
+    AccountComponent,
+    SummaryComponent,
+    ViewCVComponent,
+    ExperienceComponent,
+    EducationComponent,
+    SkillsComponent,
+    AppliedJobsComponent,
+    SavedJobsComponent
   ],
   imports: [
     BrowserModule,

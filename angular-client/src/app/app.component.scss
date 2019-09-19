@@ -1,6 +1,10 @@
 @import '~src/styles.scss';
 
 .container {
-	max-width: 140rem;
+	max-width: 150rem;
 	margin: auto;
+  padding: 7rem 2rem 2rem 2rem;
+}
+main {
+  min-height: 100%;
 }

@@ -12,6 +12,16 @@ import { PricingComponent } from './employer/pricing/pricing.component';
 import { PostJobComponent } from './employer/post-job/post-job.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { ProfileComponent } from './jobseeker/profile/profile.component';
+import { TrackerComponent } from './jobseeker/tracker/tracker.component';
+import { AccountComponent } from './jobseeker/account/account.component';
+import { SummaryComponent } from './jobseeker/profile/summary/summary.component';
+import { ViewCVComponent } from './jobseeker/profile/view-cv/view-cv.component';
+import { ExperienceComponent } from './jobseeker/profile/experience/experience.component';
+import { EducationComponent } from './jobseeker/profile/education/education.component';
+import { SkillsComponent } from './jobseeker/profile/skills/skills.component';
+import { AppliedJobsComponent } from './jobseeker/tracker/applied/applied.component';
+import { SavedJobsComponent } from './jobseeker/tracker/saved/saved.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent, pathMatch: 'full' },
@@ -21,6 +31,18 @@ const routes: Routes = [
   { path: 'cv', component: UploadCVComponent },
   { path: 'market-insights', component: MarketInsightsComponent },
   { path: 'premium', component: PremiumComponent },
+  { path: 'profile', component: ProfileComponent, children: [
+    { path: 'summary', component: SummaryComponent },
+    { path: 'cv', component: ViewCVComponent },
+    { path: 'experience', component: ExperienceComponent },
+    { path: 'education', component: EducationComponent },
+    { path: 'skills', component: SkillsComponent }
+  ] },
+  { path: 'tracker', component: TrackerComponent, children: [
+    { path: 'applied', component: AppliedJobsComponent },
+    { path: 'saved', component: SavedJobsComponent }
+  ] },
+  { path: 'account', component: AccountComponent },
   { path: 'employer', component: EmployerComponent, children: [
     { path: 'products', component: ProductsComponent },
     { path: 'pricing', component: PricingComponent },
