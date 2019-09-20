@@ -104,7 +104,7 @@ router.post('/google-login', (req, res, next) => {
             token: req.body.token,
             expiresIn: 3600,
             userId: user._id,
-            likesJobs: user.likedJobs
+            likedJobs: user.likedJobs
           })
         }
       })

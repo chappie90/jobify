@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 
+import { JobsService } from '../../../services/jobs.service';
 import { AuthService } from '../../../auth/auth.service';
+import { Job } from '../../job.model';
 
 @Component({
   selector: 'app-saved-jobs',
@@ -8,13 +11,21 @@ import { AuthService } from '../../../auth/auth.service';
   styleUrls: ['./saved.component.scss']
 })
 export class SavedJobsComponent implements OnInit {
-	private likedJobs: any;	
+  private jobsSub: Subscription;
+  private savedJobs: Job[];
 
-  constructor(private authService: AuthService) { }
+  constructor(private jobsService: JobsService,
+              private authService: AuthService) { }
 
   ngOnInit() {
-  	this.likedJobs = this.authService.getAuthData().likedJobs.split(',');
-  	console.log(this.likedJobs);
+    this.likedJobs = this.authService.getAuthData().likedJobs.split(',');
+    this.jobsService.getSavedJobs(this.likedJobs);
+    this.jobsSub = this.jobsService.getSavedJobsUpdateListener().subscribe(
+      savedJobs => {
+        this.savedJobs = savedJobs.jobs;
+        console.log(this.savedJobs);
+      }
+    );
   }
 
 }

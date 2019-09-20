@@ -41,4 +41,16 @@ router.get('', (req, res, next) => {
     });  
 });
 
+router.post('/saved', (req, res, next) => {
+  const savedJobs = req.body.savedJobs;
+  if (savedJobs) {
+    Job.find({ _id: { $in: savedJobs } })
+    .then(savedJobs => {
+      res.status(200).json({
+        savedJobs: savedJobs
+      });
+    });
+  }
+});
+
 module.exports = router;

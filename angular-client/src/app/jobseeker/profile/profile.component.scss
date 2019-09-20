@@ -10,6 +10,8 @@
   margin: 4rem 0 2rem;
   list-style-type: none; 
   margin-bottom: 30rem;
+  border-bottom: 3px solid $grey-medium;
+  padding: 1rem 0;
 }
 .item {
   display: inline-block;
@@ -18,17 +20,10 @@
   font-size: 1.8rem;
   color: $grey;
   padding: 1rem 4rem;
-  border-bottom: 3px solid $grey-medium;
 
   &:hover {
     color: $grey-dark;
   }
-}
-.link-filler {
-   font-size: 1.8rem;
-   color: $grey;
-   padding: 1rem 8rem;
-   border-bottom: 3px solid $grey-medium;
 }
 .link-active {
   border-bottom: 3px solid $jobseeker-red-dark;

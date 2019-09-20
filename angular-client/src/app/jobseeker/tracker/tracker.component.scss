@@ -2,7 +2,34 @@
 
 .tracker {
   max-width: 100rem;
-  height: 100vh;
   margin: auto;
   padding-top: 8rem;
 }
+
+.menu-list {
+  margin: 4rem 0 2rem;
+  list-style-type: none; 
+  border-bottom: 3px solid $grey-medium;
+  padding: 1rem 0;
+}
+.item {
+  display: inline-block;
+}
+.link {
+  font-size: 1.8rem;
+  color: $grey;
+  padding: 1rem 4rem;
+
+  &:hover {
+    color: $grey-dark;
+  }
+}
+.link-active {
+  border-bottom: 3px solid $jobseeker-red-dark;
+  color: $grey-dark;
+}
+
+.list {
+  list-style-type: none;
+}
+
