@@ -1,1 +1,28 @@
-<h1>Saved Jobs</h1>
+<ul class="menu-list">
+  <li class="item">
+    <a
+      routerLink="applied" 
+      routerLinkActive="link-active"
+      class="link">
+      Applied Jobs
+    </a>
+  </li>
+  <li class="item">
+    <a
+      routerLink="saved" 
+      routerLinkActive="link-active"
+      class="link">
+      Saved Jobs
+    </a>
+  </li>
+  <li class="item">
+    <a
+      class="link-filler">
+    </a>
+  </li>
+</ul>
+<ul class="list">
+	<li *ngFor="let job of likedJobs">
+		{{ job }}
+	</li>
+</ul>
