@@ -1,5 +1,9 @@
 @import '~src/styles.scss';
 
+.container {
+  min-height: calc(100vh - 12rem);
+}
+
 .jobs {
 
   &__search-container {

@@ -31,16 +31,59 @@
     display: flex;
     flex: 1;
     justify-content: flex-end;
-  //  align-items: flex-end;
+    align-items: flex-end;
   }
 
   &__list-item-like {
-    width: 2rem;
-    height: 2rem;
+    position: relative;
+    width: 1.7rem;
+    height: 1.7rem;
     display: inline-block;
     background: url('../../../../assets/images/like-2.svg');
     background-repeat: no-repeat;
     background-size: 100%;
+
+    &::before {
+      visibility: hidden;
+      opacity: 0;
+      content: 'Saved';
+      font-size: 1.4rem;
+      position: absolute;
+      top: -3.2rem;
+      left: -2.8rem;
+      background-color: $grey-dark;
+      border-radius: 4px;
+      color: $white;
+      padding: .3rem .6rem;
+      transition: all .3s;
+    }
+
+    &::after {
+      opacity: 0;
+      visibility: hidden;
+      content: '';
+      position: absolute;
+      top: -1rem;
+      left: 50%;
+      transform: translate(-50%);
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid $grey-dark;
+      transition: all .3s;
+    }
+
+    &:hover::before {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    &:hover::after {
+      opacity: 1;
+      visibility: visible;
+    }
+
   }
 
   &__img {

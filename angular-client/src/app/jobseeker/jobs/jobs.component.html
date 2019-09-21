@@ -1,11 +1,13 @@
-<div class="jobs__search-container">
-  <app-jobs-search></app-jobs-search>
-</div>
-<div *ngIf="jobsSearch" class="jobs__container">
-  <div class="jobs__list-container">
-    <app-jobs-list></app-jobs-list>
+ <div class="container"> 
+  <div class="jobs__search-container">
+    <app-jobs-search></app-jobs-search>
   </div>
-  <div class="jobs__item-container">
-    <app-jobs-item></app-jobs-item>
+  <div *ngIf="jobsSearch" class="jobs__container">
+    <div class="jobs__list-container">
+      <app-jobs-list></app-jobs-list>
+    </div>
+    <div class="jobs__item-container">
+      <app-jobs-item></app-jobs-item>
+    </div>
   </div>
 </div>
