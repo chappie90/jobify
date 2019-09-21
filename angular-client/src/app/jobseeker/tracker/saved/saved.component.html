@@ -14,9 +14,7 @@
           <h5 class="heading-extra-small">{{ job.date_posted }}</h5>
         </div>
       </div>
-      <div class="jobs-list__like-container">
-        <span *ngIf="job.likedJob" class="jobs-list__list-item-like"></span>
-      </div>
+      <span (click)="onRemove(job)" class="remove"></span>
     </li>
   </ul>
 </div>

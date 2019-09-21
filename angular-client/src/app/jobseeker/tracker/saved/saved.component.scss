@@ -4,16 +4,33 @@
   list-style-type: none;
 }
 .item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   padding: 1rem 3rem;
   background-color: $grey-light;
   border: 1px solid $grey-medium;
   border-radius: 4px;
   margin-bottom: 2rem;
-  // -webkit-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
-  // -moz-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
-  // box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
 }
 
 .heading-extra-small {
   color: $grey;
+}
+.remove::after {
+  display: inline-block;
+  content: '\00d7';
+  font-size: 3rem;
+  font-weight: lighter;
+  color: $grey;
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all .3s;
+}
+.remove:hover::after {
+  background-color: $grey-medium;
+  color: $grey-dark;
 }

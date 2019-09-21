@@ -72,6 +72,7 @@ p.login__paragraph {
     flex-direction: column;
   }
 
+
   &__header--right {
   }
 
@@ -125,6 +126,10 @@ p.login__paragraph {
     opacity: .8;
     text-decoration: underline;
   }
+}
+.company-logo {
+  max-width: 11rem;
+  max-height: 11rem;
 }
 .save-notification {
   position: absolute;

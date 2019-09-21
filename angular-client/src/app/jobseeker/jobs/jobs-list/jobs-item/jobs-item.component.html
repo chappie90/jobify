@@ -12,6 +12,7 @@
     </div>
   </div>
   <div class="jobs-item__header">
+    <img src="{{'./assets/images/company-logos/' + job.logo}}" class="company-logo" />
     <div class="jobs-item__header--left">
       <h2 class="heading-medium">{{ job.title }}</h2>
       <h3 class="heading-small">{{ job.company }}</h3>
@@ -20,7 +21,7 @@
         <button (click)="onApply(job.id)" class="button button-fill">Apply</button>
         <button (click)="onSaveJob(job.id)" class="button button-nofill">{{ jobSaveStatus }}</button>
         <div *ngIf="showSaveNotification" [ngClass]="{'grey-border': !job.likedJob}" class="save-notification">
-          <img *ngIf="job.likedJob" src="../../../../assets/images/checked.svg" class="save-icon" />
+          <img *ngIf="job.likedJob" src="./assets/images/checked.svg" class="save-icon" />
           <p *ngIf="job.likedJob" class="paragraph-small saved">You've saved this job!</p>
           <p *ngIf="!job.likedJob" class="paragraph-small unsaved">This job is no longer saved!</p>
       </div>

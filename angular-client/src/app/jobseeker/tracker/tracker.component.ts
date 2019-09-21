@@ -10,8 +10,6 @@ import { Subscription } from 'rxjs';
 export class TrackerComponent implements OnInit {
   private appliedJobs: boolean;
   private savedJobs: boolean;
-  private jobs: Job[];
-  private likedJobs: any; 
 
   constructor(private router: Router) { }
 

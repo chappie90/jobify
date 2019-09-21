@@ -18,7 +18,6 @@ export class UserService {
     this.http.patch<{ user: any; likedJobs: any; jobStatus: boolean; jobId: string; updatedJobId: string }>
       (API_URL + '/like', likeJobData).subscribe(
         response => {
-          console.log(response);
           const jobStatus = response.jobStatus;
           const updatedLikedJobs = response.user.likedJobs;
           const updatedJobId = response.jobId;
