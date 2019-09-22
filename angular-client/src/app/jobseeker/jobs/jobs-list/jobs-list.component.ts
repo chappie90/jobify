@@ -25,7 +25,7 @@ export class JobsListComponent implements OnInit {
               private userService: UserService) { }
 
   ngOnInit() {
-    this.jobs = this.jobsService.returnJobs();
+    this.jobs = this.jobsService.returnAllJobsData().jobs;
     this.selectedJob = this.jobs[0];
     this.jobsService.getJobsItem(this.jobs[0]);
     this.route.queryParams.subscribe(params => {

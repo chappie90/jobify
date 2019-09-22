@@ -18,12 +18,101 @@ router.post('', (req, res, next) => {
   // }
   const title = req.body.form.title;
   const location = req.body.form.location;
+  
+  // DATE JOBS SEARCH FILTER
+  const date = req.body.form.date;
+
+  let toDate = new Date('01-01-2019');
+  let ddToDate = String(toDate.getDate()).padStart(2, '0');
+  let mmToDate = String(toDate.getMonth() + 1).padStart(2, '0');
+  let yyyyToDate = toDate.getFullYear();
+  let toDateQuery = ddToDate + '/' + mmToDate + '/' + yyyyToDate;
+  // Maybe replace below with oldest jobs in db
+  // let fromDateQuery = Job.find().sort({ "date_posted" : 1 }).limit(1);
+  let fromDate = new Date();
+  let ddFromDate;
+  let mmFromDate;
+  let yyyyFromDate;
+  let fromDateQuery = '01/01/2000';
+
+  // RESULTS FROM LAST MONTH
+  if (date === 'month') {
+    fromDate.setDate(toDate.getDate());
+    fromDate.setMonth(toDate.getMonth() - 1);
+    if (toDate.getMonth() === 0) {
+      fromDate.setFullYear(toDate.getFullYear() - 1);
+    } else {
+      fromDate.setFullYear(toDate.getFullYear());
+    }
+    ddFromDate = String(fromDate.getDate()).padStart(2, '0');
+    mmFromDate = String(fromDate.getMonth() + 1).padStart(2, '0');
+    yyyyFromDate = fromDate.getFullYear();
+    fromDateQuery = ddFromDate + '/' + mmFromDate + '/' + yyyyFromDate;
+  }
+
+  // RESULTS FROM LAST WEEK
+  if (date === 'week') {
+    fromDate.setDate(toDate.getDate() - 7);
+    if (toDate.getDate() < 7) {
+      fromDate.setMonth(toDate.getMonth() - 1);
+    } else {
+      fromDate.setMonth(toDate.getMonth());
+    }
+    if (toDate.getMonth() === 0 && toDate.getDate() < 7) {
+      fromDate.setFullYear(toDate.getFullYear() - 1);
+    } else {
+      fromDate.setFullYear(toDate.getFullYear());
+    }
+    ddFromDate = String(fromDate.getDate()).padStart(2, '0');
+    mmFromDate = String(fromDate.getMonth() + 1).padStart(2, '0');
+    yyyyFromDate = fromDate.getFullYear();
+    fromDateQuery = ddFromDate + '/' + mmFromDate + '/' + yyyyFromDate;
+  }
+
+  // RESULTS FROM LAST 24 HOURS
+  if (date === 'day') {
+    fromDate.setDate(toDate.getDate() - 1);
+    if (toDate.getDate() === 1) {
+      fromDate.setMonth(toDate.getMonth() - 1);
+    } else {
+      fromDate.setMonth(toDate.getMonth());
+    }
+    if (toDate.getMonth() === 0 && toDate.getDate() === 1) {
+      fromDate.setFullYear(toDate.getFullYear() - 1);
+    } else {
+      fromDate.setFullYear(toDate.getFullYear());
+    }
+    ddFromDate = String(fromDate.getDate()).padStart(2, '0');
+    mmFromDate = String(fromDate.getMonth() + 1).padStart(2, '0');
+    yyyyFromDate = fromDate.getFullYear();
+    fromDateQuery = ddFromDate + '/' + mmFromDate + '/' + yyyyFromDate;
+  }
+
+  console.log(toDateQuery);
+  console.log(fromDateQuery);
+
+  let jobTypeFull = '';
+  if (req.body.form.full) {
+    jobTypeFull = 'Full-time';
+  }
+  let jobTypePart = '';
+  if (req.body.form.part) {
+    jobTypePart = 'Part-time';
+  }
+  let jobTypeContract = '';
+  if (req.body.form.contract) {
+    jobTypeContract = 'Contract';
+  }
   const pageSize = 20;
   let jobsQuery;
   jobsQuery = Job.find(
-     { 
+     {
       job_title: { $regex: title, $options: 'i' },
-      location: { $regex: location, $options: 'i' }
+      location: { $regex: location, $options: 'i' },
+      job_type: { $regex: jobTypeFull, $options: 'i' },
+      job_type: { $regex: jobTypePart, $options: 'i' },
+      job_type: { $regex: jobTypeContract, $options: 'i' },
+      date_posted: { $lte: toDateQuery, $gte: fromDateQuery }
      }
   );
   let fetchedJobs;

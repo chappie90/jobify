@@ -99,17 +99,12 @@ export class JobsService {
     });
   }
 
-  // MERGE WITH RETURN JOBS FUNCTION
   returnAllJobsData() {
     return {
       jobs: this.jobs,
       count: this.jobsCount,
       currentPage: this.currentPage
     }
-  }
-
-  returnJobs() {
-    return this.jobs;
   }
 
   getSavedJobs(jobs: any) {
@@ -130,10 +125,6 @@ export class JobsService {
 
   getSavedJobsUpdateListener() {
     return this.savedJobsUpdated.asObservable();
-  }
-
-  returnFirstJob() {
-    return this.jobs[0];
   }
 
   getJobsItem(job) {

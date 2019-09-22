@@ -110,6 +110,8 @@ export class PaginationComponent implements OnInit {
   }
 
   onGetPage(page, index, previousPage, nextPage) {
+    // REPLACE GET JOBS ARGUMENTS WITH QUERY PARAMS
+    
     if (index === 8) {
       this.firstPage = previousPage - 3;
       this.nextPage = previousPage + 1;
