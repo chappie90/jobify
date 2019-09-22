@@ -99,6 +99,15 @@ export class JobsService {
     });
   }
 
+  // MERGE WITH RETURN JOBS FUNCTION
+  returnAllJobsData() {
+    return {
+      jobs: this.jobs,
+      count: this.jobsCount,
+      currentPage: this.currentPage
+    }
+  }
+
   returnJobs() {
     return this.jobs;
   }
