@@ -32,6 +32,7 @@ export class JobsSearchComponent implements OnInit {
   }
 
   onSearch(form: NgForm) {
+    console.log(form.value);
     this.filterDateActive = form.value.date ? true : false;
     // this.filterDateActive = form.value.date === 'all-time' ? false : true;
     this.filterTypeActive = form.value.full || 
@@ -47,7 +48,7 @@ export class JobsSearchComponent implements OnInit {
                               form.value.rangehigh
                             ;
     this.jobsSearch = true;
-    this.jobsService.getJobs(form.value.title, form.value.location, 1);
+    this.jobsService.getJobs(form.value, 1);
     // Add search query parameters
     // Make sure all browsers support object spread operator
     let queryParams: Params = {};

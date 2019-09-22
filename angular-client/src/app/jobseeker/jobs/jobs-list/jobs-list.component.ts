@@ -25,13 +25,18 @@ export class JobsListComponent implements OnInit {
               private userService: UserService) { }
 
   ngOnInit() {
+    this.jobs = this.jobsService.returnJobs();
+    this.selectedJob = this.jobs[0];
+    this.jobsService.getJobsItem(this.jobs[0]);
     this.route.queryParams.subscribe(params => {
-        this.jobsService.getJobs(params.title, params.location, 1);
+       // don't need to get jobs here?
+       // this.jobsService.getJobs(params.title, params.location, 1);
       }
     );
    this.jobsSub = this.jobsService.getJobsUpdateListener()
     .subscribe(
       jobs => {
+        console.log(jobs);
         this.jobs = jobs.jobs;
         this.selectedJob = this.jobs[0];
         this.jobsService.getJobsItem(this.jobs[0]);

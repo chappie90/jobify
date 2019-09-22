@@ -5,17 +5,19 @@ const Job = require('../models/job');
 
 const router = express.Router();
 
-router.get('', (req, res, next) => {
-  console.log(req.query);
-  const currentPage = +req.query.page;
-  let title = req.query.title;
-  let location = req.query.location;
-  if (title === undefined) {
-    title = '';
-  }
-  if (location === undefined) {
-    location = '';
-  }
+router.post('', (req, res, next) => {
+  console.log(req.body);
+  const currentPage = +req.body.page;
+  // let title = req.query.title;
+  // let location = req.query.location;
+  // if (title === undefined) {
+  //   title = '';
+  // }
+  // if (location === undefined) {
+  //   location = '';
+  // }
+  const title = req.body.form.title;
+  const location = req.body.form.location;
   const pageSize = 20;
   let jobsQuery;
   jobsQuery = Job.find(

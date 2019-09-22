@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Job } from '../../job.model';
@@ -32,6 +32,8 @@ export class JobsItemComponent implements OnInit {
               private authService: AuthService) {}
 
   ngOnInit() {
+    this.job = this.jobsService.returnFirstJob();
+    this.jobSaveStatus = this.job.likedJob ? 'Unsave' : 'Save';
     this.checkToken();
     this.authSub = this.authService.getAuthStatusListener().subscribe(
       authStatus => {

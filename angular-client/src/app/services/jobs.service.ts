@@ -21,20 +21,21 @@ export class JobsService {
   constructor(private http: HttpClient,
               private authService: AuthService) {}
 
-  getJobs(title: string, location: string, page: number) {
-    let queryParams = `?page=${page}`;
-    if (title) {
-      queryParams = queryParams.concat(`&title=${title}`);
-    }
-    if (location) {
-      queryParams = queryParams.concat(`&location=${location}`);
-    }
+  // getJobs(title: string, location: string, page: number) {
+  getJobs(form: any, page: number) {
+    const searchData = { form: form, page: page };
+    // let queryParams = `?page=${page}`;
+    // if (title) {
+    //   queryParams = queryParams.concat(`&title=${title}`);
+    // }
+    // if (location) {
+    //   queryParams = queryParams.concat(`&location=${location}`);
+    // }
     // const queryParams = `?page=${page}&title=${title}&location=${location}`;
-    console.log(queryParams);
-    this.http.get<{ message: string; jobs: any; totalJobs: string; currentPage: string; }>(
+    this.http.post<{ message: string; jobs: any; totalJobs: string; currentPage: string; }>(
       // './assets/data/jobify-data.json'
 
-      API_URL + queryParams
+      API_URL, searchData
     )
     .pipe(
       map(jobsData => {
@@ -98,6 +99,10 @@ export class JobsService {
     });
   }
 
+  returnJobs() {
+    return this.jobs;
+  }
+
   getSavedJobs(jobs: any) {
     const savedJobs = { savedJobs: jobs };
     this.http.post<{ jobs: any }>(
@@ -116,6 +121,10 @@ export class JobsService {
 
   getSavedJobsUpdateListener() {
     return this.savedJobsUpdated.asObservable();
+  }
+
+  returnFirstJob() {
+    return this.jobs[0];
   }
 
   getJobsItem(job) {
