@@ -52,15 +52,6 @@ export class JobsListComponent implements OnInit {
   onGetJobsItem(job) {
     this.selectedJob = job;
     this.jobsService.getJobsItem(job);
-    const queryParams: Params = { jobId: job.id };
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.route,
-        queryParams: queryParams,
-        queryParamsHandling: 'merge'
-      }
-    );
   }
 
 }

@@ -57,7 +57,6 @@ export class JobsSearchComponent implements OnInit {
     if (form.value.location) {
       queryParams = { ...queryParams, location: form.value.location };
     }
-    console.log(queryParams);
     this.router.navigate(
       [],
       {

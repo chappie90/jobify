@@ -22,7 +22,15 @@ export class JobsService {
               private authService: AuthService) {}
 
   getJobs(title: string, location: string, page: number) {
-    const queryParams = `?page=${page}&title=${title}&location=${location}`;
+    let queryParams = `?page=${page}`;
+    if (title) {
+      queryParams = queryParams.concat(`&title=${title}`);
+    }
+    if (location) {
+      queryParams = queryParams.concat(`&location=${location}`);
+    }
+    // const queryParams = `?page=${page}&title=${title}&location=${location}`;
+    console.log(queryParams);
     this.http.get<{ message: string; jobs: any; totalJobs: string; currentPage: string; }>(
       // './assets/data/jobify-data.json'
 

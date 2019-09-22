@@ -69,9 +69,11 @@ export class JobsItemComponent implements OnInit {
     if (this.isAuthenticated === false) {
       this.showModal = true;
     } else {
+      const queryParams: Params = { jobId: job.id };        
       this.router.navigate(
         ['/apply'],
         {
+          queryParams: queryParams,
           queryParamsHandling: 'merge'
         }
       );

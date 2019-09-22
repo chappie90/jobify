@@ -8,20 +8,22 @@ const router = express.Router();
 router.get('', (req, res, next) => {
   console.log(req.query);
   const currentPage = +req.query.page;
-  const title = req.query.title;
-  const location = req.query.location;
+  let title = req.query.title;
+  let location = req.query.location;
+  if (title === undefined) {
+    title = '';
+  }
+  if (location === undefined) {
+    location = '';
+  }
   const pageSize = 20;
   let jobsQuery;
-  if (title !== 'undefined' && location !== 'undefined') {
-    jobsQuery = Job.find(
-       { 
-        job_title: { $regex: title, $options: 'i' },
-        location: { $regex: location, $options: 'i' }
-       }
-    );
-  } else {
-    jobsQuery = Job.find();
-  }
+  jobsQuery = Job.find(
+     { 
+      job_title: { $regex: title, $options: 'i' },
+      location: { $regex: location, $options: 'i' }
+     }
+  );
   let fetchedJobs;
   if (currentPage) {
     jobsQuery
