@@ -21,11 +21,11 @@
         ngModel
         (change)="getEmailValueJob(emailInput.value)"
         #emailInput="ngModel"
-        [ngClass]="{'ng-invalid ng-dirty': emailInput.invalid && formSubmitted}"
+        [ngClass]="{'invalid': emailInput.invalid && formSubmitted}"
         required
         email>
       <label [ngClass]="{'signup__label--not-empty': emailInputEmptyJob}" class="signup__label" for="emailJob">Email</label>
-      <span *ngIf="(emailInput.invalid && emailInput.dirty) || (emailInput.invalid && formSubmitted)" class="signup__error">Enter valid email</span>
+      <span *ngIf="(emailInput.invalid && formSubmitted)" class="signup__error">Enter valid email</span>
     </div>
     <div class="signup__input-group">
       <input 
@@ -36,10 +36,10 @@
         ngModel
         (change)="getPassValueJob(passwordInput.value)"
         #passwordInput="ngModel"
-        [ngClass]="{'ng-invalid ng-dirty': passwordInput.invalid && formSubmitted}"
+        [ngClass]="{'invalid': passwordInput.invalid && formSubmitted}"
         required>
       <label [ngClass]="{'signup__label--not-empty': passInputEmptyJob}" class="signup__label" for="passJob">Password</label>
-      <span *ngIf="(passwordInput.invalid && passwordInput.dirty) || (passwordInput.invalid && formSubmitted)" class="signup__error">Enter valid password</span>
+      <span *ngIf="(passwordInput.invalid && formSubmitted)" class="signup__error">Enter valid password</span>
     </div>
     <div class="signup__input-group">
       <input 
@@ -49,7 +49,7 @@
         ngModel
         #termsInput="ngModel"
         required>I have read and agree to Jobify's <a class="signup__terms-link" routerLink="/">terms of use</a> and <a class="signup__terms-link" routerLink="/">privacy policy</a>.
-        <span *ngIf="(termsInput.invalid && termsInput.dirty) || (termsInput.invalid && formSubmitted)" class="signup__error">Please agree to the terms of use before continuing</span>
+        <span *ngIf="(termsInput.invalid && formSubmitted)" class="signup__error">Please agree to the terms of use before continuing</span>
     </div>
     <button class="button signup__button">Sign up</button>
   </form>
@@ -78,11 +78,10 @@
         ngModel
         (change)="getCompanyValue(companyInput.value)"
         #companyInput="ngModel"
-        [ngClass]="{'ng-invalid ng-dirty': companyInput.invalid && formSubmitted}"
-        required
-        email>
+        [ngClass]="{'invalid': companyInput.invalid && formSubmitted}"
+        required>
       <label  [ngClass]="{'signup__label--not-empty': companyInputEmpty}" class="signup__label" for="company">Company</label>
-      <span *ngIf="(companyInput.invalid && companyInput.dirty) || (companyInput.invalid && formSubmitted)" class="signup__error">Enter valid company name</span>
+      <span *ngIf="(companyInput.invalid && formSubmitted)" class="signup__error">Enter valid company name</span>
     </div>
     <div class="signup__input-group">
       <input 
@@ -93,11 +92,11 @@
         ngModel
         (change)="getEmailValueEmp(emailInput.value)"
         #emailInput="ngModel"
-        [ngClass]="{'ng-invalid ng-dirty': emailInput.invalid && formSubmitted}"
+        [ngClass]="{'invalid': emailInput.invalid && formSubmitted}"
         required
         email>
       <label  [ngClass]="{'signup__label--not-empty': emailInputEmptyEmp}" class="signup__label" for="emailEmp">Email</label>
-      <span *ngIf="(emailInput.invalid && emailInput.dirty) || (emailInput.invalid && formSubmitted)" class="signup__error">Enter valid email</span>
+      <span *ngIf="(emailInput.invalid && formSubmitted)" class="signup__error">Enter valid email</span>
     </div>
     <div class="signup__input-group">
       <input 
@@ -108,10 +107,10 @@
         ngModel
         (change)="getPassValueEmp(passwordInput.value)"
         #passwordInput="ngModel"
-        [ngClass]="{'ng-invalid ng-dirty': passwordInput.invalid && formSubmitted}"
+        [ngClass]="{'invalid': passwordInput.invalid && formSubmitted}"
         required>
       <label  [ngClass]="{'signup__label--not-empty': passInputEmptyEmp}" class="signup__label" for="passEmp">Password</label>
-      <span *ngIf="(passwordInput.invalid && passwordInput.dirty) || (passwordInput.invalid && formSubmitted)" class="signup__error">Enter valid password</span>
+      <span *ngIf="(passwordInput.invalid && formSubmitted)" class="signup__error">Enter valid password</span>
     </div>
     <div class="signup__input-group">
       <input 
@@ -121,7 +120,7 @@
         ngModel
         #termsInput="ngModel"
         required>I have read and agree to Jobify's <a class="signup__terms-link" routerLink="/">terms of use</a> and <a class="signup__terms-link" routerLink="/">privacy policy</a>.
-        <span *ngIf="(termsInput.invalid && termsInput.dirty) || (termsInput.invalid && formSubmitted)" class="signup__error">Please agree to the terms of use before continuing</span> 
+        <span *ngIf="(termsInput.invalid && formSubmitted)" class="signup__error">Please agree to the terms of use before continuing</span> 
     </div>
     <button class="button signup__button">Sign up</button>
   </form>

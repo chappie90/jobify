@@ -162,11 +162,7 @@
   margin-top: 2.5rem;
 }
 
-input.ng-valid {
-  border: 1px solid $employer-green;
-}
-
-input.ng-invalid.ng-dirty {
+.invalid {
   border: 1px solid $jobseeker-red-dark;
 }
 
