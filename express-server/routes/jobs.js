@@ -1,4 +1,4 @@
-const express = require('express');
+  const express = require('express');
 
 const Job = require('../models/job');
 //const checkAuth = require('../middleware/check-auth');
@@ -8,14 +8,16 @@ const router = express.Router();
 router.get('', (req, res, next) => {
   console.log(req.query);
   const currentPage = +req.query.page;
-  console.log(currentPage);
   const title = req.query.title;
   const location = req.query.location;
   const pageSize = 20;
   let jobsQuery;
-  if (title || location) {
+  if (title !== 'undefined' && location !== 'undefined') {
     jobsQuery = Job.find(
-       { job_title: { $regex: title, $options: 'i' } }
+       { 
+        job_title: { $regex: title, $options: 'i' },
+        location: { $regex: location, $options: 'i' }
+       }
     );
   } else {
     jobsQuery = Job.find();

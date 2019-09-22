@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { JobsService } from '../../../services/jobs.service';
 import { AuthService } from '../../../auth/auth.service';
 import { UserService } from '../../../services/user.service';
-import { Job } from '../../job.model';
+import { Job } from '../../jobs/job.model';
 
 @Component({
   selector: 'app-saved-jobs',

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+  import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { JobsComponent } from './jobseeker/jobs/jobs.component';
@@ -22,12 +22,14 @@ import { EducationComponent } from './jobseeker/profile/education/education.comp
 import { SkillsComponent } from './jobseeker/profile/skills/skills.component';
 import { AppliedJobsComponent } from './jobseeker/tracker/applied/applied.component';
 import { SavedJobsComponent } from './jobseeker/tracker/saved/saved.component';
+import { ApplyComponent } from './jobseeker/jobs/apply/apply.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent },
   { path: 'jobs', component: JobsComponent },
+  { path: 'apply', component: ApplyComponent },
   { path: 'cv', component: UploadCVComponent },
   { path: 'market-insights', component: MarketInsightsComponent },
   { path: 'premium', component: PremiumComponent },

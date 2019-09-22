@@ -39,6 +39,7 @@ import { EducationComponent } from './jobseeker/profile/education/education.comp
 import { SkillsComponent } from './jobseeker/profile/skills/skills.component';
 import { AppliedJobsComponent } from './jobseeker/tracker/applied/applied.component';
 import { SavedJobsComponent } from './jobseeker/tracker/saved/saved.component';
+import { ApplyComponent } from './jobseeker/jobs/apply/apply.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { SavedJobsComponent } from './jobseeker/tracker/saved/saved.component';
     EducationComponent,
     SkillsComponent,
     AppliedJobsComponent,
-    SavedJobsComponent
+    SavedJobsComponent,
+    ApplyComponent
   ],
   imports: [
     BrowserModule,

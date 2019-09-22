@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { JobsService} from '../../services/jobs.service';
@@ -22,10 +23,18 @@ export class PaginationComponent implements OnInit {
   private lastPage: number;
   private jobsSub: Subscription;
   private pageSub: Subscription;
+  private searchTitle: string;
+  private searchLocation: string;
 
-  constructor(private jobsService: JobsService) {}
+  constructor(private jobsService: JobsService,
+              private router: Router,
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.searchTitle = params.title;
+      this.searchLocation = params.location;
+    });
     this.selectedPage = this.pages[0];
     this.jobsSub = this.jobsService.getJobsUpdateListener()
       .subscribe(
@@ -69,14 +78,14 @@ export class PaginationComponent implements OnInit {
       this.firstPage = previousPage - 3;
       this.nextPage = previousPage + 1;
       this.lastPage = this.nextPage + 2;
-      this.jobsService.getJobs('Analyst', 'London', this.nextPage);
+      this.jobsService.getJobs(this.searchTitle, this.searchLocation, this.nextPage);
     } else if (index === 1 && page === this.moreJobs) {
       this.firstPage = nextPage - 4;
       this.nextPage = nextPage - 1;
       this.lastPage = nextPage + 2;
-      this.jobsService.getJobs('Analyst', 'London', this.nextPage);
+      this.jobsService.getJobs(this.searchTitle, this.searchLocation, this.nextPage);
     } else {
-      this.jobsService.getJobs('Analyst', 'London', page);  
+      this.jobsService.getJobs(this.searchTitle, this.searchLocation, page);  
     }
   }
 }

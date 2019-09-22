@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Job } from '../job.model';
@@ -19,16 +19,19 @@ export class JobsListComponent implements OnInit {
   private selectedJob: Job;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private jobsService: JobsService,
               private authService: AuthService,
               private userService: UserService) { }
 
   ngOnInit() {
-   this.jobsService.getJobs('Analyst', 'London', 1);
+    this.route.queryParams.subscribe(params => {
+        this.jobsService.getJobs(params.title, params.location, 1);
+      }
+    );
    this.jobsSub = this.jobsService.getJobsUpdateListener()
     .subscribe(
       jobs => {
-        console.log(jobs);
         this.jobs = jobs.jobs;
         this.selectedJob = this.jobs[0];
         this.jobsService.getJobsItem(this.jobs[0]);
@@ -49,6 +52,15 @@ export class JobsListComponent implements OnInit {
   onGetJobsItem(job) {
     this.selectedJob = job;
     this.jobsService.getJobsItem(job);
+    const queryParams: Params = { jobId: job.id };
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: queryParams,
+        queryParamsHandling: 'merge'
+      }
+    );
   }
 
 }

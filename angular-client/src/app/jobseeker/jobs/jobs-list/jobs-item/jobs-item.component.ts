@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Job } from '../../job.model';
@@ -26,6 +26,7 @@ export class JobsItemComponent implements OnInit {
   private showSaveNotification: boolean = false;
 
   constructor(private route: ActivatedRoute,
+              private router: Router,
               private jobsService: JobsService,
               private userService: UserService,
               private authService: AuthService) {}
@@ -64,11 +65,16 @@ export class JobsItemComponent implements OnInit {
     }
   }
 
-  onApply(jobId) {
+  onApply(job) {
     if (this.isAuthenticated === false) {
       this.showModal = true;
     } else {
-      
+      this.router.navigate(
+        ['/apply'],
+        {
+          queryParamsHandling: 'merge'
+        }
+      );
     }
   }
 

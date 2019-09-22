@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { JobsService } from '../../../services/jobs.service';
@@ -23,7 +23,9 @@ export class JobsSearchComponent implements OnInit {
     date: 'all-time'
   };
 
-  constructor(private jobsService: JobsService) { }
+  constructor(private jobsService: JobsService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
 
@@ -46,9 +48,28 @@ export class JobsSearchComponent implements OnInit {
                             ;
     this.jobsSearch = true;
     this.jobsService.getJobs(form.value.title, form.value.location, 1);
+    // Add search query parameters
+    // Make sure all browsers support object spread operator
+    let queryParams: Params = {};
+    if (form.value.title) {
+      queryParams = { ...queryParams, title: form.value.title };
+    }
+    if (form.value.location) {
+      queryParams = { ...queryParams, location: form.value.location };
+    }
+    console.log(queryParams);
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: queryParams,
+        queryParamsHandling: 'merge'
+      }
+    );
   }
 
   onClearFilters(form: NgForm) {
+    // refactor!
     this.filterDateActive = false;
     this.filterTypeActive = false;
     this.filterSalaryActive = false;
