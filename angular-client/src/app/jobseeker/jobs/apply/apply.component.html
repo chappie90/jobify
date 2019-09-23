@@ -1,1 +1,54 @@
-<p>apply works!</p>
+<div class="container">
+  <div class="application">
+    <h2 class="heading-medium">Job title</h2>
+    <h3 class="heading-small">Company</h3>
+    <h3 class="heading-small margin-bottom">Location</h3>
+    <p class="margin-bottom">Signed in as <span class="bold">User email </span></p>
+    <form [formGroup]="form" (submit)="onJobApply()" class="application-form">
+      <label for="name" class="label">Name</label>
+      <input 
+        class="input" 
+        id="name"
+        type="text"
+        name="name"
+        formControlName="name"
+        required>
+      <label for="email" class="label">Email</label>
+      <input
+        class="input"
+        id="email"
+        type="email"
+        name="email"
+        formControlName="email"
+        required
+        email>
+      <label for="number" class="label">Phone (optional)</label>
+      <input
+        class="input"
+        id="number"
+        type="number"
+        name="number"
+        formControlName="number">
+      <label class="label">CV</label>
+      <div class="file-group">
+        <label for="choose-cv" class="file-label">Choose file</label>
+        <input 
+          class="file-input"
+          type="file"
+          id="choose-cv"
+          #fileChooseCV
+          (change)="onCVSelected($event)">
+        <label for="jobify-cv" class="file-label">Apply with Jobify CV</label>
+        <input
+          class="file-input"
+          type="file"
+          id="jobify-cv"
+          #fileJobifyCV
+          (change)="onCVSelected($event)">
+      </div>
+      <button
+        type="submit"
+        class="button">Submit application</button>
+    </form>
+  </div>
+</div>

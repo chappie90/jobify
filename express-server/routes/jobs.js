@@ -22,7 +22,7 @@ router.post('', (req, res, next) => {
   // DATE JOBS SEARCH FILTER
   const date = req.body.form.date;
 
-  let toDate = new Date('01-01-2019');
+  let toDate = new Date(); // mm/dd/yyy
   let ddToDate = String(toDate.getDate()).padStart(2, '0');
   let mmToDate = String(toDate.getMonth() + 1).padStart(2, '0');
   let yyyyToDate = toDate.getFullYear();
@@ -88,8 +88,15 @@ router.post('', (req, res, next) => {
     fromDateQuery = ddFromDate + '/' + mmFromDate + '/' + yyyyFromDate;
   }
 
-  console.log(toDateQuery);
-  console.log(fromDateQuery);
+  // JOB TYPE JOBS SEARCH FILTER
+  let jobTypeArray = ['Full-time'];
+  if (req.body.form.full) {
+    jobTypeArray.push('Full-time');
+  }
+  if (req.body.form.part) {
+    jobTypeArray.push('Part-time');
+  }
+  console.log(jobTypeArray);
 
   let jobTypeFull = '';
   if (req.body.form.full) {
@@ -109,10 +116,8 @@ router.post('', (req, res, next) => {
      {
       job_title: { $regex: title, $options: 'i' },
       location: { $regex: location, $options: 'i' },
-      job_type: { $regex: jobTypeFull, $options: 'i' },
-      job_type: { $regex: jobTypePart, $options: 'i' },
-      job_type: { $regex: jobTypeContract, $options: 'i' },
-      date_posted: { $lte: toDateQuery, $gte: fromDateQuery }
+      // job_type: { $in: [jobTypeArray] },
+      // date_posted: { $lte: toDateQuery, $gte: fromDateQuery }
      }
   );
   let fetchedJobs;

@@ -1,0 +1,65 @@
+@import '~src/styles.scss';
+
+.container {
+  background-color: $grey-light;
+  display: flex;
+  padding: 5rem 1rem 0;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.application {
+  max-width: 60rem;
+  width: 100%;
+  padding: 3rem;
+  background-color: $white;
+  border: 2px solid $grey-medium;
+  border-radius: 4px;
+}
+h2 {
+  margin-bottom: .8rem;
+}
+h3 {
+  margin-bottom: .4rem;
+}
+.margin-bottom {
+  margin-bottom: 2rem;
+}
+.application-form {
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  margin-bottom: .6rem;
+}
+
+.input {
+  margin-bottom: 1.4rem;
+  padding: .8rem 2rem;
+  border-radius: 4px;
+  outline: none;
+  border: 2px solid $grey-medium;
+}
+.file-group {
+  margin: .8rem 0 4rem;
+}
+.file-label {
+  border: 1px solid $grey-medium;
+  padding: .4rem 1.2rem;
+  margin-right: 1rem;
+  border-radius: 4px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.file-input {
+  display: none;
+}
+.button {
+  padding: 1.2rem 2rem;
+  border-radius: 4px;
+  max-width: 30rem;
+  width: 100%;
+  margin: auto;
+  color: $white;
+  background-color: $jobseeker-red;
+}
