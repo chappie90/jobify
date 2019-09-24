@@ -142,12 +142,11 @@ router.post('', (req, res, next) => {
 });
 
 router.get('/apply', (req, res, next) => {
-  const jobId = req.query.jobId;
+  const jobId = req.query.id;
   if (jobId) {
     Job.find({ _id: jobId })
       .then(job => {
         res.status(200).json({
-          message: 'Job fetched successfully',
           job: job
         });
       })

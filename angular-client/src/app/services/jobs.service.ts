@@ -12,11 +12,13 @@ const API_URL = environment.API + '/jobs';
 @Injectable({ providedIn: 'root' })
 export class JobsService {
   private jobs: Job[] = [];
+  private job: Job;
   private jobsCount: string;
   private currentPage: string;
   private jobsUpdated = new Subject<{ jobs: Job[]; count: string; currentPage: string }>();
   private savedJobsUpdated = new Subject<{ jobs: Job[] }>();
   private jobSelected = new Subject<{ job: Job }>();
+  private jobUpdated = new Subject<{ job: Job }>();
 
   constructor(private http: HttpClient,
               private authService: AuthService) {}
@@ -27,8 +29,10 @@ export class JobsService {
       const queryParams = `?id=${jobId}`;
       this.http.get<{ job: Job }>(
         API_URL + '/apply' + queryParams
-      ).subscribe(job => {
-        return job;
+      )
+      .subscribe(job => {
+        this.job = job.job[0];
+        this.jobUpdated.next(this.job);
       });
     }
   }
@@ -128,6 +132,10 @@ export class JobsService {
         jobs: [...this.jobs]
       });
     });
+  }
+
+  getJobUpdateListener() {
+    return this.jobUpdated.asObservable();
   }
 
   getJobsUpdateListener() {
