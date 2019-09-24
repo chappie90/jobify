@@ -26,6 +26,7 @@ export class PaginationComponent implements OnInit {
   private searchTitle: string;
   private searchLocation: string;
 
+
   constructor(private jobsService: JobsService,
               private router: Router,
               private route: ActivatedRoute) {}

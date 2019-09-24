@@ -21,7 +21,18 @@ export class JobsService {
   constructor(private http: HttpClient,
               private authService: AuthService) {}
 
-  // getJobs(title: string, location: string, page: number) {
+  getJobById(id) {
+    const jobId = id;
+    if (jobId) {
+      const queryParams = `?id=${jobId}`;
+      this.http.get<{ job: Job }>(
+        API_URL + '/apply' + queryParams
+      ).subscribe(job => {
+        return job;
+      });
+    }
+  }
+
   getJobs(form: any, page: number) {
     const searchData = { form: form, page: page };
     // let queryParams = `?page=${page}`;

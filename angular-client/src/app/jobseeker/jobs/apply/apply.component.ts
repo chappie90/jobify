@@ -24,6 +24,11 @@ export class ApplyComponent implements OnInit {
         validators: []
       })
     });
+    this.form.setValue({
+      'name': 'Stoyan Garov',
+      'email': 'stoyan.garov@yahoo.com',
+      'number': '07955443250'
+    });
   }
 
 }
