@@ -36,6 +36,7 @@ export class PaginationComponent implements OnInit {
       this.searchTitle = params.title;
       this.searchLocation = params.location;
     });
+    
     this.selectedPage = this.pages[0];
     this.jobsSub = this.jobsService.getJobsUpdateListener()
       .subscribe(

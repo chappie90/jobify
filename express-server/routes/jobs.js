@@ -141,6 +141,25 @@ router.post('', (req, res, next) => {
     });  
 });
 
+router.get('/apply', (req, res, next) => {
+  const jobId = req.query.jobId;
+  if (jobId) {
+    Job.find({ _id: jobId })
+      .then(job => {
+        res.status(200).json({
+          message: 'Job fetched successfully',
+          job: job
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(401).json({
+          message: 'Could not find job'
+        });
+      });
+  }
+});
+
 router.post('/saved', (req, res, next) => {
   const savedJobs = req.body.savedJobs;
   if (savedJobs) {
@@ -149,8 +168,15 @@ router.post('/saved', (req, res, next) => {
       res.status(200).json({
         savedJobs: savedJobs
       });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(401).json({
+        message: 'Could not fetch saved jobs'
+      });
     });
   }
 });
 
 module.exports = router;
+
