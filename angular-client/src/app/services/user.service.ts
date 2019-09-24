@@ -35,6 +35,7 @@ export class UserService {
     applicationData.append('cv', cv);
     applicationData.append('userId', userId);
     applicationData.append('jobId', jobId);
+    console.log(applicationData);
     this.http.post<{ message: string }>(
       API_URL + '/apply', applicationData
     ).subscribe(response => {

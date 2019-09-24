@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 
 import { Job } from '../../../job.model';
 import { JobsService } from '../../../services/jobs.service';
+import { UserService } from '../../../services/user.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class ApplyComponent implements OnInit {
   private jobSub: Subscription;
 
   constructor(private jobsService: JobsService,
+              private userService: UserService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -56,6 +58,7 @@ export class ApplyComponent implements OnInit {
     this.form.patchValue({
       cv: file
     });
+    console.log(this.form.value.cv);
     this.form.get('cv').updateValueAndValidity();
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -65,6 +68,7 @@ export class ApplyComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    console.log(this.form.value);
     this.userService.applyJob(this.form.value.name, this.form.value.email, this.form.value.number, this.form.value.cv, 'test-userId', this.job._id);
   }
 

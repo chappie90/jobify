@@ -5,7 +5,7 @@ const applicationSchema = mongoose.Schema({
   email: { type: String, required: true },
   number: { type: String },
   cvPath: { type: String, required: true },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  userId: { type: String, required: true },
   jobId: { type: mongoose.Schema.Types.ObjectId, ref: 'Job', required: true }
 });
 
