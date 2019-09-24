@@ -14,7 +14,7 @@ import { JobsService } from '../../../services/jobs.service';
 })
 export class ApplyComponent implements OnInit {
   form: FormGroup;
-  private job: Job;
+  private job: Job = {};
   private jobSub: Subscription;
 
   constructor(private jobsService: JobsService,
@@ -29,9 +29,7 @@ export class ApplyComponent implements OnInit {
     this.jobSub = this.jobsService.getJobUpdateListener()
       .subscribe(job => {
        this.job = job;
-       console.log(this.job);
       });
-
     this.form = new FormGroup({
       'name': new FormControl(null, {
         validators: [Validators.required]
@@ -41,13 +39,33 @@ export class ApplyComponent implements OnInit {
       }),
       'number': new FormControl(null, {
         validators: []
+      }),
+      cv: new FormControl(null, {
+        validators: [Validators.required]
       })
     });
-    this.form.setValue({
+    this.form.patchValue({
       'name': 'Stoyan Garov',
       'email': 'stoyan.garov@yahoo.com',
       'number': '07955443250'
     });
+  }
+
+  onChooseCVSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.form.patchValue({
+      cv: file
+    });
+    this.form.get('cv').updateValueAndValidity();
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+  }
+
+  onJobApply() {
+    if (this.form.invalid) {
+      return;
+    }
+    this.userService.applyJob(this.form.value.name, this.form.value.email, this.form.value.number, this.form.value.cv, 'test-userId', this.job._id);
   }
 
 }

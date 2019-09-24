@@ -31,13 +31,15 @@
         formControlName="number">
       <label class="label">CV</label>
       <div class="file-group">
-        <label for="choose-cv" class="file-label">Choose file</label>
+        <label 
+          for="choose-cv" 
+          class="file-label">Choose file</label>
         <input 
           class="file-input"
           type="file"
           id="choose-cv"
           #fileChooseCV
-          (change)="onCVSelected($event)">
+          (change)="onChooseCVSelected($event)">
         <label for="jobify-cv" class="file-label">Apply with Jobify CV</label>
         <input
           class="file-input"

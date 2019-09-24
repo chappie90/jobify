@@ -2,10 +2,31 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {OAuth2Client} = require('google-auth-library');
+const multer = require('multer');
 
 const User = require('../models/user');
 
 const router = express.Router();
+
+const MIME_TYPE_MAP = {
+  'application/pdf': 'pdf'
+};
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const isValid = MIME_TYPE_MAP[file.mimetype];
+    let error = new Error('Invalid mime type');
+    if (isValid) {
+      error = null;
+    }
+    cb(error, 'cv');
+  },
+  filename: (req, file, cb) => {
+    const name = file.originalname.toLowerCase().split(' ').join('-');
+    const ext = MIME_TYPE_MAP[file.mimetype];
+    cb(null, name + '-' + Date.now() + '.' + ext);
+  }
+});
 
 router.post('/signup', (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
@@ -142,6 +163,31 @@ router.patch('/like', (req, res, next) =>{
       console.log(err);
       res.status(401).json({
         message: 'Could not update liked jobs'
+      });
+    });
+});
+
+router.post(
+  '/apply',
+  multer({storage: storage}).single('cv'), (req, res, next) => {
+    const url = req.protocol + '://' + req.get('host');
+    const application = new Application({
+      name: req.body.name,
+      email: req.body.email,
+      number: req.body.number,
+      cvPath: url + '/cvs' + req.file.filename,
+      userId: req.body.userId,
+      jobId: req.body.jobId
+    });
+    application.save().then(application => {
+      res.status(200).json({
+        message: 'You have applied successfully to this job!'
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(401).json({
+        message: 'Something went wrong with your application'
       });
     });
 });

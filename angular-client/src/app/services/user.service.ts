@@ -27,6 +27,21 @@ export class UserService {
       );
   }
 
+  applyJob(name: string, email: string, number: string, cv: File, userId: string, jobId: string) {
+    let applicationData = new FormData();
+    applicationData.append('name', name);
+    applicationData.append('email', email);
+    applicationData.append('number', number);
+    applicationData.append('cv', cv);
+    applicationData.append('userId', userId);
+    applicationData.append('jobId', jobId);
+    this.http.post<{ message: string }>(
+      API_URL + '/apply', applicationData
+    ).subscribe(response => {
+      console.log(response);
+    });  
+  }
+
   getUserUpdateListener() {
     return this.userUpdated.asObservable();
   }
