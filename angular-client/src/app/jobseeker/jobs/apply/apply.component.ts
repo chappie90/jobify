@@ -7,7 +7,6 @@ import { Job } from '../job.model';
 import { JobsService } from '../../../services/jobs.service';
 import { UserService } from '../../../services/user.service';
 
-
 @Component({
   selector: 'app-apply',
   templateUrl: './apply.component.html',

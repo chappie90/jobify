@@ -1,0 +1,312 @@
+@import '~src/styles.scss';
+
+.search {
+  margin-top: 13rem;
+  padding: 0 3rem;
+  height: auto;
+  background-color: $white;
+
+  &--pristine {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 13rem);
+    position: relative;
+  }
+
+  &__bg {
+     display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: $jobseeker-red-dark;
+    -webkit-clip-path: polygon(0 84%, 100% 17%, 100% 100%, 0% 100%);
+    clip-path: polygon(0 84%, 100% 17%, 100% 100%, 0% 100%);
+    -webkit-clip-path: polygon(0 84%, 100% 32%, 100% 100%, 0% 100%);
+    clip-path: polygon(0 84%, 100% 32%, 100% 100%, 0% 100%);
+    -webkit-clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
+clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
+  }
+
+  &__form {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 3;
+    transition: all .4s;
+  //  border-radius: 4px;
+  //  padding: 6rem 6rem 4rem 6rem;
+  //  background-color: $grey-medium; 
+  //  border: 1px solid $grey-dark;
+    // -webkit-box-shadow: 8px 8px 20px 0px rgba(0,0,0,0.32);
+    // -moz-box-shadow: 8px 8px 20px 0px rgba(0,0,0,0.32);
+    // box-shadow: 8px 8px 20px 0px rgba(0,0,0,0.32);
+
+    &--pristine {
+      transform: translateY(-8rem);
+    }
+  }
+
+  &__button {
+    background-color: $grey-dark;
+    color: $white;
+    border-radius: 4px; 
+    padding: .8rem 1.6rem;
+    font-size: 1.6rem;
+    font-weight: 400;
+
+    &--pristine {
+      font-size: 1.8rem;
+      padding: 1rem 1.8rem;
+    }
+  }
+
+  &__input-group {
+    position: relative;
+    display: inline-block;
+    margin-right: 1rem;
+  }
+
+  &__input-label {
+    position: absolute;
+    top: -3rem;
+    left: 1rem;
+    color: $jobseeker-red-dark;
+    font-weight: bold;
+    font-size: 2rem;
+    display: none;
+
+    &--pristine {
+      display: block;
+    }
+  }
+
+  &__input-icon {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    width: 1.6rem;
+    height: 1.6rem;   
+  }
+
+  &__input-icon--search {
+    background: url('../../../../assets/images/search.svg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+
+  &__input-icon--location {
+    background: url('../../../../assets/images/location.svg');
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+
+  &__form-input {
+    padding: .7rem 1.6rem .7rem 3.2rem;
+    border-radius: 4px;
+    border: 1px solid $grey;
+    outline: none;
+    font-size: 1.5rem;
+
+    &--pristine {
+      font-size: 1.8rem;
+      padding: 1rem 1.6rem 1rem 3.2rem;
+    }
+
+    &:focus {
+      background-color: $grey-light;
+    }
+  }
+
+  &__filters-list {
+    list-style-type: none;
+  }
+
+  &__filters-item {
+    margin-left: .8rem;
+    position: relative;
+    display: inline-block;
+    border-radius: 4px;
+    background-color: $grey-light;
+    border: 1px solid $grey-medium;
+
+    &:first-of-type {
+      margin-left: 4rem;
+    }
+  }
+
+  &__filters-clear {
+    margin-left: 2.5rem;
+    position: relative;
+    display: inline-block;
+    padding: .8rem .8rem;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .3s;
+
+    &:hover {
+      background-color: $grey-light;
+    }
+  }
+
+  &__filters-clear-title {
+    color: $white;
+    font-size: 1.4rem;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -2.5rem;
+    display: inline-block;
+    padding: .4rem .8rem;
+    background-color: $jobseeker-red-darker;
+    border-radius: 45%;
+  }
+
+  &__filters-item-title {
+    cursor: pointer;
+    padding: .6rem 1rem;
+    display: inline-block;
+
+   &::after {
+     font-family: "Font Awesome 5 Free";
+     font-weight: 900;
+     content:  "\f0d7";
+     color: $grey-dark;
+     display: inline-block;
+     margin-left: .6rem;
+    }
+  }
+
+  &__filters-content {
+      display: none;
+      position: absolute;
+      top: 3.1rem;
+      right: 0;
+      width: 20rem;
+      -webkit-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
+      -moz-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
+      box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
+      border-radius: 4px;
+      background-color: $grey-light;
+      border: 1px solid $grey-medium;
+      padding: 1.2rem 2rem;
+  }
+ 
+  &__input-group--filters {
+    margin-bottom: 1rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__input--filter {
+    margin-right: .6rem;
+    visibility: hidden;
+    width: 1px;
+    height: 1px;
+    top: -9999px;
+    left: -9999px;
+
+    &:checked + .search__input-label--filter-date::before,
+    &:checked + .search__input-label--filter-type::before,
+    &:checked + .search__input-label--filter-salary::before {
+      border: 5px solid $grey-dark;
+    }
+  }
+  
+  &__input--filter,
+  &__input-label--filter {
+    cursor: pointer;
+  }
+
+  &__input-label--filter {
+    color: $grey-dark;
+    position: relative;
+    margin-left: 2.2rem; 
+    padding: .6rem; 
+  }
+
+  &__input-label--filter-date {   
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: -2.2rem;
+      width: 1.8rem;
+      display: inline-block;
+      height: 1.8rem;
+      border: 1px solid $grey-dark;
+      border-radius: 50%;
+      transition: all .3s;
+    }
+  }
+
+  &__input-label--filter-type {
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: -2.2rem;
+      width: 1.8rem;
+      display: inline-block;
+      height: 1.8rem;
+      border: 1px solid $grey-dark;
+      border-radius: 4px;
+      transition: all .3s;
+    }
+  }
+
+  &__input-label--filter-salary {
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: -2.2rem;
+      width: 1.8rem;
+      display: inline-block;
+      height: 1.8rem;
+      border: 1px solid $grey-dark;
+      border-radius: 4px;
+      transition: all .3s;
+    }
+  }
+
+  ::-webkit-input-placeholder {
+    font-size: 1.5rem;
+  }
+
+  :-ms-input-placeholder {
+    font-size: 1.5rem;
+  }
+
+  ::placeholder {
+    font-size: 1.5rem;
+  }
+}
+
+.open-dropdown {
+  display: block;
+}
+
+.filter-active {
+  background-color: $jobseeker-red-darker;
+  color: $white;
+  border-radius: 4px;
+
+  &::after {
+   color: $white;
+  }
+}

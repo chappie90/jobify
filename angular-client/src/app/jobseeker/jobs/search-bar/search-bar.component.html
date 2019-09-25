@@ -1,0 +1,253 @@
+<div class="search" [ngClass]="{'search--pristine': !jobsSearch}">
+  <div class="search__bg"></div>
+  <form 
+    class="search__form" 
+    [ngClass]="{'search__form--pristine': !jobsSearch}"
+    (submit)="onSearch(searchForm)" 
+    #searchForm="ngForm">
+    <div class="search__input-group">
+      <label 
+        for="title" 
+        class="search__input-label"
+        [ngClass]="{'search__input-label--pristine': !jobsSearch}">Search job title</label>
+      <div class="search__input-icon search__input-icon--search"></div>
+        <input
+          class="search__form-input"
+          [ngClass]="{'search__form-input--pristine': !jobsSearch}"
+          type="text"
+          name="title"
+          placeholder="Job title"
+          ngModel
+          id="title"
+          #titleInput="ngModel"
+          required />
+    </div>
+    <div class="search__input-group">
+      <label 
+        for="location" 
+        class="search__input-label"
+        [ngClass]="{'search__input-label--pristine': !jobsSearch}">Search city</label>
+      <div class="search__input-icon search__input-icon--location"></div>
+        <input
+          class="search__form-input"
+          [ngClass]="{'search__form-input--pristine': !jobsSearch}"
+          type="text"
+          name="location"
+          id="location"
+          placeholder="Location"
+          ngModel
+          #locationInput="ngModel"
+          required />
+    </div>
+    <button 
+      class="button search__button"
+      [ngClass]="{'search__button--pristine': !jobsSearch}">Find jobs</button>
+    <ul *ngIf="jobsSearch" class="search__filters-list">
+      <li 
+        [ngClass]="{'filter-active': filterDateActive}" 
+        class="search__filters-item">
+        <span
+         class="search__filters-item-title"
+         [ngClass]="{'filter-active': filterDateActive}">Date Posted</span>
+        <div appDropdown class="search__filters-content">
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="radio"
+              name="date"
+              id="day"
+              value="day"
+              ngModel
+              #dateInput="ngModel"
+              (change)="onSearch(searchForm)">
+              <label class="search__input-label--filter search__input-label--filter-date" for="day">Past 24 hours</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="radio"
+              name="date"
+              id="week"
+              value="week"
+              ngModel
+              #dateInput="ngModel"
+              (change)="onSearch(searchForm)">
+              <label class="search__input-label--filter search__input-label--filter-date" for="week">Past week</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="radio"
+              name="date"
+              id="month"
+              value="month"
+              ngModel
+              #dateInput="ngModel"
+              (change)="onSearch(searchForm)">
+            <label class="search__input-label--filter search__input-label--filter-date" for="month">Past month</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="radio"
+              name="date"
+              id="all-time"
+              value="all-time"
+              [(ngModel)]="sForm.date"
+              #dateInput="ngModel"
+              (change)="onSearch(searchForm)">
+            <label class="search__input-label--filter search__input-label--filter-date" for="all-time">All time</label>
+          </div>
+        </div>
+      </li>
+      <li 
+        [ngClass]="{'filter-active': filterTypeActive}" 
+        class="search__filters-item">
+        <span 
+          [ngClass]="{'filter-active': filterTypeActive}" 
+          class="search__filters-item-title">Job type</span>
+        <div appDropdown class="search__filters-content">
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="full"
+              id="full"
+              value="full-time"
+              ngModel
+              #typeInput="ngModel"
+              (change)="onSearch(searchForm)">
+              <label class="search__input-label--filter search__input-label--filter-type" for="full">Full time</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="part"
+              id="part"
+              value="part-time"
+              ngModel
+              #typeInput="ngModel"
+              (change)="onSearch(searchForm)">
+              <label class="search__input-label--filter search__input-label--filter-type" for="part">Part time</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="contract"
+              id="contract"
+              value="contract"
+              ngModel
+              #typeInput="ngModel"
+              (change)="onSearch(searchForm)">
+            <label class="search__input-label--filter search__input-label--filter-type" for="contract">Contract</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="temporary"
+              id="temporary"
+              value="temporary"
+              ngModel
+              #typeInput="ngModel"
+              (change)="onSearch(searchForm)">
+            <label class="search__input-label--filter search__input-label--filter-type" for="temporary">Temporary</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="apprenticeship"
+              id="apprenticeship"
+              value="apprenticeship"
+              ngModel
+              #typeInput="ngModel"
+              (change)="onSearch(searchForm)">
+            <label class="search__input-label--filter search__input-label--filter-type" for="apprenticeship">Apprenticeship</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="volunteer"
+              id="volunteer"
+              value="volunteer"
+              ngModel
+              #typeInput="ngModel"
+              (change)="onSearch(searchForm)">
+            <label class="search__input-label--filter search__input-label--filter-type" for="volunteer">Volunteer</label>
+          </div>
+        </div>
+      </li>
+      <li
+        [ngClass]="{'filter-active': filterSalaryActive}"  
+        class="search__filters-item">
+        <span 
+          [ngClass]="{'filter-active': filterSalaryActive}" 
+          class="search__filters-item-title">Salary range</span>
+        <div appDropdown class="search__filters-content">
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="rangelow"
+              id="rangelow"
+              value="rangelow"
+              ngModel
+              #salaryInput="ngModel"
+              (change)="onSearch(searchForm)">
+              <label class="search__input-label--filter search__input-label--filter-salary" for="rangelow">£20K - £40K</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="rangemedium"
+              id="rangemedium"
+              value="rangemedium"
+              ngModel
+              #salaryInput="ngModel"
+              (change)="onSearch(searchForm)">
+              <label class="search__input-label--filter search__input-label--filter-salary" for="rangemedium">£40K - £60K</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="range"
+              id="range"
+              value="range"
+              ngModel
+              #salaryInput="ngModel"
+              (change)="onSearch(searchForm)">
+            <label class="search__input-label--filter search__input-label--filter-salary" for="range">£60K - £80K</label>
+          </div>
+          <div class="search__input-group--filters">
+            <input
+              class="search__input--filter"
+              type="checkbox"
+              name="rangehigh"
+              id="rangehigh"
+              value="rangehigh"
+              ngModel
+              #salaryInput="ngModel"
+              (change)="onSearch(searchForm)">
+            <label class="search__input-label--filter search__input-label--filter-salary" for="rangehigh">More than £80K</label>
+          </div>
+        </div>
+      </li>
+      <li
+        *ngIf="filterDateActive || filterTypeActive || filterSalaryActive"
+        [ngClass]="{'filter-active': false}" 
+        (click)="onClearFilters(searchForm)" 
+        class="search__filters-clear">
+        Clear filters
+        <span 
+          [ngClass]="{'filter-active': false}" 
+          class="search__filters-clear-title">2</span>
+      </li>
+    </ul>
+  </form>
+</div>

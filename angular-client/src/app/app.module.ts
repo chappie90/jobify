@@ -27,6 +27,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { JobsListComponent } from './jobseeker/jobs/jobs-list/jobs-list.component';
 import { JobsItemComponent } from './jobseeker/jobs/jobs-list/jobs-item/jobs-item.component';
+import { SearchBarComponent } from './jobseeker/jobs/search-bar/search-bar.component';
 import { JobsSearchComponent } from './jobseeker/jobs/jobs-search/jobs-search.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { ProfileComponent } from './jobseeker/profile/profile.component';
@@ -51,6 +52,7 @@ import { ApplyComponent } from './jobseeker/jobs/apply/apply.component';
     NavSecondaryEmployerComponent,
     LandingPageComponent,
     JobsComponent,
+    JobsSearchComponent,
     UploadCVComponent,
     MarketInsightsComponent,
     PremiumComponent,
@@ -66,7 +68,7 @@ import { ApplyComponent } from './jobseeker/jobs/apply/apply.component';
     LoadingSpinnerComponent,
     JobsListComponent,
     JobsItemComponent,
-    JobsSearchComponent,
+    SearchBarComponent,
     PaginationComponent,
     ProfileComponent,
     TrackerComponent,

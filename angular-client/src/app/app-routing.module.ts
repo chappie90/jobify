@@ -1,7 +1,8 @@
-  import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { JobsComponent } from './jobseeker/jobs/jobs.component';
+import { JobsSearchComponent } from './jobseeker/jobs/jobs-search/jobs-search.component';
 import { EmployerComponent } from './employer/employer.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { UploadCVComponent } from './jobseeker/upload-cv/upload-cv.component';
@@ -28,7 +29,9 @@ const routes: Routes = [
   { path: '', component: LandingPageComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent },
-  { path: 'jobs', component: JobsComponent },
+  { path: 'jobs', component: JobsComponent, children: [
+    { path: 'search', component: JobsSearchComponent }
+  ] },
   { path: 'apply', component: ApplyComponent },
   { path: 'cv', component: UploadCVComponent },
   { path: 'market-insights', component: MarketInsightsComponent },
