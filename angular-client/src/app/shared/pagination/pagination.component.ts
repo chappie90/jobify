@@ -11,6 +11,7 @@ import { JobsService} from '../../services/jobs.service';
 })
 export class PaginationComponent implements OnInit {
   private jobsCount: string;
+  private formData: {};
   private pageSize: number = 20;
   private numberPages: number;
   private moreJobs: string = '...';
@@ -34,8 +35,10 @@ export class PaginationComponent implements OnInit {
   ngOnInit() {
     this.buildPagination();
     this.route.queryParams.subscribe(params => {
-      this.searchTitle = params.title;
-      this.searchLocation = params.location;
+      this.formData = {
+        title: params.title,
+        location: params.location
+      };
     });
     
     this.selectedPage = this.pages[0];
@@ -113,19 +116,20 @@ export class PaginationComponent implements OnInit {
 
   onGetPage(page, index, previousPage, nextPage) {
     // REPLACE GET JOBS ARGUMENTS WITH QUERY PARAMS
+
     
     if (index === 8) {
       this.firstPage = previousPage - 3;
       this.nextPage = previousPage + 1;
       this.lastPage = this.nextPage + 2;
-      this.jobsService.getJobs(this.searchTitle, this.searchLocation, this.nextPage);
+      this.jobsService.getJobs(this.formData, this.nextPage);
     } else if (index === 1 && page === this.moreJobs) {
       this.firstPage = nextPage - 4;
       this.nextPage = nextPage - 1;
       this.lastPage = nextPage + 2;
-      this.jobsService.getJobs(this.searchTitle, this.searchLocation, this.nextPage);
+      this.jobsService.getJobs(this.formData, this.nextPage);
     } else {
-      this.jobsService.getJobs(this.searchTitle, this.searchLocation, page);  
+      this.jobsService.getJobs(this.formData, page);  
     }
   }
 }

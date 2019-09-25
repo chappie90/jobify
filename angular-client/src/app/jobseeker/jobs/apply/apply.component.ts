@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { Job } from '../../../job.model';
+import { Job } from '../job.model';
 import { JobsService } from '../../../services/jobs.service';
 import { UserService } from '../../../services/user.service';
 
