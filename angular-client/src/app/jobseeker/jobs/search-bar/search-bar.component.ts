@@ -34,7 +34,9 @@ export class SearchBarComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute) {
     route.params.subscribe(val => {
-      this.jobsSearch = this.router.url === ('/jobs/search');
+      this.jobsSearch = this.router.url.includes('/jobs/search?');
+      console.log(this.router.url);
+      console.log(this.jobsSearch);
     });
   }
 
@@ -60,21 +62,24 @@ export class SearchBarComponent implements OnInit {
   }
 
   onSearch(form: NgForm) {
-  //  this.filterDateActive = form.value.date ? true : false;
-    // this.filterDateActive = form.value.date === 'all-time' ? false : true;
-    this.filterTypeActive = form.value.full || 
-                            form.value.part ||
-                            form.value.contract ||
-                            form.value.temporary ||
-                            form.value.apprenticeship ||
-                            form.value.volunteer
-                          ;
-    this.filterSalaryActive = form.value.rangelow || 
-                              form.value.rangemedium ||
-                              form.value.range ||
-                              form.value.rangehigh
+    if (this.jobsSearch) {
+        //  this.filterDateActive = form.value.date ? true : false;
+      // this.filterDateActive = form.value.date === 'all-time' ? false : true;
+      this.filterTypeActive = form.value.full || 
+                              form.value.part ||
+                              form.value.contract ||
+                              form.value.temporary ||
+                              form.value.apprenticeship ||
+                              form.value.volunteer
                             ;
-    this.jobsService.getJobs(form.value, 1);
+      this.filterSalaryActive = form.value.rangelow || 
+                                form.value.rangemedium ||
+                                form.value.range ||
+                                form.value.rangehigh
+                              ;
+      this.jobsService.getJobs(form.value, 1);
+    }
+
     // Add search query parameters
     // Make sure all browsers support object spread operator
     let queryParams: Params = {};
