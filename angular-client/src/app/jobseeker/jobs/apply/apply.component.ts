@@ -17,6 +17,8 @@ export class ApplyComponent implements OnInit {
   form: FormGroup;
   private job: Job = {};
   private jobSub: Subscription;
+  cvPreview: string;
+  fileName: string;
 
   constructor(private jobsService: JobsService,
               private userService: UserService,
@@ -58,10 +60,19 @@ export class ApplyComponent implements OnInit {
     this.form.patchValue({
       cv: file
     });
-    console.log(this.form.value.cv);
     this.form.get('cv').updateValueAndValidity();
     const reader = new FileReader();
+    reader.onload = () => {
+      this.cvPreview = reader.result as string;
+      console.log(this.cvPreview);
+    }
     reader.readAsDataURL(file);
+  }
+
+  onCVRemove() {
+    this.form.patchValue({
+      cv: ''
+    });
   }
 
   onJobApply() {

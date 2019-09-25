@@ -41,7 +41,9 @@ h3 {
   border: 2px solid $grey-medium;
 }
 .file-group {
-  margin: .8rem 0 4rem;
+  margin-bottom: 4rem;
+  display: flex;
+  align-items: center;
 }
 .file-label {
   border: 1px solid $grey-medium;
@@ -50,9 +52,40 @@ h3 {
   border-radius: 4px;
   font-size: 1.5rem;
   cursor: pointer;
+  transition: all .3s;
+
+  &:hover {
+    border: 1px solid $unifier-orange;
+  }
 }
 .file-input {
   display: none;
+}
+.cv-preview {
+  background: url('../../../../assets/images/pdf.svg'); 
+  background-repeat: no-repeat;
+  background-size: 2.5rem;
+  background-position-y: 20%;
+  padding: 1rem 0 1rem 3rem;
+  margin-left: 1rem;
+  position: relative;
+  max-width: 22rem;
+}
+.cv-remove::after {
+  content: '\00d7';
+  position: absolute;
+  display: inline-block;
+  font-size: 2rem;
+  background-color: $grey-medium;
+  text-align: center;
+  border-radius: 50%;
+  padding: 0 .6rem;
+  right: -3rem;
+  top: -1rem;
+  cursor: pointer;
+}
+.cv-remove:hover::after {
+  background-color: $grey-light;  
 }
 .button {
   padding: 1.2rem 2rem;

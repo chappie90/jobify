@@ -47,6 +47,12 @@
           id="jobify-cv"
           #fileJobifyCV
           (change)="onCVSelected($event)">
+        <div class="cv-preview" *ngIf="cvPreview !== '' && cvPreview && form.get('cv').valid">
+          <span class="cv-name">{{ form.value.cv.name }}</span>
+          <span 
+            class="cv-remove"
+            (click)="onCVRemove()"></span>
+        </div>
       </div>
         <button
           type="submit"
