@@ -4,6 +4,17 @@
   min-height: calc(100vh - 12rem);
 }
 
+.success-msg {
+  margin-top: 1rem;
+  text-align: center;
+  padding: 1rem;
+  background-color: $employer-green;
+  color: $white;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
 .jobs {
 
   &__search-container {

@@ -11,6 +11,7 @@ const API_URL = environment.API + '/user';
 @Injectable({ providedIn: 'root' })
 export class UserService {
   private userUpdated = new Subject<{ jobStatus: boolean, likedJobId: string }>();
+  private applyStatus: boolean;
 
   constructor(private http: HttpClient,
               private router: Router) {}
@@ -40,9 +41,12 @@ export class UserService {
     this.http.post<{ message: string }>(
       API_URL + '/apply', applicationData
     ).subscribe(response => {
+      const queryParams = { apply: 'success'};
+      this.applyStatus = true;
       this.router.navigate(
         ['/jobs/search'],
         {
+          queryParams: queryParams,
           queryParamsHandling: 'merge'
         }
       );
@@ -52,4 +56,9 @@ export class UserService {
   getUserUpdateListener() {
     return this.userUpdated.asObservable();
   }
+
+  returnApplyStatus() {
+    return this.applyStatus;
+  }
+
 }

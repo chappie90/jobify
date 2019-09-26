@@ -22,7 +22,11 @@ export class JobsListComponent implements OnInit {
               private router: Router,
               private jobsService: JobsService,
               private authService: AuthService,
-              private userService: UserService) { }
+              private userService: UserService) {
+    route.params.subscribe(val => {
+
+    });
+  }
 
   ngOnInit() {
     this.jobs = this.jobsService.returnAllJobsData().jobs;
@@ -36,7 +40,6 @@ export class JobsListComponent implements OnInit {
    this.jobsSub = this.jobsService.getJobsUpdateListener()
     .subscribe(
       jobs => {
-        console.log(jobs);
         this.jobs = jobs.jobs;
         this.selectedJob = this.jobs[0];
         this.jobsService.getJobsItem(this.jobs[0]);

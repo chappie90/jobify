@@ -78,7 +78,6 @@ export class ApplyComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    console.log(this.form.value);
     this.userService.applyJob(this.form.value.name, this.form.value.email, this.form.value.number, this.form.value.cv, 'test-userId', this.job._id);
   }
 

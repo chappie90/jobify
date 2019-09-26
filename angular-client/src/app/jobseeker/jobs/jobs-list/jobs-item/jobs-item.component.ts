@@ -29,7 +29,8 @@ export class JobsItemComponent implements OnInit {
               private router: Router,
               private jobsService: JobsService,
               private userService: UserService,
-              private authService: AuthService) {}
+              private authService: AuthService) {
+  }
 
   ngOnInit() {
     this.job = this.jobsService.returnAllJobsData().jobs[0];

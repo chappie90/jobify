@@ -2,6 +2,9 @@
   <div class="jobs__search-container">
     <app-search-bar></app-search-bar>
   </div>
+  <div *ngIf="applyStatus" class="success-msg">
+    <span>Congratulations! You have applied for this role! Check you email for more details</span>
+  </div>
   <div class="jobs__container">
     <div class="jobs__list-container">
       <app-jobs-list></app-jobs-list>

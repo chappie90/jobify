@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 
 import { Job } from '../job.model';
 import { JobsService } from '../../../services/jobs.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-jobs-search',
@@ -13,12 +14,20 @@ import { JobsService } from '../../../services/jobs.service';
 export class JobsSearchComponent implements OnInit {
   private jobsSub: Subscription;
   private job: Job = {};
+  private applyStatus: boolean;
 
   constructor(private jobsService: JobsService,
+              private userService: UserService,
               private router: Router,
               private route: ActivatedRoute) {}
  
   ngOnInit() {
+    this.applyStatus = this.userService.returnApplyStatus();
+    if (this.applyStatus) {
+      setTimeout(() => {
+        this.applyStatus = false;
+      }, 4000);
+    }
     this.route.queryParams.subscribe(params => {
       let title = params.title;
       let location = params.location;
@@ -34,11 +43,5 @@ export class JobsSearchComponent implements OnInit {
       }
       this.jobsService.getJobs({title: title, location: location}, pageNumber);
     });
-    this.jobsSub = this.jobsService.getJobsUpdateListener()
-      .subscribe(
-        jobs => {
-                  
-        }
-      );
   }
 }
