@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 import { environment } from '../../environments/environment';
@@ -11,7 +12,8 @@ const API_URL = environment.API + '/user';
 export class UserService {
   private userUpdated = new Subject<{ jobStatus: boolean, likedJobId: string }>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private router: Router) {}
 
   likeJob(jobId: string, jobStatus: boolean, likedJobs: any, userId: string) {
     const likeJobData = { likedJobs: likedJobs, userId: userId, jobId: jobId, jobStatus: jobStatus };
@@ -35,11 +37,15 @@ export class UserService {
     applicationData.append('cv', cv);
     applicationData.append('userId', userId);
     applicationData.append('jobId', jobId);
-    console.log(applicationData);
     this.http.post<{ message: string }>(
       API_URL + '/apply', applicationData
     ).subscribe(response => {
-      console.log(response);
+      this.router.navigate(
+        ['/jobs/search'],
+        {
+          queryParamsHandling: 'merge'
+        }
+      );
     });  
   }
 

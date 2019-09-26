@@ -14,18 +14,30 @@ export class JobsSearchComponent implements OnInit {
   private jobsSub: Subscription;
   private job: Job = {};
 
-  constructor(private jobsService: JobsService) {}
+  constructor(private jobsService: JobsService,
+              private router: Router,
+              private route: ActivatedRoute) {}
  
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      const title = params.title;
-      const location = params.location;
-      this.jobsService.getJobs({title: title, location: location}, 1);
+      let title = params.title;
+      let location = params.location;
+      let pageNumber = params.pageNumber;
+      if (!title) {
+        title = '';
+      }
+      if (!location) {
+        location = '';
+      }
+      if (!pageNumber) {
+        pageNumber = 1;
+      }
+      this.jobsService.getJobs({title: title, location: location}, pageNumber);
     });
     this.jobsSub = this.jobsService.getJobsUpdateListener()
       .subscribe(
         jobs => {
-          console.log(jobs);          
+                  
         }
       );
   }

@@ -29,9 +29,8 @@ const routes: Routes = [
   { path: '', component: LandingPageComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SignupComponent },
-  { path: 'jobs', component: JobsComponent, children: [
-    { path: 'search', component: JobsSearchComponent }
-  ] },
+  { path: 'jobs', component: JobsComponent },
+  { path: 'jobs/search', component: JobsSearchComponent },
   { path: 'apply', component: ApplyComponent },
   { path: 'cv', component: UploadCVComponent },
   { path: 'market-insights', component: MarketInsightsComponent },

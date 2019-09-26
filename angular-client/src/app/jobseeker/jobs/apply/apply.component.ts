@@ -14,7 +14,7 @@ import { UserService } from '../../../services/user.service';
 })
 export class ApplyComponent implements OnInit {
   form: FormGroup;
-  private job: Job = {};
+  private job: Job;
   private jobSub: Subscription;
   cvPreview: string;
   fileName: string;

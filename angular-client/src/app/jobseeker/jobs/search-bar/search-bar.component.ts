@@ -34,9 +34,7 @@ export class SearchBarComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute) {
     route.params.subscribe(val => {
-      this.jobsSearch = this.router.url.includes('/jobs/search?');
-      console.log(this.router.url);
-      console.log(this.jobsSearch);
+      this.jobsSearch = this.router.url.includes('/jobs/search');
     });
   }
 
@@ -44,8 +42,8 @@ export class SearchBarComponent implements OnInit {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Show loading indicator
-        this.jobsSearch = event.url === ('/jobs/search');
-        console.log(this.jobsSearch);
+        this.jobsSearch = event.url.includes('/jobs/search');
+        console.log(event.url);
       }
 
       if (event instanceof NavigationEnd) {
