@@ -56,17 +56,31 @@ export class JobsService {
       map(jobsData => {
         const authData = this.authService.getAuthData();
         let likedJobs;
+        let appliedJobs;
         if (authData) {
           likedJobs = authData.likedJobs.split(',');
+          appliedJobs = authData.appliedJobs.split(',');
         } else {
           likedJobs = [];
+          appliedJobs = [];
         }
         return {
           message: jobsData.message,
           totalJobs: jobsData.totalJobs,
           currentPage: jobsData.currentPage,
           jobs: jobsData.jobs.map(jobData => {
-           if(likedJobs.includes(jobData._id)) {
+            let liked;
+            let applied;
+            if (likedJobs.includes(jobData._id)) {
+              liked = true;
+            } else {
+              liked = false;
+            }
+            if (appliedJobs.includes(jobData._id)) {
+              applied = true;
+            } else {
+              applied = false;
+            }
             return {  
                 id: jobData._id,
                 title: jobData.job_title,
@@ -80,24 +94,9 @@ export class JobsService {
                 overview: jobData.job_overview,
                 responsible: jobData.job_responsibilities,
                 qualify: jobData.job_qualifications,
-                likedJob: true
+                likedJob: liked,
+                applied: applied
              };
-           } else {
-            return {  id: jobData._id,
-              title: jobData.job_title,
-              type: jobData.job_type,
-              location: jobData.location,
-              company: jobData.company_name,
-              logo: jobData.company_logo,
-              salary: jobData.salary,
-              industry: jobData.industry,
-              datePosted: jobData.date_posted,
-              overview: jobData.job_overview,
-              responsible: jobData.job_responsibilities,
-              qualify: jobData.job_qualifications,
-              likedJob: false
-            };
-           }
           })
         }
       })

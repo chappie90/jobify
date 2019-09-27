@@ -41,6 +41,7 @@ export class JobsListComponent implements OnInit {
     .subscribe(
       jobs => {
         this.jobs = jobs.jobs;
+        console.log(this.jobs);
         this.selectedJob = this.jobs[0];
         this.jobsService.getJobsItem(this.jobs[0]);
      //   console.log(document.getElementById('jobs-list').scrollTop);

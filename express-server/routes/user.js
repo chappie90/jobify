@@ -175,7 +175,8 @@ router.patch('/like', (req, res, next) =>{
 router.post(
   '/apply',
   multer({storage: storage}).single('cv'), (req, res, next) => {
-    const appliedJobs =req.body.appliedJobs;
+    const userId = req.body.userId;
+    const appliedJobs = req.body.appliedJobs;
     const url = req.protocol + '://' + req.get('host');
     const application = new Application({
       name: req.body.name,
@@ -186,10 +187,21 @@ router.post(
       jobId: req.body.jobId
     });
     application.save().then(application => {
-      User.findByIdAndUpdate({ _id: userId }, { appliedJobs: appliedJobs }, {new: true});
-      res.status(200).json({
-        message: 'You have applied successfully to this job!'
-      });
+      User.findByIdAndUpdate({ _id: userId }, { appliedJobs: appliedJobs }, {new: true})
+        .then(user => {
+          if (user) {
+            return res.status(200).json({
+              message: 'You have applied successfully to this job!'
+            });
+          } else {
+            return res.status(401).json({
+              message: 'User not found'
+            });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
     })
     .catch(err => {
       console.log(err);

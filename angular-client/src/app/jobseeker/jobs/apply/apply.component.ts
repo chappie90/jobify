@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { Job } from '../job.model';
 import { JobsService } from '../../../services/jobs.service';
 import { UserService } from '../../../services/user.service';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-apply',
@@ -18,9 +19,12 @@ export class ApplyComponent implements OnInit {
   private jobSub: Subscription;
   cvPreview: string;
   fileName: string;
+  private userId: string;
+  private authDataAppliedJobs: string;
 
   constructor(private jobsService: JobsService,
               private userService: UserService,
+              private authService: AuthService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -52,6 +56,8 @@ export class ApplyComponent implements OnInit {
       'email': 'stoyan.garov@yahoo.com',
       'number': '07955443250'
     });
+    this.userId = this.authService.getAuthData().userId;
+    this.authDataAppliedJobs = this.authService.getAuthData().appliedJobs;
   }
 
   onChooseCVSelected(event: Event) {
@@ -63,7 +69,6 @@ export class ApplyComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = () => {
       this.cvPreview = reader.result as string;
-      console.log(this.cvPreview);
     }
     reader.readAsDataURL(file);
   }
@@ -78,7 +83,14 @@ export class ApplyComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    this.userService.applyJob(this.form.value.name, this.form.value.email, this.form.value.number, this.form.value.cv, 'test-userId', this.job._id);
+    let newAppliedJobsArray = [];
+    if (this.authDataAppliedJobs) {
+      const appliedJobsArray = this.authDataAppliedJobs.split(',');
+      newAppliedJobsArray = [...appliedJobsArray, this.job._id];
+    } else {
+      newAppliedJobsArray.push(this.job._id);
+    }
+    this.userService.applyJob(this.form.value.name, this.form.value.email, this.form.value.number, this.form.value.cv, this.userId, newAppliedJobsArray, this.job._id);
   }
 
 }

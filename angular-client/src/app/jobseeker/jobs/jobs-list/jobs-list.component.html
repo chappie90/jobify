@@ -15,6 +15,7 @@
         </div>
       </div>
       <div class="jobs-list__like-container">
+        <span *ngIf="job.applied" class="jobs-list__list-item-apply"></span>
         <span *ngIf="job.likedJob" class="jobs-list__list-item-like"></span>
       </div>
     </li>

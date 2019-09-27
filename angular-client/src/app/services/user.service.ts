@@ -30,17 +30,19 @@ export class UserService {
       );
   }
 
-  applyJob(name: string, email: string, number: string, cv: File, userId: string, jobId: string) {
+  applyJob(name: string, email: string, number: string, cv: File, userId: string, appliedJobs: appliedJobs, jobId: string) {
     let applicationData = new FormData();
     applicationData.append('name', name);
     applicationData.append('email', email);
     applicationData.append('number', number);
     applicationData.append('cv', cv);
     applicationData.append('userId', userId);
+    applicationData.append('appliedJobs', appliedJobs);
     applicationData.append('jobId', jobId);
     this.http.post<{ message: string }>(
       API_URL + '/apply', applicationData
     ).subscribe(response => {
+      console.log(response);
       const queryParams = { apply: 'success'};
       this.applyStatus = true;
       this.router.navigate(

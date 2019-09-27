@@ -34,7 +34,6 @@ export class JobsItemComponent implements OnInit {
 
   ngOnInit() {
     this.job = this.jobsService.returnAllJobsData().jobs[0];
-    console.log(this.job);
     this.jobSaveStatus = this.job.likedJob ? 'Unsave' : 'Save';
     this.checkToken();
     this.authSub = this.authService.getAuthStatusListener().subscribe(
