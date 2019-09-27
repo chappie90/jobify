@@ -3,4 +3,5 @@ export interface User {
   password: string;
   type: string;
   likedJobs: any;
+  appliedJobs: any;
 }

@@ -48,7 +48,8 @@ router.post('/signup', (req, res, next) => {
             token: token,
             expiresIn: 3600,
             userId: response._id,
-            likedJobs: []
+            likedJobs: [],
+            appliedJobs: []
           });  
       })
       .catch(err => {
@@ -84,7 +85,8 @@ router.post('/login', (req, res, next) => {
         token: token,
         expiresIn: 3600,
         userId: fetchedUser._id,
-        likedJobs: fetchedUser.likedJobs
+        likedJobs: fetchedUser.likedJobs,
+        appliedJobs: fetchedUser.appliedJobs
       });
     })
     .catch(err => {
@@ -118,7 +120,8 @@ router.post('/google-login', (req, res, next) => {
               token: req.body.token,
               expiresIn: 3600,
               userId: user._id,
-              likedJobs: []
+              likedJobs: [],
+              appliedJobs: []
             })
           });
         } else if (user) {
@@ -126,7 +129,8 @@ router.post('/google-login', (req, res, next) => {
             token: req.body.token,
             expiresIn: 3600,
             userId: user._id,
-            likedJobs: user.likedJobs
+            likedJobs: user.likedJobs,
+            appliedJobs: user.appliedJobs
           })
         }
       })
@@ -171,6 +175,7 @@ router.patch('/like', (req, res, next) =>{
 router.post(
   '/apply',
   multer({storage: storage}).single('cv'), (req, res, next) => {
+    const appliedJobs =req.body.appliedJobs;
     const url = req.protocol + '://' + req.get('host');
     const application = new Application({
       name: req.body.name,
@@ -181,6 +186,7 @@ router.post(
       jobId: req.body.jobId
     });
     application.save().then(application => {
+      User.findByIdAndUpdate({ _id: userId }, { appliedJobs: appliedJobs }, {new: true});
       res.status(200).json({
         message: 'You have applied successfully to this job!'
       });

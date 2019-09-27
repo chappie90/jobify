@@ -37,7 +37,7 @@ export class AuthService {
 
   createUser(email: string, password: string, type: string) {
     const userData = { email: email, password: password, type: 'jobseeker' };
-    this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any}>
+    this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any}>
     (API_URL + '/signup', userData).subscribe(
       (response) => {
         this.token = response.token;
@@ -48,11 +48,12 @@ export class AuthService {
           this.authStatusListener.next(true);
           this.userId = response.userId;
           const likedJobs = response.likedJobs;
+          const appliedJobs = response.appliedJobs;
           const date = new Date();
           const tokenExpireDate = new Date(
             date.getTime() + tokenExpiration * 1000
           );
-          this.saveAuthData(this.token, tokenExpireDate, this.userId, likedJobs);
+          this.saveAuthData(this.token, tokenExpireDate, this.userId, likedJobs, appliedJobs);
           this.router.navigate(['/'])
         }
       },
@@ -65,7 +66,7 @@ export class AuthService {
 
   login(email: string, password: string) {
     const loginData = { email: email, password: password };
-    this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any }>
+    this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any }>
       (API_URL + '/login', loginData).subscribe(
       response => {
         this.token = response.token;
@@ -76,11 +77,12 @@ export class AuthService {
           this.authStatusListener.next(true);
           this.userId = response.userId;
           const likedJobs = response.likedJobs;
+          const appliedJobs = response.appliedJobs;
           const date = new Date();
           const tokenExpireDate = new Date(
             date.getTime() + tokenExpiration * 1000
           );
-          this.saveAuthData(this.token, tokenExpireDate, this.userId, likedJobs);
+          this.saveAuthData(this.token, tokenExpireDate, this.userId, likedJobs, appliedJobs);
           this.router.navigate(['/']);
         }
       },
@@ -92,7 +94,7 @@ export class AuthService {
 
   googleSignIn(email: string, token: string, type: string) {
     const googleSigninData = { email: email, token: token, type: 'jobseeker' };
-    this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any }>
+    this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any }>
       (API_URL + '/google-login', googleSigninData).subscribe(
         response => {
           this.token = response.token;
@@ -103,11 +105,12 @@ export class AuthService {
             this.authStatusListener.next(true);
             this.userId = response.userId;
             const likedJobs = response.likedJobs;
+            const appliedJobs = response.appliedJobs;
             const date = new Date();
             const tokenExpireDate = new Date(
               date.getTime() + tokenExpiration * 1000
             );
-            this.saveAuthData(this.token, tokenExpireDate, this.userId, likedJobs);
+            this.saveAuthData(this.token, tokenExpireDate, this.userId, likedJobs, appliedJobs);
             this.router.navigate(['/']);
           }
         },
@@ -134,11 +137,12 @@ export class AuthService {
     }, duration * 1000);
   }
 
-  saveAuthData(token: string, tokenExpirationDate: Date, userId: string, likedJobs: any) {
+  saveAuthData(token: string, tokenExpirationDate: Date, userId: string, likedJobs: any, appliedJobs: any) {
     localStorage.setItem('token', token);
     localStorage.setItem('tokenExpirationDate', tokenExpirationDate.toISOString());
     localStorage.setItem('userId', userId);
     localStorage.setItem('likedJobs', likedJobs);
+    localStorage.setItem('appliedJobs', appliedJobs);
   }
 
   getAuthData() {
@@ -146,14 +150,17 @@ export class AuthService {
     const tokenExpirationDate = localStorage.getItem('tokenExpirationDate');
     const userId = localStorage.getItem('userId');
     const likedJobs = localStorage.getItem('likedJobs');
-    if (!token || !tokenExpirationDate || !likedJobs) {
+    const appliedJobs = localStorage.getItem('appliedJobs');
+
+    if (!token || !tokenExpirationDate || !likedJobs || !appliedJobs) {
       return;
     }
     return {
       token: token,
       tokenExpirationDate: new Date(tokenExpirationDate),
       userId: userId,
-      likedJobs: likedJobs
+      likedJobs: likedJobs,
+      appliedJobs: appliedJobs
     };
   }
 
@@ -162,6 +169,7 @@ export class AuthService {
     localStorage.removeItem('tokenExpirationDate');
     localStorage.removeItem('userId');
     localStorage.removeItem('likedJobs');
+    localStorage.removeItem('appliedJobs');
   }
 
 
