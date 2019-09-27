@@ -12,7 +12,6 @@ import { UserService } from '../../../services/user.service';
   styleUrls: ['./jobs-search.component.scss']
 })
 export class JobsSearchComponent implements OnInit {
-  private jobsSub: Subscription;
   private job: Job = {};
   private applyStatus: boolean;
 
