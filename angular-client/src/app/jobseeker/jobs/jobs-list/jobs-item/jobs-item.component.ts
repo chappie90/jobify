@@ -41,6 +41,8 @@ export class JobsItemComponent implements OnInit, OnDestroy {
             this.jobSaveStatus = this.job.likedJob ? 'Unsave' : 'Save';
           }
         });
+      this.isAuthenticated = this.authService.getAuthData().token ? true : false;
+      console.log(this.isAuthenticated);
     });
   }
 
@@ -104,11 +106,15 @@ export class JobsItemComponent implements OnInit, OnDestroy {
     const likedJobs = this.authService.getAuthData().likedJobs;
     const likedJobsArray = likedJobs.split(',');
     const jobStatus = this.job.likedJob;
-    let newLikedJobs;
+    let newLikedJobs = [];
     if (this.job.likedJob) {
       newLikedJobs = likedJobsArray.filter(id => id !== jobId);
     } else {
-      newLikedJobs = [...likedJobsArray, jobId];
+      if (likedJobs) {
+        newLikedJobs = [...likedJobsArray, jobId];
+      } else {
+        newLikedJobs.push(jobId);
+      }
     }
     this.userService.likeJob(jobId, jobStatus, newLikedJobs, this.userId);
   }

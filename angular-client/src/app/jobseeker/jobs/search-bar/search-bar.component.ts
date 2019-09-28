@@ -95,7 +95,7 @@ export class SearchBarComponent implements OnInit {
           this.form.patchValue({
             'title': params.title,
             'location': params.location,
-            'date': 'all-time'
+            'date': params.date
           });
       }
     });
@@ -137,6 +137,9 @@ export class SearchBarComponent implements OnInit {
     }
     if (this.form.value.location) {
       queryParams = { ...queryParams, location: this.form.value.location };
+    }
+    if (this.form.value.date) {
+      queryParams = { ...queryParams, date: this.form.value.date };
     }
     this.router.navigate(
       ['/jobs/search'],
