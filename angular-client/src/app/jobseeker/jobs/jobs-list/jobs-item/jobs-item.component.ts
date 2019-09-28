@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -12,8 +12,9 @@ import { UserService } from '../../../../services/user.service';
   templateUrl: './jobs-item.component.html',
   styleUrls: ['./jobs-item.component.scss']
 })
-export class JobsItemComponent implements OnInit {
+export class JobsItemComponent implements OnInit, OnDestroy {
   private jobsSub: Subscription;
+  private jobSub: Subscription;
   private authSub: Subscription;
   private userSub: Subscription;
   private job;
@@ -23,6 +24,7 @@ export class JobsItemComponent implements OnInit {
   private showModal: boolean;
   private toggleForm: boolean = false;
   private jobSaveStatus: string;
+  private appliedStatus: string;
   private showSaveNotification: boolean = false;
 
   constructor(private route: ActivatedRoute,
@@ -30,10 +32,20 @@ export class JobsItemComponent implements OnInit {
               private jobsService: JobsService,
               private userService: UserService,
               private authService: AuthService) {
+    this.route.queryParams.subscribe(params => {
+      const jobId = params.jobId;
+      this.jobsService.getJobById(jobId);
+      this.jobSub = this.jobsService.getJobUpdateListener().subscribe(
+        job => {
+          console.log(job);
+        });
+      // this.job = this.jobsService.returnAllJobsData().jobs[0];
+    });
   }
 
   ngOnInit() {
-    this.job = this.jobsService.returnAllJobsData().jobs[0];
+    this.job = this.jobsService.returnAllJobsData().jobs[0];  
+    this.appliedStatus = this.job.applied;
     this.jobSaveStatus = this.job.likedJob ? 'Unsave' : 'Save';
     this.checkToken();
     this.authSub = this.authService.getAuthStatusListener().subscribe(
@@ -103,6 +115,12 @@ export class JobsItemComponent implements OnInit {
   onOutsideModal() {
     this.showModal = false;
     this.toggleForm = false;
+  }
+
+  ngOnDestroy() {
+    if (this.jobsSub) {
+      this.jobsSub.unsubscribe();
+    }
   }
 
 }

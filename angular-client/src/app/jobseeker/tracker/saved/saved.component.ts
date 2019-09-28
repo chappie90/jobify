@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { JobsService } from '../../../services/jobs.service';
@@ -11,7 +11,7 @@ import { Job } from '../../jobs/job.model';
   templateUrl: './saved.component.html',
   styleUrls: ['./saved.component.scss']
 })
-export class SavedJobsComponent implements OnInit {
+export class SavedJobsComponent implements OnInit, OnDestroy {
   private jobsSub: Subscription;
   private userSub: Subscription;
   private savedJobs: Job[];
@@ -51,6 +51,12 @@ export class SavedJobsComponent implements OnInit {
     const jobStatus = true;
     let newLikedJobs = this.likedJobs.filter(id => id !== job._id);
     this.userService.likeJob(jobId, jobStatus, newLikedJobs, this.userId);
+  }
+
+  ngOnDestroy() {
+    if (this.jobsSub) {
+      this.jobsSub.unsubscribe();
+    }
   }
 
 }

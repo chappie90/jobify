@@ -18,7 +18,7 @@
       <h3 class="heading-small">{{ job.company }}</h3>
       <h3>£{{ job.salary }}</h3>
       <div class="jobs-item__button-container">
-        <button (click)="onApply(job)" class="button button-fill">Apply</button>
+        <button (click)="onApply(job)" class="button button-fill">Apply{{appliedStatus}}</button>
         <button (click)="onSaveJob(job.id)" class="button button-nofill">{{ jobSaveStatus }}</button>
         <div *ngIf="showSaveNotification" [ngClass]="{'grey-border': !job.likedJob}" class="save-notification">
           <img *ngIf="job.likedJob" src="./assets/images/checked.svg" class="save-icon" />

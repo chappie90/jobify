@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { JobsService} from '../../services/jobs.service';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnDestroy {
   private jobsCount: string;
   private formData: {};
   private pageSize: number = 20;
@@ -130,6 +130,12 @@ export class PaginationComponent implements OnInit {
       this.jobsService.getJobs(this.formData, this.nextPage);
     } else {
       this.jobsService.getJobs(this.formData, page);  
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.jobsSub) {
+      this.jobsSub.unsubscribe();
     }
   }
 }

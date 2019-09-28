@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -13,7 +13,7 @@ import { AuthService } from '../../../auth/auth.service';
   templateUrl: './apply.component.html',
   styleUrls: ['./apply.component.scss']
 })
-export class ApplyComponent implements OnInit {
+export class ApplyComponent implements OnInit, OnDestroy {
   form: FormGroup;
   private job: Job;
   private jobSub: Subscription;
@@ -91,6 +91,12 @@ export class ApplyComponent implements OnInit {
       newAppliedJobsArray.push(this.job._id);
     }
     this.userService.applyJob(this.form.value.name, this.form.value.email, this.form.value.number, this.form.value.cv, this.userId, newAppliedJobsArray, this.job._id);
+  }
+
+  ngOnDestroy() {
+    if (this.jobSub) {
+      this.jobSub.unsubscribe();
+    }
   }
 
 }

@@ -6,7 +6,6 @@ const Job = require('../models/job');
 const router = express.Router();
 
 router.post('', (req, res, next) => {
-  console.log(req.body);
   const currentPage = +req.body.page;
   // let title = req.query.title;
   // let location = req.query.location;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -12,7 +12,7 @@ import { UserService } from '../../../services/user.service';
   templateUrl: './jobs-list.component.html',
   styleUrls: ['./jobs-list.component.scss']
 })
-export class JobsListComponent implements OnInit {
+export class JobsListComponent implements OnInit, OnDestroy {
   private jobs: Job[] = [];
   private jobsSub: Subscription;
   private userSub: Subscription;
@@ -23,8 +23,10 @@ export class JobsListComponent implements OnInit {
               private jobsService: JobsService,
               private authService: AuthService,
               private userService: UserService) {
-    route.params.subscribe(val => {
-
+    this.route.params.subscribe(val => {
+      this.jobs = this.jobsService.returnAllJobsData().jobs;
+      this.selectedJob = this.jobs[0];
+      this.jobsService.getJobsItem(this.jobs[0]);
     });
   }
 
@@ -32,16 +34,10 @@ export class JobsListComponent implements OnInit {
     this.jobs = this.jobsService.returnAllJobsData().jobs;
     this.selectedJob = this.jobs[0];
     this.jobsService.getJobsItem(this.jobs[0]);
-    this.route.queryParams.subscribe(params => {
-       // don't need to get jobs here?
-       // this.jobsService.getJobs(params.title, params.location, 1);
-      }
-    );
    this.jobsSub = this.jobsService.getJobsUpdateListener()
     .subscribe(
       jobs => {
         this.jobs = jobs.jobs;
-        console.log(this.jobs);
         this.selectedJob = this.jobs[0];
         this.jobsService.getJobsItem(this.jobs[0]);
      //   console.log(document.getElementById('jobs-list').scrollTop);
@@ -61,6 +57,12 @@ export class JobsListComponent implements OnInit {
   onGetJobsItem(job) {
     this.selectedJob = job;
     this.jobsService.getJobsItem(job);
+  }
+
+  ngOnDestroy() {
+    if (this.jobsSub) {
+      this.jobsSub.unsubscribe();
+    }
   }
 
 }

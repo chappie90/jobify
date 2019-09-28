@@ -18,7 +18,23 @@ export class JobsSearchComponent implements OnInit {
   constructor(private jobsService: JobsService,
               private userService: UserService,
               private router: Router,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute) {
+    this.route.queryParams.subscribe(params => {
+        let title = params.title;
+        let location = params.location;
+        let pageNumber = params.pageNumber;
+        if (!title) {
+          title = '';
+        }
+        if (!location) {
+          location = '';
+        }
+        if (!pageNumber) {
+          pageNumber = 1;
+        }
+        this.jobsService.getJobs({title: title, location: location}, pageNumber);
+    });
+  }
  
   ngOnInit() {
     this.applyStatus = this.userService.returnApplyStatus();
@@ -26,21 +42,6 @@ export class JobsSearchComponent implements OnInit {
       setTimeout(() => {
         this.applyStatus = false;
       }, 4000);
-    }
-    this.route.queryParams.subscribe(params => {
-      let title = params.title;
-      let location = params.location;
-      let pageNumber = params.pageNumber;
-      if (!title) {
-        title = '';
-      }
-      if (!location) {
-        location = '';
-      }
-      if (!pageNumber) {
-        pageNumber = 1;
-      }
-      this.jobsService.getJobs({title: title, location: location}, pageNumber);
-    });
+    }   
   }
 }
