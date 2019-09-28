@@ -24,9 +24,15 @@ export class JobsListComponent implements OnInit, OnDestroy {
               private authService: AuthService,
               private userService: UserService) {
     this.route.params.subscribe(val => {
-      this.jobs = this.jobsService.returnAllJobsData().jobs;
-      this.selectedJob = this.jobs[0];
-      this.jobsService.getJobsItem(this.jobs[0]);
+    this.jobsSub = this.jobsService.getJobsUpdateListener()
+      .subscribe(
+        jobs => {
+          this.jobs = jobs.jobs;
+          this.selectedJob = this.jobs[0];
+          this.jobsService.getJobsItem(this.jobs[0]);
+       //   console.log(document.getElementById('jobs-list').scrollTop);
+        }
+    );
     });
   }
 

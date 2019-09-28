@@ -94,6 +94,7 @@ p.login__paragraph {
   &__button-container {
     display: flex;
     justify-content: center;
+    align-items: center;
     position: relative;
   }
 
@@ -116,6 +117,17 @@ p.login__paragraph {
   border: 1px solid $jobseeker-red-dark;
   color: $jobseeker-red-dark;
   background-color: $white;
+}
+.applied-msg {
+  color: $employer-green;
+  font-weight: bold;
+  width: 1.7rem;
+  height: 1.7rem;
+  background: url('../../../../../assets/images/checked.svg');
+  background-repeat: no-repeat;
+  background-size: 1.6rem;
+  margin-right: 6rem;
+  padding-left: 2rem;
 }
 .login__link {
   color: $unifier-orange;
