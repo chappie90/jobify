@@ -27,18 +27,14 @@ export class SearchBarComponent implements OnInit {
 
   constructor(private jobsService: JobsService,
               private router: Router,
-              private route: ActivatedRoute) {
-    route.params.subscribe(val => {
-      this.jobsSearch = this.router.url.includes('/jobs/search');
-    });
-  }
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
+        console.log(event);
         // Show loading indicator
         this.jobsSearch = event.url.includes('/jobs/search');
-        console.log(event.url);
       }
 
       if (event instanceof NavigationEnd) {
@@ -92,6 +88,15 @@ export class SearchBarComponent implements OnInit {
       'rangehigh': new FormControl(null, {
         validators: []
       }),
+    });
+    this.route.queryParams.subscribe(params => {
+      this.jobsSearch = this.router.url.includes('/jobs/search');
+        if (this.jobsSearch && this.form) {
+          this.form.patchValue({
+            'title': params.title,
+            'location': params.location
+          });
+      }
     });
   }
 

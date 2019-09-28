@@ -35,7 +35,7 @@ export class JobsSearchComponent implements OnInit {
         this.jobsService.getJobs({title: title, location: location}, pageNumber);
     });
   }
- 
+  
   ngOnInit() {
     this.applyStatus = this.userService.returnApplyStatus();
     if (this.applyStatus) {
