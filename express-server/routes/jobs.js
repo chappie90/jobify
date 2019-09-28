@@ -158,14 +158,16 @@ router.get('/apply', (req, res, next) => {
   }
 });
 
-router.post('/saved', (req, res, next) => {
-  const savedJobs = req.body.savedJobs;
-  console.log(savedJobs);
-  if (savedJobs) {
-    Job.find({ _id: { $in: savedJobs } })
-    .then(savedJobs => {
+router.post('/my-jobs', (req, res, next) => {
+  const type = req.body.type;
+  const myJobs = req.body.myJobs;
+  console.log(myJobs);
+  if (type === 'saved') {
+    Job.find({ _id: { $in: myJobs } })
+    .then(myJobsData => {
       res.status(200).json({
-        savedJobs: savedJobs
+        type: type,
+        myJobs: myJobsData
       });
     })
     .catch(err => {

@@ -121,15 +121,23 @@ export class JobsService {
     }
   }
 
-  getSavedJobs(jobs: any) {
-    const savedJobs = { savedJobs: jobs };
-    this.http.post<{ jobs: any; savedJobs: any }>(
-      API_URL + '/saved', savedJobs
+  getMyJobs(jobs: any) {
+    let fetchMyJobs;
+    if (jobs.type === 'saved') {
+      fetchMyJobs = { type: 'saved', myJobs: jobs.myJobs };
+    }
+    if (jobs.type === 'applied') {
+      fetchMyJobs = { type: 'applied', myJobs: jobs.myJobs };
+    }
+    this.http.post<{ type: string; myJobs: any }>(
+      API_URL + '/my-jobs', fetchMyJobs
     ).subscribe(response => {
-      this.jobs = response.savedJobs;
-      this.savedJobsUpdated.next({
-        jobs: [...this.jobs]
-      });
+      this.jobs = response.myJobs;
+      if (response.type === 'saved') {
+        this.savedJobsUpdated.next({
+          jobs: [...this.jobs]
+        });
+      }
     });
   }
 
