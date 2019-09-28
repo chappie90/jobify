@@ -23,7 +23,7 @@ export class SearchBarComponent implements OnInit {
   private filterDateActive: boolean = false;
   private filterTypeActive: boolean = false;
   private filterSalaryActive: boolean = false;
-  private filters: number;
+  private filtersCount: number = 0;
 
   constructor(private jobsService: JobsService,
               private router: Router,
@@ -94,7 +94,8 @@ export class SearchBarComponent implements OnInit {
         if (this.jobsSearch && this.form) {
           this.form.patchValue({
             'title': params.title,
-            'location': params.location
+            'location': params.location,
+            'date': 'all-time'
           });
       }
     });
@@ -105,20 +106,26 @@ export class SearchBarComponent implements OnInit {
       return;
     }
     if (this.jobsSearch) {
-        //  this.filterDateActive = form.value.date ? true : false;
-      // this.filterDateActive = form.value.date === 'all-time' ? false : true;
-      // this.filterTypeActive = form.value.full || 
-      //                         form.value.part ||
-      //                         form.value.contract ||
-      //                         form.value.temporary ||
-      //                         form.value.apprenticeship ||
-      //                         form.value.volunteer
-      //                       ;
-      // this.filterSalaryActive = form.value.rangelow || 
-      //                           form.value.rangemedium ||
-      //                           form.value.range ||
-      //                           form.value.rangehigh
-      //                         ;
+      this.filterDateActive = this.form.value.date !== 'all-time' ? true : false;
+      this.filterTypeActive = this.form.value.full || 
+                              this.form.value.part ||
+                              this.form.value.contract ||
+                              this.form.value.temporary ||
+                              this.form.value.apprenticeship ||
+                              this.form.value.volunteer;
+      this.filterSalaryActive = this.form.value.rangelow || 
+                                this.form.value.rangemedium ||
+                                this.form.value.range ||
+                                this.form.value.rangehigh;
+      // if (this.filterDateActive) {
+      //   this.filtersCount++;
+      // }
+      // if (this.filterTypeActive) {
+      //   this.filtersCount++;
+      // }
+      // if (this.filterSalaryActive) {
+      //   this.filtersCount++;
+      // }
       this.jobsService.getJobs(this.form.value, 1);
     }
 
@@ -142,19 +149,22 @@ export class SearchBarComponent implements OnInit {
 
   onClearFilters() {
     // refactor!
-    // this.filterDateActive = false;
-    // this.filterTypeActive = false;
-    // this.filterSalaryActive = false;
-    // form.controls['full'].reset();
-    // form.controls['part'].reset();
-    // form.controls['contract'].reset();
-    // form.controls['temporary'].reset();
-    // form.controls['apprenticeship'].reset();
-    // form.controls['volunteer'].reset();
-    // form.controls['rangelow'].reset();
-    // form.controls['rangemedium'].reset();
-    // form.controls['range'].reset();
-    // form.controls['rangehigh'].reset();
+    this.form.patchValue({
+      'date': 'all-time',
+      'full': null,
+      'part': null,
+      'contract': null,
+      'temporary': null,
+      'apprenticeship': null,
+      'volunteer': null,
+      'rangelow': null,
+      'rangemedium': null,
+      'range': null,
+      'rangehigh': null
+    });
+    this.filterDateActive = false;
+    this.filterTypeActive = false;
+    this.filterSalaryActive = false;
   }
 
 }
