@@ -161,7 +161,6 @@ router.get('/apply', (req, res, next) => {
 router.post('/my-jobs', (req, res, next) => {
   const type = req.body.type;
   const myJobs = req.body.myJobs;
-  console.log(myJobs);
   if (type === 'saved') {
     Job.find({ _id: { $in: myJobs } })
     .then(myJobsData => {
@@ -177,6 +176,22 @@ router.post('/my-jobs', (req, res, next) => {
       });
     });
   }
+  if (type === 'applied') {
+    Job.find({ _id: { $in: myJobs } })
+    .then(myJobsData => {
+      res.status(200).json({
+        type: type,
+        myJobs: myJobsData
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(401).json({
+        message: 'Could not fetch saved jobs'
+      });
+    });
+  }
+
 });
 
 module.exports = router;

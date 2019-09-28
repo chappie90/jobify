@@ -16,7 +16,7 @@ export class JobsService {
   private jobsCount: string;
   private currentPage: string;
   private jobsUpdated = new Subject<{ jobs: Job[]; count: string; currentPage: string }>();
-  private savedJobsUpdated = new Subject<{ jobs: Job[] }>();
+  private myJobsUpdated = new Subject<{ type: string; jobs: Job[] }>();
   private jobSelected = new Subject<{ job: Job }>();
   private jobUpdated = new Subject<{ job: Job }>();
 
@@ -132,12 +132,10 @@ export class JobsService {
     this.http.post<{ type: string; myJobs: any }>(
       API_URL + '/my-jobs', fetchMyJobs
     ).subscribe(response => {
-      this.jobs = response.myJobs;
-      if (response.type === 'saved') {
-        this.savedJobsUpdated.next({
-          jobs: [...this.jobs]
-        });
-      }
+      this.myJobsUpdated.next({
+        type: response.type,
+        jobs: [...response.myJobs]
+      });
     });
   }
 
@@ -149,8 +147,8 @@ export class JobsService {
     return this.jobsUpdated.asObservable();
   }
 
-  getSavedJobsUpdateListener() {
-    return this.savedJobsUpdated.asObservable();
+  getMyJobsUpdateListener() {
+    return this.myJobsUpdated.asObservable();
   }
 
   getJobsItem(job) {

@@ -1,1 +1,19 @@
-<h1>Applied jobs</h1>
+<div class="container">
+  <ul class="list">
+    <li 
+      class="item"  
+      *ngFor="let job of appliedJobs">
+      <div class="info-conainer">
+        <div class="item-left">
+      <!--    <img src="./assets/images/1.png" class="jobs-list__img" /> -->
+        </div>
+        <div class="item-right">
+          <h3 class="heading-small">{{ job.job_title }}</h3>
+          <h4 class="company-title">{{ job.company_name}}</h4>
+          <h5 class="heading-extra-small">{{ job.location }}</h5>
+          <h5 class="heading-extra-small">{{ job.date_posted }}</h5>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

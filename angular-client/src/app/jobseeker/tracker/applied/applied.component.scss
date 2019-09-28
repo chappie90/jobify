@@ -1,1 +1,19 @@
 @import '~src/styles.scss';
+
+.list {
+  list-style-type: none;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem 3rem;
+  background-color: $grey-light;
+  border: 1px solid $grey-medium;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.heading-extra-small {
+  color: $grey;
+}
