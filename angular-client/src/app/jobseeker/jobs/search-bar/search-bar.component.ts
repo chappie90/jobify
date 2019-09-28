@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { 
   Router, 
   Event, 
@@ -7,7 +8,6 @@ import {
   NavigationError, 
   ActivatedRoute, 
   Params } from '@angular/router';
-import { NgForm } from '@angular/forms';
 
 import { JobsService } from '../../../services/jobs.service';
 
@@ -17,18 +17,13 @@ import { JobsService } from '../../../services/jobs.service';
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent implements OnInit {
-  @ViewChild ('searchForm', {static: false}) form;
-
+  form: FormGroup;
   private jobsSearch: boolean = false;
   private openDropdown: boolean = false;
   private filterDateActive: boolean = false;
   private filterTypeActive: boolean = false;
   private filterSalaryActive: boolean = false;
   private filters: number;
-  
-  sForm = {
-    date: 'all-time'
-  };
 
   constructor(private jobsService: JobsService,
               private router: Router,
@@ -57,35 +52,79 @@ export class SearchBarComponent implements OnInit {
         console.log(event.error);
       }
     });
+    this.form = new FormGroup({
+      'title': new FormControl(null, {
+        validators: []
+      }),
+      'location': new FormControl(null, {
+        validators: []
+      }),
+      'date': new FormControl(null, {
+        validators: []
+      }),
+      'full': new FormControl(null, {
+        validators: []
+      }),
+      'part': new FormControl(null, {
+        validators: []
+      }),
+      'contract': new FormControl(null, {
+        validators: []
+      }),
+      'temporary': new FormControl(null, {
+        validators: []
+      }),
+      'apprenticeship': new FormControl(null, {
+        validators: []
+      }),
+      'volunteer': new FormControl(null, {
+        validators: []
+      }),
+      'rangelow': new FormControl(null, {
+        validators: []
+      }),
+      'rangemedium': new FormControl(null, {
+        validators: []
+      }),
+      'range': new FormControl(null, {
+        validators: []
+      }),
+      'rangehigh': new FormControl(null, {
+        validators: []
+      }),
+    });
   }
 
-  onSearch(form: NgForm) {
+  onSearch() {
+    if (this.form.invalid) {
+      return;
+    }
     if (this.jobsSearch) {
         //  this.filterDateActive = form.value.date ? true : false;
       // this.filterDateActive = form.value.date === 'all-time' ? false : true;
-      this.filterTypeActive = form.value.full || 
-                              form.value.part ||
-                              form.value.contract ||
-                              form.value.temporary ||
-                              form.value.apprenticeship ||
-                              form.value.volunteer
-                            ;
-      this.filterSalaryActive = form.value.rangelow || 
-                                form.value.rangemedium ||
-                                form.value.range ||
-                                form.value.rangehigh
-                              ;
-      this.jobsService.getJobs(form.value, 1);
+      // this.filterTypeActive = form.value.full || 
+      //                         form.value.part ||
+      //                         form.value.contract ||
+      //                         form.value.temporary ||
+      //                         form.value.apprenticeship ||
+      //                         form.value.volunteer
+      //                       ;
+      // this.filterSalaryActive = form.value.rangelow || 
+      //                           form.value.rangemedium ||
+      //                           form.value.range ||
+      //                           form.value.rangehigh
+      //                         ;
+      this.jobsService.getJobs(this.form.value, 1);
     }
 
     // Add search query parameters
     // Make sure all browsers support object spread operator
     let queryParams: Params = {};
-    if (form.value.title) {
-      queryParams = { ...queryParams, title: form.value.title };
+    if (this.form.value.title) {
+      queryParams = { ...queryParams, title: this.form.value.title };
     }
-    if (form.value.location) {
-      queryParams = { ...queryParams, location: form.value.location };
+    if (this.form.value.location) {
+      queryParams = { ...queryParams, location: this.form.value.location };
     }
     this.router.navigate(
       ['/jobs/search'],
@@ -96,21 +135,21 @@ export class SearchBarComponent implements OnInit {
     );
   }
 
-  onClearFilters(form: NgForm) {
+  onClearFilters() {
     // refactor!
-    this.filterDateActive = false;
-    this.filterTypeActive = false;
-    this.filterSalaryActive = false;
-    form.controls['full'].reset();
-    form.controls['part'].reset();
-    form.controls['contract'].reset();
-    form.controls['temporary'].reset();
-    form.controls['apprenticeship'].reset();
-    form.controls['volunteer'].reset();
-    form.controls['rangelow'].reset();
-    form.controls['rangemedium'].reset();
-    form.controls['range'].reset();
-    form.controls['rangehigh'].reset();
+    // this.filterDateActive = false;
+    // this.filterTypeActive = false;
+    // this.filterSalaryActive = false;
+    // form.controls['full'].reset();
+    // form.controls['part'].reset();
+    // form.controls['contract'].reset();
+    // form.controls['temporary'].reset();
+    // form.controls['apprenticeship'].reset();
+    // form.controls['volunteer'].reset();
+    // form.controls['rangelow'].reset();
+    // form.controls['rangemedium'].reset();
+    // form.controls['range'].reset();
+    // form.controls['rangehigh'].reset();
   }
 
 }
