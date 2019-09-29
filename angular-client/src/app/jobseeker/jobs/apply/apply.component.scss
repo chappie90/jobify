@@ -14,7 +14,7 @@
   padding: 3rem;
   background-color: $white;
   border: 2px solid $grey-medium;
-  border-top: 4px solid $jobseeker-red;
+  border-top: 4px solid $jobseeker-red-dark;
   border-radius: 4px;
 }
 h2 {
@@ -24,6 +24,7 @@ h2 {
 }
 h3 {
   margin-bottom: .4rem;
+  font-weight: 400;
 
 }
 .bold {
@@ -47,6 +48,10 @@ h3 {
   border-radius: 4px;
   outline: none;
   border: 2px solid $grey-medium;
+  transition: all .3s;
+}
+.input:focus {
+  border: 2px solid $grey-dark;
 }
 .file-group {
   margin-bottom: 4rem;
@@ -63,7 +68,7 @@ h3 {
   transition: all .3s;
 
   &:hover {
-    border: 1px solid $unifier-orange;
+    border: 1px solid $grey-dark;
   }
 }
 .file-input {
@@ -102,5 +107,5 @@ h3 {
   width: 100%;
   margin: auto;
   color: $white;
-  background-color: $jobseeker-red;
+  background-color: $jobseeker-red-dark;
 }

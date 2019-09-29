@@ -37,6 +37,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
     this.jobSub = this.jobsService.getJobUpdateListener()
       .subscribe(job => {
        this.job = job;
+       console.log(this.job);
       });
     this.form = new FormGroup({
       'name': new FormControl(null, {
@@ -59,7 +60,6 @@ export class ApplyComponent implements OnInit, OnDestroy {
     });
     this.userId = this.authService.getAuthData().userId;
     this.userEmail = this.authService.getAuthData().userEmail;
-    console.log(this.userEmail);
     this.authDataAppliedJobs = this.authService.getAuthData().appliedJobs;
   }
 
@@ -93,7 +93,17 @@ export class ApplyComponent implements OnInit, OnDestroy {
     } else {
       newAppliedJobsArray.push(this.job._id);
     }
-    this.userService.applyJob(this.form.value.name, this.form.value.email, this.form.value.number, this.form.value.cv, this.userId, newAppliedJobsArray, this.job._id);
+    this.userService.applyJob(this.form.value.name, 
+                              this.form.value.email, 
+                              this.form.value.number, 
+                              this.form.value.cv, 
+                              this.userId, 
+                              newAppliedJobsArray, 
+                              this.job._id,
+                              this.job.job_title,
+                              this.job.company_name,
+                              this.job.location,
+                              this.job.salary);
   }
 
   ngOnDestroy() {

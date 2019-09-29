@@ -1,8 +1,7 @@
 <div class="container">
   <div class="application">
     <h2 class="heading-medium">{{ job.job_title }}</h2>
-    <h3 class="heading-small">{{ job.company_name }}</h3>
-    <h3 class="heading-small margin-bottom">{{ job.location }}</h3>
+    <h3 class="heading-small margin-bottom">{{ job.company_name }} - {{ job.location }}</h3>
     <p class="margin-bottom">Signed in as <span class="bold">{{ userEmail }}</span></p>
     <form [formGroup]="form" (submit)="onJobApply()" class="application-form">
       <label for="name" class="label">Name</label>

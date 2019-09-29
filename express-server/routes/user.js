@@ -180,8 +180,14 @@ router.patch('/like', (req, res, next) =>{
 router.post(
   '/apply',
   multer({storage: storage}).single('cv'), (req, res, next) => {
+    const userName = req.body.name;
     const userId = req.body.userId;
     const appliedJobs = req.body.appliedJobs;
+    const jobTitle = req.body.jobTitle;
+    const company = req.body.company;
+    const location = req.body.location;
+    console.log(location);
+    const salary = req.body.salary;
     const url = req.protocol + '://' + req.get('host');
     const application = new Application({
       name: req.body.name,
@@ -209,7 +215,30 @@ router.post(
               from: 'Jobify<stoyan.garov90@gmail.com>',
               to: 'stoyan.garov@yahoo.com',
               subject: 'Job Application Successful',
-              html: '<p style="background-color: #F5F5F5; font-size: 28px; font-weight: bold; border-bottom: 4px solid #9f121a; color: #9f121a; padding: 20px;">Jobify</p><p style="background-color: #aae3c6; font-size: 16px; border: 2px solid #297e52; padding: 18px"><span style="display: inline-block; font-size: 22px; margin-right: 5px; background-color: #297e52; border-radius: 50%; padding: 1px 4px;">&#x2714;</span>Congratulations! You have successfully applied to this job!</p>'
+              html: `<div style="background-color: #dcdcdc;">
+                      <div style="max-width: 70%; margin: auto; background-color: #fff;">
+                        <div style="background-color: #383838; padding: 4px 40px; margin: 0; border-bottom: 8px solid #9f121a; color: #fff">
+                          <p style="font-size: 28px; font-weight: bold">
+                            Jobify
+                          </p>
+                        </div>
+                        <div style="padding: 10px 40px;">
+                          <h3 style="font-size: 20px; color: #383838;">Hi ${userName},</h3>
+                          <div>
+                            <p style="background-color: #aae3c6; font-size: 16px; border: 2px solid #297e52; padding: 4px 10px">
+                              <span style="display: inline-block; font-size: 20px; margin-right: 5px; background-color: #297e52; border-radius: 50%; color: #fff; padding: 1px 5px;">
+                                &#x2714;
+                              </span>
+                              Congratulations! You have successfully applied to this job!
+                            </p>
+                          </div>
+                          <h3 style="font-size: 22px; text-align:center; color: #383838; margin-top: 30px; margin-bottom: 8px">${jobTitle}</h3>
+                          <h4 style="font-size: 17px; margin: 0; font-weight: lighter; text-align:center; color: #383838;">${company} - ${location}</h4>
+                          <h4 style="font-size: 17px; margin: 0; font-weight: lighter; text-align:center; color: #383838; margin-bottom: 20px">£${salary}/annum</h4>
+                          <button style="background-color: #cd1722; display: block; max-width: 120px; color: #fff; border: none; outline: 0; border-radius: 4px; margin: auto; margin-bottom: 20px; width: 100%; font-size: 16px; padding: 6px 10px; cursor: pointer;">View job</button>
+                        </div>
+                      </div>
+                    </div>`
             };
             transporter.sendMail(mailOptions, function(error, info) {
               if (error) {

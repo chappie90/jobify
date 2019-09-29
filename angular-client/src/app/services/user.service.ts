@@ -30,7 +30,17 @@ export class UserService {
       );
   }
 
-  applyJob(name: string, email: string, number: string, cv: File, userId: string, appliedJobs: any, jobId: string) {
+  applyJob(name: string, 
+           email: string, 
+           number: string, 
+           cv: File, 
+           userId: string, 
+           appliedJobs: any, 
+           jobId: string,
+           jobTitle: string,
+           company: string,
+           location: string,
+           salary: string) {
     let applicationData = new FormData();
     applicationData.append('name', name);
     applicationData.append('email', email);
@@ -39,6 +49,10 @@ export class UserService {
     applicationData.append('userId', userId);
     applicationData.append('appliedJobs', appliedJobs);
     applicationData.append('jobId', jobId);
+    applicationData.append('jobTitle', jobTitle);
+    applicationData.append('company', company);
+    applicationData.append('location', location);
+    applicationData.append('salary', salary);
     this.http.post<{ message: string }>(
       API_URL + '/apply', applicationData
     ).subscribe(response => {
