@@ -216,26 +216,51 @@ router.post(
               to: 'stoyan.garov@yahoo.com',
               subject: 'Job Application Successful',
               html: `<div style="background-color: #dcdcdc;">
-                      <div style="max-width: 70%; margin: auto; background-color: #fff;">
-                        <div style="background-color: #383838; padding: 4px 40px; margin: 0; border-bottom: 8px solid #9f121a; color: #fff">
-                          <p style="font-size: 28px; font-weight: bold">
-                            Jobify
-                          </p>
+                      <div style="max-width: 600px; margin: auto; background-color: #fff;">
+                        <div style="background-color: #383838; border-bottom: 8px solid #9f121a">
+                          <div style="max-width: 560px; margin: auto; background-color: #383838;">
+                            <div style="background-color: #383838; padding: 4px 10px; margin: 0 auto; color: #fff">
+                              <p style="font-size: 28px; font-weight: bold">
+                                Jobify
+                              </p>
+                            </div>
+                          </div>
                         </div>
-                        <div style="padding: 10px 40px;">
-                          <h3 style="font-size: 20px; color: #383838;">Hi ${userName},</h3>
-                          <div>
-                            <p style="background-color: #aae3c6; font-size: 16px; border: 2px solid #297e52; padding: 4px 10px">
-                              <span style="display: inline-block; font-size: 20px; margin-right: 5px; background-color: #297e52; border-radius: 50%; color: #fff; padding: 1px 5px;">
+                        <div style="max-width: 560px; margin: auto;">
+                          <div style="padding: 20px 10px;">
+                            <h3 style="font-size: 20px; color: #383838; ">Hi ${userName},</h3>
+                            <div style="background-color: #aae3c6; display: flex; align-items: center; padding: 0 10px; border: 2px solid #297e52;">
+                              <span style="display: inline-block; font-size: 20px; margin-right: 8px; background-color: #297e52; border-radius: 50%; color: #fff; padding: 1px 5px;">
                                 &#x2714;
                               </span>
-                              Congratulations! You have successfully applied to this job!
-                            </p>
+                              <p style="display: inline-block; font-size: 16px;">               
+                                Congratulations! You have successfully applied to this job!
+                              </p>
+                            </div>
+                            <h3 style="font-size: 22px; text-align:center; color: #383838; margin-top: 30px; margin-bottom: 8px">${jobTitle}</h3>
+                            <h4 style="font-size: 17px; margin: 0; font-weight: lighter; text-align:center; color: #383838;">${company} - ${location}</h4>
+                            <h4 style="font-size: 17px; margin: 0; font-weight: lighter; text-align:center; color: #383838; margin-bottom: 20px">£${salary}/annum</h4>
+                            <button style="background-color: #cd1722; display: block; max-width: 120px; color: #fff; border: none; outline: 0; border-radius: 4px; margin: auto; margin-bottom: 20px; width: 100%; font-size: 16px; padding: 6px 10px; cursor: pointer;">View job</button>
                           </div>
-                          <h3 style="font-size: 22px; text-align:center; color: #383838; margin-top: 30px; margin-bottom: 8px">${jobTitle}</h3>
-                          <h4 style="font-size: 17px; margin: 0; font-weight: lighter; text-align:center; color: #383838;">${company} - ${location}</h4>
-                          <h4 style="font-size: 17px; margin: 0; font-weight: lighter; text-align:center; color: #383838; margin-bottom: 20px">£${salary}/annum</h4>
-                          <button style="background-color: #cd1722; display: block; max-width: 120px; color: #fff; border: none; outline: 0; border-radius: 4px; margin: auto; margin-bottom: 20px; width: 100%; font-size: 16px; padding: 6px 10px; cursor: pointer;">View job</button>
+                        </div>
+                        <div style="background-color: #f5f5f5">
+                          <div style="max-width: 560px; margin: auto; background-color: #f5f5f5">
+                            <div style="background-color: #f5f5f5; font-size: 16px; text-align: center; padding: 40px 10px; margin: auto">
+                              <p style="max-width: 480px; margin: auto; display: block">
+                                Thousands of new jobs get added to Jobify every week, so don’t stop your job search just yet!
+                              </p>
+                              <button style="background-color: #383838; cursor: pointer; display: block; max-width: 160px; color: #fff; border: none; padding: 6px 10px; outline: 0; border-radius: 4px; margin: 20px auto 0; width: 100%; font-size: 16px">Find more jobs</button>
+                            </div>
+                          </div>
+                        </div>
+                        <div style="background-color: #383838">
+                          <div style="max-width: 560px; margin: auto; background-color: #383838">
+                            <div style="padding: 20px 10px; margin: auto; background-color: #383838; color: #fff; font-size: 14px; text-align: center;">
+                              <p>You are receiving Jobify notification emails. This email was intended for ${userName}.</p>
+                              <p>© 2019 Jobify, 182 Whitlock Drive, SW19 6SW, London.</p> 
+                              <p>Registered in England and Wales no. 4740439</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>`
