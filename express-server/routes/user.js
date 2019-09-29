@@ -49,6 +49,7 @@ router.post('/signup', (req, res, next) => {
             token: token,
             expiresIn: 3600,
             userId: response._id,
+            userEmail: response.email,
             likedJobs: [],
             appliedJobs: []
           });  
@@ -86,6 +87,7 @@ router.post('/login', (req, res, next) => {
         token: token,
         expiresIn: 3600,
         userId: fetchedUser._id,
+        userEmail: fetchedUser.email,
         likedJobs: fetchedUser.likedJobs,
         appliedJobs: fetchedUser.appliedJobs
       });
@@ -121,6 +123,7 @@ router.post('/google-login', (req, res, next) => {
               token: req.body.token,
               expiresIn: 3600,
               userId: user._id,
+              userEmail: user.email,
               likedJobs: [],
               appliedJobs: []
             })
@@ -130,6 +133,7 @@ router.post('/google-login', (req, res, next) => {
             token: req.body.token,
             expiresIn: 3600,
             userId: user._id,
+            userEmail: user.email,
             likedJobs: user.likedJobs,
             appliedJobs: user.appliedJobs
           })

@@ -14,6 +14,7 @@ export class AuthService {
   private token: string;
   private tokenTimer: any;
   private userId: string;
+  private userEmail: string;
   private authStatusListener = new Subject<boolean>();
 
   constructor(private http: HttpClient,
@@ -47,13 +48,14 @@ export class AuthService {
           this.isAuthenticated = true;
           this.authStatusListener.next(true);
           this.userId = response.userId;
+          this.userEmail = response.userEmail;
           const likedJobs = response.likedJobs;
           const appliedJobs = response.appliedJobs;
           const date = new Date();
           const tokenExpireDate = new Date(
             date.getTime() + tokenExpiration * 1000
           );
-          this.saveAuthData(this.token, tokenExpireDate, this.userId, likedJobs, appliedJobs);
+          this.saveAuthData(this.token, tokenExpireDate, this.userId, this.userEmail, likedJobs, appliedJobs);
           this.router.navigate(['/'])
         }
       },
@@ -76,13 +78,14 @@ export class AuthService {
           this.isAuthenticated = true;
           this.authStatusListener.next(true);
           this.userId = response.userId;
+          this.userEmail = response.userEmail;
           const likedJobs = response.likedJobs;
           const appliedJobs = response.appliedJobs;
           const date = new Date();
           const tokenExpireDate = new Date(
             date.getTime() + tokenExpiration * 1000
           );
-          this.saveAuthData(this.token, tokenExpireDate, this.userId, likedJobs, appliedJobs);
+          this.saveAuthData(this.token, tokenExpireDate, this.userId, this.userEmail, likedJobs, appliedJobs);
           this.router.navigate(['/']);
         }
       },
@@ -104,13 +107,14 @@ export class AuthService {
             this.isAuthenticated = true;
             this.authStatusListener.next(true);
             this.userId = response.userId;
+            this.userEmail = response.userEmail;
             const likedJobs = response.likedJobs;
             const appliedJobs = response.appliedJobs;
             const date = new Date();
             const tokenExpireDate = new Date(
               date.getTime() + tokenExpiration * 1000
             );
-            this.saveAuthData(this.token, tokenExpireDate, this.userId, likedJobs, appliedJobs);
+            this.saveAuthData(this.token, tokenExpireDate, this.userId, this.userEmail, likedJobs, appliedJobs);
             this.router.navigate(['/']);
           }
         },
@@ -125,6 +129,7 @@ export class AuthService {
     this.isAuthenticated = false;
     this.authStatusListener.next(false);
     this.userId = null;
+    this.userEmail = null;
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
 
@@ -137,10 +142,11 @@ export class AuthService {
     }, duration * 1000);
   }
 
-  saveAuthData(token: string, tokenExpirationDate: Date, userId: string, likedJobs: any, appliedJobs: any) {
+  saveAuthData(token: string, tokenExpirationDate: Date, userId: string, userEmail: string, likedJobs: any, appliedJobs: any) {
     localStorage.setItem('token', token);
     localStorage.setItem('tokenExpirationDate', tokenExpirationDate.toISOString());
     localStorage.setItem('userId', userId);
+    localStorage.setItem('userEmail', userEmail);
     localStorage.setItem('likedJobs', likedJobs);
     localStorage.setItem('appliedJobs', appliedJobs);
   }
@@ -149,6 +155,7 @@ export class AuthService {
     const token = localStorage.getItem('token');
     const tokenExpirationDate = localStorage.getItem('tokenExpirationDate');
     const userId = localStorage.getItem('userId');
+    const userEmail = localStorage.getItem('userEmail');
     const likedJobs = localStorage.getItem('likedJobs');
     const appliedJobs = localStorage.getItem('appliedJobs');
 
@@ -159,6 +166,7 @@ export class AuthService {
       token: token,
       tokenExpirationDate: new Date(tokenExpirationDate),
       userId: userId,
+      userEmail: userEmail,
       likedJobs: likedJobs,
       appliedJobs: appliedJobs
     };
@@ -168,6 +176,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('tokenExpirationDate');
     localStorage.removeItem('userId');
+    localStorage.removeItem('userEmail');
     localStorage.removeItem('likedJobs');
     localStorage.removeItem('appliedJobs');
   }
