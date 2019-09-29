@@ -119,13 +119,15 @@ p.login__paragraph {
   background-color: $white;
 }
 .applied-msg {
-  color: $employer-green;
-  font-weight: bold;
-  width: 1.7rem;
-  height: 1.7rem;
-  background: url('../../../../../assets/images/checked.svg');
+  color: #1A4C80;
+  //#3A70A6; 
+  //#1A4C80; 
+  //#042F59;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: url('../../../../../assets/images/check-3.svg');
   background-repeat: no-repeat;
-  background-size: 1.6rem;
+  background-size: 1.5rem;
   margin-right: 6rem;
   padding-left: 2rem;
 }

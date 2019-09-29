@@ -205,7 +205,7 @@ router.post(
               from: 'Jobify<stoyan.garov90@gmail.com>',
               to: 'stoyan.garov@yahoo.com',
               subject: 'Job Application Successful',
-              html: '<p style="background-color: #505050; color: #9f121a; padding: 20px; height: 40px;">Jobify</p><p style="background-color: #aae3c6; font-size: 20px; border: 2px solid #297e52; padding: 18px">Congratulations! You have successfully applied to this job!</p>'
+              html: '<p style="background-color: #F5F5F5; font-size: 28px; font-weight: bold; border-bottom: 4px solid #9f121a; color: #9f121a; padding: 20px;">Jobify</p><p style="background-color: #aae3c6; font-size: 16px; border: 2px solid #297e52; padding: 18px"><span style="display: inline-block; font-size: 22px; margin-right: 5px; background-color: #297e52; border-radius: 50%; padding: 1px 4px;">&#x2714;</span>Congratulations! You have successfully applied to this job!</p>'
             };
             transporter.sendMail(mailOptions, function(error, info) {
               if (error) {

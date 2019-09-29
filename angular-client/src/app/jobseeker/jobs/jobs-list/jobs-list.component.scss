@@ -36,10 +36,10 @@
 
   &__list-item-apply {
     position: relative;
-    width: 1.7rem;
-    height: 1.7rem;
+    width: 1.5rem;
+    height: 1.5rem;
     display: inline-block;
-    background: url('../../../../assets/images/checked.svg');
+    background: url('../../../../assets/images/check-3.svg');
     background-repeat: no-repeat;
     background-size: 100%;
     margin-right: 1rem;
@@ -88,10 +88,10 @@
 
   &__list-item-like {
     position: relative;
-    width: 1.7rem;
-    height: 1.7rem;
+    width: 1.5rem;
+    height: 1.5rem;
     display: inline-block;
-    background: url('../../../../assets/images/likey.svg');
+    background: url('../../../../assets/images/heart.svg');
     background-repeat: no-repeat;
     background-size: 100%;
     margin-right: 1rem;
