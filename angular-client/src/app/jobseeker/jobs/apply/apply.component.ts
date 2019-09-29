@@ -20,6 +20,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
   cvPreview: string;
   fileName: string;
   private userId: string;
+  private userEmail: string;
   private authDataAppliedJobs: string;
 
   constructor(private jobsService: JobsService,
@@ -57,6 +58,8 @@ export class ApplyComponent implements OnInit, OnDestroy {
       'number': '07955443250'
     });
     this.userId = this.authService.getAuthData().userId;
+    this.userEmail = this.authService.getAuthData().userEmail;
+    console.log(this.userEmail);
     this.authDataAppliedJobs = this.authService.getAuthData().appliedJobs;
   }
 
