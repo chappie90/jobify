@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {OAuth2Client} = require('google-auth-library');
 const multer = require('multer');
+const nodemailer = require('nodemailer');
 
 const User = require('../models/user');
 const Application = require('../models/application');
@@ -190,6 +191,29 @@ router.post(
       User.findByIdAndUpdate({ _id: userId }, { appliedJobs: appliedJobs }, {new: true})
         .then(user => {
           if (user) {
+            // Send application successful email
+            var transporter = nodemailer.createTransport({
+              host: 'smtp.gmail.com',
+              port: 465,
+              secure: true,
+              auth: {
+                user: 'stoyan.garov90@gmail.com',
+                pass: 'daspak12'
+              }
+            });
+            var mailOptions = {
+              from: 'Jobify<stoyan.garov90@gmail.com>',
+              to: 'stoyan.garov@yahoo.com',
+              subject: 'Job Application Successful',
+              html: '<p style="background-color: #505050; color: #9f121a; padding: 20px; height: 40px;">Jobify</p><p style="background-color: #aae3c6; font-size: 20px; border: 2px solid #297e52; padding: 18px">Congratulations! You have successfully applied to this job!</p>'
+            };
+            transporter.sendMail(mailOptions, function(error, info) {
+              if (error) {
+                console.log(error);
+              } else {
+                console.log('Email sent' + info.response); 
+              }
+            });
             return res.status(200).json({
               message: 'You have applied successfully to this job!'
             });
