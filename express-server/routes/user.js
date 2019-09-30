@@ -229,7 +229,7 @@ router.post(
                         <div style="max-width: 560px; margin: auto;">
                           <div style="padding: 20px 10px;">
                             <h3 style="font-size: 20px; color: #383838; ">Hi ${userName},</h3>
-                            <div style="background-color: #aae3c6; display: flex; align-items: center; padding: 0 10px; border: 2px solid #297e52;">
+                            <div style="background-color: #aae3c6; padding: 0 10px; border: 2px solid #297e52;">
                               <span style="display: inline-block; font-size: 20px; margin-right: 8px; background-color: #297e52; border-radius: 50%; color: #fff; padding: 1px 5px;">
                                 &#x2714;
                               </span>
