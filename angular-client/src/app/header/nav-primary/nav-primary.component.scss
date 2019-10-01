@@ -67,8 +67,7 @@
 
   &__profile-list {
     position: absolute;
-    text-align: center;
-    width: 14rem;
+    width: 18.6rem;
     top: 3rem;
     right: 1.8rem;
     padding: 0.8rem 0;
@@ -76,19 +75,49 @@
     -moz-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
     box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
     border-radius: 2px;
-    background-color: $grey-dark;
+    background-color: $grey-light;
     display: none;
+    border: 1px solid $grey-medium;
   }
 
   &__profile-list-item-link {
-    color: $grey-light;
+    color: $grey-dark;
     cursor: pointer;
     display: block;
-    padding: .9rem;
+    padding: .9rem .9rem .9rem 4.8rem;
 
     &:hover {
-      color: $unifier-orange;
+      background-color: $grey-medium;
+     // color: $unifier-orange;
     }
+  } 
+
+  .profile-link {
+    background-image: url('../../../assets/images/profile.png');
+    background-size: 2rem;
+    background-repeat: no-repeat;
+    background-position: 1.6rem 50%;
+  }
+  
+  .my-jobs-link {
+    background-image: url('../../../assets/images/my-jobs.svg');
+    background-size: 2rem;
+    background-repeat: no-repeat;
+    background-position: 1.6rem 50%;
+  }
+
+  .settings-link {
+    background-image: url('../../../assets/images/settings.svg');
+    background-size: 2rem;
+    background-repeat: no-repeat;
+    background-position: 1.6rem 50%;
+  }
+
+  .logout-link {
+    background-image: url('../../../assets/images/logout.svg');
+    background-size: 2rem;
+    background-repeat: no-repeat;
+    background-position: 1.6rem 50%;
   } 
 }
 
