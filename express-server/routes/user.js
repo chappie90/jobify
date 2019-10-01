@@ -42,7 +42,7 @@ router.post('/signup', (req, res, next) => {
       .then(response => {
         const token = jwt.sign(
           { email: response.email, userId: response._id },
-          '$2a$10$6W2pTUnnytF1pnTBdgQm9e',
+          process.env.JWT_KEY,
           { expiresIn: '1h' }
         );
           res.status(201).json({
@@ -80,7 +80,7 @@ router.post('/login', (req, res, next) => {
       }
       const token = jwt.sign(
         { email: fetchedUser.email, userId: fetchedUser._id },
-        '$2a$10$6W2pTUnnytF1pnTBdgQm9e',
+        process.env.JWT_KEY,
         { expiresIn: '1h' }
       );
       res.status(200).json({

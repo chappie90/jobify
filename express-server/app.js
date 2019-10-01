@@ -7,7 +7,7 @@ const jobsRoutes = require('./routes/jobs');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://stoyangarov:Daspak12@emaily-w8ewa.mongodb.net/jobify-dev?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://stoyangarov:' + process.env.MONGO_ATLAS_PW + '@emaily-w8ewa.mongodb.net/jobify-dev?retryWrites=true&w=majority')
   .then(() => {
     console.log('Connected to database');
   })

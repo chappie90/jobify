@@ -1,0 +1,6 @@
+{
+  "env": {
+    "MONGO_ATLAS_PW": "Daspak12",
+    "JWT_KEY": "$2a$10$6W2pTUnnytF1pnTBdgQm9e"
+  }
+}

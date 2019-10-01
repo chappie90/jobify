@@ -47,7 +47,7 @@ export class UserService {
     applicationData.append('email', email);
     applicationData.append('number', number);
     applicationData.append('cv', cv);
-    applicationData.append('applyDate', applyDate);
+    applicationData.append('applyDate', applyDate.toString());
     applicationData.append('userId', userId);
     applicationData.append('appliedJobs', appliedJobs);
     applicationData.append('jobId', jobId);
