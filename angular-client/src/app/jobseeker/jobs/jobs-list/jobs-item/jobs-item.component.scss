@@ -123,14 +123,19 @@ p.login__paragraph {
   //#3A70A6; 
   //#1A4C80; 
   //#042F59;
-  width: 1.5rem;
+  display: block;
+//  width: 1.5rem;
   height: 1.5rem;
   background: url('../../../../../assets/images/check-3.svg');
   background-repeat: no-repeat;
   background-size: 1.5rem;
-  margin-right: 6rem;
+  margin-right: .5rem;
   padding-left: 2rem;
 }
+// .applied-date {
+//   font-size: 1.4rem;
+//   font-weight: bold;
+// }
 .login__link {
   color: $unifier-orange;
   font-weight: bold;

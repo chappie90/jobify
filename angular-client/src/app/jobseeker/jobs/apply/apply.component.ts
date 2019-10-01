@@ -86,21 +86,22 @@ export class ApplyComponent implements OnInit, OnDestroy {
     if (this.form.invalid) {
       return;
     }
-    const applyDate: Date = new Date();
     let newAppliedJobsArray = [];
+    const applyDate: Date = new Date();
+    const application = { jobId: this.job._id, applyDate: new Date() };
     if (this.authDataAppliedJobs) {
-      const appliedJobsArray = this.authDataAppliedJobs.split(',');
-      newAppliedJobsArray = [...appliedJobsArray, this.job._id];
+      const appliedJobsArray = JSON.parse(this.authDataAppliedJobs);
+      newAppliedJobsArray = [...appliedJobsArray, application];
     } else {
-      newAppliedJobsArray.push(this.job._id);
+      newAppliedJobsArray.push(application);
     }
+    const newAppliedJobsString = JSON.stringify(newAppliedJobsArray);
     this.userService.applyJob(this.form.value.name, 
                               this.form.value.email, 
                               this.form.value.number, 
                               this.form.value.cv,
-                              applyDate, 
                               this.userId, 
-                              newAppliedJobsArray, 
+                              newAppliedJobsString, 
                               this.job._id,
                               this.job.job_title,
                               this.job.company_name,

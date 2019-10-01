@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import * as moment from 'moment';
 
 import { environment } from '../../environments/environment';
 import { Job } from '../jobseeker/jobs/job.model';
@@ -59,7 +60,7 @@ export class JobsService {
         let appliedJobs;
         if (authData) {
           likedJobs = authData.likedJobs.split(',');
-          appliedJobs = authData.appliedJobs.split(',');
+          appliedJobs = JSON.parse(authData.appliedJobs);
         } else {
           likedJobs = [];
           appliedJobs = [];
@@ -76,8 +77,18 @@ export class JobsService {
             } else {
               liked = false;
             }
-            if (appliedJobs.includes(jobData._id)) {
+            let checkApplication = appliedJobs.find(x => x.jobId === jobData._id);
+            let applyDate;
+            let appliedWhen;
+            if (checkApplication) {
               applied = true;
+              applyDate = checkApplication.applyDate;
+              let daysPassed: moment.Moment = moment().diff(applyDate, 'days');
+              if (daysPassed === 0) {
+                appliedWhen = 'today';
+              } else {
+                appliedWhen = daysPassed + ' days ago';
+              }
             } else {
               applied = false;
             }
@@ -95,7 +106,8 @@ export class JobsService {
                 responsible: jobData.job_responsibilities,
                 qualify: jobData.job_qualifications,
                 likedJob: liked,
-                applied: applied
+                applied: applied,
+                dateApplied: appliedWhen
              };
           })
         }

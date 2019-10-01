@@ -182,11 +182,10 @@ router.post(
   multer({storage: storage}).single('cv'), (req, res, next) => {
     const userName = req.body.name;
     const userId = req.body.userId;
-    const appliedJobs = req.body.appliedJobs;
+    const appliedJobs = JSON.parse(req.body.appliedJobs);
     const jobTitle = req.body.jobTitle;
     const company = req.body.company;
     const location = req.body.location;
-    console.log(location);
     const salary = req.body.salary;
     const url = req.protocol + '://' + req.get('host');
     const application = new Application({
@@ -194,7 +193,6 @@ router.post(
       email: req.body.email,
       number: req.body.number,
       cvPath: url + '/cvs' + req.file.filename,
-      applyDate: req.body.applyDate,
       userId: req.body.userId,
       jobId: req.body.jobId
     });

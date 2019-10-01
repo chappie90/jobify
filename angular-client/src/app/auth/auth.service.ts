@@ -50,7 +50,7 @@ export class AuthService {
           this.userId = response.userId;
           this.userEmail = response.userEmail;
           const likedJobs = response.likedJobs;
-          const appliedJobs = response.appliedJobs;
+          const appliedJobs = JSON.stringify(response.appliedJobs);
           const date = new Date();
           const tokenExpireDate = new Date(
             date.getTime() + tokenExpiration * 1000
@@ -80,7 +80,7 @@ export class AuthService {
           this.userId = response.userId;
           this.userEmail = response.userEmail;
           const likedJobs = response.likedJobs;
-          const appliedJobs = response.appliedJobs;
+          const appliedJobs = JSON.stringify(response.appliedJobs);
           const date = new Date();
           const tokenExpireDate = new Date(
             date.getTime() + tokenExpiration * 1000
@@ -109,7 +109,7 @@ export class AuthService {
             this.userId = response.userId;
             this.userEmail = response.userEmail;
             const likedJobs = response.likedJobs;
-            const appliedJobs = response.appliedJobs;
+            const appliedJobs = JSON.stringify(response.appliedJobs);
             const date = new Date();
             const tokenExpireDate = new Date(
               date.getTime() + tokenExpiration * 1000

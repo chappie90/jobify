@@ -22,6 +22,7 @@
     "@angular/router": "~8.2.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
+    "moment": "^2.24.0",
     "mongodb": "^3.3.2",
     "normalize.css": "^8.0.1",
     "rxjs": "~6.4.0",
