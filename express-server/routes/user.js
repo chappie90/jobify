@@ -194,6 +194,7 @@ router.post(
       email: req.body.email,
       number: req.body.number,
       cvPath: url + '/cvs' + req.file.filename,
+      applyDate: req.body.applyDate,
       userId: req.body.userId,
       jobId: req.body.jobId
     });

@@ -86,6 +86,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
     if (this.form.invalid) {
       return;
     }
+    const applyDate: Date = new Date();
     let newAppliedJobsArray = [];
     if (this.authDataAppliedJobs) {
       const appliedJobsArray = this.authDataAppliedJobs.split(',');
@@ -96,7 +97,8 @@ export class ApplyComponent implements OnInit, OnDestroy {
     this.userService.applyJob(this.form.value.name, 
                               this.form.value.email, 
                               this.form.value.number, 
-                              this.form.value.cv, 
+                              this.form.value.cv,
+                              applyDate, 
                               this.userId, 
                               newAppliedJobsArray, 
                               this.job._id,

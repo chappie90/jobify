@@ -33,7 +33,8 @@ export class UserService {
   applyJob(name: string, 
            email: string, 
            number: string, 
-           cv: File, 
+           cv: File,
+           applyDate: Date, 
            userId: string, 
            appliedJobs: any, 
            jobId: string,
@@ -46,6 +47,7 @@ export class UserService {
     applicationData.append('email', email);
     applicationData.append('number', number);
     applicationData.append('cv', cv);
+    applicationData.append('applyDate', applyDate);
     applicationData.append('userId', userId);
     applicationData.append('appliedJobs', appliedJobs);
     applicationData.append('jobId', jobId);
