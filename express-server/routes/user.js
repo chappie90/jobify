@@ -40,6 +40,7 @@ router.post('/signup', (req, res, next) => {
       });
       user.save()
       .then(response => {
+        const signupNotification ='Congratulations! You have successfully signed up for Jobify';
         const token = jwt.sign(
           { email: response.email, userId: response._id },
           process.env.JWT_KEY,
@@ -51,7 +52,8 @@ router.post('/signup', (req, res, next) => {
             userId: response._id,
             userEmail: response.email,
             likedJobs: [],
-            appliedJobs: []
+            appliedJobs: [],
+            notifications: [{ id: new ObjectId(), notification: signupNotification, read: 0 }]
           });  
       })
       .catch(err => {
@@ -89,7 +91,8 @@ router.post('/login', (req, res, next) => {
         userId: fetchedUser._id,
         userEmail: fetchedUser.email,
         likedJobs: fetchedUser.likedJobs,
-        appliedJobs: fetchedUser.appliedJobs
+        appliedJobs: fetchedUser.appliedJobs,
+        notifications: fetchedUser.notifications
       });
     })
     .catch(err => {
@@ -119,13 +122,15 @@ router.post('/google-login', (req, res, next) => {
           });
           user.save()
           .then(response => {
+            const signupNotification ='Congratulations! You have successfully signed up for Jobify';
             return res.status(200).json({
               token: req.body.token,
               expiresIn: 3600,
               userId: user._id,
               userEmail: user.email,
               likedJobs: [],
-              appliedJobs: []
+              appliedJobs: [],
+              notifications: [{ id: new ObjectId(), notification: signupNotification, read: 0 }]
             })
           });
         } else if (user) {
@@ -135,7 +140,8 @@ router.post('/google-login', (req, res, next) => {
             userId: user._id,
             userEmail: user.email,
             likedJobs: user.likedJobs,
-            appliedJobs: user.appliedJobs
+            appliedJobs: user.appliedJobs,
+            notifications: user.notifications
           })
         }
       })
