@@ -1,1 +1,8 @@
-<h1>Notifications</h1>
+<div class="container">
+  <ul class="list">
+    <li class="item" *ngFor="let notification of notifications">
+      <img class="img" src="./assets/images/welcome-alt.svg" />
+      {{ notification.notification }}
+    </li>
+  </ul>
+</div>

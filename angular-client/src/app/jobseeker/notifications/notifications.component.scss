@@ -1,1 +1,23 @@
 @import '~src/styles.scss';
+
+.container {
+  margin: auto;
+  margin-top: 10rem;
+  max-width: 80rem;
+}
+
+.list {
+  list-style-type: none;
+}
+.item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  border: 1px solid $grey-medium;
+  border-radius: 4px;
+}
+
+.img {
+  width: 6rem;
+  margin-right: 2rem;
+}

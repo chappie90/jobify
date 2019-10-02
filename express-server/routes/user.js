@@ -53,7 +53,7 @@ router.post('/signup', (req, res, next) => {
             userEmail: response.email,
             likedJobs: [],
             appliedJobs: [],
-            notifications: [{ 'x':new ObjectId(), notification: signupNotification, read: 0 }]
+            notifications: [{ date: new Date(), type: 'join', notification: signupNotification, read: 0 }]
           });  
       })
       .catch(err => {
@@ -130,7 +130,7 @@ router.post('/google-login', (req, res, next) => {
               userEmail: user.email,
               likedJobs: [],
               appliedJobs: [],
-              notifications: [{  notification: signupNotification, read: 0 }]
+              notifications: [{ date: new Date(), type: 'join', notification: signupNotification, read: 0 }]
             })
           });
         } else if (user) {
