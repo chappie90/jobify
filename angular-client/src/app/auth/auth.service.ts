@@ -50,7 +50,7 @@ export class AuthService {
           this.userId = response.userId;
           this.userEmail = response.userEmail;
           const likedJobs = response.likedJobs;
-          const notification = JSON.stringify(response.notifications);
+          const notifications = JSON.stringify(response.notifications);
           const appliedJobs = JSON.stringify(response.appliedJobs);
           const date = new Date();
           const tokenExpireDate = new Date(
@@ -81,7 +81,7 @@ export class AuthService {
           this.userId = response.userId;
           this.userEmail = response.userEmail;
           const likedJobs = response.likedJobs;
-          const notification = JSON.stringify(response.notifications);
+          const notifications = JSON.stringify(response.notifications);
           const appliedJobs = JSON.stringify(response.appliedJobs);
           const date = new Date();
           const tokenExpireDate = new Date(
@@ -111,7 +111,7 @@ export class AuthService {
             this.userId = response.userId;
             this.userEmail = response.userEmail;
             const likedJobs = response.likedJobs;
-            const notification = JSON.stringify(response.notifications);
+            const notifications = JSON.stringify(response.notifications);
             const appliedJobs = JSON.stringify(response.appliedJobs);
             const date = new Date();
             const tokenExpireDate = new Date(
@@ -163,6 +163,8 @@ export class AuthService {
     const likedJobs = localStorage.getItem('likedJobs');
     const appliedJobs = localStorage.getItem('appliedJobs');
     const notifications = localStorage.getItem('notifications');
+
+    console.log(notifications); 
 
     if (!token || !tokenExpirationDate) {
       return;
