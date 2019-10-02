@@ -28,6 +28,11 @@
         class="nav-primary__list-item-link nav-primary__list-item-link--signup">Sign up</a>
     </li>
     <li *ngIf="isAuthenticated" class="nav-primary__list-item">
+      <a 
+        routerLink="/notifications"
+        class="nav-primary__list-item-link nav-primary__list-item-link--notifications">Notifications</a>
+    </li>
+    <li *ngIf="isAuthenticated" class="nav-primary__list-item">
       <a
         class="nav-primary__list-item-link nav-primary__list-item-link--profile">User 
         <ul appDropdown class="nav-primary__profile-list">

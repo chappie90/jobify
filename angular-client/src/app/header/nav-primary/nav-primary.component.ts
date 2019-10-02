@@ -24,7 +24,7 @@ export class NavPrimaryComponent implements OnInit, OnDestroy {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Show loading indicator
-        this.jobsSection = event.url === '/jobs'
+        this.jobsSection = event.url.includes('/jobs')
                           || event.url === '/cv' 
                           || event.url === '/market-insights' 
                           || event.url === '/premium';

@@ -36,7 +36,7 @@
 
   &__list-item {
     display: inline-block;
-    margin: 0 1rem;
+    margin: 0 .8rem;
     position: relative;
   }
 
@@ -46,12 +46,25 @@
     border-radius: 4px;
     cursor: pointer;
 
-    &--profile::before {
-      font-family: "Font Awesome 5 Free";
-      content:  "\f007";
-      font-weight: 900;
-      margin-right: .5rem;
-      color: $grey-dark;
+    &--notifications {
+      background-image: url('../../../assets/images/notifications.svg');
+      background-repeat: no-repeat;
+      background-size: 1.8rem;
+      background-position: 0 50%;
+      padding-left: 2.2rem;
+    }
+
+    &--profile {
+      // font-family: "Font Awesome 5 Free";
+      // content:  "\f007";
+      // font-weight: 900;
+      // margin-right: .5rem;
+      // color: $grey-dark;
+      background-image: url('../../../assets/images/profile.svg');
+      background-repeat: no-repeat;
+      background-size: 1.8rem;
+      background-position: 0 50%;
+      padding-left: 2.2rem;
     }
     &--profile::after {
      font-family: "Font Awesome 5 Free";

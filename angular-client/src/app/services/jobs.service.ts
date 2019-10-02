@@ -84,7 +84,7 @@ export class JobsService {
               applied = true;
               applyDate = checkApplication.applyDate;
               let daysPassed: moment.Moment = moment().diff(applyDate, 'days');
-              if (daysPassed === 0) {
+              if (daysPassed == 0) {
                 appliedWhen = 'today';
               } else {
                 appliedWhen = daysPassed + ' days ago';
