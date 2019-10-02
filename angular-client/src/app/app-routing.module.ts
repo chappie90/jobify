@@ -24,6 +24,7 @@ import { SkillsComponent } from './jobseeker/profile/skills/skills.component';
 import { AppliedJobsComponent } from './jobseeker/tracker/applied/applied.component';
 import { SavedJobsComponent } from './jobseeker/tracker/saved/saved.component';
 import { ApplyComponent } from './jobseeker/jobs/apply/apply.component';
+import { NotificationsComponent } from './jobseeker/notifications/notifications.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent, pathMatch: 'full' },
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'cv', component: UploadCVComponent },
   { path: 'market-insights', component: MarketInsightsComponent },
   { path: 'premium', component: PremiumComponent },
+  { path: 'notifications', component: NotificationsComponent },
   { path: 'profile', component: ProfileComponent, children: [
     { path: 'summary', component: SummaryComponent },
     { path: 'cv', component: ViewCVComponent },

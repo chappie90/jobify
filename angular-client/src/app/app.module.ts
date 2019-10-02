@@ -41,6 +41,7 @@ import { SkillsComponent } from './jobseeker/profile/skills/skills.component';
 import { AppliedJobsComponent } from './jobseeker/tracker/applied/applied.component';
 import { SavedJobsComponent } from './jobseeker/tracker/saved/saved.component';
 import { ApplyComponent } from './jobseeker/jobs/apply/apply.component';
+import { NotificationsComponent } from './jobseeker/notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { ApplyComponent } from './jobseeker/jobs/apply/apply.component';
     SkillsComponent,
     AppliedJobsComponent,
     SavedJobsComponent,
-    ApplyComponent
+    ApplyComponent,
+    NotificationsComponent
   ],
   imports: [
     BrowserModule,
