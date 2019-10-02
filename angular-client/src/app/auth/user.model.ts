@@ -4,4 +4,5 @@ export interface User {
   type: string;
   likedJobs: any;
   appliedJobs: any;
+  notifications: any;
 }
