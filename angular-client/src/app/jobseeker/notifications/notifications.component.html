@@ -1,7 +1,8 @@
 <div class="container">
   <ul class="list">
     <li class="item" *ngFor="let notification of notifications">
-      <img class="img" src="./assets/images/welcome-alt.svg" />
+      <img *ngIf="notification.type === 'join'" class="img" src="./assets/images/welcome-alt.svg" />
+      <img *ngIf="notification.type === 'apply'" class="img" src="./assets/images/employee.svg" />
       {{ notification.notification }}
     </li>
   </ul>

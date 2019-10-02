@@ -33,14 +33,15 @@ const storage = multer.diskStorage({
 router.post('/signup', (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
+      const signupNotification ='Welcome! You have successfully signed up for Jobify';
       const user = new User({
         email: req.body.email,
         password: hash,
-        type: req.body.type
+        type: req.body.type,
+        notifications: [{ date: new Date(), type: 'join', notification: signupNotification, read: 0 }]
       });
       user.save()
       .then(response => {
-        const signupNotification ='Congratulations! You have successfully signed up for Jobify';
         const token = jwt.sign(
           { email: response.email, userId: response._id },
           process.env.JWT_KEY,
@@ -53,7 +54,7 @@ router.post('/signup', (req, res, next) => {
             userEmail: response.email,
             likedJobs: [],
             appliedJobs: [],
-            notifications: [{ date: new Date(), type: 'join', notification: signupNotification, read: 0 }]
+            notifications: response.notifications
           });  
       })
       .catch(err => {
@@ -115,14 +116,15 @@ router.post('/google-login', (req, res, next) => {
     User.findOne({ email: req.body.email }).
       then(user => {
         if (!user) {
+          const signupNotification ='Welcome! You have successfully signed up for Jobify';
           const user = new User({
             email: req.body.email,
             password: req.body.token,
-            type: req.body.type
+            type: req.body.type,
+            notifications: [{ date: new Date(), type: 'join', notification: signupNotification, read: 0 }]
           });
           user.save()
           .then(response => {
-            const signupNotification ='Congratulations! You have successfully signed up for Jobify';
             return res.status(200).json({
               token: req.body.token,
               expiresIn: 3600,
@@ -130,7 +132,7 @@ router.post('/google-login', (req, res, next) => {
               userEmail: user.email,
               likedJobs: [],
               appliedJobs: [],
-              notifications: [{ date: new Date(), type: 'join', notification: signupNotification, read: 0 }]
+              notifications: user.notifications
             })
           });
         } else if (user) {
@@ -203,8 +205,20 @@ router.post(
       jobId: req.body.jobId
     });
     application.save().then(application => {
-      User.findByIdAndUpdate({ _id: userId }, { appliedJobs: appliedJobs }, {new: true})
-        .then(user => {
+      const appliedNotification = `Congratulations! You have successfully applied for the role of ${jobTitle}!`;
+      User.findByIdAndUpdate(
+          { _id: userId }, 
+          { appliedJobs: appliedJobs, 
+            $push: 
+              { notifications: { 
+                                date: new Date(), 
+                                type: 'apply', 
+                                notification: appliedNotification, 
+                                read: 0 
+                                }
+              }
+          }, {new: true}
+        ).then(user => {
           if (user) {
             // Send application successful email
             var transporter = nodemailer.createTransport({

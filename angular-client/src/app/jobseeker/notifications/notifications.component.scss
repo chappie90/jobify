@@ -1,23 +1,26 @@
 @import '~src/styles.scss';
 
 .container {
-  margin: auto;
-  margin-top: 10rem;
+  margin: 10rem auto 4.5rem;
   max-width: 80rem;
 }
 
 .list {
   list-style-type: none;
+  border: 1px solid $grey-medium;
+  border-radius: 4px;
 }
 .item {
   display: flex;
   align-items: center;
-  padding: 1rem 2rem;
-  border: 1px solid $grey-medium;
-  border-radius: 4px;
+  padding: 2rem 4rem;
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid $grey-medium;
+  }
 }
 
 .img {
-  width: 6rem;
+  width: 5rem;
   margin-right: 2rem;
 }
