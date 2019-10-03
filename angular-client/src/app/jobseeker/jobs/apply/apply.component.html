@@ -4,56 +4,73 @@
     <h3 class="heading-small margin-bottom">{{ job.company_name }} - {{ job.location }}</h3>
     <p class="margin-bottom">Signed in as <span class="bold">{{ userEmail }}</span></p>
     <form [formGroup]="form" (submit)="onJobApply()" class="application-form">
-      <label for="name" class="label">Name *</label>
-      <input 
-        class="input" 
-        id="name"
-        type="text"
-        name="name"
-        formControlName="name"
-        required>
-      <label for="email" class="label">Email *</label>
-      <input
-        class="input"
-        id="email"
-        type="email"
-        name="email"
-        formControlName="email"
-        required
-        email>
-      <label for="number" class="label">Phone (optional)</label>
-      <input
-        class="input"
-        id="number"
-        type="number"
-        name="number"
-        formControlName="number">
-      <label class="label">CV *</label>
-      <div class="file-group">
-        <label 
-          for="choose-cv" 
-          class="file-label">Choose file</label>
+      <div class="input-group">
+        <label for="name" class="label">Name *</label>
         <input 
-          class="file-input"
-          type="file"
-          id="choose-cv"
-          #fileChooseCV
-          (change)="onChooseCVSelected($event)">
-        <label for="jobify-cv" class="file-label">Apply with Jobify CV</label>
+          class="input" 
+          id="name"
+          type="text"
+          name="name"
+          formControlName="name"
+          [ngClass]="{'invalid': form.get('name').invalid && formSubmitted}"
+          required>
+        <span *ngIf="form.get('name').invalid && formSubmitted" class="apply-error">Enter valid name</span>
+      </div>
+      <div class="input-group">
+        <label for="email" class="label">Email *</label>
         <input
-          class="file-input"
-          type="file"
-          id="jobify-cv"
-          #fileJobifyCV
-          (change)="onCVSelected($event)">
-        <div class="cv-preview" *ngIf="cvPreview !== '' && cvPreview && form.get('cv').valid">
-          <span class="cv-name">{{ form.value.cv.name }}</span>
-          <span 
-            class="cv-remove"
-            (click)="onCVRemove()"></span>
+          class="input"
+          id="email"
+          type="email"
+          name="email"
+          formControlName="email"
+          [ngClass]="{'invalid': form.get('email').invalid && formSubmitted}"
+          required
+          email>
+        <span *ngIf="form.get('email').invalid && formSubmitted" class="apply-error">Enter valid email</span>
+      </div>
+      <div class="input-group">
+        <label for="number" class="label">Phone (optional)</label>
+        <input
+          class="input"
+          id="number"
+          type="number"
+          name="number"
+          [ngClass]="{'invalid': form.get('number').invalid && formSubmitted}"
+          formControlName="number">
+        <span *ngIf="form.get('number').invalid && formSubmitted" class="apply-error">Enter valid number</span>
+      </div>
+      <div class="input-group">
+        <label class="label">CV *</label>
+        <span *ngIf="form.get('cv').invalid && formSubmitted" class="apply-error">Please upload CV</span>
+        <div class="file-group">
+          <label 
+            for="choose-cv" 
+            class="file-label">Choose file</label>
+          <input 
+            class="file-input"
+            type="file"
+            id="choose-cv"
+            #fileChooseCV
+            (change)="onChooseCVSelected($event)">
+          <label for="jobify-cv" class="file-label">Apply with Jobify CV</label>
+          <input
+            class="file-input"
+            type="file"
+            id="jobify-cv"
+            #fileJobifyCV
+            (change)="onCVSelected($event)">
+          <div class="cv-preview" *ngIf="cvPreview !== '' && cvPreview && form.get('cv').valid">
+            <span class="cv-name">{{ form.value.cv.name }}</span>
+            <span 
+              class="cv-remove"
+              (click)="onCVRemove()"></span>
+          </div>
         </div>
       </div>
-      <span class="cv-instructions">Allowed formats: Microsoft Word or PDF</span>
+      <span 
+        class="cv-instructions"
+        [ngClass]="{'invalid-cv': form.get('cv').invalid && cvSelected}">Allowed formats: Microsoft Word or PDF</span>
         <button
           type="submit"
           class="button submit-btn">Submit application</button>

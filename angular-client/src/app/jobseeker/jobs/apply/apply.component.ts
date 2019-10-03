@@ -23,6 +23,8 @@ export class ApplyComponent implements OnInit, OnDestroy {
   private userId: string;
   private userEmail: string;
   private authDataAppliedJobs: string;
+  private formSubmitted: boolean;
+  private cvSelected: boolean;
 
   constructor(private jobsService: JobsService,
               private userService: UserService,
@@ -66,6 +68,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
   }
 
   onChooseCVSelected(event: Event) {
+    this.cvSelected = true;
     const file = (event.target as HTMLInputElement).files[0];
     this.form.patchValue({
       cv: file
@@ -86,6 +89,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
 
   onJobApply() {
     if (this.form.invalid) {
+      this.formSubmitted = true;
       return;
     }
     let newAppliedJobsArray = [];
