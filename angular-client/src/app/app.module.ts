@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,6 +42,7 @@ import { AppliedJobsComponent } from './jobseeker/tracker/applied/applied.compon
 import { SavedJobsComponent } from './jobseeker/tracker/saved/saved.component';
 import { ApplyComponent } from './jobseeker/jobs/apply/apply.component';
 import { NotificationsComponent } from './jobseeker/notifications/notifications.component';
+import { AuthInterceptor } from './auth/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,9 @@ import { NotificationsComponent } from './jobseeker/notifications/notifications.
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

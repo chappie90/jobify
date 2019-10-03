@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 import { User } from '../auth/user.model';
+import { AuthService } from '../auth/auth.service';
 
 const API_URL = environment.API + '/user';
 
@@ -14,7 +15,8 @@ export class UserService {
   private applyStatus: boolean;
 
   constructor(private http: HttpClient,
-              private router: Router) {}
+              private router: Router,
+              private authService: AuthService) {}
 
   likeJob(jobId: string, jobStatus: boolean, likedJobs: any, userId: string) {
     const likeJobData = { likedJobs: likedJobs, userId: userId, jobId: jobId, jobStatus: jobStatus };
@@ -53,12 +55,12 @@ export class UserService {
     applicationData.append('company', company);
     applicationData.append('location', location);
     applicationData.append('salary', salary);
-    this.http.post<{ message: string }>(
+    this.http.post<{ user: User }>(
       API_URL + '/apply', applicationData
     ).subscribe(response => {
-      console.log(response);
       const queryParams = { apply: 'success'};
       this.applyStatus = true;
+
       this.router.navigate(
         ['/jobs/search'],
         {

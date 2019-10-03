@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const {OAuth2Client} = require('google-auth-library');
 const multer = require('multer');
 const nodemailer = require('nodemailer');
+const checkAuth = require('../middleware/check-auth');
 
 const User = require('../models/user');
 const Application = require('../models/application');
@@ -158,7 +159,7 @@ router.post('/google-login', (req, res, next) => {
   verify().catch(console.error);
 });
 
-router.patch('/like', (req, res, next) =>{
+router.patch('/like', checkAuth, (req, res, next) =>{
   const jobId = req.body.jobId;
   const userId = req.body.userId;
   const likedJobs = req.body.likedJobs;
@@ -187,6 +188,7 @@ router.patch('/like', (req, res, next) =>{
 
 router.post(
   '/apply',
+  checkAuth,
   multer({storage: storage}).single('cv'), (req, res, next) => {
     const userName = req.body.name;
     const userId = req.body.userId;
@@ -292,7 +294,7 @@ router.post(
               }
             });
             return res.status(200).json({
-              message: 'You have applied successfully to this job!'
+              user: user
             });
           } else {
             return res.status(401).json({
