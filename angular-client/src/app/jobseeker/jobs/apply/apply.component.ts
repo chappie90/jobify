@@ -7,6 +7,7 @@ import { Job } from '../job.model';
 import { JobsService } from '../../../services/jobs.service';
 import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../auth/auth.service';
+import { mimeType } from './mime-type.validator';
 
 @Component({
   selector: 'app-apply',
@@ -50,7 +51,8 @@ export class ApplyComponent implements OnInit, OnDestroy {
         validators: []
       }),
       cv: new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required],
+        asyncValidators: [mimeType]
       })
     });
     this.form.patchValue({

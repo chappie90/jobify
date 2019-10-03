@@ -54,9 +54,15 @@ h3 {
   border: 2px solid $grey-dark;
 }
 .file-group {
-  margin-bottom: 4rem;
   display: flex;
   align-items: center;
+  margin-bottom: .6rem;
+}
+.cv-instructions {
+  margin-bottom: 4rem;
+  margin-left: .4rem;
+  font-size: 1.4rem;
+  color: $grey;
 }
 .file-label {
   border: 1px solid $grey-medium;

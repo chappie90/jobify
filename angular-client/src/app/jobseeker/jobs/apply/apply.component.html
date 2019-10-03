@@ -4,7 +4,7 @@
     <h3 class="heading-small margin-bottom">{{ job.company_name }} - {{ job.location }}</h3>
     <p class="margin-bottom">Signed in as <span class="bold">{{ userEmail }}</span></p>
     <form [formGroup]="form" (submit)="onJobApply()" class="application-form">
-      <label for="name" class="label">Name</label>
+      <label for="name" class="label">Name *</label>
       <input 
         class="input" 
         id="name"
@@ -12,7 +12,7 @@
         name="name"
         formControlName="name"
         required>
-      <label for="email" class="label">Email</label>
+      <label for="email" class="label">Email *</label>
       <input
         class="input"
         id="email"
@@ -28,7 +28,7 @@
         type="number"
         name="number"
         formControlName="number">
-      <label class="label">CV</label>
+      <label class="label">CV *</label>
       <div class="file-group">
         <label 
           for="choose-cv" 
@@ -53,6 +53,7 @@
             (click)="onCVRemove()"></span>
         </div>
       </div>
+      <span class="cv-instructions">Allowed formats: Microsoft Word or PDF</span>
         <button
           type="submit"
           class="button submit-btn">Submit application</button>
