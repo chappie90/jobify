@@ -164,8 +164,6 @@ export class AuthService {
     const appliedJobs = localStorage.getItem('appliedJobs');
     const notifications = localStorage.getItem('notifications');
 
-    console.log(notifications); 
-
     if (!token || !tokenExpirationDate) {
       return;
     }
