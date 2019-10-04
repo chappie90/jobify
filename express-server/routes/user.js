@@ -32,6 +32,7 @@ const storage = multer.diskStorage({
 });
 
 router.post('/signup', (req, res, next) => {
+  console.log(req);
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const signupNotification ='Welcome! You have successfully signed up for Jobify';
@@ -43,6 +44,7 @@ router.post('/signup', (req, res, next) => {
       });
       user.save()
       .then(response => {
+        console.log(response);
         const token = jwt.sign(
           { email: response.email, userId: response._id },
           process.env.JWT_KEY,

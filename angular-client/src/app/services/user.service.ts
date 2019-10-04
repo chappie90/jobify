@@ -60,7 +60,6 @@ export class UserService {
     ).subscribe(response => {
       const queryParams = { apply: 'success'};
       this.applyStatus = true;
-
       this.router.navigate(
         ['/jobs/search'],
         {
