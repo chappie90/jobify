@@ -33,16 +33,27 @@ export class JobsItemComponent implements OnInit, OnDestroy {
               private userService: UserService,
               private authService: AuthService) {
     this.route.queryParams.subscribe(params => {
+      this.isAuthenticated = this.authService.getAuthData().token ? true : false;
       this.jobSub = this.jobsService.getJobsItemUpdateListener().subscribe(
         job => {
           this.job = job;
+          console.log(this.job);
           if (this.job) {
             this.appliedStatus = this.job.applied;
             this.jobSaveStatus = this.job.likedJob ? 'Unsave' : 'Save';
           }
         });
-      this.isAuthenticated = this.authService.getAuthData().token ? true : false;
-      console.log(this.isAuthenticated);
+      this.userSub = this.userService.getUserUpdateListener().subscribe(
+        userStatus => {
+          // Update job item to show job was saved
+          this.job.likedJob = userStatus.jobStatus ? false : true;
+          this.jobSaveStatus = this.job.likedJob ? 'Unsave' : 'Save';
+          this.showSaveNotification = true;
+          setTimeout(() => {
+            this.showSaveNotification = false;
+          }, 3000);
+        }
+      );
     });
   }
 
