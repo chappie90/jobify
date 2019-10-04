@@ -11,7 +11,7 @@ const API_URL = environment.API + '/user';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private userUpdated = new Subject<{ jobStatus: boolean, likedJobId: string }>();
+  private userUpdated = new Subject<{ jobStatus: boolean, likedJobId: string, appliedJobs: string }>();
   private applyStatus: boolean;
 
   constructor(private http: HttpClient,
@@ -60,6 +60,7 @@ export class UserService {
     ).subscribe(response => {
       const queryParams = { apply: 'success'};
       this.applyStatus = true;
+      localStorage.setItem('appliedJobs', JSON.stringify(response.appliedJobs));
       this.router.navigate(
         ['/jobs/search'],
         {

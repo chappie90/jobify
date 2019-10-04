@@ -296,7 +296,7 @@ router.post(
               }
             });
             return res.status(200).json({
-              user: user
+                appliedJobs: user.appliedJobs
             });
           } else {
             return res.status(401).json({

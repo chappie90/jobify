@@ -23,7 +23,20 @@ export class JobsListComponent implements OnInit, OnDestroy {
               private jobsService: JobsService,
               private authService: AuthService,
               private userService: UserService) {
-    this.route.params.subscribe(val => {
+    this.route.queryParams.subscribe(params => {
+    let title = params.title;
+        let location = params.location;
+        let pageNumber = params.pageNumber;
+        if (!title) {
+          title = '';
+        }
+        if (!location) {
+          location = '';
+        }
+        if (!pageNumber) {
+          pageNumber = 1;
+        }
+        this.jobsService.getJobs({title: title, location: location}, pageNumber);
     this.jobsSub = this.jobsService.getJobsUpdateListener()
       .subscribe(
         jobs => {
