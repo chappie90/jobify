@@ -209,7 +209,8 @@ router.post(
     ).then(user => {
       if (user) {
         return res.status(200).json({
-          cv: user.cv
+          cv: user.cvPath,
+          cvName: user.cvName
         });
       }
     }).catch(err => {

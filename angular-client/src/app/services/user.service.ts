@@ -39,7 +39,8 @@ export class UserService {
     this.http.post<any>(
       API_URL + '/upload-cv', cvData
     ).subscribe(response => {
-      console.log(response);
+      localStorage.setItem('cv', response.cv);
+      localStorage.setItem('cvName', response.cvName);
       this.router.navigate(['/profile/cv']);
     });
   }
