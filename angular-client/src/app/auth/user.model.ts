@@ -6,4 +6,5 @@ export interface User {
   appliedJobs: any;
   notifications: any;
   cv: string;
+  cvName: string;
 }

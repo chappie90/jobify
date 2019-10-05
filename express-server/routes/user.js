@@ -153,7 +153,7 @@ router.post('/google-login', (req, res, next) => {
             appliedJobs: user.appliedJobs,
             notifications: user.notifications,
             cv: user.cvPath,
-            cvName: fetchedUser.cvName
+            cvName: user.cvName
           })
         }
       })
@@ -196,7 +196,7 @@ router.patch('/like', checkAuth, (req, res, next) =>{
 });
 
 router.post(
-  '/upload-cv',
+  '/cv/upload',
  // checkAuth,
   multer({storage: storage}).single('cv'), (req, res, next) => {
     const userId = req.body.userId;
@@ -219,6 +219,30 @@ router.post(
         message: 'Could not upload CV'
       });
     }) 
+});
+
+router.patch(
+  '/cv/delete',
+  // checkAuth,
+  (req, res, next) => {
+    const userId = req.body.userId;
+    User.findByIdAndUpdate(
+      { _id: userId },
+      { cvPath: '', cvName: '' },
+      { new: true }
+    ).then(user => {
+      if (user) {
+        return res.status(200).json({
+          cv: user.cvPath,
+          cvName: user.cvName
+        });
+      }
+    }).catch(err => {
+      console.log(err);
+      res.status(401).json({
+        message: 'Could not delete CV'
+      });
+    });
 });
 
 router.post(

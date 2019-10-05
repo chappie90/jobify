@@ -41,7 +41,6 @@ export class AuthService {
     this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any}>
     (API_URL + '/signup', userData).subscribe(
       (response) => {
-        console.log(response);
         this.token = response.token;
         if (this.token) {
           const tokenExpiration = response.expiresIn;
@@ -54,6 +53,7 @@ export class AuthService {
           const notifications = JSON.stringify(response.notifications);
           const appliedJobs = JSON.stringify(response.appliedJobs);
           const cv = response.cv;
+          const cvName = response.cvName;
           const date = new Date();
           const tokenExpireDate = new Date(
             date.getTime() + tokenExpiration * 1000
@@ -65,7 +65,8 @@ export class AuthService {
                             likedJobs, 
                             appliedJobs, 
                             notifications, 
-                            cv);
+                            cv,
+                            cvName);
           this.router.navigate(['/'])
         }
       },

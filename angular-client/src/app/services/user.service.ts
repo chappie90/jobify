@@ -11,7 +11,7 @@ const API_URL = environment.API + '/user';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private userUpdated = new Subject<{ jobStatus: boolean, likedJobId: string, appliedJobs: string }>();
+  private userUpdated = new Subject<{ jobStatus: boolean, likedJobId: string, appliedJobs: string, cvPath: string, cvName: string }>();
   private applyStatus: boolean;
 
   constructor(private http: HttpClient,
@@ -37,11 +37,22 @@ export class UserService {
     cvData.append('cv', cv);
     cvData.append('userId', userId);
     this.http.post<any>(
-      API_URL + '/upload-cv', cvData
+      API_URL + '/cv/upload', cvData
     ).subscribe(response => {
       localStorage.setItem('cv', response.cv);
       localStorage.setItem('cvName', response.cvName);
       this.router.navigate(['/profile/cv']);
+    });
+  }
+
+  deleteCv(id: string) {
+    const userId = { userId: id };
+    this.http.patch<any>(
+      API_URL + '/cv/delete', userId
+    ).subscribe(response => {
+      this.userUpdated.next({ cvPath: '', cvName: '' });
+      localStorage.removeItem('cv');
+      localStorage.removeItem('cvName');
     });
   }
 
