@@ -55,7 +55,7 @@ export class UserService {
     applicationData.append('company', company);
     applicationData.append('location', location);
     applicationData.append('salary', salary);
-    this.http.post<{ user: User }>(
+    this.http.post<any>(
       API_URL + '/apply', applicationData
     ).subscribe(response => {
       const queryParams = { apply: 'success'};

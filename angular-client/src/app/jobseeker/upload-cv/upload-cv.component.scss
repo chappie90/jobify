@@ -1,1 +1,46 @@
 @import '~src/styles.scss';
+
+.container {
+  max-width: 38rem;
+  margin: auto;
+  padding: 16rem 2rem 5rem;
+  min-height: 100vh;
+ text-align: center;
+}
+.upload-icon {
+  width: 9rem;
+}
+.benefit-container {
+  display: flex;
+  align-items: center;
+  padding: .6rem 0;
+}
+.check-icon {
+  width: 2rem;
+  margin-right: 1rem;
+}
+.heading-small {
+  font-weight: 400;
+}
+.heading-main {
+  font-weight: bold; 
+  font-size: 2.2rem;
+}
+.label {
+  background-color: $jobseeker-red-dark;
+  padding: 1rem 2rem;
+  display: block;
+  font-weight: bold;
+  text-align: center;
+  max-width: 24rem;
+  margin: 3rem auto;
+  color: $white;
+  border-radius: 4px;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+.input {
+  visibility: hidden;
+  height: 0;
+}
+

@@ -1,1 +1,20 @@
-<h1>Upload CV component</h1>
+<div class="container">
+  <img class="upload-icon" src="./assets/images/upload-3.svg"/>
+  <h1 class="heading-small heading-main">Upload your CV to:</h1>
+  <div class="benefit-container">
+    <img class="check-icon" src="./assets/images/check-symbol.svg" />
+    <h3 class="heading-small">Apply to jobs on Jobify quicker</h3>
+  </div>
+  <div class="benefit-container">
+    <img class="check-icon" src="./assets/images/check-symbol.svg" />
+    <h3 class="heading-small">Be found by employers on Jobify</h3>
+  </div>
+  <form [formGroup]="form" (submit)="onCvUpload()">
+    <label for="cv" class="label">Upload CV</label>
+    <input 
+      type="file"
+      class="input"
+      id="cv"
+      (change)="onCvSelected($event)"/>
+  </form>
+</div>
