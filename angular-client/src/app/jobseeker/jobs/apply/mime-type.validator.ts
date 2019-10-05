@@ -16,7 +16,6 @@ export const mimeType = (control: AbstractControl): Promise<{[key: string]: any}
       let isValid = false;
       for (let i = 0; i < arr.length; i++) {
         header += arr[i].toString(16);
-        console.log(header);
       }
       switch (header) {
         case "25504446":

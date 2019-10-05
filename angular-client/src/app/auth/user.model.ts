@@ -5,4 +5,5 @@ export interface User {
   likedJobs: any;
   appliedJobs: any;
   notifications: any;
+  cv: string;
 }

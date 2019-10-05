@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {OAuth2Client} = require('google-auth-library');
 const multer = require('multer');
+const path = require('path');
 const nodemailer = require('nodemailer');
 const checkAuth = require('../middleware/check-auth');
 
@@ -22,7 +23,7 @@ const storage = multer.diskStorage({
     if (isValid) {
       error = null;
     }
-    cb(error, 'cv');
+    cb(error, './public/uploads/');
   },
   filename: (req, file, cb) => {
     const name = file.originalname.toLowerCase().split(' ').join('-');
@@ -32,7 +33,6 @@ const storage = multer.diskStorage({
 });
 
 router.post('/signup', (req, res, next) => {
-  console.log(req);
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const signupNotification ='Welcome! You have successfully signed up for Jobify';
@@ -44,7 +44,6 @@ router.post('/signup', (req, res, next) => {
       });
       user.save()
       .then(response => {
-        console.log(response);
         const token = jwt.sign(
           { email: response.email, userId: response._id },
           process.env.JWT_KEY,
@@ -57,7 +56,9 @@ router.post('/signup', (req, res, next) => {
             userEmail: response.email,
             likedJobs: [],
             appliedJobs: [],
-            notifications: response.notifications
+            notifications: response.notifications,
+            cv: '',
+            cvName: ''
           });  
       })
       .catch(err => {
@@ -96,7 +97,9 @@ router.post('/login', (req, res, next) => {
         userEmail: fetchedUser.email,
         likedJobs: fetchedUser.likedJobs,
         appliedJobs: fetchedUser.appliedJobs,
-        notifications: fetchedUser.notifications
+        notifications: fetchedUser.notifications,
+        cv: fetchedUser.cvPath,
+        cvName: fetchedUser.cvName
       });
     })
     .catch(err => {
@@ -135,7 +138,9 @@ router.post('/google-login', (req, res, next) => {
               userEmail: user.email,
               likedJobs: [],
               appliedJobs: [],
-              notifications: user.notifications
+              notifications: user.notifications,
+              cv: '',
+              cvName: ''
             })
           });
         } else if (user) {
@@ -146,7 +151,9 @@ router.post('/google-login', (req, res, next) => {
             userEmail: user.email,
             likedJobs: user.likedJobs,
             appliedJobs: user.appliedJobs,
-            notifications: user.notifications
+            notifications: user.notifications,
+            cv: user.cvPath,
+            cvName: fetchedUser.cvName
           })
         }
       })
@@ -193,10 +200,11 @@ router.post(
  // checkAuth,
   multer({storage: storage}).single('cv'), (req, res, next) => {
     const userId = req.body.userId;
-    const url = req.protocol + '://' + req.get('host');
+     const url = req.protocol + '://' + req.get('host');
     User.findByIdAndUpdate(
       { _id: userId },
-      { cvPath: url + '/cvs' + req.file.filename },
+      { cvPath: url + '/ftp/uploads/' + req.file.filename, 
+        cvName: req.file.originalname },
       { new: true }
     ).then(user => {
       if (user) {
@@ -218,7 +226,6 @@ router.post(
   multer({storage: storage}).single('cv'), (req, res, next) => {
     const userName = req.body.name;
     const userId = req.body.userId;
-    console.log(userId);
     const appliedJobs = JSON.parse(req.body.appliedJobs);
     const jobTitle = req.body.jobTitle;
     const company = req.body.company;

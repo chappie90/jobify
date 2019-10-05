@@ -41,6 +41,7 @@ export class AuthService {
     this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any}>
     (API_URL + '/signup', userData).subscribe(
       (response) => {
+        console.log(response);
         this.token = response.token;
         if (this.token) {
           const tokenExpiration = response.expiresIn;
@@ -52,11 +53,19 @@ export class AuthService {
           const likedJobs = response.likedJobs;
           const notifications = JSON.stringify(response.notifications);
           const appliedJobs = JSON.stringify(response.appliedJobs);
+          const cv = response.cv;
           const date = new Date();
           const tokenExpireDate = new Date(
             date.getTime() + tokenExpiration * 1000
           );
-          this.saveAuthData(this.token, tokenExpireDate, this.userId, this.userEmail, likedJobs, appliedJobs, notifications);
+          this.saveAuthData(this.token, 
+                            tokenExpireDate, 
+                            this.userId, 
+                            this.userEmail, 
+                            likedJobs, 
+                            appliedJobs, 
+                            notifications, 
+                            cv);
           this.router.navigate(['/'])
         }
       },
@@ -72,6 +81,7 @@ export class AuthService {
     this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any }>
       (API_URL + '/login', loginData).subscribe(
       response => {
+        console.log(response);
         this.token = response.token;
         if (this.token) {
           const tokenExpiration = response.expiresIn;
@@ -83,11 +93,21 @@ export class AuthService {
           const likedJobs = response.likedJobs;
           const notifications = JSON.stringify(response.notifications);
           const appliedJobs = JSON.stringify(response.appliedJobs);
+          const cv = response.cv;
+          const cvName = response.cvName;         
           const date = new Date();
           const tokenExpireDate = new Date(
             date.getTime() + tokenExpiration * 1000
           );
-          this.saveAuthData(this.token, tokenExpireDate, this.userId, this.userEmail, likedJobs, appliedJobs, notifications);
+          this.saveAuthData(this.token, 
+                            tokenExpireDate, 
+                            this.userId, 
+                            this.userEmail, 
+                            likedJobs, 
+                            appliedJobs, 
+                            notifications,
+                            cv,
+                            cvName);
           this.router.navigate(['/']);
         }
       },
@@ -102,6 +122,7 @@ export class AuthService {
     this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any }>
       (API_URL + '/google-login', googleSigninData).subscribe(
         response => {
+          console.log(response);
           this.token = response.token;
           if (this.token) {
             const tokenExpiration = response.expiresIn;
@@ -113,11 +134,21 @@ export class AuthService {
             const likedJobs = response.likedJobs;
             const notifications = JSON.stringify(response.notifications);
             const appliedJobs = JSON.stringify(response.appliedJobs);
+            const cv = response.cv;
+            const cvName = response.cvName; 
             const date = new Date();
             const tokenExpireDate = new Date(
               date.getTime() + tokenExpiration * 1000
             );
-            this.saveAuthData(this.token, tokenExpireDate, this.userId, this.userEmail, likedJobs, appliedJobs, notifications);
+            this.saveAuthData(this.token, 
+                              tokenExpireDate, 
+                              this.userId, 
+                              this.userEmail, 
+                              likedJobs, 
+                              appliedJobs, 
+                              notifications,
+                              cv,
+                              cvName);
             this.router.navigate(['/']);
           }
         },
@@ -145,7 +176,15 @@ export class AuthService {
     }, duration * 1000);
   }
 
-  saveAuthData(token: string, tokenExpirationDate: Date, userId: string, userEmail: string, likedJobs: any, appliedJobs: any, notifications: any) {
+  saveAuthData(token: string, 
+              tokenExpirationDate: Date, 
+              userId: string, 
+              userEmail: string, 
+              likedJobs: any, 
+              appliedJobs: any, 
+              notifications: any,
+              cv: string,
+              cvName: string) {
     localStorage.setItem('token', token);
     localStorage.setItem('tokenExpirationDate', tokenExpirationDate.toISOString());
     localStorage.setItem('userId', userId);
@@ -153,6 +192,8 @@ export class AuthService {
     localStorage.setItem('likedJobs', likedJobs);
     localStorage.setItem('appliedJobs', appliedJobs);
     localStorage.setItem('notifications', notifications);
+    localStorage.setItem('cv', cv);
+    localStorage.setItem('cvName', cvName);
   }
 
   getAuthData() {
@@ -163,6 +204,8 @@ export class AuthService {
     const likedJobs = localStorage.getItem('likedJobs');
     const appliedJobs = localStorage.getItem('appliedJobs');
     const notifications = localStorage.getItem('notifications');
+    const cv = localStorage.getItem('cv');
+    const cvName = localStorage.getItem('cvName');
 
     if (!token || !tokenExpirationDate) {
       return;
@@ -174,7 +217,9 @@ export class AuthService {
       userEmail: userEmail,
       likedJobs: likedJobs,
       appliedJobs: appliedJobs,
-      notifications: notifications
+      notifications: notifications,
+      cv: cv,
+      cvName: cvName
     };
   }
 
@@ -186,6 +231,8 @@ export class AuthService {
     localStorage.removeItem('likedJobs');
     localStorage.removeItem('appliedJobs');
     localStorage.removeItem('notifications');
+    localStorage.removeItem('cv');
+    localStorage.removeItem('cvName');
   }
 
 

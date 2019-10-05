@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const serveIndex = require('serve-index');
 
 const userRoutes = require('./routes/user');
 const jobsRoutes = require('./routes/jobs');
@@ -17,6 +18,8 @@ mongoose.connect('mongodb+srv://stoyangarov:' + process.env.MONGO_ATLAS_PW + '@e
 
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
+
+  app.use('/ftp', express.static('public'), serveIndex('public', {'icons': true}));
 
   app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
