@@ -7,7 +7,8 @@ const userSchema = mongoose.Schema({
   type: { type: String, required: true },
   likedJobs: { type: Array },
   appliedJobs: { type: Array },
-  notifications: { type: Array }
+  notifications: { type: Array },
+  cvPath: { type: String }
 });
 
 userSchema.plugin(uniqueValidator);

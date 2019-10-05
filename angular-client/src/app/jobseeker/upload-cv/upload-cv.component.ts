@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { mimeType } from '../jobs/apply/mime-type.validator';
+import { UserService } from '../../services/user.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-upload-cv',
@@ -9,7 +11,12 @@ import { mimeType } from '../jobs/apply/mime-type.validator';
   styleUrls: ['./upload-cv.component.scss']
 })
 export class UploadCVComponent implements OnInit {
-  form: FormGroup;
+  @ViewChild('cvForm') cvForm: FormGroupDirective;
+
+  private userId: string;
+
+  constructor(private userService: UserService,
+              private authService: AuthService) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -18,6 +25,7 @@ export class UploadCVComponent implements OnInit {
         asyncValidators: [mimeType]
       })
     });
+    this.userId = this.authService.getAuthData().userId;
   }
 
   onCvSelected(event: Event) {
@@ -32,5 +40,10 @@ export class UploadCVComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    this.cvForm.ngSubmit.emit();
+  }
+
+  onFormSubmit() {
+    this.userService.uploadCv(this.form.value.cv, this.userId);
   }
 }

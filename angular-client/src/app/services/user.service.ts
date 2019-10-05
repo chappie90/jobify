@@ -32,6 +32,18 @@ export class UserService {
       );
   }
 
+  uploadCv(cv: File, userId: string) {
+    let cvData = new FormData();
+    cvData.append('cv', cv);
+    cvData.append('userId', userId);
+    this.http.post<any>(
+      API_URL + '/upload-cv', cvData
+    ).subscribe(response => {
+      console.log(response);
+      this.router.navigate(['/profile/cv']);
+    });
+  }
+
   applyJob(name: string, 
            email: string, 
            number: string, 

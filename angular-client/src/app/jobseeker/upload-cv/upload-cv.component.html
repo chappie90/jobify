@@ -9,7 +9,7 @@
     <img class="check-icon" src="./assets/images/check-symbol.svg" />
     <h3 class="heading-small">Be found by employers on Jobify</h3>
   </div>
-  <form [formGroup]="form" (submit)="onCvUpload()">
+  <form #cvForm="ngForm" (ngSubmit)="onFormSubmit()">
     <label for="cv" class="label">Upload CV</label>
     <input 
       type="file"

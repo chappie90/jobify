@@ -19,7 +19,6 @@ export class ApplyComponent implements OnInit, OnDestroy {
   private job: Job;
   private jobSub: Subscription;
   cvPreview: string;
-  fileName: string;
   private userId: string;
   private userEmail: string;
   private authDataAppliedJobs: string;
@@ -40,7 +39,6 @@ export class ApplyComponent implements OnInit, OnDestroy {
     this.jobSub = this.jobsService.getJobUpdateListener()
       .subscribe(job => {
        this.job = job;
-       console.log(this.job);
       });
     this.form = new FormGroup({
       'name': new FormControl(null, {

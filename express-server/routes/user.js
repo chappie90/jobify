@@ -189,11 +189,36 @@ router.patch('/like', checkAuth, (req, res, next) =>{
 });
 
 router.post(
+  '/upload-cv',
+ // checkAuth,
+  multer({storage: storage}).single('cv'), (req, res, next) => {
+    const userId = req.body.userId;
+    const url = req.protocol + '://' + req.get('host');
+    User.findByIdAndUpdate(
+      { _id: userId },
+      { cvPath: url + '/cvs' + req.file.filename },
+      { new: true }
+    ).then(user => {
+      if (user) {
+        return res.status(200).json({
+          cv: user.cv
+        });
+      }
+    }).catch(err => {
+      console.log(err);
+      res.status(401).json({
+        message: 'Could not upload CV'
+      });
+    }) 
+});
+
+router.post(
   '/apply',
-  checkAuth,
+//  checkAuth,
   multer({storage: storage}).single('cv'), (req, res, next) => {
     const userName = req.body.name;
     const userId = req.body.userId;
+    console.log(userId);
     const appliedJobs = JSON.parse(req.body.appliedJobs);
     const jobTitle = req.body.jobTitle;
     const company = req.body.company;

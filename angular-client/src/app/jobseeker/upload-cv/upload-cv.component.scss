@@ -3,17 +3,22 @@
 .container {
   max-width: 38rem;
   margin: auto;
-  padding: 16rem 2rem 5rem;
+  padding: 2rem;
   min-height: 100vh;
- text-align: center;
+ // text-align: center;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-direction: column;
 }
 .upload-icon {
   width: 9rem;
 }
 .benefit-container {
   display: flex;
+  width: 100%;
   align-items: center;
-  padding: .6rem 0;
+  padding: .6rem 0 .6rem 1rem;
 }
 .check-icon {
   width: 2rem;
