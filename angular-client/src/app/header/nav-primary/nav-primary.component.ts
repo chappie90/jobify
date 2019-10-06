@@ -16,6 +16,7 @@ export class NavPrimaryComponent implements OnInit, OnDestroy {
   private isAuthenticated = false;
   private openDropdown = false;
   private authStatusSub: Subscription;
+  userType: string;
 
   constructor(private router: Router,
               private authService: AuthService) {}
@@ -24,13 +25,22 @@ export class NavPrimaryComponent implements OnInit, OnDestroy {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Show loading indicator
+        this.userType = localStorage.getItem('userType');
         this.jobsSection = event.url.includes('/jobs')
                           || event.url === '/cv' 
                           || event.url === '/market-insights' 
-                          || event.url === '/premium';
+                          || event.url === '/premium'
+                          || (event.url === '/notifications' && this.userType === 'jobseeker')
+                          || (event.url.includes('/profile') && this.userType === 'jobseeker')
+                          || (event.url.includes('/tracker') && this.userType === 'jobseeker')
+                          || (event.url.includes('/account') && this.userType === 'jobseeker');
         this.employerSection = event.url === '/employer/products' 
                               || event.url === '/employer/pricing' 
-                              || event.url === '/employer/post-job';
+                              || event.url === '/employer/post-job'
+                              || (event.url === '/notifications' && this.userType === 'employer')
+                              || (event.url.includes('/profile') && this.userType === 'employer')
+                              || (event.url.includes('/tracker') && this.userType === 'employer')
+                              || (event.url.includes('/account') && this.userType === 'employer');
       }
 
       if (event instanceof NavigationEnd) {

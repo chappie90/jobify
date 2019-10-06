@@ -11,6 +11,9 @@ export class HeaderComponent implements OnInit {
   employerSection: boolean;
   loginPage: boolean;
   signupPage: boolean;
+  jobseekerType: boolean;
+  employerType: boolean;
+  userType: string;
 
   constructor(private router: Router) {}
 
@@ -27,6 +30,17 @@ export class HeaderComponent implements OnInit {
                               || event.url === '/employer/post-job';
         this.loginPage = event.url ==='/login';
         this.signupPage = event.url === '/signup';
+        this.userType = localStorage.getItem('userType');
+        this.jobseekerType = event.url === '/notifications' && this.userType === 'jobseeker'
+                            || (event.url === '/notifications' && this.userType === 'jobseeker')
+                            || (event.url.includes('/profile') && this.userType === 'jobseeker')
+                            || (event.url.includes('/tracker') && this.userType === 'jobseeker')
+                            || (event.url.includes('/account') && this.userType === 'jobseeker');
+         this.employerType = event.url === '/notifications' && this.userType === 'employer'
+                            || (event.url === '/notifications' && this.userType === 'employer')
+                            || (event.url.includes('/profile') && this.userType === 'employer')
+                            || (event.url.includes('/tracker') && this.userType === 'employer')
+                            || (event.url.includes('/account') && this.userType === 'employer');
       }
 
       if (event instanceof NavigationEnd) {

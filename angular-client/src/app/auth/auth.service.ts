@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   createUser(email: string, password: string, type: string) {
-    const userData = { email: email, password: password, type: 'jobseeker' };
+    const userData = { email: email, password: password, type: type };
     this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any}>
     (API_URL + '/signup', userData).subscribe(
       (response) => {
@@ -49,6 +49,7 @@ export class AuthService {
           this.authStatusListener.next(true);
           this.userId = response.userId;
           this.userEmail = response.userEmail;
+          const userType =response.userType;
           const likedJobs = response.likedJobs;
           const notifications = JSON.stringify(response.notifications);
           const appliedJobs = JSON.stringify(response.appliedJobs);
@@ -63,6 +64,7 @@ export class AuthService {
                             tokenExpireDate, 
                             this.userId, 
                             this.userEmail, 
+                            userType,
                             likedJobs, 
                             appliedJobs, 
                             notifications, 
@@ -93,6 +95,7 @@ export class AuthService {
           this.authStatusListener.next(true);
           this.userId = response.userId;
           this.userEmail = response.userEmail;
+          const userType = response.userType;
           const likedJobs = response.likedJobs;
           const notifications = JSON.stringify(response.notifications);
           const appliedJobs = JSON.stringify(response.appliedJobs);
@@ -107,6 +110,7 @@ export class AuthService {
                             tokenExpireDate, 
                             this.userId, 
                             this.userEmail, 
+                            userType,
                             likedJobs, 
                             appliedJobs, 
                             notifications,
@@ -136,6 +140,7 @@ export class AuthService {
             this.authStatusListener.next(true);
             this.userId = response.userId;
             this.userEmail = response.userEmail;
+            const userType = response.userType;
             const likedJobs = response.likedJobs;
             const notifications = JSON.stringify(response.notifications);
             const appliedJobs = JSON.stringify(response.appliedJobs);
@@ -150,6 +155,7 @@ export class AuthService {
                               tokenExpireDate, 
                               this.userId, 
                               this.userEmail, 
+                              userType,
                               likedJobs, 
                               appliedJobs, 
                               notifications,
@@ -187,6 +193,7 @@ export class AuthService {
               tokenExpirationDate: Date, 
               userId: string, 
               userEmail: string, 
+              userType: string,
               likedJobs: any, 
               appliedJobs: any, 
               notifications: any,
@@ -197,6 +204,7 @@ export class AuthService {
     localStorage.setItem('tokenExpirationDate', tokenExpirationDate.toISOString());
     localStorage.setItem('userId', userId);
     localStorage.setItem('userEmail', userEmail);
+    localStorage.setItem('userType', userType);
     localStorage.setItem('likedJobs', likedJobs);
     localStorage.setItem('appliedJobs', appliedJobs);
     localStorage.setItem('notifications', notifications);
@@ -210,6 +218,7 @@ export class AuthService {
     const tokenExpirationDate = localStorage.getItem('tokenExpirationDate');
     const userId = localStorage.getItem('userId');
     const userEmail = localStorage.getItem('userEmail');
+    const userType = localStorage.getItem('userType');
     const likedJobs = localStorage.getItem('likedJobs');
     const appliedJobs = localStorage.getItem('appliedJobs');
     const notifications = localStorage.getItem('notifications');
@@ -225,6 +234,7 @@ export class AuthService {
       tokenExpirationDate: new Date(tokenExpirationDate),
       userId: userId,
       userEmail: userEmail,
+      userType: userType,
       likedJobs: likedJobs,
       appliedJobs: appliedJobs,
       notifications: notifications,
@@ -239,6 +249,7 @@ export class AuthService {
     localStorage.removeItem('tokenExpirationDate');
     localStorage.removeItem('userId');
     localStorage.removeItem('userEmail');
+    localStorage.removeItem('userType');
     localStorage.removeItem('likedJobs');
     localStorage.removeItem('appliedJobs');
     localStorage.removeItem('notifications');

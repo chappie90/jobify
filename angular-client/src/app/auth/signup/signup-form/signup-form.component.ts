@@ -103,12 +103,20 @@ export class SignupFormComponent implements OnInit, AfterViewInit, OnDestroy {
     this.companyInputEmpty = value ? true: false;
   }
 
-  onSignup(form: NgForm) {
+  onSignupJobseeker(form: NgForm) {
     if (form.invalid) {
       this.formSubmitted = true;
       return;
     }
-    this.authService.createUser(form.value.email, form.value.password, form.value.type);
+    this.authService.createUser(form.value.email, form.value.password, 'jobseeker');
+  }
+
+  onSignupEmployer(form: NgForm) {
+    if (form.invalid) {
+      this.formSubmitted = true;
+      return;
+    }
+    this.authService.createUser(form.value.email, form.value.password, 'employer');
   }
 
   ngAfterViewInit() {
