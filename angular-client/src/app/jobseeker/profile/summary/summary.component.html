@@ -13,7 +13,7 @@
       <label 
         for="fname" 
         class="label"
-       >First Name</label>
+        [ngClass]="{'edit-mode-label': editMode}">First Name</label>
       <input
         class="input"
         id="fname"
@@ -29,7 +29,7 @@
       <label 
         for="lname" 
         class="label"
-        [ngClass]="{'edit-mode-label': editMode || lname}">Last Name</label>
+        [ngClass]="{'edit-mode-label': editMode}">Last Name</label>
       <input
         class="input"
         id="lname"
@@ -45,7 +45,7 @@
       <label 
         for="country" 
         class="label"
-        [ngClass]="{'edit-mode-label': editMode || country}">Country of Residence</label>
+        [ngClass]="{'edit-mode-label': editMode}">Country of Residence</label>
       <select 
         class="select"
         id="country"
@@ -62,7 +62,7 @@
       <label 
         for="address" 
         class="label"
-        [ngClass]="{'edit-mode-label': editMode || address}">Address</label>
+        [ngClass]="{'edit-mode-label': editMode}">Address</label>
       <input
         class="input"
         id="address"
@@ -78,7 +78,7 @@
       <label 
         for="number" 
         class="label"
-        [ngClass]="{'edit-mode-label': editMode || number}">Phone Number</label>
+        [ngClass]="{'edit-mode-label': editMode}">Phone Number</label>
       <input
         class="input"
         id="number"

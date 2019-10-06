@@ -32,18 +32,23 @@
   display: block;
   margin-bottom: .3rem;
   position: absolute;
-  top: -2rem;
-  left: .5rem;
+  top: -1rem;
+  left: 1rem;
   color: $grey;
   transition: all .3s;
 }
-.check-icon {
-  width: 1.6rem;
-  position: absolute;
+.edit-mode-label {
   top: -2rem;
-  left: -2rem;
+  left: 0.5rem;
+}
+.check-icon {
+  width: 1.4rem;
+  position: absolute;
+  top: -1rem;
+  left: -1.5rem;
   opacity: 0;
   visibility: hidden;
+  transition: all .3s;
 }
 .value-set {
   opacity: 1;
@@ -52,10 +57,10 @@
 .input {
   width: 100%;
   font-size: 1.8rem;
-  padding: .6rem 2rem;
+  padding: .6rem 1rem;
   margin-bottom: 3rem;
   border-radius: 4px;
-  border: none;
+  border: 1px solid transparent;
 //  visibility: hidden;
 }
 .edit-mode-input {
@@ -65,11 +70,11 @@
 .select {
   width: 100%;
   margin-bottom: 3rem;
-  padding: .5rem 2rem;
+  padding: .5rem 1rem;
   border-radius: 4px;
   background-color: $white;
-  border: none;
-  visibility: hidden;
+  border: 1px solid transparent;
+  //  visibility: hidden;
 }
 .edit-mode-select {
   border: 1px solid $grey-medium;

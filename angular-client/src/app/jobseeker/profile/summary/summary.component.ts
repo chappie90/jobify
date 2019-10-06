@@ -44,6 +44,18 @@ export class SummaryComponent implements OnInit {
         validators: []
       })
     });
+    const summaryString = this.authService.getAuthData().summary;
+    if (summaryString) {
+      const summaryObj = JSON.parse(summaryString);
+      this.form.patchValue({
+        'fname': summaryObj.fname,
+        'lname': summaryObj.lname,
+        'country': summaryObj.country,
+        'address': summaryObj.address,
+        'number': summaryObj.number
+      });
+    }
+
     if (this.form.value.fname) {
       this.fname = true;
     }
