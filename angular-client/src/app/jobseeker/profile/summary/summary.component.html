@@ -1,1 +1,94 @@
-<h1>Summary</h1>
+<div class="container">
+  <form 
+    [formGroup]="form" 
+    (submit)=onFormSubmit() 
+    class="summary-form"
+    [ngClass]="{'edit-mode-form': editMode}">
+    <img (click)="onFormEdit()" src="./assets/images/edit-3.svg" class="trash-icon" />
+    <div class="input-group">
+      <img 
+        src="./assets/images/check-symbol.svg" 
+        class="check-icon" 
+        [ngClass]="{'value-set': fname && !editMode}"/>
+      <label 
+        for="fname" 
+        class="label"
+       >First Name</label>
+      <input
+        class="input"
+        id="fname"
+        type="text"
+        formControlName="fname"
+        [ngClass]="{'edit-mode-input': editMode}"/>
+    </div>
+    <div class="input-group">
+      <img 
+        src="./assets/images/check-symbol.svg" 
+        class="check-icon" 
+        [ngClass]="{'value-set': lname && !editMode}"/>
+      <label 
+        for="lname" 
+        class="label"
+        [ngClass]="{'edit-mode-label': editMode || lname}">Last Name</label>
+      <input
+        class="input"
+        id="lname"
+        type="text"
+        formControlName="lname"
+        [ngClass]="{'edit-mode-input': editMode}"/>
+    </div>
+    <div class="input-group">
+      <img 
+        src="./assets/images/check-symbol.svg" 
+        class="check-icon" 
+        [ngClass]="{'value-set': country && !editMode}"/>
+      <label 
+        for="country" 
+        class="label"
+        [ngClass]="{'edit-mode-label': editMode || country}">Country of Residence</label>
+      <select 
+        class="select"
+        id="country"
+        formControlName="country"
+        [ngClass]="{'edit-mode-select': editMode}">
+        <option *ngFor="let c of countries" [ngValue]="c">{{ c }}</option>
+      </select> 
+    </div>
+    <div class="input-group">
+      <img 
+        src="./assets/images/check-symbol.svg" 
+        class="check-icon" 
+        [ngClass]="{'value-set': address && !editMode}"/>
+      <label 
+        for="address" 
+        class="label"
+        [ngClass]="{'edit-mode-label': editMode || address}">Address</label>
+      <input
+        class="input"
+        id="address"
+        type="text"
+        formControlName="address"
+        [ngClass]="{'edit-mode-input': editMode}"/>
+    </div>
+    <div class="input-group">
+      <img 
+        src="./assets/images/check-symbol.svg" 
+        class="check-icon" 
+        [ngClass]="{'value-set': number && !editMode}"/>
+      <label 
+        for="number" 
+        class="label"
+        [ngClass]="{'edit-mode-label': editMode || number}">Phone Number</label>
+      <input
+        class="input"
+        id="number"
+        type="number"
+        formControlName="number"
+        [ngClass]="{'edit-mode-input': editMode}"/>
+    </div>
+    <button
+      type="submit"
+      class="submit-btn"
+      [ngClass]="{'edit-mode-btn': editMode}">Update my profile</button>
+  </form>
+</div>

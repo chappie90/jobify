@@ -52,6 +52,7 @@ export class AuthService {
           const likedJobs = response.likedJobs;
           const notifications = JSON.stringify(response.notifications);
           const appliedJobs = JSON.stringify(response.appliedJobs);
+          const summary = JSON.stringify(response.summary);
           const cv = response.cv;
           const cvName = response.cvName;
           const date = new Date();
@@ -66,7 +67,8 @@ export class AuthService {
                             appliedJobs, 
                             notifications, 
                             cv,
-                            cvName);
+                            cvName,
+                            summary);
           this.router.navigate(['/'])
         }
       },
@@ -94,6 +96,7 @@ export class AuthService {
           const likedJobs = response.likedJobs;
           const notifications = JSON.stringify(response.notifications);
           const appliedJobs = JSON.stringify(response.appliedJobs);
+          const summary = JSON.stringify(response.summary);
           const cv = response.cv;
           const cvName = response.cvName;         
           const date = new Date();
@@ -108,7 +111,8 @@ export class AuthService {
                             appliedJobs, 
                             notifications,
                             cv,
-                            cvName);
+                            cvName,
+                            summary);
           this.router.navigate(['/']);
         }
       },
@@ -135,6 +139,7 @@ export class AuthService {
             const likedJobs = response.likedJobs;
             const notifications = JSON.stringify(response.notifications);
             const appliedJobs = JSON.stringify(response.appliedJobs);
+            const summary = JSON.stringify(response.summary);
             const cv = response.cv;
             const cvName = response.cvName; 
             const date = new Date();
@@ -149,7 +154,8 @@ export class AuthService {
                               appliedJobs, 
                               notifications,
                               cv,
-                              cvName);
+                              cvName,
+                              summary);
             this.router.navigate(['/']);
           }
         },
@@ -185,7 +191,8 @@ export class AuthService {
               appliedJobs: any, 
               notifications: any,
               cv: string,
-              cvName: string) {
+              cvName: string,
+              summary: any) {
     localStorage.setItem('token', token);
     localStorage.setItem('tokenExpirationDate', tokenExpirationDate.toISOString());
     localStorage.setItem('userId', userId);
@@ -195,6 +202,7 @@ export class AuthService {
     localStorage.setItem('notifications', notifications);
     localStorage.setItem('cv', cv);
     localStorage.setItem('cvName', cvName);
+    localStorage.setItem('summary', summary);
   }
 
   getAuthData() {
@@ -207,6 +215,7 @@ export class AuthService {
     const notifications = localStorage.getItem('notifications');
     const cv = localStorage.getItem('cv');
     const cvName = localStorage.getItem('cvName');
+    const summary = localStorage.getItem('summary');
 
     if (!token || !tokenExpirationDate) {
       return;
@@ -220,7 +229,8 @@ export class AuthService {
       appliedJobs: appliedJobs,
       notifications: notifications,
       cv: cv,
-      cvName: cvName
+      cvName: cvName,
+      summary: summary
     };
   }
 
@@ -234,6 +244,7 @@ export class AuthService {
     localStorage.removeItem('notifications');
     localStorage.removeItem('cv');
     localStorage.removeItem('cvName');
+    localStorage.removeItem('summary');
   }
 
 

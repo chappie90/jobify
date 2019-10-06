@@ -373,4 +373,39 @@ router.post(
     });
 });
 
+router.post(
+  '/profile/summary',
+  // checkAuth,
+  (req, res, next) => {
+    const formData = req.body.formData;
+    const userId = req.body.userId;
+    console.log(formData);
+    console.log(userId);
+    User.findByIdAndUpdate(
+      { _id: userId },
+      { profile: {
+          summary: {
+            fname: formData.fname, 
+            lname: formData.lname, 
+            country: formData.country,
+            address: formData.address,
+            number: formData.number 
+          }
+        }
+      }, 
+      { new: true }
+    ).then(user => {
+      if (user) {
+        res.status(200).json({
+          summary: user.profile.summary
+        });
+      }
+    }).catch(err => {
+      console.log(err);
+      res.status(401).json({
+        message: 'Could not update profile summary'
+      });
+    });
+});
+
 module.exports = router;

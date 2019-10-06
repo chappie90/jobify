@@ -11,7 +11,7 @@ const API_URL = environment.API + '/user';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private userUpdated = new Subject<{ jobStatus: boolean, likedJobId: string, appliedJobs: string, cvPath: string, cvName: string }>();
+  private userUpdated = new Subject<{ jobStatus: boolean, likedJobId: string, appliedJobs: string, cvPath: string, cvName: string, status: boolean}>();
   private applyStatus: boolean;
 
   constructor(private http: HttpClient,
@@ -93,6 +93,16 @@ export class UserService {
         }
       );
     });  
+  }
+
+  updateSummary(formData: any, userId: string) {
+    const summaryData = { formData: formData, userId: userId };
+    this.http.post<any>(
+      API_URL + '/profile/summary', summaryData
+    ).subscribe(response => {
+      localStorage.setItem('summary', JSON.stringify(response.summary));
+      this.userUpdated.next({ status: true });
+    });
   }
 
   getUserUpdateListener() {
