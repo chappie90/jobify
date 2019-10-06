@@ -16,7 +16,8 @@ const userSchema = mongoose.Schema({
       lname: String,
       country: String,
       address: String,
-      number: Number
+      number: Number,
+      avatarPath: String
     }
   }
 });

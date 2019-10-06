@@ -11,6 +11,7 @@ const API_URL = environment.API + '/user';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
+  private avatarUpdated = new Subject<{ status: boolean }>();
   private userUpdated = new Subject<{ jobStatus: boolean, likedJobId: string, appliedJobs: string, cvPath: string, cvName: string, status: boolean}>();
   private applyStatus: boolean;
 
@@ -105,8 +106,24 @@ export class UserService {
     });
   }
 
+  updateAvatar(formData: any, userId: string) {
+    let avatarData = new FormData();
+    avatarData.append('avatar', formData.avatar);
+    avatarData.append('userId', userId);
+    this.http.post<any>(
+      API_URL + '/profile/summary/avatar', avatarData
+    ).subscribe(response => {
+      localStorage.setItem('avatar', response.avatarPath);
+      this.avatarUpdated.next({ status: true });
+    });
+  }
+
   getUserUpdateListener() {
     return this.userUpdated.asObservable();
+  }
+
+  getAvatarUpdateListener() {
+    return this.avatarUpdated.asObservable();
   }
 
   returnApplyStatus() {

@@ -16,6 +16,12 @@ const MIME_TYPE_MAP = {
   'application/pdf': 'pdf'
 };
 
+const MIME_TYPE_MAP_AVATAR = {
+  'image/png': 'png',
+  'image/jpeg': 'jpg',
+  'image/jpg': 'jpg'
+};
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const isValid = MIME_TYPE_MAP[file.mimetype];
@@ -28,6 +34,22 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     const name = file.originalname.toLowerCase().split(' ').join('-');
     const ext = MIME_TYPE_MAP[file.mimetype];
+    cb(null, name + '-' + Date.now() + '.' + ext);
+  }
+});
+
+const storageAvatar = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const isValid = MIME_TYPE_MAP_AVATAR[file.mimetype];
+    let error = new Error('Invalid mime type');
+    if (isValid) {
+      error = null;
+    }
+    cb(error, './public/uploads/');
+  },
+  filename: (req, file, cb) => {
+    const name = file.originalname.toLowerCase().split(' ').join('-');
+    const ext = MIME_TYPE_MAP_AVATAR[file.mimetype];
     cb(null, name + '-' + Date.now() + '.' + ext);
   }
 });
@@ -59,7 +81,8 @@ router.post('/signup', (req, res, next) => {
             appliedJobs: [],
             notifications: response.notifications,
             cv: '',
-            cvName: ''
+            cvName: '',
+            summary: {}
           });  
       })
       .catch(err => {
@@ -101,7 +124,8 @@ router.post('/login', (req, res, next) => {
         appliedJobs: fetchedUser.appliedJobs,
         notifications: fetchedUser.notifications,
         cv: fetchedUser.cvPath,
-        cvName: fetchedUser.cvName
+        cvName: fetchedUser.cvName,
+        summary: fetchedUser.profile.summary 
       });
     })
     .catch(err => {
@@ -143,7 +167,8 @@ router.post('/google-login', (req, res, next) => {
               appliedJobs: [],
               notifications: user.notifications,
               cv: '',
-              cvName: ''
+              cvName: '',
+              summary: {}
             })
           });
         } else if (user) {
@@ -157,7 +182,8 @@ router.post('/google-login', (req, res, next) => {
             appliedJobs: user.appliedJobs,
             notifications: user.notifications,
             cv: user.cvPath,
-            cvName: user.cvName
+            cvName: user.cvName,
+            summary: user.profile.summary
           })
         }
       })
@@ -378,13 +404,40 @@ router.post(
 });
 
 router.post(
+  '/profile/summary/avatar',
+ //  checkAuth,
+  multer({storage: storageAvatar}).single('avatar'), (req, res, next) => {
+    const userId = req.body.userId;
+    const url = req.protocol + '://' + req.get('host');
+    User.findByIdAndUpdate(
+      { _id: userId },
+      { profile: {
+          summary: {
+            avatarPath: url + '/ftp/uploads/' + req.file.filename 
+          }
+        }  
+      },
+      { new: true }
+    ).then(user => {
+      if (user) {
+        res.status(200).json({
+          avatarPath: user.profile.summary.avatarPath
+        });
+      }
+    }).catch(err => {
+      console.log(err);
+      res.status(401).json({
+        message: 'Could not update avatar image'
+      });
+    });
+});
+
+router.post(
   '/profile/summary',
   // checkAuth,
   (req, res, next) => {
     const formData = req.body.formData;
     const userId = req.body.userId;
-    console.log(formData);
-    console.log(userId);
     User.findByIdAndUpdate(
       { _id: userId },
       { profile: {

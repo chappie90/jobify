@@ -29,7 +29,7 @@ export class ViewCVComponent implements OnInit, OnDestroy {
     }
     this.form = new FormGroup({
       cv: new FormControl(null, {
-        Validators: [Validators.required],
+        validators: [Validators.required],
         asyncValidators: [mimeType]
       })
     });

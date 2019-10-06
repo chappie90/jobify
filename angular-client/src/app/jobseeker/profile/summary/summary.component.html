@@ -1,5 +1,20 @@
 <div class="container">
   <form 
+    #imageForm="ngForm" 
+    (ngSubmit)="onImageSubmit()"
+    class="image-form">
+    <label
+      class="image-label"
+      for="image">
+        <img [src]="avatarImg" src="./assets/images/avatar-2.svg" class="avatar-img" />
+      </label>
+    <input
+      type="file"
+      class="image-input"
+      id="image"
+      (change)="onAvatarSelected($event)"/>
+  </form>
+  <form 
     [formGroup]="form" 
     (submit)=onFormSubmit() 
     class="summary-form"
