@@ -33,7 +33,8 @@ export class NavPrimaryComponent implements OnInit, OnDestroy {
                           || (event.url === '/notifications' && this.userType === 'jobseeker')
                           || (event.url.includes('/profile') && this.userType === 'jobseeker')
                           || (event.url.includes('/tracker') && this.userType === 'jobseeker')
-                          || (event.url.includes('/account') && this.userType === 'jobseeker');
+                          || (event.url.includes('/account') && this.userType === 'jobseeker')
+                          || event.url.includes('/apply');
         this.employerSection = event.url === '/employer/products' 
                               || event.url === '/employer/pricing' 
                               || event.url === '/employer/post-job'

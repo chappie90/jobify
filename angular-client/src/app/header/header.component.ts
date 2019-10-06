@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
         this.jobsSection = event.url.includes('/jobs')
                           || event.url === '/cv' 
                           || event.url === '/market-insights' 
-                          || event.url === '/premium';
+                          || event.url.includes('/apply');
         this.employerSection = event.url === '/employer/products' 
                               || event.url === '/employer/pricing' 
                               || event.url === '/employer/post-job';
