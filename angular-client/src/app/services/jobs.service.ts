@@ -59,7 +59,7 @@ export class JobsService {
         let likedJobs;
         let appliedJobs;
         if (authData) {
-          likedJobs = authData.likedJobs.split(',');
+          likedJobs = JSON.parse(authData.likedJobs);
           appliedJobs = JSON.parse(authData.appliedJobs);
         } else {
           likedJobs = [];
@@ -144,6 +144,7 @@ export class JobsService {
     this.http.post<{ type: string; myJobs: any }>(
       API_URL + '/my-jobs', fetchMyJobs
     ).subscribe(response => {
+      console.log(response);
       this.myJobsUpdated.next({
         type: response.type,
         jobs: [...response.myJobs]

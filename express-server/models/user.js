@@ -5,11 +5,15 @@ const userSchema = mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   type: { type: String, required: true },
-  likedJobs: { type: Array },
-  appliedJobs: { type: Array },
-  notifications: { type: Array },
-  cvPath: { type: String },
-  cvName: { type: String },
+  myJobs: {
+    applied: Array,
+    saved: Array,
+  },
+  // likedJobs: Array,
+  // appliedJobs: Array,
+  notifications: Array,
+  cvPath: String,
+  cvName: String,
   profile: {
     summary: {
       fname: String,

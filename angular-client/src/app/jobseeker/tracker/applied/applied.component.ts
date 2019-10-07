@@ -23,7 +23,7 @@ export class AppliedJobsComponent implements OnInit, OnDestroy {
               private userService: UserService) { }
 
   ngOnInit() {
-    const appliedJobs = this.authService.getAuthData().appliedJobs.split(',');
+    const appliedJobs = JSON.parse(this.authService.getAuthData().appliedJobs);
     this.jobsService.getMyJobs({ type: 'applied', myJobs: appliedJobs });
     this.jobsSub = this.jobsService.getMyJobsUpdateListener().subscribe(
       myJobsData => {

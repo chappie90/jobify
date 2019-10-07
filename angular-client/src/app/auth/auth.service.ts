@@ -38,7 +38,8 @@ export class AuthService {
 
   createUser(email: string, password: string, type: string) {
     const userData = { email: email, password: password, type: type };
-    this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any}>
+    // this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any}>
+    this.http.post<any>
     (API_URL + '/signup', userData).subscribe(
       (response) => {
         this.token = response.token;
@@ -50,9 +51,9 @@ export class AuthService {
           this.userId = response.userId;
           this.userEmail = response.userEmail;
           const userType =response.userType;
-          const likedJobs = response.likedJobs;
+          const likedJobs = JSON.stringify(response.myJobs.saved);
+          const appliedJobs = JSON.stringify(response.myJobs.applied);
           const notifications = JSON.stringify(response.notifications);
-          const appliedJobs = JSON.stringify(response.appliedJobs);
           const summary = JSON.stringify(response.summary);
           const avatar = response.avatarPath;
           const cv = response.cv;
@@ -88,7 +89,6 @@ export class AuthService {
     this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any }>
       (API_URL + '/login', loginData).subscribe(
       response => {
-        console.log(response);
         this.token = response.token;
         if (this.token) {
           const tokenExpiration = response.expiresIn;
@@ -98,9 +98,9 @@ export class AuthService {
           this.userId = response.userId;
           this.userEmail = response.userEmail;
           const userType = response.userType;
-          const likedJobs = response.likedJobs;
+          const likedJobs = JSON.stringify(response.myJobs.saved);
+          const appliedJobs = JSON.stringify(response.myJobs.applied);
           const notifications = JSON.stringify(response.notifications);
-          const appliedJobs = JSON.stringify(response.appliedJobs);
           const summary = JSON.stringify(response.summary);
           const avatar = response.avatar;
           const cv = response.cv;
@@ -135,7 +135,6 @@ export class AuthService {
     this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any }>
       (API_URL + '/google-login', googleSigninData).subscribe(
         response => {
-          console.log(response);
           this.token = response.token;
           if (this.token) {
             const tokenExpiration = response.expiresIn;
@@ -145,9 +144,9 @@ export class AuthService {
             this.userId = response.userId;
             this.userEmail = response.userEmail;
             const userType = response.userType;
-            const likedJobs = response.likedJobs;
+            const likedJobs = JSON.stringify(response.myJobs.saved);
+            const appliedJobs = JSON.stringify(response.myJobs.applied);
             const notifications = JSON.stringify(response.notifications);
-            const appliedJobs = JSON.stringify(response.appliedJobs);
             const summary = JSON.stringify(response.summary);
             const avatar = response.avatar;
             const cv = response.cv;

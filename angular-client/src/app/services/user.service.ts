@@ -21,11 +21,12 @@ export class UserService {
 
   likeJob(jobId: string, jobStatus: boolean, likedJobs: any, userId: string) {
     const likeJobData = { likedJobs: likedJobs, userId: userId, jobId: jobId, jobStatus: jobStatus };
-    this.http.patch<{ user: any; likedJobs: any; jobStatus: boolean; jobId: string; updatedJobId: string }>
+    // this.http.patch<{ user: any; likedJobs: any; jobStatus: boolean; jobId: string; updatedJobId: string }>
+    this.http.patch<any> 
       (API_URL + '/like', likeJobData).subscribe(
         response => {
           const jobStatus = response.jobStatus;
-          const updatedLikedJobs = response.user.likedJobs;
+          const updatedLikedJobs = JSON.stringify(response.user.myJobs.saved);
           const updatedJobId = response.jobId;
           localStorage.setItem('likedJobs', updatedLikedJobs);
           this.userUpdated.next({ jobStatus: jobStatus, likedJobId: updatedJobId });

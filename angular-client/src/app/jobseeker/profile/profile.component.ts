@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(private router: Router,
               private route: ActivatedRoute) {
-   this.route.params.subscribe(params => { 
+    this.route.params.subscribe(params => { 
     this.summary = this.route.snapshot._routerState.url === '/profile/summary';
     this.cv = this.route.snapshot._routerState.url === '/profile/cv';
     this.experience = this.route.snapshot._routerState.url === '/profile/experience';

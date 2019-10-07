@@ -37,7 +37,6 @@ export class JobsItemComponent implements OnInit, OnDestroy {
       this.jobSub = this.jobsService.getJobsItemUpdateListener().subscribe(
         job => {
           this.job = job;
-          console.log(this.job);
           if (this.job) {
             this.appliedStatus = this.job.applied;
             this.jobSaveStatus = this.job.likedJob ? 'Unsave' : 'Save';
@@ -115,7 +114,8 @@ export class JobsItemComponent implements OnInit, OnDestroy {
     }
     this.userId = this.authService.getAuthData().userId;
     const likedJobs = this.authService.getAuthData().likedJobs;
-    const likedJobsArray = likedJobs.split(',');
+    // const likedJobsArray = likedJobs.split(',');
+    const likedJobsArray  = JSON.parse(likedJobs);
     const jobStatus = this.job.likedJob;
     let newLikedJobs = [];
     if (this.job.likedJob) {

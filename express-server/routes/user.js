@@ -77,8 +77,12 @@ router.post('/signup', (req, res, next) => {
             userId: response._id,
             userEmail: response.email,
             userType: response.type,
-            likedJobs: [],
-            appliedJobs: [],
+            myJobs: {
+              applied: [],
+              saved: []
+            },
+            // likedJobs: [],
+            // appliedJobs: [],
             notifications: response.notifications,
             cv: '',
             cvName: '',
@@ -120,8 +124,9 @@ router.post('/login', (req, res, next) => {
         userId: fetchedUser._id,
         userEmail: fetchedUser.email,
         userType: fetchedUser.type,
-        likedJobs: fetchedUser.likedJobs,
-        appliedJobs: fetchedUser.appliedJobs,
+        myJobs: fetchedUser.myJobs,
+        // likedJobs: fetchedUser.likedJobs,
+        // appliedJobs: fetchedUser.appliedJobs,
         notifications: fetchedUser.notifications,
         cv: fetchedUser.cvPath,
         cvName: fetchedUser.cvName,
@@ -163,8 +168,12 @@ router.post('/google-login', (req, res, next) => {
               userId: user._id,
               userEmail: user.email,
               userType: user.type,
-              likedJobs: [],
-              appliedJobs: [],
+              myJobs: {
+                applied: [],
+                saved: []
+              },
+              // likedJobs: [],
+              // appliedJobs: [],
               notifications: user.notifications,
               cv: '',
               cvName: '',
@@ -178,8 +187,9 @@ router.post('/google-login', (req, res, next) => {
             userId: user._id,
             userEmail: user.email,
             userType: user.type,
-            likedJobs: user.likedJobs,
-            appliedJobs: user.appliedJobs,
+            myJobs: user.myJobs,
+            // likedJobs: user.likedJobs,
+            // appliedJobs: user.appliedJobs,
             notifications: user.notifications,
             cv: user.cvPath,
             cvName: user.cvName,
@@ -203,8 +213,14 @@ router.patch('/like', checkAuth, (req, res, next) =>{
   const userId = req.body.userId;
   const likedJobs = req.body.likedJobs;
   const jobStatus = req.body.jobStatus;
-  User.findByIdAndUpdate({ _id: userId }, {likedJobs: likedJobs}, {new: true})
-    .then(user => {
+  User.findByIdAndUpdate(
+    { _id: userId }, 
+    { myJobs: { 
+        saved: likedJobs
+      }
+    },
+    {new: true}
+  ).then(user => {
       if (user) {
         return res.status(200).json({
           user: user,
@@ -299,7 +315,10 @@ router.post(
       const appliedNotification = `Congratulations! You have successfully applied for the role of ${jobTitle}!`;
       User.findByIdAndUpdate(
           { _id: userId }, 
-          { appliedJobs: appliedJobs, 
+          // { appliedJobs: appliedJobs, 
+          { myJobs: {
+              applied: appliedJobs
+            },
             $push: 
               { notifications: { 
                                 date: new Date(), 
@@ -383,7 +402,8 @@ router.post(
               }
             });
             return res.status(200).json({
-                appliedJobs: user.appliedJobs
+                // appliedJobs: user.appliedJobs
+                appliedJobs: user.myJobs.applied
             });
           } else {
             return res.status(401).json({

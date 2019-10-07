@@ -23,7 +23,7 @@ export class SavedJobsComponent implements OnInit, OnDestroy {
               private userService: UserService) { }
 
   ngOnInit() {
-    const likedJobs = this.authService.getAuthData().likedJobs.split(',');
+    const likedJobs = JSON.parse(this.authService.getAuthData().likedJobs);
     this.jobsService.getMyJobs({ type: 'saved', myJobs: likedJobs });
     this.jobsSub = this.jobsService.getMyJobsUpdateListener().subscribe(
       myJobsData => {
