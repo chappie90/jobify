@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
+import { Router, ActivatedRoute, Params, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,7 +11,13 @@ export class TrackerComponent implements OnInit {
   private appliedJobs: boolean;
   private savedJobs: boolean;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      this.appliedJobs = this.route.snapshot._routerState.url === '/tracker/applied';
+      this.savedJobs = this.route.snapshot._routerState.url === '/tracker/saved';
+    });
+  }
 
   ngOnInit() {
     this.router.events.subscribe((event: Event) => {
