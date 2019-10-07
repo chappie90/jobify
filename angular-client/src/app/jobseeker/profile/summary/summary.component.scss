@@ -6,7 +6,11 @@
   padding: 3rem;
 }
 .avatar-img {
-  width: 40rem;
+  height: 20rem;
+  cursor: pointer;
+}
+.image-input {
+  visibility: hidden;
 }
 .summary-form {
   width: 70%;

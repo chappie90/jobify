@@ -32,7 +32,6 @@ export class SearchBarComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
-        console.log(event);
         // Show loading indicator
         this.jobsSearch = event.url.includes('/jobs/search');
       }

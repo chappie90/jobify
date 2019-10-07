@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
+import { Router, Event, ActivatedRoute, Params, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +13,16 @@ export class ProfileComponent implements OnInit {
   private education: boolean;
   private skills: boolean;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private route: ActivatedRoute) {
+   this.route.params.subscribe(params => { 
+    this.summary = this.route.snapshot._routerState.url === '/profile/summary';
+    this.cv = this.route.snapshot._routerState.url === '/profile/cv';
+    this.experience = this.route.snapshot._routerState.url === '/profile/experience';
+    this.education = this.route.snapshot._routerState.url === '/profile/education';
+    this.skills = this.route.snapshot._routerState.url === '/profile/skills';
+   });
+  }
 
   ngOnInit() {
     this.router.events.subscribe((event: Event) => {
@@ -23,6 +32,7 @@ export class ProfileComponent implements OnInit {
         this.experience = event.url === '/profile/experience';
         this.education = event.url === '/profile/education';
         this.skills = event.url === '/profile/skills';
+        console.log(this.summary);
       }
 
       if (event instanceof NavigationEnd) {
