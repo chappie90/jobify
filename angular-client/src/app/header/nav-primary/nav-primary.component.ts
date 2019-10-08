@@ -16,7 +16,8 @@ export class NavPrimaryComponent implements OnInit, OnDestroy {
   private isAuthenticated = false;
   private openDropdown = false;
   private authStatusSub: Subscription;
-  userType: string;
+  private userType: string;
+  private notifications: any;
 
   constructor(private router: Router,
               private authService: AuthService) {}
@@ -70,6 +71,10 @@ export class NavPrimaryComponent implements OnInit, OnDestroy {
     if (this.token) {
       this.isAuthenticated = true;
     }
+  }
+
+  getNotifications() {
+    this.notifications = JSON.parse(localStorage.getItem('notifications'));
   }
   
   onLogout() {

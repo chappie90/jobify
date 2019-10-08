@@ -29,9 +29,23 @@
     </li>
     <li *ngIf="isAuthenticated" class="nav-primary__list-item">
       <a 
-        routerLink="/notifications"
+        (click)="getNotifications()"
         class="nav-primary__list-item-link nav-primary__list-item-link--notifications">
         Notifications
+        <ul appDropdown class="notifications-list">
+          <li *ngFor="let n of notifications" class="notifications-item">
+              <img *ngIf="n.type === 'join'" class="notifications-img" src="./assets/images/welcome-alt.svg" />
+              <img *ngIf="n.type === 'apply'" class="notifications-img" src="./assets/images/employee.svg" />
+              <span class="notifications-msg">{{ n.notification }}
+              </span>
+          </li>
+          <li class="notifications-item">
+            <a
+              routerLink="/notifications"
+              class="show-notifications-link">Show more
+            </a>
+          </li>
+        </ul>
       </a>
     </li>
     <li *ngIf="isAuthenticated" class="nav-primary__list-item">

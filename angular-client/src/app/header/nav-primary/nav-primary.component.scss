@@ -135,6 +135,45 @@
   } 
 }
 
+.notifications-list {
+  position: absolute;
+  width: 35rem;
+  top: 3rem;
+  right: 1.5rem;
+  padding: 1rem;
+  background-color: $grey-light;
+  -webkit-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
+  -moz-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
+  box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
+  border: 1px solid $grey-medium;
+  border-radius: 2px;
+  display: none;
+  cursor: initial;
+}
+.notifications-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+
+  &:not(:last-of-type) {
+     border-bottom: 1px solid $grey-medium;
+  }
+}
+.notifications-img {
+  width: 4rem;
+  margin-right: 1rem;
+}
+.notifications-msg {
+  line-height: 1.5;
+}
+.show-notifications-link {
+  margin: auto;
+  margin-top: 1rem;
+  background-color: $grey-dark;
+  color: $white;
+  padding: .4rem 1rem;
+  border-radius: 4px;
+}
 .open-dropdown {
   display: block;  
 }

@@ -1,8 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
 import { Subscription } from 'rxjs';
-
-import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-notifications',
@@ -12,11 +9,10 @@ import { AuthService } from '../../auth/auth.service';
 export class NotificationsComponent implements OnInit, OnDestroy {
   private notifications: any;
 
-  constructor(private authService: AuthService) { }
+  constructor() {}
 
   ngOnInit() {
-    this.notifications = JSON.parse(this.authService.getAuthData().notifications);
-    
+    this.notifications = JSON.parse(localStorage.getItem('notifications'));
   }
 
   ngOnDestroy() {
