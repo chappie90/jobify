@@ -68,7 +68,9 @@
   margin-bottom: 3rem;
   border-radius: 4px;
   border: 1px solid transparent;
-//  visibility: hidden;
+  background-color: $white;
+  color: $grey-dark;
+  transition: all .3s;
 }
 .edit-mode-input {
   border: 1px solid $grey-medium;
@@ -77,15 +79,23 @@
 .select {
   width: 100%;
   margin-bottom: 3rem;
-  padding: .5rem 1rem;
+  padding: .45rem 1rem;
   border-radius: 4px;
   background-color: $white;
   border: 1px solid transparent;
-  //  visibility: hidden;
+  background-color: $white;
+  color: $grey-dark;
+  font-size: 1.8rem;
+  -moz-appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Safari and Chrome */
+  appearance: none;
+  transition: all .3s;
 }
 .edit-mode-select {
   border: 1px solid $grey-medium;
-  visibility: visible;
+  -moz-appearance: menulist;
+  -webkit-appearance: menulist;
+  appearance: menulist;
 }
 .submit-btn {
   padding: 1rem 2rem;
