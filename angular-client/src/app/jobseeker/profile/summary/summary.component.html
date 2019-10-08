@@ -13,13 +13,18 @@
       class="image-input"
       id="image"
       (change)="onAvatarSelected($event)"/>
+    <span class="edit-img-icon-wrapper">
+      <img src="./assets/images/edit-3.svg" class="edit-img-icon" />
+    </span>
   </form>
   <form 
     [formGroup]="form" 
     (submit)=onFormSubmit() 
     class="summary-form"
     [ngClass]="{'edit-mode-form': editMode}">
-    <img (click)="onFormEdit()" src="./assets/images/edit-3.svg" class="edit-icon" />
+    <span (click)="onFormEdit()" class="edit-icon-wrapper"> 
+      <img src="./assets/images/edit-3.svg" class="edit-icon" />
+    </span>
     <div class="group-container">
       <div class="input-group">
         <img 

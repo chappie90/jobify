@@ -14,6 +14,9 @@ import { mimeType } from './mime-type.validator';
 export class SummaryComponent implements OnInit {
   @ViewChild('imageForm') imageForm: FormGroupDirective;
 
+  // Do cloudinary transformation 
+  // https://res.cloudinary.com/dycqqk3s6/image/upload/c_thumb,w_400,g_face/image-source
+
   private form: FormGroup;
   private userId: string;
   private fname: boolean;

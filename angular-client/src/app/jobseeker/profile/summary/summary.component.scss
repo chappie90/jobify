@@ -2,29 +2,90 @@
 
 .container {
   display: flex;
-  justify-content: center;
-  padding: 3rem;
+  justify-content: space-around;
+  padding: 1rem;
+}
+.image-form {
+  margin-top: 2rem;
+  width: 30rem;
+  text-align: center;
+  position: relative;
+}
+.edit-img-icon-wrapper {
+  width: 3.4rem;
+  height: 3.4rem;
+  text-align: center;
+  position: absolute;
+  top: -1.5rem;
+  right: 1rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all .3s;
+  visibility: hidden;
+  opacity: 0;
+  background-color: $grey-light;
+}
+.edit-img-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .avatar-img {
-  height: 20rem;
+  width: 25rem;
+  height: 25rem;
+  object-fit: cover;
+  border-radius: 4px;
   cursor: pointer;
+  transition: all .3s;
+
+  &:hover {
+    -webkit-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+    -moz-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+    box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+  }
+}
+.image-label:hover ~ .edit-img-icon-wrapper {
+  visibility: visible;
+  opacity: 1;
+  -webkit-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+    -moz-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+    box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
 }
 .image-input {
   visibility: hidden;
 }
 .summary-form {
-  width: 70%;
-  padding: 4rem 2rem 2rem;
+  padding: 5rem 2rem 2rem;
   border-radius: 4px;
   position: relative;
   transition: all .3s;
 }
+.edit-icon-wrapper {
+  width: 3.4rem;
+  height: 3.4rem;
+  text-align: center;
+  position: absolute;
+  top: .5rem;
+  right: 1.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all .3s;
+
+  &:hover {
+    background-color: $grey-medium;
+
+  }
+}
 .edit-icon {
   width: 1.8rem;
+  height: 1.8rem;
   position: absolute;
-  top: 1rem;
-  right: 2rem;
-  cursor: pointer;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .edit-mode-form {
   background-color: $grey-light;
@@ -152,7 +213,7 @@
 .submit-btn {
   padding: 1rem 2rem;
   background-color: $jobseeker-red-dark;
-  margin: 2rem auto 1rem;
+  margin: 1rem auto 1rem;
   display: block;
   max-width: 25rem;
   width: 100%;
