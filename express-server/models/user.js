@@ -9,8 +9,6 @@ const userSchema = mongoose.Schema({
     applied: Array,
     saved: Array,
   },
-  // likedJobs: Array,
-  // appliedJobs: Array,
   notifications: Array,
   cvPath: String,
   cvName: String,

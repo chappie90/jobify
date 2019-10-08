@@ -24,10 +24,6 @@ export class AuthService {
     return this.token;
   }
 
-  // getUserId() {
-  //   return this.userId;
-  // }
-
   getIsAuth() {
     return this.isAuthenticated;
   }
@@ -36,46 +32,50 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  createUser(email: string, password: string, type: string) {
-    const userData = { email: email, password: password, type: type };
-    // this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any}>
-    this.http.post<any>
-    (API_URL + '/signup', userData).subscribe(
-      (response) => {
-        this.token = response.token;
-        if (this.token) {
-          const tokenExpiration = response.expiresIn;
-          this.logoutOnTokenExpire(tokenExpiration);
-          this.isAuthenticated = true;
-          this.authStatusListener.next(true);
-          this.userId = response.userId;
-          this.userEmail = response.userEmail;
-          const userType =response.userType;
-          const likedJobs = JSON.stringify(response.myJobs.saved);
-          const appliedJobs = JSON.stringify(response.myJobs.applied);
-          const notifications = JSON.stringify(response.notifications);
-          const summary = JSON.stringify(response.summary);
-          const avatar = response.avatarPath;
-          const cv = response.cv;
-          const cvName = response.cvName;
-          const date = new Date();
-          const tokenExpireDate = new Date(
-            date.getTime() + tokenExpiration * 1000
-          );
-          this.saveAuthData(this.token, 
+  newUserSession(userData: any) {
+    this.token = userData.token;
+    if (this.token) {
+      const tokenExpiration = userData.expiresIn;
+      this.logoutOnTokenExpire(tokenExpiration);
+      this.isAuthenticated = true;
+      this.authStatusListener.next(true);
+      this.userId = userData.userId;
+      this.userEmail = userData.userEmail;
+      const userType =userData.userType;
+      const likedJobs = JSON.stringify(userData.myJobs.saved);
+      const appliedJobs = JSON.stringify(userData.myJobs.applied);
+      const notifications = JSON.stringify(userData.notifications);
+      const summary = JSON.stringify(userData.summary);
+      const avatar = userData.avatarPath;
+      const cv = userData.cv;
+      const cvName = userData.cvName;
+      const date = new Date();
+      const tokenExpireDate = new Date(
+        date.getTime() + tokenExpiration * 1000
+      );
+      this.saveAuthData(this.token, 
                             tokenExpireDate, 
                             this.userId, 
                             this.userEmail, 
                             userType,
                             likedJobs, 
                             appliedJobs, 
-                            notifications, 
+                            notifications,
                             cv,
                             cvName,
                             summary,
                             avatar);
-          this.router.navigate(['/'])
-        }
+      this.router.navigate(['/']);
+    }
+  }
+
+  createUser(email: string, password: string, type: string) {
+    const userData = { email: email, password: password, type: type };
+    // this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any}>
+    this.http.post<any>
+    (API_URL + '/signup', userData).subscribe(
+      response => {
+        this.newUserSession(response); 
       },
       error => {
         // console.log(error);
@@ -89,40 +89,7 @@ export class AuthService {
     this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any }>
       (API_URL + '/login', loginData).subscribe(
       response => {
-        this.token = response.token;
-        if (this.token) {
-          const tokenExpiration = response.expiresIn;
-          this.logoutOnTokenExpire(tokenExpiration);
-          this.isAuthenticated = true;
-          this.authStatusListener.next(true);
-          this.userId = response.userId;
-          this.userEmail = response.userEmail;
-          const userType = response.userType;
-          const likedJobs = JSON.stringify(response.myJobs.saved);
-          const appliedJobs = JSON.stringify(response.myJobs.applied);
-          const notifications = JSON.stringify(response.notifications);
-          const summary = JSON.stringify(response.summary);
-          const avatar = response.avatar;
-          const cv = response.cv;
-          const cvName = response.cvName;         
-          const date = new Date();
-          const tokenExpireDate = new Date(
-            date.getTime() + tokenExpiration * 1000
-          );
-          this.saveAuthData(this.token, 
-                            tokenExpireDate, 
-                            this.userId, 
-                            this.userEmail, 
-                            userType,
-                            likedJobs, 
-                            appliedJobs, 
-                            notifications,
-                            cv,
-                            cvName,
-                            summary,
-                            avatar);
-          this.router.navigate(['/']);
-        }
+        this.newUserSession(response);
       },
       error => {
         this.authStatusListener.next(false);
@@ -135,40 +102,7 @@ export class AuthService {
     this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any }>
       (API_URL + '/google-login', googleSigninData).subscribe(
         response => {
-          this.token = response.token;
-          if (this.token) {
-            const tokenExpiration = response.expiresIn;
-            this.logoutOnTokenExpire(tokenExpiration);
-            this.isAuthenticated = true;
-            this.authStatusListener.next(true);
-            this.userId = response.userId;
-            this.userEmail = response.userEmail;
-            const userType = response.userType;
-            const likedJobs = JSON.stringify(response.myJobs.saved);
-            const appliedJobs = JSON.stringify(response.myJobs.applied);
-            const notifications = JSON.stringify(response.notifications);
-            const summary = JSON.stringify(response.summary);
-            const avatar = response.avatar;
-            const cv = response.cv;
-            const cvName = response.cvName; 
-            const date = new Date();
-            const tokenExpireDate = new Date(
-              date.getTime() + tokenExpiration * 1000
-            );
-            this.saveAuthData(this.token, 
-                              tokenExpireDate, 
-                              this.userId, 
-                              this.userEmail, 
-                              userType,
-                              likedJobs, 
-                              appliedJobs, 
-                              notifications,
-                              cv,
-                              cvName,
-                              summary,
-                              avatar);
-            this.router.navigate(['/']);
-          }
+          this.newUserSession(response);
         },
         error => {
           this.authStatusListener.next(false);
@@ -184,7 +118,6 @@ export class AuthService {
     this.userEmail = null;
     clearTimeout(this.tokenTimer);
     this.clearAuthData();
-
     this.router.navigate(['/']);
   }
 
