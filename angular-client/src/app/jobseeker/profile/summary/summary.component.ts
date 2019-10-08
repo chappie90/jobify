@@ -18,8 +18,9 @@ export class SummaryComponent implements OnInit {
   private userId: string;
   private fname: boolean;
   private lname: boolean;
+  private headline: boolean;
   private country: boolean;
-  private address: boolean;
+  private city: boolean;
   private avatar: any;
   private avatarImg: any;
   private number: boolean;
@@ -47,10 +48,13 @@ export class SummaryComponent implements OnInit {
       'lname': new FormControl(null, {
         validators: []
       }),
+      'headline': new FormControl(null, {
+        validators: []
+      }),
       'country': new FormControl(null, {
         validators: []
       }),
-      'address': new FormControl(null, {
+      'city': new FormControl(null, {
         validators: []
       }),
       'number': new FormControl(null, {
@@ -63,8 +67,9 @@ export class SummaryComponent implements OnInit {
       this.form.patchValue({
         'fname': summaryObj.fname,
         'lname': summaryObj.lname,
+        'headline': summaryObj.headline,
         'country': summaryObj.country,
-        'address': summaryObj.address,
+        'city': summaryObj.city,
         'number': summaryObj.number
       });
     }
@@ -75,11 +80,14 @@ export class SummaryComponent implements OnInit {
     if (this.form.value.lname) {
       this.lname = true;
     }
+    if (this.form.value.headline) {
+      this.headline = true;
+    }
     if (this.form.value.country) {
       this.country = true;
     }
-    if (this.form.value.address) {
-      this.address = true;
+    if (this.form.value.city) {
+      this.city = true;
     }
     if (this.form.value.number) {
       this.number = true;
@@ -89,7 +97,6 @@ export class SummaryComponent implements OnInit {
     this.avatarSub = this.userService.getAvatarUpdateListener().subscribe(avatarStatus => {
       if (avatarStatus) {
         this.avatarImg = this.authService.getAuthData().avatar;
-        console.log(this.avatarImg);
       }
     });
     this.userSub = this.userService.getUserUpdateListener().subscribe(userStatus => {
@@ -100,8 +107,9 @@ export class SummaryComponent implements OnInit {
           this.form.patchValue({
             'fname': summaryObj.fname,
             'lname': summaryObj.lname,
+            'headline': summaryObj.headline,
             'country': summaryObj.country,
-            'address': summaryObj.address,
+            'city': summaryObj.city,
             'number': summaryObj.number
           });
           if (this.form.value.fname) {
@@ -110,11 +118,14 @@ export class SummaryComponent implements OnInit {
           if (this.form.value.lname) {
             this.lname = true;
           }
+          if (this.form.value.headline) {
+            this.headline = true;
+          }
           if (this.form.value.country) {
             this.country = true;
           }
-          if (this.form.value.address) {
-            this.address = true;
+          if (this.form.value.city) {
+            this.city = true;
           }
           if (this.form.value.number) {
             this.number = true;

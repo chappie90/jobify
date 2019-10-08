@@ -19,23 +19,42 @@
     (submit)=onFormSubmit() 
     class="summary-form"
     [ngClass]="{'edit-mode-form': editMode}">
-    <img (click)="onFormEdit()" src="./assets/images/edit-3.svg" class="trash-icon" />
-    <div class="input-group">
-      <img 
-        src="./assets/images/check-symbol.svg" 
-        class="check-icon" 
-        [ngClass]="{'value-set': fname && !editMode}"/>
-      <label 
-        for="fname" 
-        class="label"
-        [ngClass]="{'edit-mode-label': editMode}">First Name</label>
-      <input
-        class="input"
-        id="fname"
-        type="text"
-        formControlName="fname"
-        [attr.disabled]="editMode? null: ''"
-        [ngClass]="{'edit-mode-input': editMode}"/>
+    <img (click)="onFormEdit()" src="./assets/images/edit-3.svg" class="edit-icon" />
+    <div class="group-container">
+      <div class="input-group">
+        <img 
+          src="./assets/images/check-symbol.svg" 
+          class="check-icon" 
+          [ngClass]="{'value-set': fname && !editMode}"/>
+        <label 
+          for="fname" 
+          class="label"
+          [ngClass]="{'edit-mode-label': editMode}">First Name</label>
+        <input
+          class="input"
+          id="fname"
+          type="text"
+          formControlName="fname"
+          [attr.disabled]="editMode? null: ''"
+          [ngClass]="{'edit-mode-input': editMode}"/>
+      </div>
+      <div class="input-group">
+        <img 
+          src="./assets/images/check-symbol.svg" 
+          class="check-icon" 
+          [ngClass]="{'value-set': lname && !editMode}"/>
+        <label 
+          for="lname" 
+          class="label"
+          [ngClass]="{'edit-mode-label': editMode}">Last Name</label>
+        <input
+          class="input"
+          id="lname"
+          type="text"
+          formControlName="lname"
+          [attr.disabled]="editMode? null: ''"
+          [ngClass]="{'edit-mode-input': editMode}"/>
+      </div>
     </div>
     <div class="input-group">
       <img 
@@ -43,52 +62,57 @@
         class="check-icon" 
         [ngClass]="{'value-set': lname && !editMode}"/>
       <label 
-        for="lname" 
+        for="headline" 
         class="label"
-        [ngClass]="{'edit-mode-label': editMode}">Last Name</label>
-      <input
-        class="input"
-        id="lname"
+        [ngClass]="{'edit-mode-label': editMode}">Headline</label>
+      <textarea
+        rows="2"
+        maxlength="100"
+        class="textarea"
+        id="headline"
         type="text"
-        formControlName="lname"
-        [attr.disabled]="editMode? null: ''"
-        [ngClass]="{'edit-mode-input': editMode}"/>
+        formControlName="headline"
+        *ngIf="editMode"
+        [ngClass]="{'edit-mode-input': editMode}"></textarea>
+      <div *ngIf="!editMode" class="textarea-output">{{ form.value.headline }}</div>
     </div>
-    <div class="input-group">
-      <img 
-        src="./assets/images/check-symbol.svg" 
-        class="check-icon" 
-        [ngClass]="{'value-set': country && !editMode}"/>
-      <label 
-        for="country" 
-        class="label"
-        [ngClass]="{'edit-mode-label': editMode}">Country of Residence</label>
-      <select 
-        class="select"
-        id="country"
-        formControlName="country"
-        [attr.disabled]="editMode? null: ''"
-        [ngClass]="{'edit-mode-select': editMode}">
-        <option value="0" selected="selected">Select country</option>
-        <option *ngFor="let c of countries" [ngValue]="c">{{ c }}</option>
-      </select> 
-    </div>
-    <div class="input-group">
-      <img 
-        src="./assets/images/check-symbol.svg" 
-        class="check-icon" 
-        [ngClass]="{'value-set': address && !editMode}"/>
-      <label 
-        for="address" 
-        class="label"
-        [ngClass]="{'edit-mode-label': editMode}">Address</label>
-      <input
-        class="input"
-        id="address"
-        type="text"
-        formControlName="address"
-        [attr.disabled]="editMode? null: ''"
-        [ngClass]="{'edit-mode-input': editMode}"/>
+    <div class="group-container">
+      <div class="input-group">
+        <img 
+          src="./assets/images/check-symbol.svg" 
+          class="check-icon" 
+          [ngClass]="{'value-set': country && !editMode}"/>
+        <label 
+          for="country" 
+          class="label"
+          [ngClass]="{'edit-mode-label': editMode}">Country of Residence</label>
+        <select 
+          class="select"
+          id="country"
+          formControlName="country"
+          [attr.disabled]="editMode? null: ''"
+          [ngClass]="{'edit-mode-select': editMode}">
+          <option value="0" selected="selected">Select country</option>
+          <option *ngFor="let c of countries" [ngValue]="c">{{ c }}</option>
+        </select> 
+      </div>
+      <div class="input-group">
+        <img 
+          src="./assets/images/check-symbol.svg" 
+          class="check-icon" 
+          [ngClass]="{'value-set': city && !editMode}"/>
+        <label 
+          for="city" 
+          class="label"
+          [ngClass]="{'edit-mode-label': editMode}">City</label>
+        <input
+          class="input"
+          id="city"
+          type="text"
+          formControlName="city"
+          [attr.disabled]="editMode? null: ''"
+          [ngClass]="{'edit-mode-input': editMode}"/>
+      </div>
     </div>
     <div class="input-group">
       <img 

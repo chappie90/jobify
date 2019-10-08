@@ -16,8 +16,9 @@ const userSchema = mongoose.Schema({
     summary: {
       fname: String,
       lname: String,
+      headline: String,
       country: String,
-      address: String,
+      city: String,
       number: Number,
       avatarPath: String
     }
