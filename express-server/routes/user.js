@@ -63,7 +63,9 @@ router.post('/signup', (req, res, next) => {
         password: hash,
         type: req.body.type,
         notifications: [{ date: new Date(), type: 'join', notification: signupNotification, status: 0 }],
-        newNotifications: 1 
+        newNotifications: 1,
+        cvPath: '',
+        cvName: '' 
       });
       user.save()
       .then(newUser => {
@@ -84,8 +86,8 @@ router.post('/signup', (req, res, next) => {
             },
             notifications: newUser.notifications,
             newNotifications: newUser.newNotifications,
-            cv: '',
-            cvName: '',
+            cv: newUser.cvPath,
+            cvName: newUser.cvName,
             summary: {}
           });  
       })
