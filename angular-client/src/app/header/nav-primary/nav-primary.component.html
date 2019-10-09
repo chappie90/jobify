@@ -37,8 +37,8 @@
           <li *ngFor="let n of notifications" class="notifications-item">
               <img *ngIf="n.type === 'join'" class="notifications-img" src="./assets/images/welcome-alt.svg" />
               <img *ngIf="n.type === 'apply'" class="notifications-img" src="./assets/images/employee.svg" />
-              <span class="notifications-msg">{{ n.notification }}
-              </span>
+              <span class="notifications-msg">{{ n.notification }}</span>
+              <span class="notifications-date">{{ n.datePosted }}</span>
           </li>
           <li class="notifications-item">
             <a

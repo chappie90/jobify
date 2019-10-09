@@ -13,11 +13,19 @@
 .item {
   display: flex;
   align-items: center;
-  padding: 2rem 4rem;
+  position: relative;
+  padding: 2rem 5rem 2rem 4rem;
 
   &:not(:last-of-type) {
     border-bottom: 1px solid $grey-medium;
   }
+}
+
+.notification-date {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  color: $grey;
 }
 
 .img {

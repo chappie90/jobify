@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { Subscription } from 'rxjs';
+import * as moment from 'moment';
 
 import { AuthService } from '../../auth/auth.service';
 import { UserService } from '../../services/user.service';
@@ -88,7 +89,26 @@ export class NavPrimaryComponent implements OnInit, OnDestroy {
   getNotifications() {
     let notiArray = JSON.parse(localStorage.getItem('notifications'));
     notiArray.sort((a, b) => b.date.localeCompare(a.date));
-    this.notifications = notiArray.slice(0, 3);
+    let notifications = notiArray.slice(0, 3);
+    this.notifications = notifications.map(notification => {
+      let dateReceived = moment(notification.date);
+      let postedDaysAgo: moment.Moment = moment().diff(dateReceived, 'days');
+      let postedHoursAgo: moment.Moment = moment().diff(dateReceived, 'hours');
+      let postedMinutesAgo: moment.Moment = moment().diff(dateReceived, 'minutes');
+      let postedTimeAgo;
+      if (postedDaysAgo > 0) {
+        postedTimeAgo = postedDaysAgo + 'd';
+      } else if (postedHoursAgo > 0 ) {
+        postedTimeAgo = postedHoursAgo + 'h';
+      } else {
+        postedTimeAgo = postedMinutesAgo + 'm';
+      }
+      return {
+        type: notification.type,
+        notification: notification.notification,
+        datePosted: postedTimeAgo
+      }
+    });
     this.userService.clearNotifications(this.userId);
   }
   
