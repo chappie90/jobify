@@ -9,7 +9,14 @@ const userSchema = mongoose.Schema({
     applied: Array,
     saved: Array,
   },
-  notifications: Array,
+  notifications: [
+    {
+      date: { type: Date, required: true },
+      type: { type: String, required: true },
+      notification: { type: String, required: true },
+      status: { type: Boolean, required: true } 
+    }
+  ],
   cvPath: String,
   cvName: String,
   profile: {

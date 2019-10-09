@@ -13,6 +13,8 @@ export class NotificationsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.notifications = JSON.parse(localStorage.getItem('notifications'));
+    this.notifications.sort((a, b) => b.date.localeCompare(a.date));
+    console.log(this.notifications);
   }
 
   ngOnDestroy() {

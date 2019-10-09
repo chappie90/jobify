@@ -62,7 +62,7 @@ router.post('/signup', (req, res, next) => {
         email: req.body.email,
         password: hash,
         type: req.body.type,
-        notifications: [{ date: new Date(), type: 'join', notification: signupNotification, read: 0 }]
+        notifications: [{ date: new Date(), type: 'join', notification: signupNotification, status: 0 }]
       });
       user.save()
       .then(response => {
@@ -158,7 +158,7 @@ router.post('/google-login', (req, res, next) => {
             email: req.body.email,
             password: req.body.token,
             type: req.body.type,
-            notifications: [{ date: new Date(), type: 'join', notification: signupNotification, read: 0 }]
+            notifications: [{ date: new Date(), type: 'join', notification: signupNotification, status: 0 }]
           });
           user.save()
           .then(response => {
@@ -320,7 +320,7 @@ router.post(
                                       date: new Date(), 
                                       type: 'apply', 
                                       notification: appliedNotification, 
-                                      read: 0 
+                                      status: 0 
                                     }
                     }
           }, {new: true}
