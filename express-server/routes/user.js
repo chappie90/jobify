@@ -65,7 +65,12 @@ router.post('/signup', (req, res, next) => {
         notifications: [{ date: new Date(), type: 'join', notification: signupNotification, status: 0 }],
         newNotifications: 1,
         cvPath: '',
-        cvName: '' 
+        cvName: '',
+        profile: {
+          summary: {
+            avatarPath: ''
+          }
+        }
       });
       user.save()
       .then(newUser => {
@@ -88,7 +93,8 @@ router.post('/signup', (req, res, next) => {
             newNotifications: newUser.newNotifications,
             cv: newUser.cvPath,
             cvName: newUser.cvName,
-            summary: {}
+            summary: {},
+            avatarPath: newUser.profile.summary.avatarPath
           });  
       })
       .catch(err => {
@@ -127,7 +133,8 @@ router.post('/login', (req, res, next) => {
           newNotifications: fetchedUser.newNotifications,
           cv: fetchedUser.cvPath,
           cvName: fetchedUser.cvName,
-          summary: fetchedUser.profile.summary 
+          summary: fetchedUser.profile.summary,
+          avatarPath: fetchedUser.profile.summary.avatarPath 
         });
       } else {
         return res.status(401).json({

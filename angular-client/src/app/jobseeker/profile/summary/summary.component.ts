@@ -44,6 +44,9 @@ export class SummaryComponent implements OnInit {
         asyncValidators: [mimeType]
       })
     });
+    if (!this.avatarImg) {
+      this.avatarImg = './assets/images/avatar-2.svg';
+    }
     this.form = new FormGroup({
       'fname': new FormControl(null, {
         validators: []
