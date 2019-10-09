@@ -32,7 +32,7 @@
         (click)="getNotifications()"
         class="nav-primary__list-item-link nav-primary__list-item-link--notifications">
         Notifications
-        <span class="notifications-count">3</span>
+        <span *ngIf="newNotificationsCount && newNotificationsCount != 0" class="notifications-count">{{ newNotificationsCount }}</span>
         <ul appDropdown class="notifications-list">
           <li *ngFor="let n of notifications" class="notifications-item">
               <img *ngIf="n.type === 'join'" class="notifications-img" src="./assets/images/welcome-alt.svg" />

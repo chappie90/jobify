@@ -55,8 +55,6 @@ const storageAvatar = multer.diskStorage({
 });
 
 router.post('/signup', (req, res, next) => {
-  let newUser;
-  let token;
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const signupNotification ='Welcome! You have successfully signed up for Jobify!';
@@ -64,23 +62,16 @@ router.post('/signup', (req, res, next) => {
         email: req.body.email,
         password: hash,
         type: req.body.type,
-        notifications: [{ date: new Date(), type: 'join', notification: signupNotification, status: 0 }]
+        notifications: [{ date: new Date(), type: 'join', notification: signupNotification, status: 0 }],
+        newNotifications: 1 
       });
       user.save()
-      .then(response => {
-        newUser = response;
-        token = jwt.sign(
-          { email: response.email, userId: response._id },
+      .then(newUser => {
+        let token = jwt.sign(
+          { email: newUser.email, userId: newUser._id },
           process.env.JWT_KEY,
           { expiresIn: '1h' }
         );
-        return User.aggregate( [
-          { $match: { _id: newUser._id }  },
-          { $project: { 'notifications.type': 'apply' } },
-          { $project: { _id: false, count: { $size: '$notifications' }} }
-        ] );
-      }).then(count => {
-        console.log(count);
          res.status(201).json({
             token: token,
             expiresIn: 3600,
@@ -92,6 +83,7 @@ router.post('/signup', (req, res, next) => {
               saved: []
             },
             notifications: newUser.notifications,
+            newNotifications: newUser.newNotifications,
             cv: '',
             cvName: '',
             summary: {}
@@ -105,7 +97,6 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
   let fetchedUser;
-  let token;
   User.findOne({ email: req.body.email })
     .then(user => {
       if (!user) {
@@ -117,42 +108,30 @@ router.post('/login', (req, res, next) => {
       return bcrypt.compare(req.body.password, user.password);
     })
     .then(result => {
-      if (!result) {
+      if (result) {
+        const token = jwt.sign(
+          { email: fetchedUser.email, userId: fetchedUser._id },
+          process.env.JWT_KEY,
+          { expiresIn: '1h' }
+        );
+        res.status(200).json({
+          token: token,
+          expiresIn: 3600,
+          userId: fetchedUser._id,
+          userEmail: fetchedUser.email,
+          userType: fetchedUser.type,
+          myJobs: fetchedUser.myJobs,
+          notifications: fetchedUser.notifications,
+          newNotifications: fetchedUser.newNotifications,
+          cv: fetchedUser.cvPath,
+          cvName: fetchedUser.cvName,
+          summary: fetchedUser.profile.summary 
+        });
+      } else {
         return res.status(401).json({
           message: 'Invalid user'
         });
       }
-      token = jwt.sign(
-        { email: fetchedUser.email, userId: fetchedUser._id },
-        process.env.JWT_KEY,
-        { expiresIn: '1h' }
-      );
-      return User.aggregate( [
-          { $match: { _id: fetchedUser._id } },
-          { $project: {
-              _id: false,
-              notifications: {$filter: {
-                  input: '$notifications',
-                  as: 'n',
-                  cond: {$eq: ['$$n.status', false]}
-              }}
-          }}
-      ] );
-    }).then(count => {
-      const newNotifications = count[0].notifications.length;
-      res.status(200).json({
-        token: token,
-        expiresIn: 3600,
-        userId: fetchedUser._id,
-        userEmail: fetchedUser.email,
-        userType: fetchedUser.type,
-        myJobs: fetchedUser.myJobs,
-        notifications: fetchedUser.notifications,
-        newNotifications: newNotifications,
-        cv: fetchedUser.cvPath,
-        cvName: fetchedUser.cvName,
-        summary: fetchedUser.profile.summary 
-      });
     })
     .catch(err => {
       res.status(401).json({
@@ -337,6 +316,7 @@ router.post(
       User.findByIdAndUpdate(
           { _id: userId }, 
           { myJobs: { applied: appliedJobs},
+            $inc: { newNotifications: 1 },
             $push: { notifications: { 
                                       date: new Date(), 
                                       type: 'apply', 
@@ -420,7 +400,8 @@ router.post(
             });
             return res.status(200).json({
                 appliedJobs: user.myJobs.applied,
-                notifications: user.notifications
+                notifications: user.notifications,
+                newNotifications: user.newNotifications
             });
           } else {
             return res.status(401).json({
@@ -499,6 +480,31 @@ router.post(
       console.log(err);
       res.status(401).json({
         message: 'Could not update profile summary'
+      });
+    });
+});
+
+router.post(
+  '/notifications/clear',
+  // checkAuth,
+  (req, res, next) => {
+    const userId = req.body.userId;
+    User.findByIdAndUpdate(
+      { _id: userId },
+      { newNotifications: 0 },
+      { new: true }
+    ).then(user => {
+      if (user) {
+        console.log(user);
+        res.status(200).json({
+          notifications: user.notifications,
+          newNotifications: user.newNotifications
+        });
+      }
+    }).catch(err => {
+      console.log(err);
+      res.status(401).json({
+        message: 'Could not clear notifications'
       });
     });
 });

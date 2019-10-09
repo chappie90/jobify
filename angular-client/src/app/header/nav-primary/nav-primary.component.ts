@@ -3,6 +3,7 @@ import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '../../auth/auth.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-nav-primary',
@@ -16,11 +17,15 @@ export class NavPrimaryComponent implements OnInit, OnDestroy {
   private isAuthenticated = false;
   private openDropdown = false;
   private authStatusSub: Subscription;
+  private notificationsSub: Subscription;
   private userType: string;
+  private userId: string;
   private notifications: any;
+  private newNotificationsCount: number;
 
   constructor(private router: Router,
-              private authService: AuthService) {}
+              private authService: AuthService,
+              private userService: UserService) {}
 
   ngOnInit() {
     this.router.events.subscribe((event: Event) => {
@@ -57,11 +62,18 @@ export class NavPrimaryComponent implements OnInit, OnDestroy {
       }
     });
     this.checkToken();
-  //  this.isAuthenticated = this.authService.getIsAuth();
+    this.userId = localStorage.getItem('userId');
+    this.newNotificationsCount = localStorage.getItem('newNotifications');
     this.authStatusSub = this.authService.getAuthStatusListener().subscribe(
       authStatus => {
-        console.log(authStatus);
         this.isAuthenticated = authStatus;
+      }
+    );
+    this.notificationsSub = this.userService.getNotificationsUpdateListener().subscribe(
+      notificationsUpdate => {
+        if (notificationsUpdate) {
+          this.newNotificationsCount = localStorage.getItem('newNotifications');
+        }
       }
     );
   }
@@ -75,9 +87,9 @@ export class NavPrimaryComponent implements OnInit, OnDestroy {
 
   getNotifications() {
     let notiArray = JSON.parse(localStorage.getItem('notifications'));
-    console.log(notiArray);
     notiArray.sort((a, b) => b.date.localeCompare(a.date));
     this.notifications = notiArray.slice(0, 3);
+    this.userService.clearNotifications(this.userId);
   }
   
   onLogout() {

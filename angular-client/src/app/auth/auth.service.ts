@@ -139,7 +139,7 @@ export class AuthService {
               likedJobs: any, 
               appliedJobs: any, 
               notifications: any,
-              newNotifications: string,
+              newNotifications: number,
               cv: string,
               cvName: string,
               summary: any,

@@ -13,6 +13,7 @@ const API_URL = environment.API + '/user';
 export class UserService {
   private avatarUpdated = new Subject<{ status: boolean }>();
   private userUpdated = new Subject<{ jobStatus: boolean, likedJobId: string, appliedJobs: string, cvPath: string, cvName: string, status: boolean}>();
+  private notificationsUpdated = new Subject<boolean>();
   private applyStatus: boolean;
 
   constructor(private http: HttpClient,
@@ -88,6 +89,8 @@ export class UserService {
       this.applyStatus = true;
       localStorage.setItem('appliedJobs', JSON.stringify(response.appliedJobs));
       localStorage.setItem('notifications', JSON.stringify(response.notifications));
+      localStorage.setItem('newNotifications', response.newNotifications);
+      this.notificationsUpdated.next(true);
       this.router.navigate(
         ['/jobs/search'],
         {
@@ -118,6 +121,20 @@ export class UserService {
       localStorage.setItem('avatar', response.avatarPath);
       this.avatarUpdated.next({ status: true });
     });
+  }
+
+  clearNotifications(userId: string) {
+    const userData = { userId: userId };
+    this.http.post<any>(
+      API_URL + '/notifications/clear', userData
+    ).subscribe(response => {
+      localStorage.setItem('newNotifications', response.newNotifications);
+      this.notificationsUpdated.next(true);
+    });
+  }
+
+  getNotificationsUpdateListener() {
+    return this.notificationsUpdated.asObservable();
   }
 
   getUserUpdateListener() {

@@ -17,6 +17,7 @@ const userSchema = mongoose.Schema({
       status: { type: Boolean, required: true } 
     }
   ],
+  newNotifications: Number,
   cvPath: String,
   cvName: String,
   profile: {
