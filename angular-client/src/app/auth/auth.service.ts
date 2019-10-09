@@ -33,6 +33,7 @@ export class AuthService {
   }
 
   newUserSession(userData: any) {
+    console.log(userData);
     this.token = userData.token;
     if (this.token) {
       const tokenExpiration = userData.expiresIn;
@@ -45,6 +46,7 @@ export class AuthService {
       const likedJobs = JSON.stringify(userData.myJobs.saved);
       const appliedJobs = JSON.stringify(userData.myJobs.applied);
       const notifications = JSON.stringify(userData.notifications);
+      const newNotifications = userData.newNotifications;
       const summary = JSON.stringify(userData.summary);
       const avatar = userData.avatarPath;
       const cv = userData.cv;
@@ -61,6 +63,7 @@ export class AuthService {
                             likedJobs, 
                             appliedJobs, 
                             notifications,
+                            newNotifications,
                             cv,
                             cvName,
                             summary,
@@ -86,9 +89,10 @@ export class AuthService {
 
   login(email: string, password: string) {
     const loginData = { email: email, password: password };
-    this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any }>
+    this.http.post<any>
       (API_URL + '/login', loginData).subscribe(
       response => {
+        console.log(response);
         this.newUserSession(response);
       },
       error => {
@@ -135,6 +139,7 @@ export class AuthService {
               likedJobs: any, 
               appliedJobs: any, 
               notifications: any,
+              newNotifications: string,
               cv: string,
               cvName: string,
               summary: any,
@@ -147,6 +152,7 @@ export class AuthService {
     localStorage.setItem('likedJobs', likedJobs);
     localStorage.setItem('appliedJobs', appliedJobs);
     localStorage.setItem('notifications', notifications);
+    localStorage.setItem('newNotifications', newNotifications);
     localStorage.setItem('cv', cv);
     localStorage.setItem('cvName', cvName);
     localStorage.setItem('summary', summary);
@@ -162,6 +168,7 @@ export class AuthService {
     const likedJobs = localStorage.getItem('likedJobs');
     const appliedJobs = localStorage.getItem('appliedJobs');
     const notifications = localStorage.getItem('notifications');
+    const newNotifications = localStorage.getItem('newNotifications');
     const cv = localStorage.getItem('cv');
     const cvName = localStorage.getItem('cvName');
     const summary = localStorage.getItem('summary');
@@ -179,6 +186,7 @@ export class AuthService {
       likedJobs: likedJobs,
       appliedJobs: appliedJobs,
       notifications: notifications,
+      newNotifications: newNotifications,
       cv: cv,
       cvName: cvName,
       summary: summary,
@@ -195,6 +203,7 @@ export class AuthService {
     localStorage.removeItem('likedJobs');
     localStorage.removeItem('appliedJobs');
     localStorage.removeItem('notifications');
+    localStorage.removeItem('newNotifications');
     localStorage.removeItem('cv');
     localStorage.removeItem('cvName');
     localStorage.removeItem('summary');

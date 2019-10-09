@@ -55,6 +55,8 @@ const storageAvatar = multer.diskStorage({
 });
 
 router.post('/signup', (req, res, next) => {
+  let newUser;
+  let token;
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
       const signupNotification ='Welcome! You have successfully signed up for Jobify!';
@@ -66,24 +68,30 @@ router.post('/signup', (req, res, next) => {
       });
       user.save()
       .then(response => {
-        const token = jwt.sign(
+        newUser = response;
+        token = jwt.sign(
           { email: response.email, userId: response._id },
           process.env.JWT_KEY,
           { expiresIn: '1h' }
         );
-          res.status(201).json({
+        return User.aggregate( [
+          { $match: { _id: newUser._id }  },
+          { $project: { 'notifications.type': 'apply' } },
+          { $project: { _id: false, count: { $size: '$notifications' }} }
+        ] );
+      }).then(count => {
+        console.log(count);
+         res.status(201).json({
             token: token,
             expiresIn: 3600,
-            userId: response._id,
-            userEmail: response.email,
-            userType: response.type,
+            userId: newUser._id,
+            userEmail: newUser.email,
+            userType: newUser.type,
             myJobs: {
               applied: [],
               saved: []
             },
-            // likedJobs: [],
-            // appliedJobs: [],
-            notifications: response.notifications,
+            notifications: newUser.notifications,
             cv: '',
             cvName: '',
             summary: {}
@@ -97,6 +105,7 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/login', (req, res, next) => {
   let fetchedUser;
+  let token;
   User.findOne({ email: req.body.email })
     .then(user => {
       if (!user) {
@@ -113,11 +122,24 @@ router.post('/login', (req, res, next) => {
           message: 'Invalid user'
         });
       }
-      const token = jwt.sign(
+      token = jwt.sign(
         { email: fetchedUser.email, userId: fetchedUser._id },
         process.env.JWT_KEY,
         { expiresIn: '1h' }
       );
+      return User.aggregate( [
+          { $match: { _id: fetchedUser._id } },
+          { $project: {
+              _id: false,
+              notifications: {$filter: {
+                  input: '$notifications',
+                  as: 'n',
+                  cond: {$eq: ['$$n.status', false]}
+              }}
+          }}
+      ] );
+    }).then(count => {
+      const newNotifications = count[0].notifications.length;
       res.status(200).json({
         token: token,
         expiresIn: 3600,
@@ -125,9 +147,8 @@ router.post('/login', (req, res, next) => {
         userEmail: fetchedUser.email,
         userType: fetchedUser.type,
         myJobs: fetchedUser.myJobs,
-        // likedJobs: fetchedUser.likedJobs,
-        // appliedJobs: fetchedUser.appliedJobs,
         notifications: fetchedUser.notifications,
+        newNotifications: newNotifications,
         cv: fetchedUser.cvPath,
         cvName: fetchedUser.cvName,
         summary: fetchedUser.profile.summary 

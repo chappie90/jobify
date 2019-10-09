@@ -17,7 +17,6 @@
   left: 0;
   width: 100%;
   display: flex;
-  padding: .9rem;
   z-index: 10;
   background-color: $white;
   justify-content: flex-end;
@@ -36,22 +35,32 @@
 
   &__list-item {
     display: inline-block;
-    margin: 0 .8rem;
     position: relative;
+
+    &:first-of-type {
+      margin: 0 .8rem;
+    }
   }
 
   &__list-item-link {
     color: $black;
-    padding: .8rem 1.2rem;
+    padding: .8rem 1rem;
     border-radius: 4px;
+    display: inline-block;
+    transition: all .3s;
+
     cursor: pointer;
 
     &--notifications {
       background-image: url('../../../assets/images/notifications.svg');
       background-repeat: no-repeat;
-      background-size: 1.8rem;
-      background-position: 0 50%;
-      padding-left: 2.2rem;
+      background-size: 2.1rem;
+      background-position: .6rem 50%;
+      padding-left: 3.2rem;
+
+      &:hover {
+        background-color: $grey-light;
+      }
     }
 
     &--profile {
@@ -62,9 +71,13 @@
       // color: $grey-dark;
       background-image: url('../../../assets/images/profile.svg');
       background-repeat: no-repeat;
-      background-size: 1.8rem;
-      background-position: 0 50%;
-      padding-left: 2.2rem;
+      background-size: 2rem;
+      background-position: .6rem 50%;
+      padding-left: 3.2rem;
+
+      &:hover {
+        background-color: $grey-light;
+      }
     }
     &--profile::after {
      font-family: "Font Awesome 5 Free";
@@ -98,11 +111,11 @@
     cursor: pointer;
     display: block;
     font-size: 1.5rem;
+    font-weight: 400;
     padding: .9rem .9rem .9rem 4.8rem;
 
     &:hover {
       background-color: $grey-medium;
-     // color: $unifier-orange;
     }
   } 
 
@@ -134,7 +147,23 @@
     background-position: 1.6rem 50%;
   } 
 }
-
+.notifications-count {
+  display: inline-block;
+  font-size: 1.1rem;
+  position: absolute;
+  font-weight: bold;
+  top: -.2rem;
+  left: -.3rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $jobseeker-red-darker;
+  color: $white;
+  border-radius: 50%;
+//  z-index: -1;
+}
 .notifications-list {
   position: absolute;
   width: 35rem;
