@@ -1,9 +1,23 @@
 <div class="container">
   <ul class="list">
     <li class="item" *ngFor="let notification of notifications">
-      <img *ngIf="notification.type === 'join'" class="img" src="./assets/images/welcome-alt.svg" />
-      <img *ngIf="notification.type === 'apply'" class="img" src="./assets/images/employee.svg" />
-      <span class="notification-msg">{{ notification.notification }}</span>
+      <div class="main-content">
+        <img *ngIf="notification.type === 'join'" class="img" src="./assets/images/welcome-alt.svg" />
+        <img *ngIf="notification.type === 'apply'" class="img" src="./assets/images/employee.svg" />
+        <span class="notification-msg">{{ notification.notification }}</span>
+      </div>
+      <a
+        *ngIf="notification.type === 'apply'"
+        class="prompt-btn"
+        routerLink="/jobs/search">
+         Find more jobs
+      </a>
+      <a
+        *ngIf="notification.type === 'join'"
+        class="prompt-btn"
+        routerLink="/cv">
+         Get started
+      </a>
       <span class="notification-date">{{ notification.datePosted }}</span>
     </li>
   </ul>

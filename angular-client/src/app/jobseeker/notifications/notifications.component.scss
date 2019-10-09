@@ -11,23 +11,33 @@
   border-radius: 4px;
 }
 .item {
-  display: flex;
-  align-items: center;
+  padding: 1.5rem 5rem 1.5rem 2rem;
   position: relative;
-  padding: 2rem 5rem 2rem 4rem;
 
   &:not(:last-of-type) {
     border-bottom: 1px solid $grey-medium;
   }
 }
-
+.main-content {
+  display: flex;
+  align-items: center;
+}
 .notification-date {
   position: absolute;
   bottom: 2rem;
   right: 2rem;
   color: $grey;
+  font-size: 1.4rem;
 }
-
+.prompt-btn {
+  display: inline-block;
+  margin-left: 7rem;
+  background-color: $grey-light;
+  padding: .4rem .8rem;
+  border: 1px solid $grey-dark;
+  color: $grey-dark;
+  border-radius: 4px;
+}
 .img {
   width: 5rem;
   margin-right: 2rem;

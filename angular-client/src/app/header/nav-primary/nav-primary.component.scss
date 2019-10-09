@@ -169,7 +169,7 @@
   width: 37rem;
   top: 3.6rem;
   right: 1.5rem;
-  padding: 1rem;
+  padding: .5rem 1rem;
   background-color: $grey-light;
   -webkit-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
   -moz-box-shadow: 4px 4px 16px -1px rgba(0,0,0,0.26);
@@ -202,10 +202,11 @@
   position: absolute;
   bottom: 1rem;
   right: .6rem;
+  font-size: 1.4rem;
 }
 .show-notifications-link {
   margin: auto;
-  margin-top: 1rem;
+  margin-top: .5rem;
   background-color: $grey-dark;
   color: $white;
   padding: .4rem 1rem;
