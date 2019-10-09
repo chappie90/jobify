@@ -1,1 +1,16 @@
-<h1>Skills</h1>
+<div class="container">
+  <form [formGroup]="form" (submit)="onAddSkill()" class="skills-form">
+    <label for="skill" class="label">Add skill</label>
+    <input 
+      class="input"
+      id="skill"
+      type="text"
+      formControlName="skill"
+      required/>
+    <button class="submit-btn">Add</button>
+    <span *ngIf="{'invalid': form.get('skill').invalid && formSubmitted} && false" class="error-msg">Skill invalid</span>
+  </form>
+  <ul class="list">
+    <li *ngFor="let s of skills" class="item">{{ s.skill }}</li>
+  </ul>
+</div>

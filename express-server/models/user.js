@@ -29,7 +29,13 @@ const userSchema = mongoose.Schema({
       city: String,
       number: Number,
       avatarPath: String
-    }
+    },
+    skills: [
+      {
+        date: { type: Date, required: true },
+        skill: { type: String, required: true }
+      }
+    ]
   }
 });
 

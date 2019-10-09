@@ -1,1 +1,45 @@
 @import '~src/styles.scss';
+
+.container {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.skills-form {;
+  width: 100%;
+  max-width: 50rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+.label {
+  margin-right: 1rem;
+  font-size: 1.8rem;
+}
+.input {
+  padding: .6rem 1rem;
+  border: 1px solid $grey-medium;
+  border-right: none;
+  flex: 1;
+}
+.submit-btn {
+  padding: .7rem 1.8rem;
+  background-color: $jobseeker-red-dark;
+  color: $white;
+}
+.list {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 60rem;
+}
+.item {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  padding: .6rem 1.2rem;
+  background-color: $grey-dark;
+  color: $white;
+  border-radius: 4px
+}

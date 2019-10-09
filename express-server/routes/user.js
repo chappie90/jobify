@@ -494,6 +494,36 @@ router.post(
 });
 
 router.post(
+  '/profile/skills',
+  // checkAuth,
+  (req, res, next) => {
+    const userId = req.body.userId;
+    const skill = req.body.formData.skill;
+    console.log(skill);
+    User.findByIdAndUpdate(
+      { _id: userId },
+      { $push: {
+          'profile.skills':
+              { date: new Date(), 
+                skill: skill
+              }
+        }
+      },
+      { new: true }
+    ).then(user => {
+      console.log(user);
+      res.status(200).json({
+        skills: user.profile.skills
+      });
+    }).catch(err => {
+      console.log(err);
+      res.status(401).json({
+        message: 'Could not add skill'
+      });
+    });
+});
+
+router.post(
   '/notifications/clear',
   // checkAuth,
   (req, res, next) => {

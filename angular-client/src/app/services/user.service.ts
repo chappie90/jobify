@@ -14,6 +14,7 @@ export class UserService {
   private avatarUpdated = new Subject<{ status: boolean }>();
   private userUpdated = new Subject<{ jobStatus: boolean, likedJobId: string, appliedJobs: string, cvPath: string, cvName: string, status: boolean}>();
   private notificationsUpdated = new Subject<boolean>();
+  private skillsUpdated = new Subject<boolean>();
   private applyStatus: boolean;
 
   constructor(private http: HttpClient,
@@ -131,6 +132,21 @@ export class UserService {
       localStorage.setItem('newNotifications', response.newNotifications);
       this.notificationsUpdated.next(true);
     });
+  }
+
+  addSkill(formData: any, userId: string) {
+    const skillsData = { formData: formData, userId: userId };
+    this.http.post<any>(
+      API_URL + '/profile/skills', skillsData
+    ).subscribe(response => {
+      const skills = JSON.stringify(response.skills);
+      localStorage.setItem('skills', skills);
+      this.skillsUpdated.next(true);
+    });  
+  }
+
+  getSkillsUpdateListener() {
+    return this.skillsUpdated.asObservable();
   }
 
   getNotificationsUpdateListener() {
