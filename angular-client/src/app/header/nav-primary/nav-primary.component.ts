@@ -74,7 +74,7 @@ export class NavPrimaryComponent implements OnInit, OnDestroy {
   }
 
   getNotifications() {
-    this.notifications = JSON.parse(localStorage.getItem('notifications'));
+    this.notifications = JSON.parse(localStorage.getItem('notifications')).slice(0, 3);
   }
   
   onLogout() {

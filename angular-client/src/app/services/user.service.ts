@@ -87,6 +87,7 @@ export class UserService {
       const queryParams = { apply: 'success'};
       this.applyStatus = true;
       localStorage.setItem('appliedJobs', JSON.stringify(response.appliedJobs));
+      localStorage.setItem('notifications', JSON.stringify(response.notifications));
       this.router.navigate(
         ['/jobs/search'],
         {

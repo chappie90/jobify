@@ -57,7 +57,7 @@ const storageAvatar = multer.diskStorage({
 router.post('/signup', (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then(hash => {
-      const signupNotification ='Welcome! You have successfully signed up for Jobify';
+      const signupNotification ='Welcome! You have successfully signed up for Jobify!';
       const user = new User({
         email: req.body.email,
         password: hash,
@@ -315,18 +315,14 @@ router.post(
       const appliedNotification = `Congratulations! You have successfully applied for the role of ${jobTitle}!`;
       User.findByIdAndUpdate(
           { _id: userId }, 
-          // { appliedJobs: appliedJobs, 
-          { myJobs: {
-              applied: appliedJobs
-            },
-            $push: 
-              { notifications: { 
-                                date: new Date(), 
-                                type: 'apply', 
-                                notification: appliedNotification, 
-                                read: 0 
-                                }
-              }
+          { myJobs: { applied: appliedJobs},
+            $push: { notifications: { 
+                                      date: new Date(), 
+                                      type: 'apply', 
+                                      notification: appliedNotification, 
+                                      read: 0 
+                                    }
+                    }
           }, {new: true}
         ).then(user => {
           if (user) {
@@ -402,8 +398,8 @@ router.post(
               }
             });
             return res.status(200).json({
-                // appliedJobs: user.appliedJobs
-                appliedJobs: user.myJobs.applied
+                appliedJobs: user.myJobs.applied,
+                notifications: user.notifications
             });
           } else {
             return res.status(401).json({
