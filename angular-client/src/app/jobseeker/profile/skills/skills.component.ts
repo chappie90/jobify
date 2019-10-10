@@ -47,5 +47,8 @@ export class SkillsComponent implements OnInit {
     this.userService.addSkill(this.form.value, this.userId);
   }
 
+  onRemoveSkill(skill) {
+    this.userService.removeSkill(skill._id, this.userId);
+  }
 
 }

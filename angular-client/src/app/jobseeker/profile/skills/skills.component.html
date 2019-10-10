@@ -11,7 +11,10 @@
     <span *ngIf="{'invalid': form.get('skill').invalid && formSubmitted} && false" class="error-msg">Skill invalid</span>
   </form>
   <ul class="list">
-    <li *ngFor="let s of skills" class="item">
+    <li 
+      *ngFor="let s of skills" 
+      (click)="onRemoveSkill(s)"
+      class="item">
       <span class="skill-name">{{ s.skill }}</span>
     </li>
   </ul>

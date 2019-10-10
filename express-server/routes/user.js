@@ -524,6 +524,32 @@ router.post(
 });
 
 router.post(
+  '/profile/skills/remove',
+  // checkAuth,
+  (req, res, next) => {
+    const skillId = req.body.skillId;
+    const userId = req.body.userId;
+    console.log(skillId);
+    console.log(userId);
+    User.findByIdAndUpdate(
+      { _id: userId },
+      { $pull: { 'profile.skills': { _id: skillId } } },
+      { new: true }
+    ).then(response => {
+      console.log(response);
+      res.status(200).json({
+        message: 'Skill removed'
+      });
+    }).catch(err => {
+      console.log(err);
+      res.status(401).json({
+        message: 'Could not remove skill'
+      });
+    });
+  }
+);
+
+router.post(
   '/notifications/clear',
   // checkAuth,
   (req, res, next) => {
