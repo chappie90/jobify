@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -27,7 +27,7 @@ export class SkillsComponent implements OnInit {
     });
     this.form = new FormGroup({
       'skill': new FormControl(null, {
-        validators: [Validators.required]
+        validators: [Validators.required, this.skillExists.bind(this)]
       })
     });
     this.userId = localStorage.getItem('userId');
@@ -45,9 +45,6 @@ export class SkillsComponent implements OnInit {
       this.formSubmitted = true;
       return;
     }
-    if (this.skills.some(s => s.skill === this.form.value.skill)) {
-      return;
-    }
     this.userService.addSkill(this.form.value, this.userId);
     this.form.patchValue({
       'skill': ''
@@ -56,6 +53,13 @@ export class SkillsComponent implements OnInit {
 
   onRemoveSkill(skill) {
     this.userService.removeSkill(skill._id, this.userId);
+  }
+
+  skillExists(control: FormControl): {[s: string]: boolean} {
+    if (this.skills.some(s => s.skill === control.value)) {
+      return { 'skillAlreadyExists': true };
+    }
+    return null;
   }
 
 }
