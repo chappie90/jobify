@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 
+import { ValidateSkill } from './skill.validator.ts';
 import { UserService } from '../../../services/user.service';
 
 @Component({
@@ -44,7 +45,13 @@ export class SkillsComponent implements OnInit {
       this.formSubmitted = true;
       return;
     }
+    if (this.skills.some(s => s.skill === this.form.value.skill)) {
+      return;
+    }
     this.userService.addSkill(this.form.value, this.userId);
+    this.form.patchValue({
+      'skill': ''
+    });
   }
 
   onRemoveSkill(skill) {

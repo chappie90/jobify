@@ -19,13 +19,23 @@
 }
 .input {
   padding: .6rem 1rem;
-  border: 1px solid $grey-medium;
+  border: 1px solid $grey-medium  ;
   border-right: none;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
   flex: 1;
+  outline: 0;
+  transition: all .3s;
+}
+.input:focus {
+
 }
 .submit-btn {
   padding: .7rem 1.8rem;
   background-color: $jobseeker-red-dark;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  transition: all .3s;
   color: $white;
 }
 .list {
@@ -47,7 +57,7 @@
   background-image: url('../../../../assets/images/delete-2.svg');
   background-size: 2rem;
   background-repeat: no-repeat;
-  background-position: -100% 50%;
+  background-position: -300% 50%;
   overflow: hidden;
 
   &:hover {
@@ -55,7 +65,7 @@
     background-position: 50% 50%;
   }
   &:hover .skill-name {
-    transform: translateX(200%);
+    transform: translateX(300%);
   }
 }
 .skill-name {
