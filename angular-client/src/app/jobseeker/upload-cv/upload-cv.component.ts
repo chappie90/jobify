@@ -11,7 +11,7 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./upload-cv.component.scss']
 })
 export class UploadCVComponent implements OnInit {
-  @ViewChild('cvForm') cvForm: FormGroupDirective;
+  @ViewChild('cvForm') cvForm: FormGroup;
 
   private userId: string;
 

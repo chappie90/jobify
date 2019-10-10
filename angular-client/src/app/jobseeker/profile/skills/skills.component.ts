@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { UserService } from '../../../services/user.service';
@@ -16,9 +17,13 @@ export class SkillsComponent implements OnInit {
   private formSubmitted: boolean;
   private userSub: Subscription;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.skills = JSON.parse(localStorage.getItem('skills'));
+    });
     this.form = new FormGroup({
       'skill': new FormControl(null, {
         validators: [Validators.required]
@@ -29,7 +34,6 @@ export class SkillsComponent implements OnInit {
       skillsStatus => {
         if (skillsStatus) {
           this.skills = JSON.parse(localStorage.getItem('skills'));
-          console.log(this.skills);
         }
       }
     );
