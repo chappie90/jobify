@@ -1,1 +1,9 @@
 @import '~src/styles.scss';
+
+.add-btn {
+  margin: 1rem;
+  padding: .8rem 1.4rem;
+  background-color: $employer-green;
+  color: $white;
+  border-radius: 4px;
+}

@@ -536,7 +536,6 @@ router.post(
       { $pull: { 'profile.skills': { _id: skillId } } },
       { new: true }
     ).then(response => {
-      console.log(response);
       res.status(200).json({
         message: 'Skill removed'
       });
