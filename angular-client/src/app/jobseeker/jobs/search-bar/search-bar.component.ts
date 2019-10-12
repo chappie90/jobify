@@ -9,6 +9,7 @@ import {
   ActivatedRoute, 
   Params } from '@angular/router';
 
+import { CompleterService, CompleterData } from 'ng2-completer';
 import { JobsService } from '../../../services/jobs.service';
 
 @Component({
@@ -18,6 +19,7 @@ import { JobsService } from '../../../services/jobs.service';
 })
 export class SearchBarComponent implements OnInit {
   form: FormGroup;
+  protected city: string;
   private jobsSearch: boolean = false;
   private openDropdown: boolean = false;
   private filterDateActive: boolean = false;
@@ -167,6 +169,37 @@ export class SearchBarComponent implements OnInit {
     this.filterDateActive = false;
     this.filterTypeActive = false;
     this.filterSalaryActive = false;
+  }
+
+  protected cities = [
+    'Birmingham', 
+    'Bradford', 
+    'Bristol', 
+    'Edinburgh', 
+    'Glasgow', 
+    'Leeds', 
+    'Liverpool', 
+    'London', 
+    'Manchester',
+    'Newcastle',
+    'Nottingham',
+    'Portsmouth',
+    'Sheffield',
+    'Southhampton'
+  ];
+
+  locationSelected(event: Event) {
+    if (event.title) {
+    this.form.patchValue({
+      'location': event.title
+    });
+    }
+  }
+
+  cityChanged(city) {
+    this.form.patchValue({
+      'location': city
+    });
   }
 
 }

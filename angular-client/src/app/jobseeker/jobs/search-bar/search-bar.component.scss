@@ -310,3 +310,16 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
    color: $white;
   }
 }
+.ng2-completer {
+  background-color: red;
+}
+.completer-holder {
+  background-color: grey;
+}
+:host(.completer-input) {
+  background-color: blue;
+}
+
+.completer-dropdown {
+ 
+}

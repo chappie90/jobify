@@ -4,7 +4,8 @@
     class="search__form" 
     [ngClass]="{'search__form--pristine': !jobsSearch}"
     (submit)="onSearch()" 
-    [formGroup]="form">
+    [formGroup]="form"
+    autocomplete="off">
     <div class="search__input-group">
       <label 
         for="title" 
@@ -27,6 +28,7 @@
         [ngClass]="{'search__input-label--pristine': !jobsSearch}">Search city</label>
       <div class="search__input-icon search__input-icon--location"></div>
         <input
+          style="visibility: hidden; height: 0; width: 0"
           class="search__form-input"
           [ngClass]="{'search__form-input--pristine': !jobsSearch}"
           type="text"
@@ -35,6 +37,16 @@
           id="location"
           placeholder="Location"/>
     </div>
+    <ng2-completer 
+      [(ngModel)]="city" 
+      [datasource]="cities" 
+      [minSearchLength]="0" 
+      [autoMatch]="false"
+      [ngModelOptions]="{standalone: true}"
+      [fillHighlighted]="false"
+      [inputClass]="'search__form-input'"
+      (keydown)="cityChanged(city)">
+    </ng2-completer>
     <button 
       class="button search__button"
       [ngClass]="{'search__button--pristine': !jobsSearch}">Find jobs</button>

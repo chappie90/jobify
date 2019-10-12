@@ -12,7 +12,7 @@ import { mimeType } from '../../jobs/apply/mime-type.validator';
   styleUrls: ['./view-cv.component.scss']
 })
 export class ViewCVComponent implements OnInit, OnDestroy {
-  @ViewChild('cvForm') cvForm: FormGroupDirective;
+  @ViewChild('cvForm') cvForm: FormGroup;
   private cv: string;
   private cvName: string;
   private userId: string;
