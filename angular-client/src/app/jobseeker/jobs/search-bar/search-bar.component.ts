@@ -20,6 +20,7 @@ import { JobsService } from '../../../services/jobs.service';
 export class SearchBarComponent implements OnInit {
   form: FormGroup;
   protected city: string;
+  private title: string;
   private jobsSearch: boolean = false;
   private openDropdown: boolean = false;
   private filterDateActive: boolean = false;
@@ -98,6 +99,8 @@ export class SearchBarComponent implements OnInit {
             'location': params.location,
             'date': params.date
           });
+          this.title = params.title;
+          this.city = params.location;
       }
     });
   }
@@ -171,7 +174,13 @@ export class SearchBarComponent implements OnInit {
     this.filterSalaryActive = false;
   }
 
-  protected cities = [
+  titles = [
+    'Web Developer',
+    'Marketing Executive',
+    'Graphic Designer'
+  ];
+
+  cities = [
     'Birmingham', 
     'Bradford', 
     'Bristol', 
@@ -188,12 +197,10 @@ export class SearchBarComponent implements OnInit {
     'Southhampton'
   ];
 
-  locationSelected(event: Event) {
-    if (event.title) {
+  titleChanged(title) {
     this.form.patchValue({
-      'location': event.title
+      'title': title
     });
-    }
   }
 
   cityChanged(city) {

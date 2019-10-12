@@ -106,11 +106,12 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
   }
 
   &__form-input {
-    padding: .7rem 1.6rem .7rem 3.2rem;
-    border-radius: 4px;
-    border: 1px solid $grey;
-    outline: none;
-    font-size: 1.5rem;
+      padding: .7rem 1.6rem .7rem 3.2rem;
+      border-radius: 4px;
+      border: 1px solid $grey;
+      outline: none;
+      position: absolute;
+      font-size: 1.5rem;
 
     &--pristine {
       font-size: 1.8rem;
@@ -120,6 +121,13 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
     &:focus {
       background-color: $grey-light;
     }
+  }
+
+  .hide-input {
+    visibility: hidden;
+    position: absolute;
+    height: 0;
+    width: 0;
   }
 
   &__filters-list {
@@ -309,17 +317,4 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
   &::after {
    color: $white;
   }
-}
-.ng2-completer {
-  background-color: red;
-}
-.completer-holder {
-  background-color: grey;
-}
-:host(.completer-input) {
-  background-color: blue;
-}
-
-.completer-dropdown {
- 
 }
