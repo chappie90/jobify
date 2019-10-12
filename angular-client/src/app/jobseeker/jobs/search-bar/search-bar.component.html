@@ -14,7 +14,6 @@
       <div class="search__input-icon search__input-icon--search"></div>
         <input
           class="search__form-input hide-input"
-          [ngClass]="{'search__form-input--pristine': !jobsSearch}"
           type="text"
           name="title"
           formControlName="title"
@@ -27,8 +26,9 @@
           [autoMatch]="false"
           [ngModelOptions]="{standalone: true}"
           [fillHighlighted]="false"
-          [inputClass]="'search__form-input'"
+          [inputClass]="'autocomplete-input'"
           (keydown)="titleChanged(title)"
+          [ngClass]="{'autocomplete-input-pristine': jobsSearch}"
           placeholder="Job title">
         </ng2-completer>
     </div>
@@ -40,7 +40,6 @@
       <div class="search__input-icon search__input-icon--location"></div>
         <input
           class="search__form-input hide-input"
-          [ngClass]="{'search__form-input--pristine': !jobsSearch}"
           type="text"
           name="location"
           formControlName="location"
@@ -53,8 +52,9 @@
           [autoMatch]="false"
           [ngModelOptions]="{standalone: true}"
           [fillHighlighted]="false"
-          [inputClass]="'search__form-input'"
+          [inputClass]="'autocomplete-input'"
           (keydown)="cityChanged(city)"
+          [ngClass]="{'autocomplete-input-pristine': jobsSearch}"
           placeholder="Location">
         </ng2-completer>
     </div>

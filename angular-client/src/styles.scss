@@ -55,25 +55,26 @@ button {
 }
 
 // Ng2 Autocomplete styling - Job title, Location inputs
-.search__form-input {
-  padding: 1.05rem 1.6rem 1.05rem 3.2rem;
+.autocomplete-input {
+  padding: .9rem 1.6rem .9rem 3.2rem;
   border-radius: 4px;
   width: 30rem;
   border: 1px solid $grey;
   outline: none;
-  font-size: 1.5rem;
-
-&--pristine {
-  font-size: 1.8rem;
-  padding: 1rem 1.6rem 1rem 3.2rem;
-}
+  font-size: 1.7rem;
 
   &:focus {
     background-color: $grey-light;
   }
+
+  &-pristine input {
+    width: auto;
+    padding: .75rem 1.6rem .75rem 3.2rem;
+    font-size: 1.5rem;
+  }
 }
 .completer-dropdown {
     max-height: 25rem !important;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
 }
