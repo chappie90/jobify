@@ -1,41 +1,24 @@
 <form [formGroup]="form" class="form" (submit)="onFormSubmit()">
   <button type="button" class="add-btn" (click)="onAddEducation()">Add Education<span> +</span></button>
-  <div formGroupName="education">
-    <div class="input-group">
-      <label for="school" class="label">School</label>
-      <input type="text" id="school" class="input" formControlName="school" />
-    </div>
-    <div class="input-group">
-      <label for="degree" class="label">Degree</label>
-      <input type="text" id="degree" class="input" formControlName="degree" />
-    </div>
-    <div class="input-group">
-      <label for="field" class="label">Field of study</label>
-      <input type="text" id="field" class="input" formControlName="field" />
-    </div>
-    <div class="input-group">
-      <label for="from-date" class="label">Start Year</label>
-      <input type="date" id="from-date" class="input" formControlName="fromDate" />
-      <label for="to-date" class="label">End Year (or expected)</label>
-      <input type="date" id="to-date" class="input" formControlName="toDate" />
-    </div>
-     <div class="input-group">
-      <label for="grade" class="label">Grade</label>
-      <input type="text" id="grade" class="input" formControlName="grade" />
-    </div>
-     <div class="input-group">
-      <label for="description" class="label">Description</label>
-      <textarea  id="description" class="input" formControlName="description">      
-      </textarea> 
-    </div>
-  </div>
-  <div formArrayName="test">
+  <div formArrayName="education">
     <div class="form-group"
-      *ngFor="let t of form.get('test').controls; let i = index">
-      <label>this is a test</label>
-      <input type="text" formControlName="test.name">
-      <input type="text" formControlName="i">
+      *ngFor="let e of form.get('education').controls; let i = index">
+      <div [formGroupName]="i">
+         <div class="input-group">
+            <label for="school" class="label">School</label>
+            <input type="text" id="school" class="input" formControlName="school" />
+          </div>
+          <div class="input-group">
+            <label for="degree" class="label">Degree</label>
+            <input type="text" id="degree" class="input" formControlName="degree" />
+          </div>
+        <div class="input-group">
+          <label for="field" class="label">Field of study</label>
+          <input type="text" id="field" class="input" formControlName="field" />
+        </div>
+      </div>
     </div>
   </div>
+  <button type="submit" class="submit-btn">Submit</button>
 </form>
 

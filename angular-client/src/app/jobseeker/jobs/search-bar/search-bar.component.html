@@ -28,6 +28,7 @@
           [fillHighlighted]="false"
           [inputClass]="'autocomplete-input'"
           (keydown)="titleChanged(title)"
+          (keyup)="getTitles(title)"
           [ngClass]="{'autocomplete-input-pristine': jobsSearch}"
           placeholder="Job title">
         </ng2-completer>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-education',
@@ -8,46 +8,76 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class EducationComponent implements OnInit {
   form: FormGroup;
+  education: FormArray;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.form = new FormGroup({
-      'education': new FormGroup({
-        'school': new FormControl(null, {
-          validators: []
-        }),
-        'degree': new FormControl(null, {
-          validators: []
-        }),
-        'field': new FormControl(null, {
-          validators: []
-        }),
-        'fromDate': new FormControl(null, {
-          validators: []
-        }),
-        'toDate': new FormControl(null, {
-          validators: []
-        }),
-        'grade': new FormControl(null, {
-          validators: []
-        }),
-        'description': new FormControl(null, {
-          validators: []
-        })
+    this.form = this.formBuilder.group({
+      education: this.formBuilder.array([ this.addEducation() ])
+    });
+
+
+
+
+
+
+
+
+    // this.form = new FormGroup({
+    //   'education': new FormGroup({
+    //     'school': new FormControl(null, {
+    //       validators: [Validators.required]
+    //     }),
+    //     'degree': new FormControl(null, {
+    //       validators: [Validators.required]
+    //     }),
+    //     'field': new FormControl(null, {
+    //       validators: [Validators.required]
+    //     }),
+    //     'fromDate': new FormControl(null, {
+    //       validators: [Validators.required]
+    //     }),
+    //     'toDate': new FormControl(null, {
+    //       validators: [Validators.required]
+    //     }),
+    //     'grade': new FormControl(null, {
+    //       validators: [Validators.required]
+    //     }),
+    //     'description': new FormControl(null, {
+    //       validators: [Validators.required]
+    //     })
+    //   }),
+    //    'test': new FormArray([])
+    // });
+  }
+
+  addEducation(): FormGroup {
+    return this.formBuilder.group({
+      school: new FormControl(null, {
+         validators: [Validators.required]
       }),
-       'test': new FormArray([])
+      degree: new FormControl(null, {
+         validators: [Validators.required]
+      }),
+      field: new FormControl(null, {
+         validators: [Validators.required]
+      })
     });
   }
 
 
+  onAddEducation():void {
+    this.education = this.form.get('education') as FormArray;
+    this.education.push(this.addEducation());
+  }
 
-  onAddEducation() {
-    const control = new FormGroup({
-      'name': new FormControl(null),
-      'age': new FormControl(null)
-    });
-    (<FormArray>this.form.get('test')).push(control);
+  onFormSubmit() {
+    if (this.form.invalid) {
+      console.log(this.form.value);
+      return;
+    }
+        console.log(this.form.value);
   }
 
 }

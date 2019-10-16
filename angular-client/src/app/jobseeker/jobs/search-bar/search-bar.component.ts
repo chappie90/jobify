@@ -8,6 +8,7 @@ import {
   NavigationError, 
   ActivatedRoute, 
   Params } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { CompleterService, CompleterData } from 'ng2-completer';
 import { JobsService } from '../../../services/jobs.service';
@@ -27,12 +28,17 @@ export class SearchBarComponent implements OnInit {
   private filterTypeActive: boolean = false;
   private filterSalaryActive: boolean = false;
   private filtersCount: number = 0;
+  private titlesSub: Subscription;
+  private titles: any;
 
   constructor(private jobsService: JobsService,
               private router: Router,
               private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.titlesSub = this.jobsService.getAutoCompleteTitles().subscribe(response => {
+      this.titles = response.jobs.jobs.map(t => t.job_title);
+    });
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Show loading indicator
@@ -174,12 +180,6 @@ export class SearchBarComponent implements OnInit {
     this.filterSalaryActive = false;
   }
 
-  titles = [
-    'Web Developer',
-    'Marketing Executive',
-    'Graphic Designer'
-  ];
-
   cities = [
     'Birmingham', 
     'Bradford', 
@@ -196,6 +196,10 @@ export class SearchBarComponent implements OnInit {
     'Sheffield',
     'Southhampton'
   ];
+
+  getTitles(title) {
+    this.jobsService.getJobTitles(title);
+  }
 
   titleChanged(title) {
     this.form.patchValue({

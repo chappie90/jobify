@@ -140,6 +140,27 @@ router.post('', (req, res, next) => {
     });  
 });
 
+router.post('/titles', (req, res, next) => {
+  // Job.find({ job_title: { $regex: req.body.title, $options: 'i' } }).limit(10)
+   Job.aggregate(
+      [
+        { '$group': { '_id': '$job_title', 'job_title': { $regex: req.body.title, $options: 'i' }} },
+        { '$limit': 10 }
+      ]
+    )
+    .then(jobs => {
+      res.status(200).json({
+        jobs: jobs
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(401).json({
+          message: 'Could not find any titles'
+        });
+      });
+    })
+});
+
 router.get('/apply', (req, res, next) => {
   const jobId = req.query.id;
   if (jobId) {

@@ -33,7 +33,6 @@ export class AuthService {
   }
 
   newUserSession(userData: any) {
-    console.log(userData);
     this.token = userData.token;
     if (this.token) {
       const tokenExpiration = userData.expiresIn;
@@ -46,7 +45,7 @@ export class AuthService {
       const likedJobs = JSON.stringify(userData.myJobs.saved);
       const appliedJobs = JSON.stringify(userData.myJobs.applied);
       const notifications = JSON.stringify(userData.notifications);
-      const newNotifications = userData.newNotifications;
+      const newNotifications = userData.newNotifications.toString();
       const summary = JSON.stringify(userData.summary);
       const avatar = userData.avatarPath;
       const cv = userData.cv;
@@ -139,7 +138,7 @@ export class AuthService {
               likedJobs: any, 
               appliedJobs: any, 
               notifications: any,
-              newNotifications: number,
+              newNotifications: string,
               cv: string,
               cvName: string,
               summary: any,

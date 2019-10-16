@@ -20,6 +20,7 @@ export class JobsService {
   private myJobsUpdated = new Subject<{ type: string; jobs: Job[] }>();
   private jobSelected = new Subject<{ job: Job }>();
   private jobUpdated = new Subject<{ job: Job }>();
+  private titlesUpdated = new Subject<{ jobs: any }>();
 
   constructor(private http: HttpClient,
               private authService: AuthService) {}
@@ -150,6 +151,19 @@ export class JobsService {
         jobs: [...response.myJobs]
       });
     });
+  }
+
+  getJobTitles(title: string) {
+    const titleData = { title: title };
+    this.http.post<any>(
+      API_URL + '/titles', titleData
+    ).subscribe(response => {
+      this.titlesUpdated.next({ jobs: response });
+    });
+  }
+
+  getAutoCompleteTitles() {
+    return this.titlesUpdated.asObservable();
   }
 
   getJobUpdateListener() {

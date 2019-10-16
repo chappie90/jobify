@@ -22,7 +22,7 @@ export class NavPrimaryComponent implements OnInit, OnDestroy {
   private userType: string;
   private userId: string;
   private notifications: any;
-  private newNotificationsCount: number;
+  private newNotificationsCount: string;
 
   constructor(private router: Router,
               private authService: AuthService,
