@@ -16,40 +16,7 @@ export class EducationComponent implements OnInit {
     this.form = this.formBuilder.group({
       education: this.formBuilder.array([ this.addEducation() ])
     });
-
-
-
-
-
-
-
-
-    // this.form = new FormGroup({
-    //   'education': new FormGroup({
-    //     'school': new FormControl(null, {
-    //       validators: [Validators.required]
-    //     }),
-    //     'degree': new FormControl(null, {
-    //       validators: [Validators.required]
-    //     }),
-    //     'field': new FormControl(null, {
-    //       validators: [Validators.required]
-    //     }),
-    //     'fromDate': new FormControl(null, {
-    //       validators: [Validators.required]
-    //     }),
-    //     'toDate': new FormControl(null, {
-    //       validators: [Validators.required]
-    //     }),
-    //     'grade': new FormControl(null, {
-    //       validators: [Validators.required]
-    //     }),
-    //     'description': new FormControl(null, {
-    //       validators: [Validators.required]
-    //     })
-    //   }),
-    //    'test': new FormArray([])
-    // });
+  // Template access form {{ form.controls.education.controls[i].controls.school.value }}
   }
 
   addEducation(): FormGroup {
@@ -62,7 +29,19 @@ export class EducationComponent implements OnInit {
       }),
       field: new FormControl(null, {
          validators: [Validators.required]
-      })
+      }),
+      grade: new FormControl(null, {
+         validators: [Validators.required]
+      }),
+      from: new FormControl(null, {
+         validators: [Validators.required]
+      }),
+      to: new FormControl(null, {
+         validators: [Validators.required]
+      }),
+      description: new FormControl(null, {
+         validators: [Validators.required]
+      }),
     });
   }
 

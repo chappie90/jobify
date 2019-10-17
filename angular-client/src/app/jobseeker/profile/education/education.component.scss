@@ -1,14 +1,88 @@
 @import '~src/styles.scss';
-
+@keyframes slide-up {
+    0% {
+        opacity: 0;
+        transform: translateY(-5rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.container {
+  display: flex;
+  align-items: flex-start;
+}
 .add-btn {
-  margin: 1rem;
+  margin: 0 1rem;
   padding: .8rem 1.4rem;
   background-color: $employer-green;
   color: $white;
+  font-weight: 400;
   border-radius: 4px;
+  width: 20rem;
+}
+.form {
+  margin-left: 4rem;
+  flex: 1;
+  position: relative;
+  transition: all .3s;
+}
+.form-array {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.form-group {
+  position: relative;
+  padding: 4rem 3rem 2rem;
+  border-radius: 4px;
+  background-color: $grey-light;
+  -webkit-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+  -moz-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+  box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+  margin-bottom: 4rem;
+  margin-top: .3rem;
+  animation: slide-up .4s ease;
+}
+.number {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: $grey;
+  font-size: 2.8rem;
+  font-weight: 700;
+}
+.row {
+  display: flex;
+}
+.input-group {
+  flex: 1;
+  margin: 0 1rem;
+}
+.label {
+  margin: .5rem .2rem;
+  display: inline-block;
+}
+.input {
+  width: 100%;
+  padding: .8rem 1.2rem;
+  border-radius: 4px;
+  border: 1px solid $grey-medium;
+  margin-bottom: .8rem;
+  outline: 0;
+  transition: all .3s;
+
+  &:focus {
+    border: 1px solid $grey-dark;
+  }
 }
 .submit-btn {
   padding: .8rem 1.4rem;
   background-color: $unifier-orange;
   border-radius: 4px;
+  display: block;
+  width: 100%;
+  max-width: 20rem;
+  margin: 2rem auto 0;
+  font-weight: 400;
 }
