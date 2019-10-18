@@ -5,43 +5,45 @@
       <div class="form-group"
         *ngFor="let e of form.get('education').controls; let i = index">
         <div [formGroupName]="i">
+          <span (click)="onFormEdit()" class="edit-icon-wrapper"> 
+            <img src="./assets/images/edit-3.svg" class="edit-icon" />
+          </span>
           <span class="number">{{ i + 1 }}</span>
           <div class="row">
            <div class="input-group">
-              <label for="school" class="label">School</label>
-              <input type="text" id="school" class="input" formControlName="school" />
+              <label [for]="'school-'+i+1" class="label">School</label>
+              <input type="text" [id]="'school-'+i+1" class="input" formControlName="school" />
             </div>
             <div class="input-group">
-              <label for="degree" class="label">Degree</label>
-              <input type="text" id="degree" class="input" formControlName="degree" />
+              <label [for]="'degree-'+i+1" class="label">Degree</label>
+              <input type="text" [id]="'degree-'+i+1" class="input" formControlName="degree" />
             </div>
           </div>
           <div class="row">
             <div class="input-group">
-              <label for="field" class="label">Field of study</label>
-              <input type="text" id="field" class="input" formControlName="field" />
+              <label [for]="'field-'+i+1" class="label">Field of study</label>
+              <input type="text" [id]="'field-'+i+1" class="input" formControlName="field" />
             </div>
             <div class="input-group">
-              <label for="grade" class="label">Grade</label>
-              <input type="text" id="grade" class="input" formControlName="grade" />
+              <label [for]="'grade-'+i+1" class="label">Grade</label>
+              <input type="text" [id]="'grade-'+i+1" class="input" formControlName="grade" />
             </div>
            </div>
            <div class="row">
             <div class="input-group">
-              <label for="from" class="label">Start Date</label>
-              <input type="date" id="from" class="input" formControlName="from" />
+              <label [for]="'from-'+i+1" class="label">Start Date</label>
+              <input type="date" [id]="'from-'+i+1" class="input" formControlName="from" />
             </div>
             <div class="input-group">
-              <label for="to" class="label">End Date (or expected)</label>
-              <input type="date" id="to" class="input" formControlName="to" />
+              <label [for]="'to-'+i+1" class="label">End Date (or expected)</label>
+              <input type="date" [id]="'to-'+i+1" class="input" formControlName="to" />
             </div>
            </div>
            <div class="input-group">
-              <label for="description" class="label">Description</label>
-              <textarea  id="description" class="input" formControlName="description">                
-              </textarea>
+              <label [for]="'description-'+i+1" class="label">Description</label>
+              <textarea  [id]="'description-'+i+1" class="input" formControlName="description"></textarea>
             </div>
-            <button type="submit" class="submit-btn">Save Education</button>
+            <button #submitBtn (click)="formGroupRef(submitBtn.id)" type="submit" [id]="i" class="submit-btn">Save Education</button>
           </div>
         </div>
       </div>

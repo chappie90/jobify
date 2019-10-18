@@ -62,6 +62,7 @@ button {
   border: 1px solid $grey;
   outline: none;
   font-size: 1.7rem;
+  transition: all .3s;
 
   &:focus {
     background-color: $grey-light;

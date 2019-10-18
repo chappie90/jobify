@@ -88,7 +88,7 @@
   transform: translate(-50%, -50%);
 }
 .edit-mode-form {
-  background-color: $grey-light;
+  background-color: $grey-dark;
   -webkit-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
     -moz-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
     box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
@@ -119,6 +119,7 @@
 .edit-mode-label {
   top: -2rem;
   left: 0.5rem;
+  color: $white;
 }
 .check-icon {
   width: 1.4rem;

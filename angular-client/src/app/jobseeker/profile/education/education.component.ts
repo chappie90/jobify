@@ -9,6 +9,7 @@ import { FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@ang
 export class EducationComponent implements OnInit {
   form: FormGroup;
   education: FormArray;
+  formGroupId: string;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -52,11 +53,19 @@ export class EducationComponent implements OnInit {
   }
 
   onFormSubmit() {
-    if (this.form.invalid) {
-      console.log(this.form.value);
+    let formGroupId = this.formGroupId;
+    if (this.form.get('education').controls[formGroupId].invalid) {    
+      console.log('invalid');
+      console.log(this.form.value.education);
       return;
     }
-        console.log(this.form.value);
+    console.log('valid');
+    console.log(this.form.value);
+    console.log(this.form.get('education').valid);
+  }
+
+  formGroupRef(btnId) {
+    this.formGroupId = btnId;
   }
 
 }
