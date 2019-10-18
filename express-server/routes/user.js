@@ -494,6 +494,40 @@ router.post(
 });
 
 router.post(
+  '/profile/education',
+  // checkAuth
+  (req, res, next) => {
+  const formData = req.body.formData;
+  const userId = req.body.userId;
+  User.findByIdAndUpdate(
+    { _id: userId },
+    { profile: {
+        education: {
+          school: formData.school,
+          degree: formData.degree,
+          field_study: formData.field,
+          grade: formData.grade,
+          from_date: formData.from,
+          to_date: formData.to,
+          description: formData.description
+        }
+      }
+    },
+    { new: true }
+  ).then(user => {
+    if (user) {
+      res.status(200).json({
+        education: user.profile.education
+      });
+    }
+  }).catch(err => {
+    res.status(401).json({
+      message: 'Could not update profile education'
+    });
+  });    
+});
+
+router.post(
   '/profile/skills',
   // checkAuth,
   (req, res, next) => {

@@ -25,7 +25,14 @@ export class EducationComponent implements OnInit {
       education: this.formBuilder.array([ this.addEducation() ])
     });
     this.userId = localStorage.getItem('userId');
-
+    this.userSub = this.userService.getUserEducationUpdateListener().subscribe(
+      educationStatus => {
+        if (educationStatus) {
+          const educationObj = JSON.parse(localStorage.getItem('education'));
+          console.log(educationObj);
+        }
+      }
+    );
   // Template access form {{ form.controls.education.controls[i].controls.school.value }}
   }
 

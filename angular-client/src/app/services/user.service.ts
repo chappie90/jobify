@@ -14,6 +14,7 @@ export class UserService {
   private avatarUpdated = new Subject<{ status: boolean }>();
   private userUpdated = new Subject<{ jobStatus: boolean, likedJobId: string, appliedJobs: string, cvPath: string, cvName: string, status: boolean}>();
   private notificationsUpdated = new Subject<boolean>();
+  private userEducationUpdated = new Subject<boolean>();
   private skillsUpdated = new Subject<boolean>();
   private applyStatus: boolean;
 
@@ -126,11 +127,11 @@ export class UserService {
 
   updateEducation(formData: any, userId: string) {
     const educationData = { formData: formData, userId: userId };
-    console.log(educationData);
     this.http.post<any>(
       API_URL + '/profile/education', educationData
     ).subscribe(response => {
-      console.log(response);
+      localStorage.setItem('education', JSON.stringify(response.education));
+      this.userEducationUpdated.next(true);
     });
   }
 
@@ -166,6 +167,10 @@ export class UserService {
       localStorage.setItem('skills', newSkills);
       this.skillsUpdated.next(true);
     });
+  }
+
+   getUserEducationUpdateListener() {
+    return this.userEducationUpdated.asObservable();
   }
 
   getSkillsUpdateListener() {
