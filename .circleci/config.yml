@@ -14,12 +14,6 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/mongo:3.4.4
 
-    working_directory: ./angular-client
-
-    steps:
-      - checkout
-
-      - run: yarn install
-
-      # run tests!
-      - run: yarn test
+     steps:
+       - checkout
+       - run: echo "A first hello"
