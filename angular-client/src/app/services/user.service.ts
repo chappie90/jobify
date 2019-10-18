@@ -124,6 +124,16 @@ export class UserService {
     });
   }
 
+  updateEducation(formData: any, userId: string) {
+    const educationData = { formData: formData, userId: userId };
+    console.log(educationData);
+    this.http.post<any>(
+      API_URL + '/profile/education', educationData
+    ).subscribe(response => {
+      console.log(response);
+    });
+  }
+
   clearNotifications(userId: string) {
     const userData = { userId: userId };
     this.http.post<any>(

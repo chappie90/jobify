@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+
+import { AuthService } from '../../../auth/auth.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-education',
@@ -10,13 +14,18 @@ export class EducationComponent implements OnInit {
   form: FormGroup;
   education: FormArray;
   formGroupId: string;
+  userSub: Subscription;
+  userId: string;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+              private userService: UserService) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
       education: this.formBuilder.array([ this.addEducation() ])
     });
+    this.userId = localStorage.getItem('userId');
+
   // Template access form {{ form.controls.education.controls[i].controls.school.value }}
   }
 
@@ -55,13 +64,14 @@ export class EducationComponent implements OnInit {
   onFormSubmit() {
     let formGroupId = this.formGroupId;
     if (this.form.get('education').controls[formGroupId].invalid) {    
-      console.log('invalid');
-      console.log(this.form.value.education);
       return;
     }
-    console.log('valid');
-    console.log(this.form.value);
-    console.log(this.form.get('education').valid);
+    let formGroupData = this.form.value.education[formGroupId];
+    this.userService.updateEducation(formGroupData, this.userId);
+  }
+
+  onFormEdit() {
+
   }
 
   formGroupRef(btnId) {
