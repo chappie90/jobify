@@ -497,34 +497,79 @@ router.post(
   '/profile/education',
   // checkAuth
   (req, res, next) => {
-  const formData = req.body.formData;
-  const userId = req.body.userId;
-  User.findByIdAndUpdate(
-    { _id: userId },
-    { profile: {
-        education: {
-          school: formData.school,
-          degree: formData.degree,
-          field_study: formData.field,
-          grade: formData.grade,
-          from_date: formData.from,
-          to_date: formData.to,
-          description: formData.description
-        }
+    const formGroupId = req.body.formGroupId;
+    const formData = req.body.formData;
+    const userId = req.body.userId;
+    User.find(
+      { _id: userId,
+       'profile.education': {
+          $elemMatch: {
+            id: formGroupId
+          }
+        } 
       }
-    },
-    { new: true }
-  ).then(user => {
-    if (user) {
-      res.status(200).json({
-        education: user.profile.education
+    ).then(user => {
+      if (user.length !== 0) {
+        User.findByIdAndUpdate(
+          { _id: userId },
+          {
+            $set: {
+              profile: {
+                education: {
+                  id: formGroupId,
+                  school: formData.school,
+                  degree: formData.degree,
+                  field_study: formData.field,
+                  grade: formData.grade,
+                  from_date: formData.from,
+                  to_date: formData.to,
+                  description: formData.description
+                }
+              }
+            }
+          },
+          { new: true }
+        ).then(user => {
+       //   console.log(user);
+          res.status(200).json({
+            education: user.profile.education
+          });
+        });
+      } else {
+        User.findByIdAndUpdate(
+          { _id: userId },
+          { $addToSet: {
+              'profile.education': {
+                id: formGroupId,
+                school: formData.school,
+                degree: formData.degree,
+                field_study: formData.field,
+                grade: formData.grade,
+                from_date: formData.from,
+                to_date: formData.to,
+                description: formData.description
+              }
+            }
+          },
+          { new: true }
+        ).then(user => {
+          console.log(user);
+          res.status(200).json({
+            education: user.profile.education
+          });
+        }).catch(err => {
+          console.log(err);
+          res.status(401).json({
+            message: 'Could not update profile education'
+          });
+        });
+      }
+    }).catch(err => {
+      console.log(err);
+      res.status(401).json({
+        message: 'Could not update profile education'
       });
-    }
-  }).catch(err => {
-    res.status(401).json({
-      message: 'Could not update profile education'
-    });
-  });    
+    });   
 });
 
 router.post(
@@ -533,7 +578,6 @@ router.post(
   (req, res, next) => {
     const userId = req.body.userId;
     const skill = req.body.formData.skill;
-    console.log(skill);
     User.findByIdAndUpdate(
       { _id: userId },
       { $push: {
@@ -563,8 +607,6 @@ router.post(
   (req, res, next) => {
     const skillId = req.body.skillId;
     const userId = req.body.userId;
-    console.log(skillId);
-    console.log(userId);
     User.findByIdAndUpdate(
       { _id: userId },
       { $pull: { 'profile.skills': { _id: skillId } } },

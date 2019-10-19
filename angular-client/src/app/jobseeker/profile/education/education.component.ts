@@ -74,7 +74,7 @@ export class EducationComponent implements OnInit {
       return;
     }
     let formGroupData = this.form.value.education[formGroupId];
-    this.userService.updateEducation(formGroupData, this.userId);
+    this.userService.updateEducation(formGroupId, formGroupData, this.userId);
   }
 
   onFormEdit() {
