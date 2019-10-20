@@ -500,6 +500,20 @@ router.post(
     const formGroupId = req.body.formGroupId;
     const formData = req.body.formData;
     const userId = req.body.userId;
+    // User.aggregate([
+    //   { $match: {
+    //     '_id': userId,
+    //     'profile.education': {
+    //       '$elemMatch': {
+    //         'id': formGroupId
+    //       }
+    //     }
+    //   }}
+    // ]).then(user => {
+    //   console.log(user);
+    // }).catch(err => {
+    //   console.log(err);
+    // });
     User.find(
       { _id: userId,
        'profile.education': {
@@ -509,13 +523,13 @@ router.post(
         } 
       }
     ).then(user => {
+      console.log('test');
       if (user.length !== 0) {
-        User.findByIdAndUpdate(
-          { _id: userId },
+        User.update(
+          { _id: userId, 'profile.education': { $elemMatch: { id: formGroupId }}},
           {
             $set: {
-              profile: {
-                education: {
+              'profile.$.education': {
                   id: formGroupId,
                   school: formData.school,
                   degree: formData.degree,
@@ -525,7 +539,6 @@ router.post(
                   to_date: formData.to,
                   description: formData.description
                 }
-              }
             }
           },
           { new: true }
