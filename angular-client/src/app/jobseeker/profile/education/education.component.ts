@@ -16,11 +16,14 @@ export class EducationComponent implements OnInit {
   formGroupId: string;
   userSub: Subscription;
   userId: string;
+  educationData: any;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService) {}
 
   ngOnInit() {
+    this.educationData = JSON.parse(localStorage.getItem('education'));
+    console.log(this.educationData);
     this.form = this.formBuilder.group({
       education: this.formBuilder.array([ this.addEducation() ])
     });
@@ -74,11 +77,12 @@ export class EducationComponent implements OnInit {
       return;
     }
     let formGroupData = this.form.value.education[formGroupId];
-    this.userService.updateEducation(formGroupId, formGroupData, this.userId);
+    let editMode = false;
+    this.userService.updateEducation(formGroupId, formGroupData, editMode, this.userId);
   }
 
   onFormEdit() {
-
+    this.userService.editModeEduction(true);
   }
 
   formGroupRef(btnId) {

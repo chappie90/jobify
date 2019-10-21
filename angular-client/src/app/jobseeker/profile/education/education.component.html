@@ -2,9 +2,11 @@
   <button type="button" class="add-btn" (click)="onAddEducation()">Add Education<span> +</span></button>
   <form [formGroup]="form" class="form" (submit)="onFormSubmit()">
     <div class="form-array" formArrayName="education">
-      <div class="form-group"
-        *ngFor="let e of form.get('education').controls; let i = index">
-        <div [formGroupName]="i">
+      <div *ngFor="let e of form.get('education').controls; let i = index">
+        <div 
+          class="edit-form-group" 
+          [ngClass]="{'preview-form-group': e.editMode}"
+          [formGroupName]="i">
           <span (click)="onFormEdit()" class="edit-icon-wrapper"> 
             <img src="./assets/images/edit-3.svg" class="edit-icon" />
           </span>
@@ -12,38 +14,72 @@
           <div class="row">
            <div class="input-group">
               <label [for]="'school-'+i+1" class="label">School</label>
-              <input type="text" [id]="'school-'+i+1" class="input" formControlName="school" />
+              <input 
+                type="text" 
+                [id]="'school-'+i+1" 
+                class="input" 
+                [ngClass]="{'edit-mode-input': e.editMode}"
+                formControlName="school" />
             </div>
             <div class="input-group">
               <label [for]="'degree-'+i+1" class="label">Degree</label>
-              <input type="text" [id]="'degree-'+i+1" class="input" formControlName="degree" />
+              <input 
+                type="text" 
+                [id]="'degree-'+i+1" 
+                class="input" 
+                [ngClass]="{'edit-mode-input': e.editMode}"
+                formControlName="degree" />
             </div>
           </div>
           <div class="row">
             <div class="input-group">
               <label [for]="'field-'+i+1" class="label">Field of study</label>
-              <input type="text" [id]="'field-'+i+1" class="input" formControlName="field" />
+              <input 
+                type="text" 
+                [id]="'field-'+i+1" 
+                class="input" 
+                [ngClass]="{'edit-mode-input': e.editMode}"
+                formControlName="field" />
             </div>
             <div class="input-group">
               <label [for]="'grade-'+i+1" class="label">Grade</label>
-              <input type="text" [id]="'grade-'+i+1" class="input" formControlName="grade" />
+              <input 
+                type="text" 
+                [id]="'grade-'+i+1" 
+                class="input" 
+                [ngClass]="{'edit-mode-input': e.editMode}"
+                formControlName="grade" />
             </div>
            </div>
            <div class="row">
             <div class="input-group">
               <label [for]="'from-'+i+1" class="label">Start Date</label>
-              <input type="date" [id]="'from-'+i+1" class="input" formControlName="from" />
+              <input 
+                type="date" 
+                [id]="'from-'+i+1" 
+                class="input" 
+                [ngClass]="{'edit-mode-input': e.editMode}"
+                formControlName="from" />
             </div>
             <div class="input-group">
               <label [for]="'to-'+i+1" class="label">End Date (or expected)</label>
-              <input type="date" [id]="'to-'+i+1" class="input" formControlName="to" />
+              <input 
+                type="date" 
+                [id]="'to-'+i+1" 
+                class="input" 
+                [ngClass]="{'edit-mode-input': e.editMode}"
+                formControlName="to" />
             </div>
            </div>
            <div class="input-group">
               <label [for]="'description-'+i+1" class="label">Description</label>
-              <textarea  [id]="'description-'+i+1" class="input" formControlName="description"></textarea>
+              <textarea 
+                [id]="'description-'+i+1" 
+                class="input" 
+                [ngClass]="{'edit-mode-input': e.editMode}"
+                formControlName="description"></textarea>
             </div>
-            <button #submitBtn (click)="formGroupRef(submitBtn.id)" type="submit" [id]="i" class="submit-btn">Save Education</button>
+            <button (click)="formGroupRef(i)" type="submit" [id]="i" class="submit-btn">Save Education</button>
           </div>
         </div>
       </div>

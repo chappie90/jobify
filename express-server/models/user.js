@@ -39,7 +39,8 @@ const userSchema = mongoose.Schema({
         grade: String,
         from_date: Date,
         to_date: Date,
-        description: String
+        description: String,
+        editMode: Boolean
       }
     ],
     skills: [

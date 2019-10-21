@@ -90,8 +90,8 @@
 .edit-mode-form {
   background-color: $grey-dark;
   -webkit-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
-    -moz-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
-    box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+  moz-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+  box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
 }
 .group-container {
   display: flex;

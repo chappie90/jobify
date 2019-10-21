@@ -503,11 +503,30 @@ router.post(
 });
 
 router.post(
+  '/profile/education/edit',
+  // checkAuth
+  (req, res, next) => {
+    const formGroupId = req.body.formGroupId;
+    const userId = req.body.userId;
+    const status = req.body.editModeData.status;
+    User.find(
+      { _id: userId,
+        'profile.education.id': formGroupId 
+      }
+    ).then(user => {
+
+    }).catch(err => {
+      console.log(err);
+    });
+});
+
+router.post(
   '/profile/education',
   // checkAuth
   (req, res, next) => {
     const formGroupId = req.body.formGroupId;
     const formData = req.body.formData;
+    const editMode = req.body.editMode;
     const userId = req.body.userId;
     User.find(
       { _id: userId,
@@ -528,7 +547,8 @@ router.post(
                   grade: formData.grade,
                   from_date: formData.from,
                   to_date: formData.to,
-                  description: formData.description
+                  description: formData.description,
+                  editMode: editMode
                 }
             }
           },
@@ -551,7 +571,8 @@ router.post(
                 grade: formData.grade,
                 from_date: formData.from,
                 to_date: formData.to,
-                description: formData.description
+                description: formData.description,
+                editMode: editMode
               }
             }
           },

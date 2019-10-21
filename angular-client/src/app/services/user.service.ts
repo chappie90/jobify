@@ -125,10 +125,20 @@ export class UserService {
     });
   }
 
-  updateEducation(formGroupId: string, formData: any, userId: string) {
-    const educationData = { formGroupId: formGroupId, formData: formData, userId: userId };
+  updateEducation(formGroupId: string, formData: any, editMode: boolean, userId: string) {
+    const educationData = { formGroupId: formGroupId, formData: formData, editMode: editMode, userId: userId };
     this.http.post<any>(
       API_URL + '/profile/education', educationData
+    ).subscribe(response => {
+      localStorage.setItem('education', JSON.stringify(response.education));
+      this.userEducationUpdated.next(true);
+    });
+  }
+
+  editModeEducation(status: boolean) {
+    const editModeData = { status: status };
+    this.http.post<any>(
+      API_URL + '/profile/education/edit', editModeData
     ).subscribe(response => {
       localStorage.setItem('education', JSON.stringify(response.education));
       this.userEducationUpdated.next(true);
