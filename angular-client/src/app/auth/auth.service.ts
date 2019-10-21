@@ -47,6 +47,7 @@ export class AuthService {
       const notifications = JSON.stringify(userData.notifications);
       const newNotifications = userData.newNotifications.toString();
       const summary = JSON.stringify(userData.summary);
+      const education = JSON.stringify(userData.education);
       const avatar = userData.avatarPath;
       const cv = userData.cv;
       const cvName = userData.cvName;
@@ -66,6 +67,7 @@ export class AuthService {
                             cv,
                             cvName,
                             summary,
+                            education,
                             avatar);
       this.router.navigate(['/']);
     }
@@ -142,6 +144,7 @@ export class AuthService {
               cv: string,
               cvName: string,
               summary: any,
+              education: any,
               avatar) {
     localStorage.setItem('token', token);
     localStorage.setItem('tokenExpirationDate', tokenExpirationDate.toISOString());
@@ -155,6 +158,7 @@ export class AuthService {
     localStorage.setItem('cv', cv);
     localStorage.setItem('cvName', cvName);
     localStorage.setItem('summary', summary);
+    localStorage.setItem('education', education);
     localStorage.setItem('avatar', avatar);
   }
 
@@ -171,6 +175,7 @@ export class AuthService {
     const cv = localStorage.getItem('cv');
     const cvName = localStorage.getItem('cvName');
     const summary = localStorage.getItem('summary');
+    const education = localStorage.getItem('education');
     const avatar = localStorage.getItem('avatar');
 
     if (!token || !tokenExpirationDate) {
@@ -189,6 +194,7 @@ export class AuthService {
       cv: cv,
       cvName: cvName,
       summary: summary,
+      education: education,
       avatar: avatar
     };
   }
@@ -206,6 +212,7 @@ export class AuthService {
     localStorage.removeItem('cv');
     localStorage.removeItem('cvName');
     localStorage.removeItem('summary');
+    localStorage.removeItem('education');
     localStorage.removeItem('avatar');
   }
 

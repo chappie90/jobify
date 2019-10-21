@@ -7,4 +7,6 @@ export interface User {
   notifications: any;
   cv: string;
   cvName: string;
+  summary: any;
+  education: any;
 }

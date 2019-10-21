@@ -69,7 +69,8 @@ router.post('/signup', (req, res, next) => {
         profile: {
           summary: {
             avatarPath: ''
-          }
+          },
+          education: {}
         }
       });
       user.save()
@@ -94,6 +95,7 @@ router.post('/signup', (req, res, next) => {
             cv: newUser.cvPath,
             cvName: newUser.cvName,
             summary: {},
+            education: {},
             avatarPath: newUser.profile.summary.avatarPath
           });  
       })
@@ -134,6 +136,7 @@ router.post('/login', (req, res, next) => {
           cv: fetchedUser.cvPath,
           cvName: fetchedUser.cvName,
           summary: fetchedUser.profile.summary,
+          education: fetchedUser.profile.education,
           avatarPath: fetchedUser.profile.summary.avatarPath 
         });
       } else {
@@ -167,7 +170,11 @@ router.post('/google-login', (req, res, next) => {
             email: req.body.email,
             password: req.body.token,
             type: req.body.type,
-            notifications: [{ date: new Date(), type: 'join', notification: signupNotification, status: 0 }]
+            notifications: [{ date: new Date(), type: 'join', notification: signupNotification, status: 0 }],
+            profile: {
+              summary: {},
+              education: {}
+            }
           });
           user.save()
           .then(response => {
@@ -186,7 +193,8 @@ router.post('/google-login', (req, res, next) => {
               notifications: user.notifications,
               cv: '',
               cvName: '',
-              summary: {}
+              summary: {},
+              education: {}
             })
           });
         } else if (user) {
@@ -202,7 +210,8 @@ router.post('/google-login', (req, res, next) => {
             notifications: user.notifications,
             cv: user.cvPath,
             cvName: user.cvName,
-            summary: user.profile.summary
+            summary: user.profile.summary,
+            education: user.profile.education
           })
         }
       })
