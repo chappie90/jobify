@@ -70,7 +70,7 @@ router.post('/signup', (req, res, next) => {
           summary: {
             avatarPath: ''
           },
-          education: {}
+          education: []
         }
       });
       user.save()
@@ -95,7 +95,7 @@ router.post('/signup', (req, res, next) => {
             cv: newUser.cvPath,
             cvName: newUser.cvName,
             summary: {},
-            education: {},
+            education: [],
             avatarPath: newUser.profile.summary.avatarPath
           });  
       })
@@ -173,7 +173,7 @@ router.post('/google-login', (req, res, next) => {
             notifications: [{ date: new Date(), type: 'join', notification: signupNotification, status: 0 }],
             profile: {
               summary: {},
-              education: {}
+              education: []
             }
           });
           user.save()
@@ -194,7 +194,7 @@ router.post('/google-login', (req, res, next) => {
               cv: '',
               cvName: '',
               summary: {},
-              education: {}
+              education: []
             })
           });
         } else if (user) {

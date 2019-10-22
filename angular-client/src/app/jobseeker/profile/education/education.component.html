@@ -5,7 +5,7 @@
       <div *ngFor="let e of form.get('education').controls; let i = index">
         <div 
           class="edit-form-group" 
-          [ngClass]="{'preview-form-group': e.editMode}"
+          [ngClass]="{'preview-form-group': !e.editMode}"
           [formGroupName]="i">
           <span (click)="onFormEdit()" class="edit-icon-wrapper"> 
             <img src="./assets/images/edit-3.svg" class="edit-icon" />

@@ -33,6 +33,18 @@ export class EducationComponent implements OnInit {
         if (educationStatus) {
           const educationObj = JSON.parse(localStorage.getItem('education'));
           console.log(educationObj);
+          console.log(this.form.get('education'));
+          this.form.get('education').patchValue([
+            { 
+              school: educationObj[0].school,
+              degree: educationObj[0].degree,
+              field: educationObj[0].field_study,
+              grade: educationObj[0].grade,
+              from: educationObj[0].from_date,
+              to: educationObj[0].to_date,
+              description: educationObj[0].description
+            }
+          ]);
         }
       }
     );

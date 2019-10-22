@@ -32,13 +32,6 @@
   display: flex;
   flex-direction: column-reverse;
 }
-.preview-form-group {
-  position: relative;
-  padding: 3.5rem 3rem 2rem;
-  border-radius: 4px;
-  margin-bottom: 4rem;
-  margin-top: .3rem;
-}
 .edit-form-group {
   position: relative;
   border-radius: 4px;
@@ -51,6 +44,18 @@
   -moz-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
   box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
    animation: slide-up .4s ease;
+}
+.preview-form-group {
+  position: relative;
+  padding: 3.5rem 3rem 2rem;
+  border-radius: 4px;
+  margin-bottom: 4rem;
+  margin-top: .3rem;
+  background-color: $white;
+  color: $grey-dark;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 .edit-icon-wrapper {
   width: 3.4rem;
