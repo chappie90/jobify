@@ -535,7 +535,7 @@ router.post(
     ).then(user => {
       console.log('test');
       if (user.length !== 0) {
-        User.updateOne(
+        User.findOneAndUpdate(
           { _id: userId, 'profile.education.id': formGroupId },
           {
             $set: {
@@ -554,13 +554,13 @@ router.post(
           },
           { new: true }
         ).then(user => {
-       console.log(user);
+          console.log(user);
           res.status(200).json({
-       //     education: user.profile.education
+            education: user.profile.education
           });
         });
       } else {
-        User.findByIdAndUpdate(
+        User.findOneAndUpdate(
           { _id: userId },
           { $addToSet: {
               'profile.education': {
@@ -578,7 +578,6 @@ router.post(
           },
           { new: true }
         ).then(user => {
-          console.log(user);
           res.status(200).json({
             education: user.profile.education
           });

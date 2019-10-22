@@ -27,6 +27,20 @@ export class EducationComponent implements OnInit {
     this.form = this.formBuilder.group({
       education: this.formBuilder.array([ this.addEducation() ])
     });
+    const educationObj = JSON.parse(localStorage.getItem('education'));
+    if (educationObj.length !== 0) {
+          this.form.get('education').patchValue([
+            { 
+              school: educationObj[0].school,
+              degree: educationObj[0].degree,
+              field: educationObj[0].field_study,
+              grade: educationObj[0].grade,
+              from: educationObj[0].from_date,
+              to: educationObj[0].to_date,
+              description: educationObj[0].description
+            }
+          ]);
+        }
     this.userId = localStorage.getItem('userId');
     this.userSub = this.userService.getUserEducationUpdateListener().subscribe(
       educationStatus => {
