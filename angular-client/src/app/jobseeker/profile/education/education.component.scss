@@ -1,8 +1,8 @@
 @import '~src/styles.scss';
-@keyframes slide-up {
+@keyframes slide-right {
     0% {
         opacity: 0;
-        transform: translateY(-5rem);
+        transform: translateX(-5rem);
     }
     100% {
         opacity: 1;
@@ -22,20 +22,11 @@
   border-radius: 4px;
   width: 20rem;
 }
-.form {
-  margin-left: 4rem;
-  flex: 1;
-  position: relative;
-  transition: all .3s;
-}
-.form-array {
-  display: flex;
-  flex-direction: column-reverse;
-}
 .edit-form-group {
   position: relative;
   border-radius: 4px;
   margin-bottom: 4rem;
+  margin-left: 4rem;
   margin-top: .3rem;
   padding: 3.5rem 3rem 2rem;
   background-color: $grey-dark;
@@ -43,7 +34,7 @@
   -webkit-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
   -moz-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
   box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
-   animation: slide-up .4s ease;
+   animation: slide-right .4s ease;
 }
 .preview-form-group {
   position: relative;
@@ -56,31 +47,6 @@
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-}
-.edit-icon-wrapper {
-  width: 3.4rem;
-  height: 3.4rem;
-  text-align: center;
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  cursor: pointer;
-  border-radius: 50%;
-  background-color: $grey;
-  transition: all .3s;
-
-  &:hover {
-    background-color: $grey-medium;
-
-  }
-}
-.edit-icon {
-  width: 1.8rem;
-  height: 1.8rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 .number {
   position: absolute;
@@ -125,3 +91,87 @@
   margin: 2rem auto 0;
   font-weight: 400;
 }
+.education-timeline {
+  flex: 1;
+  margin-left: 4rem;
+}
+.list {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.item {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  list-style-type: none;
+  padding: 2rem 4rem;
+  border-bottom: 1px solid $grey-medium;
+}
+.check-icon {
+  width: 2rem;
+  margin-right: 1rem;
+}
+.education-details {
+  display: flex;
+  flex-direction: column;
+}
+.education-field {
+  margin-bottom: .5rem;
+}
+.school {
+  font-weight: 700;
+  font-size: 2rem;
+}
+.date {
+  color: $grey;
+  font-size: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.edit-icon-wrapper {
+  width: 3.4rem;
+  height: 3.4rem;
+  text-align: center;
+  position: absolute;
+  top: 1rem;
+  right: 4.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all .3s;
+
+  &:hover {
+    background-color: $grey-medium;
+
+  }
+}
+.edit-icon-wrapper-edit-mode {
+  background-color: $grey;
+}
+.edit-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.delete-icon-wrapper {
+  width: 3.4rem;
+  height: 3.4rem;
+  text-align: center;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all .3s;
+
+  &:hover {
+    background-color: $grey-medium;
+
+  }
+}
+.delete-icon-wrapper-edit-mode {
+  background-color: $grey;
+}
+
+

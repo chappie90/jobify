@@ -12,68 +12,17 @@ import { UserService } from '../../../services/user.service';
 })
 export class EducationComponent implements OnInit {
   form: FormGroup;
-  education: FormArray;
-  formGroupId: string;
   userSub: Subscription;
   userId: string;
-  educationData: any;
+  formGroupId: number;
+  educationArray: any;
+  editMode: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService) {}
 
   ngOnInit() {
-    // this.educationData = JSON.parse(localStorage.getItem('education'));
-    this.form = this.formBuilder.group({
-      education: this.formBuilder.array([ this.addEducation() ])
-    });
-    const educationObj = JSON.parse(localStorage.getItem('education'));
-    if (educationObj.length !== 0) {
-          let i = 0;
-          for (let educationItem of educationObj) {
-          //  console.log(educationItem);
-           //  console.log(this.form.get('education').controls[0]);
-            this.form.get('education').controls[i].patchValue([
-              { 
-                school: educationItem .school,
-                degree: educationItem.degree,
-                field: educationItem.field_study,
-                grade: educationItem.grade,
-                from: educationItem.from_date,
-                to: educationItem.to_date,
-                description: educationItem.description
-              }
-          ]);
-          i++;
-          }
-        }
-    this.userId = localStorage.getItem('userId');
-    this.userSub = this.userService.getUserEducationUpdateListener().subscribe(
-      educationStatus => {
-        if (educationStatus) {
-          const educationObj = JSON.parse(localStorage.getItem('education'));
-          let i = 0;
-          for (let educationItem of educationObj) {
-            this.form.get('education').controls[i].patchValue([
-              { 
-                school: educationItem .school,
-                degree: educationItem.degree,
-                field: educationItem.field_study,
-                grade: educationItem.grade,
-                from: educationItem.from_date,
-                to: educationItem.to_date,
-                description: educationItem.description
-              }
-          ]);
-          i++;
-          }
-        }
-      }
-    );
-  // Template access form {{ form.controls.education.controls[i].controls.school.value }}
-  }
-
-  addEducation(): FormGroup {
-    return this.formBuilder.group({
+    this.form = new FormGroup({
       school: new FormControl(null, {
          validators: [Validators.required]
       }),
@@ -94,33 +43,78 @@ export class EducationComponent implements OnInit {
       }),
       description: new FormControl(null, {
          validators: [Validators.required]
-      }),
-    });
-  }
-
-
-  onAddEducation():void {
-    this.education = this.form.get('education') as FormArray;
-    this.education.push(this.addEducation());
-  }
-
-  onFormSubmit() {
-    let formGroupId = this.formGroupId;
-    if (this.form.get('education').controls[formGroupId].invalid) {    
-      return;
+      })
+    });  
+    this.educationArray = JSON.parse(localStorage.getItem('education'));
+    this.educationArray.map(
+            item => {
+              let fromDate = new Date(item.from_date);
+              let toDate = new Date(item.to_date);
+              return {
+                ...item,
+                from_date: fromDate,
+                to_date: toDate
+              }
+            }
+    );
+    if (this.educationArray.length !== 0) {
+      this.formGroupId = this.educationArray.length + 1;
+    } else {
+      this.formGroupId = 1;
+      this.editMode = true;
     }
-    let formGroupData = this.form.value.education[formGroupId];
-    let editMode = false;
-    this.userService.updateEducation(formGroupId, formGroupData, editMode, this.userId);
+    this.userId = localStorage.getItem('userId');
+    this.userSub = this.userService.getUserEducationUpdateListener().subscribe(
+      educationStatus => {
+        if (educationStatus) {
+          this.editMode = false;
+          this.educationArray = JSON.parse(localStorage.getItem('education'));
+          this.educationArray.map(
+            item => {
+              return {
+                ...item,
+                  from_date: fromDate,
+                  to_date: toDate
+                }
+            }
+          );
+        }
+      }
+    );
+  }
+
+  onAddEducation() {
+    this.editMode = true;
     this.form.reset();
   }
 
-  onFormEdit() {
-    this.userService.editModeEduction(true);
+  onDeleteEducation(e) {
+    console.log(e);
   }
 
-  formGroupRef(btnId) {
-    this.formGroupId = btnId;
+  onFormSubmit() {
+    if (this.form.invalid) {    
+      return;
+    }
+    let formGroupData = this.form.value;
+    console.log(this.form.value.from);
+    this.userService.updateEducation(this.formGroupId, formGroupData, this.userId);
   }
 
+  onFormEdit(e) {
+    this.editMode = !this.editMode;
+    if (this.editMode) {
+      let fromDate = new Date(e.from_date).toISOString().substring(0, 10);
+      let toDate = new Date(e.to_date).toISOString().substring(0, 10);
+      this.form.patchValue({
+        'school': e.school,
+        'degree': e.degree,
+        'field': e.field_study,
+        'grade': e.grade,
+        'from': fromDate,
+        'to': toDate,
+        'description': e.description
+      });
+    }
+  }
 }

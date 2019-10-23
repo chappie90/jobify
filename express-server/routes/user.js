@@ -526,7 +526,6 @@ router.post(
   (req, res, next) => {
     const formGroupId = req.body.formGroupId;
     const formData = req.body.formData;
-    const editMode = req.body.editMode;
     const userId = req.body.userId;
     User.find(
       { _id: userId,
@@ -547,8 +546,7 @@ router.post(
                   grade: formData.grade,
                   from_date: formData.from,
                   to_date: formData.to,
-                  description: formData.description,
-                  editMode: editMode
+                  description: formData.description
                 }
             }
           },
@@ -571,8 +569,7 @@ router.post(
                 grade: formData.grade,
                 from_date: formData.from,
                 to_date: formData.to,
-                description: formData.description,
-                editMode: editMode
+                description: formData.description
               }
             }
           },

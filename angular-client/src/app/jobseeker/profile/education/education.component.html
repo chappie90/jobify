@@ -1,88 +1,112 @@
 <div class="container">
   <button type="button" class="add-btn" (click)="onAddEducation()">Add Education<span> +</span></button>
-  <form [formGroup]="form" class="form" (submit)="onFormSubmit()">
-    <div class="form-array" formArrayName="education">
-      <div *ngFor="let e of form.get('education').controls; let i = index">
-        <div 
-          class="edit-form-group" 
-          [ngClass]="{'preview-form-group': !e.editMode}"
-          [formGroupName]="i">
-          <span (click)="onFormEdit()" class="edit-icon-wrapper"> 
-            <img src="./assets/images/edit-3.svg" class="edit-icon" />
-          </span>
-          <span class="number">{{ i + 1 }}</span>
-          <div class="row">
-           <div class="input-group">
-              <label [for]="'school-'+i+1" class="label">School</label>
-              <input 
-                type="text" 
-                [id]="'school-'+i+1" 
-                class="input" 
-                [ngClass]="{'edit-mode-input': e.editMode}"
-                formControlName="school" />
-            </div>
-            <div class="input-group">
-              <label [for]="'degree-'+i+1" class="label">Degree</label>
-              <input 
-                type="text" 
-                [id]="'degree-'+i+1" 
-                class="input" 
-                [ngClass]="{'edit-mode-input': e.editMode}"
-                formControlName="degree" />
-            </div>
+  <form 
+    [formGroup]="form" 
+    class="edit-form-group"
+    *ngIf="editMode"
+    (submit)="onFormSubmit()">
+        <span 
+          (click)="onFormEdit()" 
+          class="edit-icon-wrapper"
+          [ngClass]="{'edit-icon-wrapper-edit-mode': editMode}"> 
+          <img src="./assets/images/edit-3.svg" class="edit-icon" />
+        </span>
+        <div class="row">
+         <div class="input-group">
+            <label [for]="'school-'+i+1" class="label">School</label>
+            <input 
+              type="text" 
+              [id]="'school-'+i+1" 
+              class="input" 
+              [ngClass]="{'edit-mode-input': false}"
+              formControlName="school" />
           </div>
-          <div class="row">
-            <div class="input-group">
-              <label [for]="'field-'+i+1" class="label">Field of study</label>
-              <input 
-                type="text" 
-                [id]="'field-'+i+1" 
-                class="input" 
-                [ngClass]="{'edit-mode-input': e.editMode}"
-                formControlName="field" />
-            </div>
-            <div class="input-group">
-              <label [for]="'grade-'+i+1" class="label">Grade</label>
-              <input 
-                type="text" 
-                [id]="'grade-'+i+1" 
-                class="input" 
-                [ngClass]="{'edit-mode-input': e.editMode}"
-                formControlName="grade" />
-            </div>
-           </div>
-           <div class="row">
-            <div class="input-group">
-              <label [for]="'from-'+i+1" class="label">Start Date</label>
-              <input 
-                type="date" 
-                [id]="'from-'+i+1" 
-                class="input" 
-                [ngClass]="{'edit-mode-input': e.editMode}"
-                formControlName="from" />
-            </div>
-            <div class="input-group">
-              <label [for]="'to-'+i+1" class="label">End Date (or expected)</label>
-              <input 
-                type="date" 
-                [id]="'to-'+i+1" 
-                class="input" 
-                [ngClass]="{'edit-mode-input': e.editMode}"
-                formControlName="to" />
-            </div>
-           </div>
-           <div class="input-group">
-              <label [for]="'description-'+i+1" class="label">Description</label>
-              <textarea 
-                [id]="'description-'+i+1" 
-                class="input" 
-                [ngClass]="{'edit-mode-input': e.editMode}"
-                formControlName="description"></textarea>
-            </div>
-            <button (click)="formGroupRef(i)" type="submit" [id]="i" class="submit-btn">Save Education</button>
+          <div class="input-group">
+            <label [for]="'degree-'+i+1" class="label">Degree</label>
+            <input 
+              type="text" 
+              [id]="'degree-'+i+1" 
+              class="input" 
+              [ngClass]="{'edit-mode-input': false}"
+              formControlName="degree" />
           </div>
         </div>
-      </div>
+        <div class="row">
+          <div class="input-group">
+            <label [for]="'field-'+i+1" class="label">Field of study</label>
+            <input 
+              type="text" 
+              [id]="'field-'+i+1" 
+              class="input" 
+              [ngClass]="{'edit-mode-input': false}"
+              formControlName="field" />
+          </div>
+          <div class="input-group">
+            <label [for]="'grade-'+i+1" class="label">Grade</label>
+            <input 
+              type="text" 
+              [id]="'grade-'+i+1" 
+              class="input" 
+              [ngClass]="{'edit-mode-input': false}"
+              formControlName="grade" />
+          </div>
+         </div>
+         <div class="row">
+          <div class="input-group">
+            <label [for]="'from-'+i+1" class="label">Start Date</label>
+            <input 
+              type="date" 
+              [id]="'from-'+i+1" 
+              class="input" 
+              [ngClass]="{'edit-mode-input': false}"
+              formControlName="from" />
+          </div>
+          <div class="input-group">
+            <label [for]="'to-'+i+1" class="label">End Date (or expected)</label>
+            <input 
+              type="date" 
+              [id]="'to-'+i+1" 
+              class="input" 
+              [ngClass]="{'edit-mode-input': false}"
+              formControlName="to" />
+          </div>
+         </div>
+         <div class="input-group">
+            <label [for]="'description-'+i+1" class="label">Description</label>
+            <textarea 
+              [id]="'description-'+i+1" 
+              class="input" 
+              [ngClass]="{'edit-mode-input': false}"
+              formControlName="description"></textarea>
+          </div>
+            <button  type="submit" class="submit-btn">Save Education</button>
   </form>
+  <div *ngIf="!editMode" class="education-timeline">
+    <ul class="list">
+      <li 
+        class="item"
+        *ngFor="let e of educationArray; let i = index">
+         <img 
+          src="./assets/images/check-symbol.svg" 
+          class="check-icon" />
+          <div class="education-details">
+            <span class="education-field school">{{ e.school }}</span>
+            <span class="education-field">{{ e.degree }}, {{ e.field_study }}, {{ e.grade }}</span>
+            <span class="education-field date">{{ e.from_date | date: 'longDate' }} - {{ e.to_date | date: 'longDate' }}</span>
+            <span class="education-field">{{ e.description }}</span>
+          </div>
+          <span 
+            (click)="onFormEdit(e)" 
+            class="edit-icon-wrapper">
+            <img src="./assets/images/edit-3.svg" class="edit-icon" />
+          </span>
+          <span 
+            (click)="onDeleteEducation(e)" 
+            class="delete-icon-wrapper">
+            <img src="./assets/images/delete.svg" class="edit-icon" />
+          </span>
+      </li>
+    </ul>
+  </div>
 </div>
 

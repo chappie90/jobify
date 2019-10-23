@@ -125,8 +125,8 @@ export class UserService {
     });
   }
 
-  updateEducation(formGroupId: string, formData: any, editMode: boolean, userId: string) {
-    const educationData = { formGroupId: formGroupId, formData: formData, editMode: editMode, userId: userId };
+  updateEducation(formGroupId: string, formData: any, userId: string) {
+    const educationData = { formGroupId: formGroupId, formData: formData, userId: userId };
     this.http.post<any>(
       API_URL + '/profile/education', educationData
     ).subscribe(response => {
