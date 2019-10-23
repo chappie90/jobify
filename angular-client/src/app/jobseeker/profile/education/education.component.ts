@@ -17,6 +17,7 @@ export class EducationComponent implements OnInit {
   formGroupId: number;
   educationArray: any;
   editMode: boolean;
+  currentForm: string;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService) {}
@@ -57,20 +58,17 @@ export class EducationComponent implements OnInit {
               }
             }
     );
-    if (this.educationArray.length !== 0) {
-      this.formGroupId = this.educationArray.length + 1;
-    } else {
-      this.formGroupId = 1;
-      this.editMode = true;
-    }
     this.userId = localStorage.getItem('userId');
     this.userSub = this.userService.getUserEducationUpdateListener().subscribe(
       educationStatus => {
         if (educationStatus) {
           this.editMode = false;
+          this.currentForm = '';
           this.educationArray = JSON.parse(localStorage.getItem('education'));
           this.educationArray.map(
             item => {
+              let fromDate = new Date(item.from_date);
+              let toDate = new Date(item.to_date);
               return {
                 ...item,
                   from_date: fromDate,
@@ -96,14 +94,24 @@ export class EducationComponent implements OnInit {
     if (this.form.invalid) {    
       return;
     }
+    console.log(this.educationArray);
+    if (this.educationArray.length !== 0 && !this.currentForm) {
+      this.formGroupId = this.educationArray.length + 1;  
+    } else if (this.educationArray.length !== 0) {
+      this.formGroupId = this.educationArray.find(form => form._id === this.currentForm);
+      this.formGroupId = this.formGroupId.id;
+    } else {
+      this.formGroupId = 1;
+      this.editMode = true;
+    }
     let formGroupData = this.form.value;
-    console.log(this.form.value.from);
     this.userService.updateEducation(this.formGroupId, formGroupData, this.userId);
   }
 
   onFormEdit(e) {
     this.editMode = !this.editMode;
     if (this.editMode) {
+      this.currentForm = e._id;
       let fromDate = new Date(e.from_date).toISOString().substring(0, 10);
       let toDate = new Date(e.to_date).toISOString().substring(0, 10);
       this.form.patchValue({
