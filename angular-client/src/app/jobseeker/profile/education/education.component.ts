@@ -22,43 +22,50 @@ export class EducationComponent implements OnInit {
               private userService: UserService) {}
 
   ngOnInit() {
-    this.educationData = JSON.parse(localStorage.getItem('education'));
-    console.log(this.educationData);
+    // this.educationData = JSON.parse(localStorage.getItem('education'));
     this.form = this.formBuilder.group({
       education: this.formBuilder.array([ this.addEducation() ])
     });
     const educationObj = JSON.parse(localStorage.getItem('education'));
     if (educationObj.length !== 0) {
-          this.form.get('education').patchValue([
-            { 
-              school: educationObj[0].school,
-              degree: educationObj[0].degree,
-              field: educationObj[0].field_study,
-              grade: educationObj[0].grade,
-              from: educationObj[0].from_date,
-              to: educationObj[0].to_date,
-              description: educationObj[0].description
-            }
+          let i = 0;
+          for (let educationItem of educationObj) {
+          //  console.log(educationItem);
+           //  console.log(this.form.get('education').controls[0]);
+            this.form.get('education').controls[i].patchValue([
+              { 
+                school: educationItem .school,
+                degree: educationItem.degree,
+                field: educationItem.field_study,
+                grade: educationItem.grade,
+                from: educationItem.from_date,
+                to: educationItem.to_date,
+                description: educationItem.description
+              }
           ]);
+          i++;
+          }
         }
     this.userId = localStorage.getItem('userId');
     this.userSub = this.userService.getUserEducationUpdateListener().subscribe(
       educationStatus => {
         if (educationStatus) {
           const educationObj = JSON.parse(localStorage.getItem('education'));
-          console.log(educationObj);
-          console.log(this.form.get('education'));
-          this.form.get('education').patchValue([
-            { 
-              school: educationObj[0].school,
-              degree: educationObj[0].degree,
-              field: educationObj[0].field_study,
-              grade: educationObj[0].grade,
-              from: educationObj[0].from_date,
-              to: educationObj[0].to_date,
-              description: educationObj[0].description
-            }
+          let i = 0;
+          for (let educationItem of educationObj) {
+            this.form.get('education').controls[i].patchValue([
+              { 
+                school: educationItem .school,
+                degree: educationItem.degree,
+                field: educationItem.field_study,
+                grade: educationItem.grade,
+                from: educationItem.from_date,
+                to: educationItem.to_date,
+                description: educationItem.description
+              }
           ]);
+          i++;
+          }
         }
       }
     );
@@ -105,6 +112,7 @@ export class EducationComponent implements OnInit {
     let formGroupData = this.form.value.education[formGroupId];
     let editMode = false;
     this.userService.updateEducation(formGroupId, formGroupData, editMode, this.userId);
+    this.form.reset();
   }
 
   onFormEdit() {
