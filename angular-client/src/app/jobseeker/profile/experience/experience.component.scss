@@ -1,1 +1,220 @@
 @import '~src/styles.scss';
+
+@keyframes slide-right {
+    0% {
+        opacity: 0;
+        transform: translateX(-5rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.container {
+  display: flex;
+  align-items: flex-start;
+}
+.add-btn {
+  margin: 0 1rem;
+  padding: .8rem 1.4rem;
+  background-color: $employer-green;
+  color: $white;
+  font-weight: 400;
+  border-radius: 4px;
+  width: 20rem;
+}
+.edit-form-group {
+  position: relative;
+  border-radius: 4px;
+  margin-bottom: 4rem;
+  margin-left: 4rem;
+  margin-top: .3rem;
+  padding: 3.5rem 3rem 2rem;
+  background-color: $grey-dark;
+  color: $white;
+  -webkit-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+  -moz-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+  box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+   animation: slide-right .4s ease;
+}
+
+.row {
+  display: flex;
+}
+.input-group {
+  position: relative;
+  flex: 1;
+  margin: 0 1rem;
+}
+.input-group-role {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+}
+.label {
+  margin: .5rem .2rem;
+  display: inline-block;
+}
+.label-present {
+  display: block;
+  margin-top: 1rem;
+  margin-left: .4rem;
+}
+.input {
+  width: 100%;
+  padding: .8rem 1.2rem;
+  border-radius: 4px;
+  margin-bottom: .9rem;
+  outline: 0;
+  border: none;
+ // visibility: hidden;
+  transition: all .3s;
+}
+.edit-mode-input {
+  visibility: visible;
+}
+.submit-btn {
+  padding: .8rem 1.4rem;
+  background-color: $jobseeker-red-dark;
+  color: $white;
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  max-width: 20rem;
+  margin: 2rem auto 0;
+  font-weight: 400;
+}
+.education-timeline {
+  flex: 1;
+  margin-left: 4rem;
+}
+.list {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.item {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  list-style-type: none;
+  padding: 2rem 4rem;
+  border-bottom: 1px solid $grey-medium;
+}
+.check-icon {
+  width: 2rem;
+  margin-right: 1rem;
+}
+.education-details {
+  display: flex;
+  flex-direction: column;
+}
+.education-field {
+  margin-bottom: .5rem;
+}
+.school {
+  font-weight: 700;
+  font-size: 2rem;
+}
+.date {
+  color: $grey;
+  font-size: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.edit-icon-wrapper {
+  width: 3.4rem;
+  height: 3.4rem;
+  text-align: center;
+  position: absolute;
+  top: 1rem;
+  right: 4.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: $grey;
+  transition: all .3s;
+
+  &:hover {
+    background-color: $grey-medium;
+
+  }
+}
+.edit-icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.delete-icon-wrapper {
+  width: 3.4rem;
+  height: 3.4rem;
+  text-align: center;
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all .3s;
+
+  &:hover {
+    background-color: $grey-medium;
+
+  }
+}
+.delete-icon-wrapper-edit-mode {
+  background-color: $grey;
+}
+.input-checkbox {
+  visibility: hidden;
+  width: 1px;
+  height: 1px;
+  top: -9999px;
+  left: -9999px;
+
+  &:checked + .label-checkbox::before {
+    background-color: $unifier-orange;
+    border: 1px solid $unifier-orange;
+  }
+  &:checked + .label-checkbox::after {
+    opacity: 1;
+  }
+}
+.label-checkbox {
+  cursor: pointer;
+  color: $white;
+  position: relative;
+  display: block;
+  padding-left: .6rem;
+  margin: 1rem 0 1rem 2.2rem; 
+
+   &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: -2.2rem;
+      width: 2rem;
+      display: inline-block;
+      height: 2rem;
+      border: 1px solid $white;
+      transition: all .3s;
+    }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: -1.5rem;
+    top: 1px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: all .3s;
+  } 
+}

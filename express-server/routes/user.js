@@ -521,6 +521,30 @@ router.post(
 });
 
 router.post(
+  '/profile/education/remove',
+  // checkAuth,
+  (req, res, next) => {
+    const formGroupId = req.body.formGroupId;   
+    const userId = req.body.userId;
+    User.findByIdAndUpdate(
+      { _id: userId },
+      { $pull: { 'profile.education': { _id: formGroupId  } } },
+      { new: true }
+    ).then(user => {
+      console.log(user);
+      res.status(200).json({
+        education: user.profile.education
+      });
+    }).catch(err => {
+      console.log(err);
+      res.status(401).json({
+        message: 'Could not delete education'
+      });
+    });
+  }
+);
+
+router.post(
   '/profile/education',
   // checkAuth
   (req, res, next) => {

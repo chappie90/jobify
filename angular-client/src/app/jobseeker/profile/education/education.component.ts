@@ -87,7 +87,8 @@ export class EducationComponent implements OnInit {
   }
 
   onDeleteEducation(e) {
-    console.log(e);
+    let formGroupId = e._id;
+    this.userService.deleteEducation(formGroupId, this.userId);
   }
 
   onFormSubmit() {

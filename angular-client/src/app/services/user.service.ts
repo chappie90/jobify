@@ -135,10 +135,10 @@ export class UserService {
     });
   }
 
-  editModeEducation(status: boolean) {
-    const editModeData = { status: status };
+  deleteEducation(formGroupId: string, userId: string) {
+    const educationData = { formGroupId: formGroupId, userId: userId };
     this.http.post<any>(
-      API_URL + '/profile/education/edit', editModeData
+      API_URL + '/profile/education/remove', educationData
     ).subscribe(response => {
       localStorage.setItem('education', JSON.stringify(response.education));
       this.userEducationUpdated.next(true);

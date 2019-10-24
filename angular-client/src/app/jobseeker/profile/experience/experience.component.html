@@ -1,1 +1,120 @@
-<h1>Experience</h1>
+<div class="container">
+  <button type="button" class="add-btn" (click)="onAddExperience()">Add Experience<span> +</span></button>
+  <form 
+    [formGroup]="form" 
+    class="edit-form-group"
+    (submit)="onFormSubmit()">
+        <span 
+          (click)="onFormEdit()" 
+          class="edit-icon-wrapper"> 
+          <img src="./assets/images/edit-3.svg" class="edit-icon" />
+        </span>
+        <div class="row">
+          <div class="column">
+           <div class="input-group">
+              <label for="title" class="label">Title</label>
+              <input 
+                type="text" 
+                id="title" 
+                class="input" 
+                [ngClass]="{'edit-mode-input': false}"
+                formControlName="title" />
+            </div>
+            <div class="input-group">
+              <label for="company" class="label">Company</label>
+              <input 
+                type="text" 
+                id="company" 
+                class="input" 
+                [ngClass]="{'edit-mode-input': false}"
+                formControlName="company" />
+            </div>
+            <div class="input-group">
+            <label for="location" class="label">Location</label>
+            <input 
+              type="text" 
+              id="location" 
+              class="input" 
+              [ngClass]="{'edit-mode-input': false}"
+              formControlName="location" />
+          </div>
+          </div>
+          <div class="column">
+            <div class="input-group">
+              <label for="description" class="label">Description</label>
+              <textarea 
+                id="description" 
+                class="input" 
+                rows="9"
+                [ngClass]="{'edit-mode-input': false}"
+                formControlName="description"></textarea>
+            </div>
+          </div>
+        </div>
+         <div class="row">
+          <div class="input-group-role">
+            <input 
+              type="checkbox" 
+              id="current-role" 
+              class="input-checkbox" 
+              [ngClass]="{'edit-mode-input': false}"
+              (change)="toggleEndDate($event)"
+              formControlName="currentRole" />
+            <label for="current-role" class="label-checkbox">I am currently working in this role</label>
+          </div>
+         </div>
+         <div class="row">
+          <div class="input-group" [ngClass]="{'limit-width': hideEndDate}">
+            <label for="from" class="label">Start Date</label>
+            <input 
+              type="date" 
+              id="from" 
+              class="input" 
+              formControlName="from" />
+          </div>
+          <div 
+            class="input-group"
+            [ngClass]="{'input-group-end-date': hideEndDate}"
+            >
+            <label for="to" class="label">End Date</label>
+            <label *ngIf="hideEndDate" class="label-present">Present</label>
+            <input 
+              *ngIf="!hideEndDate"
+              type="date" 
+              id="to" 
+              class="input" 
+              [ngClass]="{'edit-mode-input': false}"
+              formControlName="to" />
+          </div>
+         </div>
+            <button  type="submit" class="submit-btn">Save Education</button>
+  </form>
+  <div *ngIf="!editMode" class="education-timeline">
+    <ul class="list">
+      <li 
+        class="item"
+        *ngFor="let e of educationArray; let i = index">
+         <img 
+          src="./assets/images/check-symbol.svg" 
+          class="check-icon" />
+          <div class="education-details">
+            <span class="education-field school">{{ e.school }}</span>
+            <span class="education-field">{{ e.degree }}, {{ e.field_study }}, {{ e.grade }}</span>
+            <span class="education-field date">{{ e.from_date | date: 'longDate' }} - {{ e.to_date | date: 'longDate' }}</span>
+            <span class="education-field">{{ e.description }}</span>
+          </div>
+          <span 
+            (click)="onFormEdit(e)" 
+            class="edit-icon-wrapper">
+            <img src="./assets/images/edit-3.svg" class="edit-icon" />
+          </span>
+          <span 
+            (click)="onDeleteEducation(e)" 
+            class="delete-icon-wrapper">
+            <img src="./assets/images/delete.svg" class="edit-icon" />
+          </span>
+      </li>
+    </ul>
+  </div>
+</div>
+

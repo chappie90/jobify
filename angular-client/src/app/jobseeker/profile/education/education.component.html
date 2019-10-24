@@ -13,19 +13,19 @@
         </span>
         <div class="row">
          <div class="input-group">
-            <label [for]="'school-'+i+1" class="label">School</label>
+            <label for="school" class="label">School</label>
             <input 
               type="text" 
-              [id]="'school-'+i+1" 
+              id="school" 
               class="input" 
               [ngClass]="{'edit-mode-input': false}"
               formControlName="school" />
           </div>
           <div class="input-group">
-            <label [for]="'degree-'+i+1" class="label">Degree</label>
+            <label for="degree" class="label">Degree</label>
             <input 
               type="text" 
-              [id]="'degree-'+i+1" 
+              id="degree" 
               class="input" 
               [ngClass]="{'edit-mode-input': false}"
               formControlName="degree" />
@@ -33,19 +33,19 @@
         </div>
         <div class="row">
           <div class="input-group">
-            <label [for]="'field-'+i+1" class="label">Field of study</label>
+            <label for="field" class="label">Field of study</label>
             <input 
               type="text" 
-              [id]="'field-'+i+1" 
+              id="field" 
               class="input" 
               [ngClass]="{'edit-mode-input': false}"
               formControlName="field" />
           </div>
           <div class="input-group">
-            <label [for]="'grade-'+i+1" class="label">Grade</label>
+            <label for="grade" class="label">Grade</label>
             <input 
               type="text" 
-              [id]="'grade-'+i+1" 
+              id="grade" 
               class="input" 
               [ngClass]="{'edit-mode-input': false}"
               formControlName="grade" />
@@ -53,28 +53,28 @@
          </div>
          <div class="row">
           <div class="input-group">
-            <label [for]="'from-'+i+1" class="label">Start Date</label>
+            <label for="from" class="label">Start Date</label>
             <input 
               type="date" 
-              [id]="'from-'+i+1" 
+              id="from" 
               class="input" 
               [ngClass]="{'edit-mode-input': false}"
               formControlName="from" />
           </div>
           <div class="input-group">
-            <label [for]="'to-'+i+1" class="label">End Date (or expected)</label>
+            <label for="to" class="label">End Date (or expected)</label>
             <input 
               type="date" 
-              [id]="'to-'+i+1" 
+              id="to" 
               class="input" 
               [ngClass]="{'edit-mode-input': false}"
               formControlName="to" />
           </div>
          </div>
          <div class="input-group">
-            <label [for]="'description-'+i+1" class="label">Description</label>
+            <label for="description" class="label">Description</label>
             <textarea 
-              [id]="'description-'+i+1" 
+              id="description" 
               class="input" 
               [ngClass]="{'edit-mode-input': false}"
               formControlName="description"></textarea>
