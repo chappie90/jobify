@@ -136,6 +136,16 @@ export class UserService {
     });
   }
 
+  deleteExperience(formGroupId: string, userId: string) {
+    const experienceData = { formGroupId: formGroupId, userId: userId };
+    this.http.post<any>(
+      API_URL + '/profile/experience/remove', experienceData
+    ).subscribe(response => {
+      localStorage.setItem('experience', JSON.stringify(response.experience));
+      this.userExperienceUpdated.next(true);
+    });
+  }
+
   updateEducation(formGroupId: string, formData: any, userId: string) {
     const educationData = { formGroupId: formGroupId, formData: formData, userId: userId };
     this.http.post<any>(

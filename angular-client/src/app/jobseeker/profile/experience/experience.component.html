@@ -1,6 +1,7 @@
 <div class="container">
   <button type="button" class="add-btn" (click)="onAddExperience()">Add Experience<span> +</span></button>
-  <form 
+  <form
+    *ngIf="editMode" 
     [formGroup]="form" 
     class="edit-form-group"
     (submit)="onFormSubmit()">
@@ -87,21 +88,22 @@
               formControlName="to" />
           </div>
          </div>
-            <button  type="submit" class="submit-btn">Save Education</button>
+            <button  type="submit" class="submit-btn">Save Experience</button>
   </form>
-  <div *ngIf="!editMode" class="education-timeline">
+  <div *ngIf="!editMode" class="experience-timeline">
     <ul class="list">
       <li 
         class="item"
-        *ngFor="let e of educationArray; let i = index">
+        *ngFor="let e of experienceArray; let i = index">
          <img 
           src="./assets/images/check-symbol.svg" 
           class="check-icon" />
-          <div class="education-details">
-            <span class="education-field school">{{ e.school }}</span>
-            <span class="education-field">{{ e.degree }}, {{ e.field_study }}, {{ e.grade }}</span>
-            <span class="education-field date">{{ e.from_date | date: 'longDate' }} - {{ e.to_date | date: 'longDate' }}</span>
-            <span class="education-field">{{ e.description }}</span>
+          <div class="experience-details">
+            <span class="experience-field">{{ e.title }}</span>
+            <span class="experience-field">{{ e.company }}, {{ e.location }}</span>
+            <span class="experience-field">{{ e.description }}</span>
+            <span class="experience-field date">{{ e.from | date: 'longDate' }} - {{ e.to | date: 'longDate' }}</span>
+            <span class="experience-field">{{ e.description }}</span>
           </div>
           <span 
             (click)="onFormEdit(e)" 
@@ -109,7 +111,7 @@
             <img src="./assets/images/edit-3.svg" class="edit-icon" />
           </span>
           <span 
-            (click)="onDeleteEducation(e)" 
+            (click)="onDeleteExperience(e)" 
             class="delete-icon-wrapper">
             <img src="./assets/images/delete.svg" class="edit-icon" />
           </span>

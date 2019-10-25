@@ -580,6 +580,29 @@ router.post(
 });
 
 router.post(
+  '/profile/experience/remove',
+  // checkAuth,
+  (req, res, next) => {
+    const formGroupId = req.body.formGroupId;   
+    const userId = req.body.userId;
+    User.findByIdAndUpdate(
+      { _id: userId },
+      { $pull: { 'profile.experience': { _id: formGroupId  } } },
+      { new: true }
+    ).then(user => {
+      res.status(200).json({
+        experience: user.profile.experience
+      });
+    }).catch(err => {
+      console.log(err);
+      res.status(401).json({
+        message: 'Could not delete experience'
+      });
+    });
+  }
+);
+
+router.post(
   '/profile/education/remove',
   // checkAuth,
   (req, res, next) => {

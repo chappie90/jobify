@@ -51,12 +51,12 @@ export class ExperienceComponent implements OnInit {
     this.experienceArray = JSON.parse(localStorage.getItem('experience'));
     this.experienceArray.map(
             item => {
-              let fromDate = new Date(item.from_date);
-              let toDate = new Date(item.to_date);
+              let fromDate = new Date(item.from);
+              let toDate = new Date(item.to);
               return {
                 ...item,
-                from_date: fromDate,
-                to_date: toDate
+                from: fromDate,
+                to: toDate
               }
             }
     );
@@ -69,18 +69,28 @@ export class ExperienceComponent implements OnInit {
           this.experienceArray = JSON.parse(localStorage.getItem('experience'));
           this.experienceArray.map(
             item => {
-              let fromDate = new Date(item.from_date);
-              let toDate = new Date(item.to_date);
+              let fromDate = new Date(item.from);
+              let toDate = new Date(item.to);
               return {
                 ...item,
-                  from_date: fromDate,
-                  to_date: toDate
+                  from: fromDate,
+                  to: toDate
                 }
             }
           );
         }
       }
     );
+  }
+
+  onAddExperience() {
+    this.editMode = true;
+    this.form.reset();
+  }
+
+  onDeleteExperience(e) {
+    let formGroupId = e._id;
+    this.userService.deleteExperience(formGroupId, this.userId);
   }
 
   onFormSubmit() {
@@ -102,6 +112,24 @@ export class ExperienceComponent implements OnInit {
 
   toggleEndDate(e) {
     this.hideEndDate = e.target.checked ? true: false;
+  }
+
+  onFormEdit(e) {
+    this.editMode = !this.editMode;
+    if (this.editMode) {
+      this.currentForm = e._id;
+      let fromDate = new Date(e.from).toISOString().substring(0, 10);
+      let toDate = new Date(e.to).toISOString().substring(0, 10);
+      this.form.patchValue({
+        'title': e.title,
+        'company': e.company,
+        'location': e.location,
+        'description': e.description,
+        'from': fromDate,
+        'to': toDate,
+        'currentRole': e.currentRole
+      });
+    }
   }
 
 }
