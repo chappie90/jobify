@@ -15,6 +15,7 @@ export class UserService {
   private userUpdated = new Subject<{ jobStatus: boolean, likedJobId: string, appliedJobs: string, cvPath: string, cvName: string, status: boolean}>();
   private notificationsUpdated = new Subject<boolean>();
   private userEducationUpdated = new Subject<boolean>();
+  private userExperienceUpdated = new Subject<boolean>();
   private skillsUpdated = new Subject<boolean>();
   private applyStatus: boolean;
 
@@ -191,6 +192,10 @@ export class UserService {
 
    getUserEducationUpdateListener() {
     return this.userEducationUpdated.asObservable();
+  }
+
+  getUserExperienceUpdateListener() {
+    return this.userExperienceUpdated.asObservable();
   }
 
   getSkillsUpdateListener() {

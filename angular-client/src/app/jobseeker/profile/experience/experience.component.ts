@@ -36,20 +36,20 @@ export class ExperienceComponent implements OnInit {
          validators: [Validators.required]
       }),
       currentRole: new FormControl(null, {
-         validators: [Validators.required]
+         validators: []
       }),
       from: new FormControl(null, {
-         validators: [Validators.required]
+         validators: []
       }),
       to: new FormControl(null, {
-         validators: [Validators.required]
+         validators: []
       }),
       description: new FormControl(null, {
          validators: [Validators.required]
       })
     });
     this.experienceArray = JSON.parse(localStorage.getItem('experience'));
-    this.educationArray.map(
+    this.experienceArray.map(
             item => {
               let fromDate = new Date(item.from_date);
               let toDate = new Date(item.to_date);
@@ -81,6 +81,23 @@ export class ExperienceComponent implements OnInit {
         }
       }
     );
+  }
+
+  onFormSubmit() {
+    if (this.form.invalid) {    
+      return;
+    }
+    if (this.experienceArray.length !== 0 && !this.currentForm) {
+      this.formGroupId = this.experienceArray.length + 1;  
+    } else if (this.experienceArray.length !== 0) {
+      this.formGroupId = this.experienceArray.find(form => form._id === this.currentForm);
+      this.formGroupId = this.formGroupId.id;
+    } else {
+      this.formGroupId = 1;
+      this.editMode = true;
+    }
+    let formGroupData = this.form.value;
+    this.userService.updateExperience(this.formGroupId, formGroupData, this.userId);
   }
 
   toggleEndDate(e) {

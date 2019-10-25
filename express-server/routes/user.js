@@ -70,6 +70,7 @@ router.post('/signup', (req, res, next) => {
           summary: {
             avatarPath: ''
           },
+          experience: [],
           education: []
         }
       });
@@ -95,6 +96,7 @@ router.post('/signup', (req, res, next) => {
             cv: newUser.cvPath,
             cvName: newUser.cvName,
             summary: {},
+            experience: [],
             education: [],
             avatarPath: newUser.profile.summary.avatarPath
           });  
@@ -136,6 +138,7 @@ router.post('/login', (req, res, next) => {
           cv: fetchedUser.cvPath,
           cvName: fetchedUser.cvName,
           summary: fetchedUser.profile.summary,
+          experience: fetchedUser.profile.experience,
           education: fetchedUser.profile.education,
           avatarPath: fetchedUser.profile.summary.avatarPath 
         });
@@ -194,6 +197,7 @@ router.post('/google-login', (req, res, next) => {
               cv: '',
               cvName: '',
               summary: {},
+              experience: [],
               education: []
             })
           });
@@ -211,6 +215,7 @@ router.post('/google-login', (req, res, next) => {
             cv: user.cvPath,
             cvName: user.cvName,
             summary: user.profile.summary,
+            experience: user.profile.experience,
             education: user.profile.education
           })
         }
@@ -503,21 +508,75 @@ router.post(
 });
 
 router.post(
-  '/profile/education/edit',
+  '/profile/experience',
   // checkAuth
   (req, res, next) => {
     const formGroupId = req.body.formGroupId;
+    const formData = req.body.formData;
     const userId = req.body.userId;
-    const status = req.body.editModeData.status;
     User.find(
       { _id: userId,
-        'profile.education.id': formGroupId 
+        'profile.experience.id': formGroupId 
       }
     ).then(user => {
-
+      if (user.length !== 0) {
+        User.findOneAndUpdate(
+          { _id: userId, 'profile.experience.id': formGroupId },
+          {
+            $set: {
+              'profile.experience.$': {
+                  id: formGroupId,
+                  title: formData.title,
+                  company: formData.company,
+                  location: formData.location,
+                  description: formData.description,
+                  from_date: formData.from,
+                  to_date: formData.to,
+                  currentRole: formData.currentRole
+                }
+            }
+          },
+          { new: true }
+        ).then(user => {
+          console.log(user);
+          res.status(200).json({
+            experience: user.profile.experience
+          });
+        });
+      } else {
+        User.findOneAndUpdate(
+          { _id: userId },
+          { $addToSet: {
+              'profile.experience': {
+                id: formGroupId,
+                title: formData.title,
+                company: formData.company,
+                location: formData.location,
+                description: formData.description,
+                from_date: formData.from,
+                to_date: formData.to,
+                currentRole: formData.currentRole
+              }
+            }
+          },
+          { new: true }
+        ).then(user => {
+          res.status(200).json({
+            experience: user.profile.experience
+          });
+        }).catch(err => {
+          console.log(err);
+          res.status(401).json({
+            message: 'Could not update profile experience'
+          });
+        });
+      }
     }).catch(err => {
       console.log(err);
-    });
+      res.status(401).json({
+        message: 'Could not update profile experience'
+      });
+    });   
 });
 
 router.post(

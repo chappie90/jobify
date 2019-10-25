@@ -47,6 +47,7 @@ export class AuthService {
       const notifications = JSON.stringify(userData.notifications);
       const newNotifications = userData.newNotifications.toString();
       const summary = JSON.stringify(userData.summary);
+      const experience = JSON.stringify(userData.experience);
       const education = JSON.stringify(userData.education);
       const avatar = userData.avatarPath;
       const cv = userData.cv;
@@ -67,6 +68,7 @@ export class AuthService {
                             cv,
                             cvName,
                             summary,
+                            experience,
                             education,
                             avatar);
       this.router.navigate(['/']);
@@ -144,6 +146,7 @@ export class AuthService {
               cv: string,
               cvName: string,
               summary: any,
+              experience: any,
               education: any,
               avatar) {
     localStorage.setItem('token', token);
@@ -158,6 +161,7 @@ export class AuthService {
     localStorage.setItem('cv', cv);
     localStorage.setItem('cvName', cvName);
     localStorage.setItem('summary', summary);
+    localStorage.setItem('experience', experience);
     localStorage.setItem('education', education);
     localStorage.setItem('avatar', avatar);
   }
@@ -175,6 +179,7 @@ export class AuthService {
     const cv = localStorage.getItem('cv');
     const cvName = localStorage.getItem('cvName');
     const summary = localStorage.getItem('summary');
+    const experience = localStorage.getItem('experience');
     const education = localStorage.getItem('education');
     const avatar = localStorage.getItem('avatar');
 
@@ -194,6 +199,7 @@ export class AuthService {
       cv: cv,
       cvName: cvName,
       summary: summary,
+      experience: experience,
       education: education,
       avatar: avatar
     };
@@ -212,6 +218,7 @@ export class AuthService {
     localStorage.removeItem('cv');
     localStorage.removeItem('cvName');
     localStorage.removeItem('summary');
+    localStorage.removeItem('experience');
     localStorage.removeItem('education');
     localStorage.removeItem('avatar');
   }

@@ -30,6 +30,18 @@ const userSchema = mongoose.Schema({
       number: Number,
       avatarPath: String
     },
+    experience: [
+      {
+        id: String,
+        title: String,
+        company: String,
+        location: String,
+        description: String,
+        from: Date,
+        to: Date,
+        currentRole: Boolean
+      }
+    ],
     education: [
       {
         id: String,
