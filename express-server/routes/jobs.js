@@ -10,18 +10,11 @@ router.post('', (req, res, next) => {
   let title = req.body.form.title;
   let location = req.body.form.location;
 
-  if (title === undefined) {
-    title = '';
-  }
-  if (location === undefined) {
-    location = '';
-  }
-  
-  console.log(title);
-  console.log(location);
-
-  // // DATE JOBS SEARCH FILTER
-  // const date = req.body.form.date;
+  // DATE JOBS SEARCH FILTER
+  const date = req.body.form.date;
+  console.log('date ' + date);
+  console.log('title' + title);
+  console.log('location ' + location);
 
   // let toDate = new Date(); // mm/dd/yyy
   // let ddToDate = String(toDate.getDate()).padStart(2, '0');

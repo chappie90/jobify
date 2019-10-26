@@ -36,9 +36,9 @@ export class SearchBarComponent implements OnInit {
               private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.titlesSub = this.jobsService.getAutoCompleteTitles().subscribe(response => {
-      this.titles = response.jobs.jobs.map(t => t.job_title);
-    });
+    // this.titlesSub = this.jobsService.getAutoCompleteTitles().subscribe(response => {
+    //   this.titles = response.jobs.jobs.map(t => t.job_title);
+    // });
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Show loading indicator
@@ -57,57 +57,77 @@ export class SearchBarComponent implements OnInit {
       }
     });
     this.form = new FormGroup({
-      'title': new FormControl(null, {
+      'title': new FormControl('', {
         validators: []
       }),
-      'location': new FormControl(null, {
+      'location': new FormControl('', {
         validators: []
       }),
-      'date': new FormControl(null, {
+      'date': new FormControl('all-time', {
         validators: []
       }),
-      'full': new FormControl(null, {
+      'full': new FormControl('', {
         validators: []
       }),
-      'part': new FormControl(null, {
+      'part': new FormControl('', {
         validators: []
       }),
-      'contract': new FormControl(null, {
+      'contract': new FormControl('', {
         validators: []
       }),
-      'temporary': new FormControl(null, {
+      'temporary': new FormControl('', {
         validators: []
       }),
-      'apprenticeship': new FormControl(null, {
+      'apprenticeship': new FormControl('', {
         validators: []
       }),
-      'volunteer': new FormControl(null, {
+      'volunteer': new FormControl('', {
         validators: []
       }),
-      'rangelow': new FormControl(null, {
+      'rangelow': new FormControl('', {
         validators: []
       }),
-      'rangemedium': new FormControl(null, {
+      'rangemedium': new FormControl('', {
         validators: []
       }),
-      'range': new FormControl(null, {
+      'range': new FormControl('', {
         validators: []
       }),
-      'rangehigh': new FormControl(null, {
+      'rangehigh': new FormControl('', {
         validators: []
       }),
     });
     this.route.queryParams.subscribe(params => {
-      this.jobsSearch = this.router.url.includes('/jobs/search');
-        if (this.jobsSearch && this.form) {
-          this.form.patchValue({
-            'title': params.title,
-            'location': params.location,
-            'date': params.date
-          });
-          this.title = params.title;
-          this.city = params.location;
+       if (this.jobsSearch && this.form) {
+        this.form.patchValue({
+          'title': params.title,
+          'location': params.location,
+          'date': params.date
+        });
       }
+      this.jobsSearch = this.router.url.includes('/jobs/search');
+      let title = params.title;
+      let location = params.location;
+      let date = params.date;
+      let pageNumber = params.pageNumber;
+      if (!title) {
+        title = '';
+      }
+      if (!location) {
+        location = '';
+      }
+      if (!date) {
+        date = '';
+      }
+      if (!pageNumber) {
+        pageNumber = 1;
+      }
+      const jobsQueryData = { 
+        title: title, 
+        location: location, 
+        date: date 
+      }; 
+      this.jobsService.getJobs(jobsQueryData, pageNumber);
     });
   }
 
@@ -115,18 +135,18 @@ export class SearchBarComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-    if (this.jobsSearch) {
-      // this.filterDateActive = this.form.value.date !== 'all-time' ? true : false;
-      // this.filterTypeActive = this.form.value.full || 
-      //                         this.form.value.part ||
-      //                         this.form.value.contract ||
-      //                         this.form.value.temporary ||
-      //                         this.form.value.apprenticeship ||
-      //                         this.form.value.volunteer;
-      // this.filterSalaryActive = this.form.value.rangelow || 
-      //                           this.form.value.rangemedium ||
-      //                           this.form.value.range ||
-      //                           this.form.value.rangehigh;
+    // if (this.jobsSearch) {
+      this.filterDateActive = this.form.value.date !== 'all-time' ? true : false;
+      this.filterTypeActive = this.form.value.full || 
+                              this.form.value.part ||
+                              this.form.value.contract ||
+                              this.form.value.temporary ||
+                              this.form.value.apprenticeship ||
+                              this.form.value.volunteer;
+      this.filterSalaryActive = this.form.value.rangelow || 
+                                this.form.value.rangemedium ||
+                                this.form.value.range ||
+                                this.form.value.rangehigh;
       // if (this.filterDateActive) {
       //   this.filtersCount++;
       // }
@@ -137,7 +157,7 @@ export class SearchBarComponent implements OnInit {
       //   this.filtersCount++;
       // }
       this.jobsService.getJobs(this.form.value, 1);
-    }
+   // }
 
     // Add search query parameters
     // Make sure all browsers support object spread operator
@@ -164,53 +184,53 @@ export class SearchBarComponent implements OnInit {
     // refactor!
     this.form.patchValue({
       'date': 'all-time',
-      'full': null,
-      'part': null,
-      'contract': null,
-      'temporary': null,
-      'apprenticeship': null,
-      'volunteer': null,
-      'rangelow': null,
-      'rangemedium': null,
-      'range': null,
-      'rangehigh': null
+      'full': '',
+      'part': '',
+      'contract': '',
+      'temporary': '',
+      'apprenticeship': '',
+      'volunteer': '',
+      'rangelow': '',
+      'rangemedium': '',
+      'range': '',
+      'rangehigh': ''
     });
     this.filterDateActive = false;
     this.filterTypeActive = false;
     this.filterSalaryActive = false;
   }
 
-  cities = [
-    'Birmingham', 
-    'Bradford', 
-    'Bristol', 
-    'Edinburgh', 
-    'Glasgow', 
-    'Leeds', 
-    'Liverpool', 
-    'London', 
-    'Manchester',
-    'Newcastle',
-    'Nottingham',
-    'Portsmouth',
-    'Sheffield',
-    'Southhampton'
-  ];
+  // cities = [
+  //   'Birmingham', 
+  //   'Bradford', 
+  //   'Bristol', 
+  //   'Edinburgh', 
+  //   'Glasgow', 
+  //   'Leeds', 
+  //   'Liverpool', 
+  //   'London', 
+  //   'Manchester',
+  //   'Newcastle',
+  //   'Nottingham',
+  //   'Portsmouth',
+  //   'Sheffield',
+  //   'Southhampton'
+  // ];
 
-  getTitles(title) {
-    this.jobsService.getJobTitles(title);
-  }
+  // getTitles(title) {
+  //   this.jobsService.getJobTitles(title);
+  // }
 
-  titleChanged(title) {
-    this.form.patchValue({
-      'title': title
-    });
-  }
+  // titleChanged(title) {
+  //   this.form.patchValue({
+  //     'title': title
+  //   });
+  // }
 
-  cityChanged(city) {
-    this.form.patchValue({
-      'location': city
-    });
-  }
+  // cityChanged(city) {
+  //   this.form.patchValue({
+  //     'location': city
+  //   });
+  // }
 
 }

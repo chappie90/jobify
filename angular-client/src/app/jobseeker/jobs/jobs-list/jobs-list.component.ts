@@ -37,7 +37,7 @@ export class JobsListComponent implements OnInit, OnDestroy {
         if (!pageNumber) {
           pageNumber = 1;
         }
-    this.jobsService.getJobs({title: title, location: location}, pageNumber);
+   // this.jobsService.getJobs({title: title, location: location}, pageNumber);
     this.jobsSub = this.jobsService.getJobsUpdateListener()
       .subscribe(
         jobs => {
