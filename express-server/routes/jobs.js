@@ -1,4 +1,5 @@
-  const express = require('express');
+const express = require('express');
+const moment = require('moment');
 
 const Job = require('../models/job');
 //const checkAuth = require('../middleware/check-auth');
@@ -12,77 +13,30 @@ router.post('', (req, res, next) => {
 
   // DATE JOBS SEARCH FILTER
   const date = req.body.form.date;
-  console.log('date ' + date);
-  console.log('title' + title);
-  console.log('location ' + location);
 
-  // let toDate = new Date(); // mm/dd/yyy
-  // let ddToDate = String(toDate.getDate()).padStart(2, '0');
-  // let mmToDate = String(toDate.getMonth() + 1).padStart(2, '0');
-  // let yyyyToDate = toDate.getFullYear();
-  // let toDateQuery = ddToDate + '/' + mmToDate + '/' + yyyyToDate;
-  // // Maybe replace below with oldest jobs in db
-  // // let fromDateQuery = Job.find().sort({ "date_posted" : 1 }).limit(1);
-  // let fromDate = new Date();
-  // let ddFromDate;
-  // let mmFromDate;
-  // let yyyyFromDate;
-  // let fromDateQuery = '01/01/2000';
+  // Get current date
+  let today = moment().toDate();
+  let fromDate = moment('01/01/2000', "YYYY-MM-DD").toDate();
 
-  // // RESULTS FROM LAST MONTH
-  // if (date === 'month') {
-  //   fromDate.setDate(toDate.getDate());
-  //   fromDate.setMonth(toDate.getMonth() - 1);
-  //   if (toDate.getMonth() === 0) {
-  //     fromDate.setFullYear(toDate.getFullYear() - 1);
-  //   } else {
-  //     fromDate.setFullYear(toDate.getFullYear());
-  //   }
-  //   ddFromDate = String(fromDate.getDate()).padStart(2, '0');
-  //   mmFromDate = String(fromDate.getMonth() + 1).padStart(2, '0');
-  //   yyyyFromDate = fromDate.getFullYear();
-  //   fromDateQuery = ddFromDate + '/' + mmFromDate + '/' + yyyyFromDate;
-  // }
+  // RESULTS FROM LAST MONTH
+  if (date === 'month') {
+    fromDate = moment().subtract(1, 'months');
+  }
 
-  // // RESULTS FROM LAST WEEK
-  // if (date === 'week') {
-  //   fromDate.setDate(toDate.getDate() - 7);
-  //   if (toDate.getDate() < 7) {
-  //     fromDate.setMonth(toDate.getMonth() - 1);
-  //   } else {
-  //     fromDate.setMonth(toDate.getMonth());
-  //   }
-  //   if (toDate.getMonth() === 0 && toDate.getDate() < 7) {
-  //     fromDate.setFullYear(toDate.getFullYear() - 1);
-  //   } else {
-  //     fromDate.setFullYear(toDate.getFullYear());
-  //   }
-  //   ddFromDate = String(fromDate.getDate()).padStart(2, '0');
-  //   mmFromDate = String(fromDate.getMonth() + 1).padStart(2, '0');
-  //   yyyyFromDate = fromDate.getFullYear();
-  //   fromDateQuery = ddFromDate + '/' + mmFromDate + '/' + yyyyFromDate;
-  // }
+  // RESULTS FROM LAST WEEK
+  if (date === 'week') {
+    fromDate = moment().subtract(1, 'weeks'); 
+  }
 
-  // // RESULTS FROM LAST 24 HOURS
-  // if (date === 'day') {
-  //   fromDate.setDate(toDate.getDate() - 1);
-  //   if (toDate.getDate() === 1) {
-  //     fromDate.setMonth(toDate.getMonth() - 1);
-  //   } else {
-  //     fromDate.setMonth(toDate.getMonth());
-  //   }
-  //   if (toDate.getMonth() === 0 && toDate.getDate() === 1) {
-  //     fromDate.setFullYear(toDate.getFullYear() - 1);
-  //   } else {
-  //     fromDate.setFullYear(toDate.getFullYear());
-  //   }
-  //   ddFromDate = String(fromDate.getDate()).padStart(2, '0');
-  //   mmFromDate = String(fromDate.getMonth() + 1).padStart(2, '0');
-  //   yyyyFromDate = fromDate.getFullYear();
-  //   fromDateQuery = ddFromDate + '/' + mmFromDate + '/' + yyyyFromDate;
-  // }
+  // RESULTS FROM LAST 24 HOURS
+  if (date === 'day') {
+    fromDate = moment().subtract(1, 'days');
+  }
 
-  // // JOB TYPE JOBS SEARCH FILTER
+  console.log(today);
+  console.log(fromDate);
+
+  // // // JOB TYPE JOBS SEARCH FILTER
   // let jobTypeArray = ['Full-time'];
   // if (req.body.form.full) {
   //   jobTypeArray.push('Full-time');
@@ -103,7 +57,9 @@ router.post('', (req, res, next) => {
   // let jobTypeContract = '';
   // if (req.body.form.contract) {
   //   jobTypeContract = 'Contract';
-  // }
+  // // }
+
+
   const pageSize = 20;
   let jobsQuery;
   jobsQuery = Job.find(
@@ -111,13 +67,14 @@ router.post('', (req, res, next) => {
       job_title: { $regex: title, $options: 'i' },
       location: { $regex: location, $options: 'i' },
       // job_type: { $in: [jobTypeArray] },
-      // date_posted: { $lte: toDateQuery, $gte: fromDateQuery }
+      date_posted: { $lte: today.toISOString(), $gte: fromDate.toISOString() }
      }
   );
   let jobsQueryCount = Job.find(
      {
       job_title: { $regex: title, $options: 'i' },
       location: { $regex: location, $options: 'i' },
+      date_posted: { $lte: today.toISOString(), $gte: fromDate.toISOString() }
      }
   ).count();
   let fetchedJobs;
