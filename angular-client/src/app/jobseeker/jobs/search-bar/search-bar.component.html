@@ -6,58 +6,33 @@
     (submit)="onSearch()" 
     [formGroup]="form"
     autocomplete="off">
-    <div class="search__input-group">
+    <div class="search__input-group"  [ngClass]="{'search__input-group--pristine': jobsSearch}">
       <label 
         for="title" 
         class="search__input-label"
         [ngClass]="{'search__input-label--pristine': !jobsSearch}">Search job title</label>
       <div class="search__input-icon search__input-icon--search"></div>
         <input
-          class="search__form-input hide-input"
+          class="search__form-input"
           type="text"
           name="title"
           formControlName="title"
           placeholder="Job title"
           id="title"/>
-        <ng2-completer 
-          [(ngModel)]="title" 
-          [datasource]="titles" 
-          [minSearchLength]="0" 
-          [autoMatch]="false"
-          [ngModelOptions]="{standalone: true}"
-          [fillHighlighted]="false"
-          [inputClass]="'autocomplete-input'"
-          (keydown)="titleChanged(title)"
-          (keyup)="getTitles(title)"
-          [ngClass]="{'autocomplete-input-pristine': jobsSearch}"
-          placeholder="Job title">
-        </ng2-completer>
     </div>
-    <div class="search__input-group">
+    <div class="search__input-group" [ngClass]="{'search__input-group--pristine': jobsSearch}">
       <label 
         for="location" 
         class="search__input-label"
         [ngClass]="{'search__input-label--pristine': !jobsSearch}">Search city</label>
       <div class="search__input-icon search__input-icon--location"></div>
         <input
-          class="search__form-input hide-input"
+          class="search__form-input"
           type="text"
           name="location"
           formControlName="location"
           id="location"
           placeholder="Location"/>
-        <ng2-completer 
-          [(ngModel)]="city" 
-          [datasource]="cities" 
-          [minSearchLength]="0" 
-          [autoMatch]="false"
-          [ngModelOptions]="{standalone: true}"
-          [fillHighlighted]="false"
-          [inputClass]="'autocomplete-input'"
-          (keydown)="cityChanged(city)"
-          [ngClass]="{'autocomplete-input-pristine': jobsSearch}"
-          placeholder="Location">
-        </ng2-completer>
     </div>
     <button 
       class="button search__button"

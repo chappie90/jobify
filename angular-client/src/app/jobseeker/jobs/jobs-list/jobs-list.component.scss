@@ -172,8 +172,12 @@
 }
 .results-count {
   display: block;
-  margin-bottom: 1rem;
-  margin-left: 1rem;
+  position: sticky;
+  top: 0;
+  left: 0;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
   font-size: 1.7rem;
   color: $grey;
+  background-color: $white
 }
