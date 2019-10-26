@@ -17,6 +17,7 @@ export class JobsListComponent implements OnInit, OnDestroy {
   private jobsSub: Subscription;
   private userSub: Subscription;
   private selectedJob: Job;
+  private resultsCount: number;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -36,7 +37,7 @@ export class JobsListComponent implements OnInit, OnDestroy {
         if (!pageNumber) {
           pageNumber = 1;
         }
-        this.jobsService.getJobs({title: title, location: location}, pageNumber);
+    this.jobsService.getJobs({title: title, location: location}, pageNumber);
     this.jobsSub = this.jobsService.getJobsUpdateListener()
       .subscribe(
         jobs => {
@@ -57,6 +58,7 @@ export class JobsListComponent implements OnInit, OnDestroy {
     .subscribe(
       jobs => {
         this.jobs = jobs.jobs;
+        this.resultsCount = jobs.count;
         this.selectedJob = this.jobs[0];
         this.jobsService.getJobsItem(this.jobs[0]);
      //   console.log(document.getElementById('jobs-list').scrollTop);

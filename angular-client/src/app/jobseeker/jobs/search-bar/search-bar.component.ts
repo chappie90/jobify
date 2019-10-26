@@ -116,17 +116,17 @@ export class SearchBarComponent implements OnInit {
       return;
     }
     if (this.jobsSearch) {
-      this.filterDateActive = this.form.value.date !== 'all-time' ? true : false;
-      this.filterTypeActive = this.form.value.full || 
-                              this.form.value.part ||
-                              this.form.value.contract ||
-                              this.form.value.temporary ||
-                              this.form.value.apprenticeship ||
-                              this.form.value.volunteer;
-      this.filterSalaryActive = this.form.value.rangelow || 
-                                this.form.value.rangemedium ||
-                                this.form.value.range ||
-                                this.form.value.rangehigh;
+      // this.filterDateActive = this.form.value.date !== 'all-time' ? true : false;
+      // this.filterTypeActive = this.form.value.full || 
+      //                         this.form.value.part ||
+      //                         this.form.value.contract ||
+      //                         this.form.value.temporary ||
+      //                         this.form.value.apprenticeship ||
+      //                         this.form.value.volunteer;
+      // this.filterSalaryActive = this.form.value.rangelow || 
+      //                           this.form.value.rangemedium ||
+      //                           this.form.value.range ||
+      //                           this.form.value.rangehigh;
       // if (this.filterDateActive) {
       //   this.filtersCount++;
       // }
