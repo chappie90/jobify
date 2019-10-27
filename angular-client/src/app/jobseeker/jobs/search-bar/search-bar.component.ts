@@ -98,36 +98,36 @@ export class SearchBarComponent implements OnInit {
       }),
     });
     this.route.queryParams.subscribe(params => {
+      this.jobsSearch = this.router.url.includes('/jobs/search');
        if (this.jobsSearch && this.form) {
+        let title = params.title;
+        let location = params.location;
+        let date = params.date;
+        let pageNumber = params.pageNumber;
+        if (!title) {
+          title = '';
+        }
+        if (!location) {
+          location = '';
+        }
+        if (!date) {
+          date = 'all-time';
+        }
+        if (!pageNumber) {
+          pageNumber = 1;
+        }
+        const jobsQueryData = { 
+          title: title, 
+          location: location, 
+          date: date 
+        }; 
+        this.jobsService.getJobs(jobsQueryData, pageNumber);
         this.form.patchValue({
-          'title': params.title,
-          'location': params.location,
-          'date': params.date
+          'title': title,
+          'location': location,
+          'date': date
         });
       }
-      this.jobsSearch = this.router.url.includes('/jobs/search');
-      let title = params.title;
-      let location = params.location;
-      let date = params.date;
-      let pageNumber = params.pageNumber;
-      if (!title) {
-        title = '';
-      }
-      if (!location) {
-        location = '';
-      }
-      if (!date) {
-        date = '';
-      }
-      if (!pageNumber) {
-        pageNumber = 1;
-      }
-      const jobsQueryData = { 
-        title: title, 
-        location: location, 
-        date: date 
-      }; 
-      this.jobsService.getJobs(jobsQueryData, pageNumber);
     });
   }
 

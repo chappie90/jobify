@@ -40,6 +40,7 @@ export class JobsService {
   }
 
   getJobs(form: any, page: number) {
+    console.log('testy test');
     console.log(form);
     const searchData = { form: form, page: page };
     // let queryParams = `?page=${page}`;
