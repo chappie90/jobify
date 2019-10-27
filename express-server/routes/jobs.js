@@ -33,32 +33,39 @@ router.post('', (req, res, next) => {
     fromDate = moment().subtract(1, 'days');
   }
 
-  console.log(today);
-  console.log(fromDate);
+  // JOB TYPE JOBS SEARCH FILTER
+//  let typeArr = ['Full-time', 'Part-time', 'Contract', 'Temporary', 'Apprenticeship', 'Volunteer'];
+  let typeArr = [];
+  let fullTime = req.body.form.full;
+  let partTime = req.body.form.part;
+  let contract = req.body.form.contract;
+  let temporary = req.body.form.temporary;
+  let apprenticeship = req.body.form.apprenticeship;
+  let volunteer = req.body.form.volunteer;
+  if (!fullTime && !partTime && !contract && !temporary && !apprenticeship && !volunteer) {
+    typeArr = ['Full-time', 'Part-time', 'Contract', 'Temporary', 'Apprenticeship', 'Volunteer'];
+  }
 
-  // // // JOB TYPE JOBS SEARCH FILTER
-  // let jobTypeArray = ['Full-time'];
-  // if (req.body.form.full) {
-  //   jobTypeArray.push('Full-time');
-  // }
-  // if (req.body.form.part) {
-  //   jobTypeArray.push('Part-time');
-  // }
-  // console.log(jobTypeArray);
+  if (fullTime) {
+    typeArr.push('Full-time');
+  }
+  if (partTime) {
+    typeArr.push('Part-time');
+  }
+  if (contract) {
+    typeArr.push('Contract');
+  }
+  if (temporary) {
+    typeArr.push('Temporary');
+  }
+  if (apprenticeship) {
+    typeArr.push('Apprenticeship');
+  }
+  if (volunteer) {
+    typeArr.push('Volunteer');
+  }
 
-  // let jobTypeFull = '';
-  // if (req.body.form.full) {
-  //   jobTypeFull = 'Full-time';
-  // }
-  // let jobTypePart = '';
-  // if (req.body.form.part) {
-  //   jobTypePart = 'Part-time';
-  // }
-  // let jobTypeContract = '';
-  // if (req.body.form.contract) {
-  //   jobTypeContract = 'Contract';
-  // // }
-
+  console.log(typeArr);
 
   const pageSize = 20;
   let jobsQuery;
@@ -66,7 +73,7 @@ router.post('', (req, res, next) => {
      {
       job_title: { $regex: title, $options: 'i' },
       location: { $regex: location, $options: 'i' },
-      // job_type: { $in: [jobTypeArray] },
+      job_type: { $in: typeArr },
       date_posted: { $lte: today.toISOString(), $gte: fromDate.toISOString() }
      }
   );
@@ -74,6 +81,7 @@ router.post('', (req, res, next) => {
      {
       job_title: { $regex: title, $options: 'i' },
       location: { $regex: location, $options: 'i' },
+      job_type: { $in: typeArr },
       date_posted: { $lte: today.toISOString(), $gte: fromDate.toISOString() }
      }
   ).count();
