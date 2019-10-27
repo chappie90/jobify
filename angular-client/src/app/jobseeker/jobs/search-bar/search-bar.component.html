@@ -173,9 +173,29 @@
           [ngClass]="{'filter-active': filterSalaryActive}" 
           class="search__filters-item-title">Salary range</span>
           <div class="search__filters-content range-container">
+            <div class="range-values">
+              <span>{{ salaryMinVal | number }}</span>
+              <span>{{ salaryMaxVal | number }}</span>
+            </div>
             <span class="multi-range">
-              <input class="range-input" type="range" min="0" max="50" value="5" id="lower" />
-              <input class="range-input" type="range" min="0" max="50" value="45" id="upper" />
+              <input 
+                class="range-input" 
+                type="range" 
+                min="0" 
+                max="299999"
+                id="lower" 
+                formControlName="salaryMin"
+                #salaryMin
+                (input)="onSalaryMinChange(salaryMin.value, salaryMax.value)" />
+              <input 
+                class="range-input" 
+                type="range" 
+                min="1" 
+                max="300000" 
+                id="upper" 
+                formControlName="salaryMax" 
+                #salaryMax
+                (input)="onSalaryMaxChange(salaryMax.value, salaryMin.value)"/>
             </span>
           </div>
       </li>

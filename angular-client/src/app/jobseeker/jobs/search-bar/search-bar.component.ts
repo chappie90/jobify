@@ -30,6 +30,8 @@ export class SearchBarComponent implements OnInit {
   private filtersCount: number = 0;
   private titlesSub: Subscription;
   private titles: any;
+  private salaryMinVal: number;
+  private salaryMaxVal: number;
 
   constructor(private jobsService: JobsService,
               private router: Router,
@@ -39,6 +41,8 @@ export class SearchBarComponent implements OnInit {
     // this.titlesSub = this.jobsService.getAutoCompleteTitles().subscribe(response => {
     //   this.titles = response.jobs.jobs.map(t => t.job_title);
     // });
+    this.salaryMinVal = 10000;
+    this.salaryMaxVal = 290000;
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Show loading indicator
@@ -84,6 +88,12 @@ export class SearchBarComponent implements OnInit {
       'volunteer': new FormControl('', {
         validators: []
       }),
+      'salaryMin': new FormControl(10000, {
+
+      }),
+      'salaryMax': new FormControl(290000, {
+
+      }), 
       'rangelow': new FormControl('', {
         validators: []
       }),
@@ -134,6 +144,16 @@ export class SearchBarComponent implements OnInit {
   ngAfterViewInit() { 
     this.dropDown();
     this.rangeSlider();
+  }
+
+  onSalaryMinChange(minValue, maxValue) {
+    this.salaryMinVal = minValue;
+    this.salaryMaxVal = maxValue;
+  }
+
+  onSalaryMaxChange(maxValue, minValue) {
+    this.salaryMaxVal = maxValue;
+    this.salaryMinVal = minValue;
   }
 
   onSearch() {
