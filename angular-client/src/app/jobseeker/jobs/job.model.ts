@@ -4,7 +4,8 @@ export interface Job {
   type: string;
   location: string;
   company: string;
-  salary: string;
+  salaryMin: number;
+  salaryMax: number;
   industry: string;
   datePosted: string;
   overview: string;

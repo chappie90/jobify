@@ -11,7 +11,7 @@ router.post('', (req, res, next) => {
   let title = req.body.form.title;
   let location = req.body.form.location;
 
-  // DATE JOBS SEARCH FILTER
+  // DATE SEARCH FILTER
   const date = req.body.form.date;
 
   // Get current date
@@ -33,8 +33,7 @@ router.post('', (req, res, next) => {
     fromDate = moment().subtract(1, 'days');
   }
 
-  // JOB TYPE JOBS SEARCH FILTER
-//  let typeArr = ['Full-time', 'Part-time', 'Contract', 'Temporary', 'Apprenticeship', 'Volunteer'];
+  // JOB TYPE SEARCH FILTER
   let typeArr = [];
   let fullTime = req.body.form.full;
   let partTime = req.body.form.part;
@@ -65,7 +64,30 @@ router.post('', (req, res, next) => {
     typeArr.push('Volunteer');
   }
 
-  console.log(typeArr);
+  // SALARY RANGE SEARCH FILTER
+  // let rangeArr = [];
+  // let range = req.body.form.range;
+  // let rangeLow = req.body.form.rangelow;
+  // let rangeMedium = req.body.form.rangemedium;
+  // let rangeHigh = req.body.form.rangehigh;
+
+  // if (!range && !rangeLow && !rangeMedium && !rangeHigh) {
+  //   typeArr = ['Full-time', 'Part-time', 'Contract', 'Temporary', 'Apprenticeship', 'Volunteer'];
+  // }
+
+  // if (range) {
+  //   typeArr.push('Full-time');
+  // }
+  // if (partTime) {
+  //   typeArr.push('Part-time');
+  // }
+  // if (contract) {
+  //   typeArr.push('Contract');
+  // }
+  // if (temporary) {
+  //   typeArr.push('Temporary');
+  // }
+
 
   const pageSize = 20;
   let jobsQuery;

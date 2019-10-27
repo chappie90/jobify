@@ -16,7 +16,7 @@
     <div class="jobs-item__header--left">
       <h2 class="heading-medium">{{ job.title }}</h2>
       <h3 class="heading-small">{{ job.company }}</h3>
-      <h3>£{{ job.salary }}</h3>
+      <h3>£{{ job.salaryMin }} - {{ job.salaryMax }}</h3>
       <div class="jobs-item__button-container">
         <button *ngIf="!appliedStatus" (click)="onApply(job)" class="button button-fill">Apply</button>
         <span *ngIf="appliedStatus" class="applied-msg">Applied <span class="applied-date">{{ job.dateApplied }}</span></span>
