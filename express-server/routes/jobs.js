@@ -112,7 +112,6 @@ router.post('', (req, res, next) => {
   //   typeArr.push('Temporary');
   // }
 
-
   const pageSize = 20;
   let jobsQuery;
   jobsQuery = Job.find(

@@ -38,6 +38,7 @@ export class SearchBarComponent implements OnInit {
               private route: ActivatedRoute) {}
 
   ngOnInit() {
+
     // this.titlesSub = this.jobsService.getAutoCompleteTitles().subscribe(response => {
     //   this.titles = response.jobs.jobs.map(t => t.job_title);
     // });
@@ -206,6 +207,24 @@ export class SearchBarComponent implements OnInit {
   }
 
   rangeSlider() {
+     // const thumbSize = -240;
+    const thumbSize = 15;
+    const rangeMin = document.getElementById('lower');
+    const rangeMax = document.getElementById('upper');
+    const tooltipMin = document.querySelector('.tooltip-min-wrapper');
+    const tooltipMax = document.querySelector('.tooltip-max-wrapper');
+
+  rangeMin.addEventListener('input', e => {
+    console.log(rangeMin.value);
+    const ratio = (rangeMin.value - rangeMin.min) / (rangeMin.max - rangeMin.min);
+    let pos = thumbSize / 2 + ratio * 100 - ratio * thumbSize;
+    tooltipMin.style.left = ratio * 321 - 5 + 'px';
+  });
+  rangeMax.addEventListener('input', e => {
+    const ratio = (rangeMax.value - rangeMax.min) / (rangeMax.max - rangeMax.min);
+    let pos = thumbSize / 2 + ratio * 100 - ratio * thumbSize;
+    tooltipMax.style.left = ratio * 335 + 'px';
+  });
     let lowerSlider = document.querySelector('#lower');
     let upperSlider = document.querySelector('#upper');
     let lowerVal = parseInt(lowerSlider.value);

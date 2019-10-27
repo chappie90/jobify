@@ -307,7 +307,7 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
 }
 .range-input {
   appearance: none;
-  width: 100%;
+  width: 34rem;
   height: 100%;
   margin: 0;
   padding: 0 2px;
@@ -331,6 +331,7 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
     background-color: $grey-dark;
     position: relative;
     cursor: pointer;
+    z-index: 2;
     appearance: none;
    pointer-events: all;
     &::before {
@@ -348,18 +349,23 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
 .multi-range {
   position: relative;
   height: 5rem;
-  display: block;
+  top: 3rem;
+  width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
 .range-container {
-  width: 40rem;
+  width: 44rem;
+  height: 10rem;
 
   input[type=range] {
       position: absolute;
       
       &:nth-child(1) {
          &::-webkit-slider-thumb::before {
-            background-color: red;
+            background-color: grey;
          }
       }
 
@@ -371,14 +377,6 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
          }
       }
    }
-}
-.range-values {
-  display: flex;
-  justify-content: space-between;
-
-  span {
-    color: $jobseeker-red-darker;
-  }
 }
 
 .open-dropdown {
@@ -392,5 +390,71 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
 
   &::after {
    color: $white;
+  }
+}
+.tooltip-min-wrapper {
+  position: absolute;
+  top: -1.6rem;
+  left: 0;
+  height: 4rem;
+}
+.tooltip-min {
+  height: 2rem;
+  font-size: 1.4rem;
+  justify-content: center;
+  width: 7.6rem;
+  font-weight: 700;
+  padding: 1.2rem 0;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  background-color: $jobseeker-red-darker;
+  color: $white;
+  letter-spacing: 1px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 1rem;
+    right: 25%;
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    
+    border-top: 7px solid $jobseeker-red-darker;
+  }
+}
+.tooltip-max-wrapper {
+  position: absolute;
+  top: -1.6rem;
+ // right: 0;
+  height: 4rem;
+}
+.tooltip-max {
+  height: 2rem;
+  width: 7.6rem;
+  font-weight: 700;
+  font-size: 1.4rem;
+  padding: 1.2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: $jobseeker-red-darker;
+  color: $white;
+  letter-spacing: 1px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 1rem;
+    left: 25%;
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    
+    border-top: 7px solid $jobseeker-red-darker;
   }
 }
