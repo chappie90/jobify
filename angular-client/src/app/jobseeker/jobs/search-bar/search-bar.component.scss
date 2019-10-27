@@ -305,6 +305,73 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
     font-size: 1.5rem;
   }
 }
+.range-input {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0 2px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 1px;
+  outline: none;
+  background: linear-gradient($grey-medium, $grey-medium) no-repeat center;
+  background-size: 100% .8rem;
+  pointer-events: none;
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  &::-webkit-slider-thumb {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    background-color: $grey-dark;
+    position: relative;
+    cursor: pointer;
+    appearance: none;
+   pointer-events: all;
+    &::before {
+          content: ' ';
+          display: block;
+          position: absolute;
+          top: 13px;
+          left: 100%;
+          width: 100%;
+          height: 2px;
+    }
+  }
+}
+
+.multi-range {
+  position: relative;
+  height: 5rem;
+  display: block;
+}
+
+.range-container {
+  width: 40rem;
+
+  input[type=range] {
+      position: absolute;
+      
+      &:nth-child(1) {
+         &::-webkit-slider-thumb::before {
+            background-color: red;
+         }
+      }
+
+      &:nth-child(2) {
+         background: none;
+
+         &::-webkit-slider-thumb::before {
+             background-color: grey; 
+         }
+      }
+   }
+}
 
 .open-dropdown {
   display: block;

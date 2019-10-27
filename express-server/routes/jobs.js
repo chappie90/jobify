@@ -65,11 +65,35 @@ router.post('', (req, res, next) => {
   }
 
   // SALARY RANGE SEARCH FILTER
-  // let rangeArr = [];
-  // let range = req.body.form.range;
-  // let rangeLow = req.body.form.rangelow;
-  // let rangeMedium = req.body.form.rangemedium;
-  // let rangeHigh = req.body.form.rangehigh;
+  let rangeArr = [];
+  let rangeLow = req.body.form.rangelow;
+  let range = req.body.form.range;
+  let rangeMedium = req.body.form.rangemedium;
+  let rangeHigh = req.body.form.rangehigh;
+
+  // Cap max salary input at £300000;
+  let salaryMin = 0; 
+  let salaryMax = 300000;
+
+  if (rangeLow) {
+    salaryMin = 20000;
+    salaryMax = 40000;
+  }
+
+  if (range) {
+    salaryMin = 40000;
+    salaryMax = 60000;
+  }
+
+  if (rangeMedium) {
+    salaryMin = 60000;
+    salaryMax = 80000;
+  }
+
+  if (rangeHigh) {
+    salaryMin = 80000;
+    salaryMax = 300000;
+  }
 
   // if (!range && !rangeLow && !rangeMedium && !rangeHigh) {
   //   typeArr = ['Full-time', 'Part-time', 'Contract', 'Temporary', 'Apprenticeship', 'Volunteer'];
@@ -96,7 +120,11 @@ router.post('', (req, res, next) => {
       job_title: { $regex: title, $options: 'i' },
       location: { $regex: location, $options: 'i' },
       job_type: { $in: typeArr },
-      date_posted: { $lte: today.toISOString(), $gte: fromDate.toISOString() }
+      date_posted: { $lte: today.toISOString(), $gte: fromDate.toISOString() },
+      $and: [
+        { salary_min: { $gte: salaryMin } },
+        { salary_max: { $lte:  salaryMax } }         
+      ]
      }
   );
   let jobsQueryCount = Job.find(
@@ -104,7 +132,11 @@ router.post('', (req, res, next) => {
       job_title: { $regex: title, $options: 'i' },
       location: { $regex: location, $options: 'i' },
       job_type: { $in: typeArr },
-      date_posted: { $lte: today.toISOString(), $gte: fromDate.toISOString() }
+      date_posted: { $lte: today.toISOString(), $gte: fromDate.toISOString() },
+      $and: [
+        { salary_min: { $gte: salaryMin } },
+        { salary_max: { $lte:  salaryMax } }         
+      ]
      }
   ).count();
   let fetchedJobs;
