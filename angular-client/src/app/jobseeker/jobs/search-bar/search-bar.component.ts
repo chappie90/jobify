@@ -131,6 +131,11 @@ export class SearchBarComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() { 
+    this.dropDown();
+    this.rangeSlider();
+  }
+
   onSearch() {
     if (this.form.invalid) {
       return;
@@ -186,36 +191,53 @@ export class SearchBarComponent implements OnInit {
     let lowerVal = parseInt(lowerSlider.value);
     let upperVal = parseInt(upperSlider.value);
 
+    upperSlider.oninput = function() {
+       lowerVal = parseInt(lowerSlider.value);
+       upperVal = parseInt(upperSlider.value);
+       
+       if (upperVal < lowerVal + 4) {
+          lowerSlider.value = upperVal - 4;
+          
+          if (lowerVal == lowerSlider.min) {
+             upperSlider.value = 4;
+          }
+       }
+    };
 
-upperSlider.oninput = function() {
-   lowerVal = parseInt(lowerSlider.value);
-   upperVal = parseInt(upperSlider.value);
-   
-   if (upperVal < lowerVal + 4) {
-      lowerSlider.value = upperVal - 4;
-      
-      if (lowerVal == lowerSlider.min) {
-         upperSlider.value = 4;
+    lowerSlider.oninput = function() {
+       lowerVal = parseInt(lowerSlider.value);
+       upperVal = parseInt(upperSlider.value);
+       
+       if (lowerVal > upperVal - 4) {
+          upperSlider.value = lowerVal + 4;
+          
+          if (upperVal == upperSlider.max) {
+             lowerSlider.value = parseInt(upperSlider.max) - 4;
+          }
+
+       }
+    };
+  }
+
+  dropDown() {
+    let filtersArray = document.querySelectorAll('.search__filters-item-title');
+    for (let i = 0; i < filtersArray.length; i++) {
+      filtersArray[i].addEventListener('click', function() {
+        for (let x = 0; x < filtersArray.length; x++) {
+          if (filtersArray[i] !== filtersArray[x]) {
+            filtersArray[x].nextElementSibling.classList.remove('open-dropdown');
+          }
+        }
+        filtersArray[i].nextElementSibling.classList.toggle('open-dropdown');
+      });
+    }
+    let itemsArray = document.querySelectorAll('.search__filters-item');
+    document.addEventListener('click', function(event) {
+      for (let i = 0; i < itemsArray.length; i++) {
+        if (itemsArray[i].contains(event.target)) return;
+        itemsArray[i].querySelector('.search__filters-content').classList.remove('open-dropdown');
       }
-   }
-};
-
-rangeSlider();
-
-
-lowerSlider.oninput = function() {
-   lowerVal = parseInt(lowerSlider.value);
-   upperVal = parseInt(upperSlider.value);
-   
-   if (lowerVal > upperVal - 4) {
-      upperSlider.value = lowerVal + 4;
-      
-      if (upperVal == upperSlider.max) {
-         lowerSlider.value = parseInt(upperSlider.max) - 4;
-      }
-
-   }
-};
+    });
   }
 
   onClearFilters() {
