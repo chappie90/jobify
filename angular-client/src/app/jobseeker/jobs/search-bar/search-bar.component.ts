@@ -224,6 +224,7 @@ export class SearchBarComponent implements OnInit {
     // Add search query parameters
     // Make sure all browsers support object spread operator
     let queryParams: Params = {};
+    let type = [];
     if (this.form.value.title) {
       queryParams = { ...queryParams, title: this.form.value.title };
     }
@@ -232,6 +233,36 @@ export class SearchBarComponent implements OnInit {
     }
     if (this.form.value.date) {
       queryParams = { ...queryParams, date: this.form.value.date };
+    }
+    if (this.form.value.full) {
+      type.push('fullTime');
+      queryParams = { ...queryParams, type: type };
+    }
+    if (this.form.value.part) {
+      type.push('partTime');
+      queryParams = { ...queryParams, type: type };
+    }
+    if (this.form.value.contract) {
+      type.push('contract');
+      queryParams = { ...queryParams, type: type };
+    }
+    if (this.form.value.temporary) {
+      type.push('temporary');
+      queryParams = { ...queryParams, type: type };
+    }
+    if (this.form.value.apprenticeship) {
+      type.push('apprenticeship');
+      queryParams = { ...queryParams, type: type };
+    }
+    if (this.form.value.volunteer) {
+      type.push('volunteer');
+      queryParams = { ...queryParams, type: type };
+    }
+    if (this.form.value.salaryMin) {
+      queryParams = { ...queryParams, salaryMin: this.form.value.salaryMin };
+    }
+    if (this.form.value.salaryMax) {
+      queryParams = { ...queryParams, salaryMax: this.form.value.salaryMax };
     }
     this.router.navigate(
       ['/jobs/search'],
