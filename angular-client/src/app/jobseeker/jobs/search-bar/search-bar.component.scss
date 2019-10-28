@@ -458,3 +458,25 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
     border-top: 7px solid $jobseeker-red-darker;
   }
 }
+.bar-container {
+  width: 34rem;
+  position: relative;
+}
+.tooltip-min-bar {
+  position: absolute;
+  top: 2.1rem;
+  z-index: 2;
+  right: 3rem;
+  left: 3rem;
+  height: .8rem;
+  background-color: $grey;
+}
+.tooltip-max-bar {
+  position: absolute;
+  top: 2.1rem;
+  right: 3rem;
+  left: 3rem;
+  height: .8rem;
+  background-color: $grey;
+  z-index: 2;
+}
