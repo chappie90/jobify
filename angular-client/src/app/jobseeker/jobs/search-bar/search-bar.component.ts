@@ -20,6 +20,7 @@ import { JobsService } from '../../../services/jobs.service';
 })
 export class SearchBarComponent implements OnInit {
   form: FormGroup;
+  private loading: boolean;
   protected city: string;
   private title: string;
   private jobsSearch: boolean = false;
@@ -46,6 +47,7 @@ export class SearchBarComponent implements OnInit {
     this.jobsSub = this.jobsService.getJobsUpdateListener()
       .subscribe(
         jobs => {
+          this.loading = false;
           this.searchPristine = false;
        //   console.log(document.getElementById('jobs-list').scrollTop);
         }
@@ -57,12 +59,12 @@ export class SearchBarComponent implements OnInit {
     this.salaryMaxVal = 300000;
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
-        // Show loading indicator
+        this.loading = true;
         this.jobsSearch = event.url.includes('/jobs/search');
       }
 
       if (event instanceof NavigationEnd) {
-        // Hide loading indicator
+        this.loading = false;
       }
 
       if (event instanceof NavigationError) {
@@ -307,6 +309,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   onSearch() {
+    this.loading = true;
     if (this.form.invalid) {
       return;
     }

@@ -1,6 +1,19 @@
+.spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white; 
+  opacity: .5;
+  z-index: 10;
+}
 .lds-ring {
   display: inline-block;
-  position: relative;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 64px;
   height: 64px;
 }
@@ -14,7 +27,7 @@
   border: 6px solid #fed;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fed transparent transparent transparent;
+  border-color: black transparent transparent transparent;
 }
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;

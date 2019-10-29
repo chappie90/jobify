@@ -329,6 +329,7 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
     width: 1.6rem;
     border-radius: 50%;
     background-color: $grey-dark;
+    border: 2px solid $grey-light;
     position: relative;
     cursor: pointer;
     z-index: 2;
@@ -398,14 +399,14 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
 //   height: 4rem;
 // }
 .tooltip-min {
-  height: 2.5rem;
+  height: 2rem;
   position: absolute;
   top: -2rem;
   font-size: 1.4rem;
   justify-content: center;
   width: 7.6rem;
   font-weight: 700;
-  padding: 1.2rem 0;
+  padding: 1.4rem 0;
   display: flex;
   align-items: center;
   border-radius: 10px;
@@ -426,14 +427,14 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
   }
 }
 .tooltip-max {
-  height: 2.5rem;
+  height: 2rem;
   position: absolute;
   top: -2rem;
   font-size: 1.4rem;
   justify-content: center;
   width: 7.6rem;
   font-weight: 700;
-  padding: 1.2rem 0;
+  padding: 1.4rem 0;
   display: flex;
   align-items: center;
   border-radius: 10px;
@@ -445,7 +446,7 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
     content: '';
     position: absolute;
     bottom: -.6rem;
-    left: 25%;
+    right: 25%;
     width: 0; 
     height: 0; 
     border-left: 5px solid transparent;
