@@ -325,8 +325,8 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
   }
 
   &::-webkit-slider-thumb {
-    height: 1.8rem;
-    width: 1.8rem;
+    height: 2rem;
+    width: 2rem;
     border-radius: 50%;
     background-color: $grey-dark;
     position: relative;
@@ -357,7 +357,7 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
 }
 
 .range-container {
-  width: 44rem;
+  width: 40rem;
   height: 10rem;
 
   input[type=range] {
@@ -392,74 +392,49 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
    color: $white;
   }
 }
-.tooltip-min-wrapper {
-  position: absolute;
-  top: -1.6rem;
-  left: 0;
-  height: 4rem;
-}
+// .tooltip-min-wrapper {
+//   position: absolute;
+//   top: -1.6rem;
+//   height: 4rem;
+// }
 .tooltip-min {
-  height: 2rem;
-  font-size: 1.4rem;
-  justify-content: center;
-  width: 7.6rem;
-  font-weight: 700;
-  padding: 1.2rem 0;
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
-  background-color: $jobseeker-red-darker;
-  color: $white;
-  letter-spacing: 1px;
-
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: 1rem;
-    right: 25%;
-    width: 0; 
-    height: 0; 
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    
-    border-top: 7px solid $jobseeker-red-darker;
-  }
-}
-.tooltip-max-wrapper {
+  // height: 2rem;
   position: absolute;
-  top: -1.6rem;
- // right: 0;
-  height: 4rem;
+  top: -1rem;
+  font-size: 1.6rem;
+ // justify-content: center;
+  // width: 7.6rem;
+  font-weight: 700;
+ // padding: 1.2rem 0;
+ // display: flex;
+ // align-items: center;
+ // border-radius: 10px;
+//  background-color: $jobseeker-red-darker;
+  color: $jobseeker-red-darker;
+  // letter-spacing: 1px;
+
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   bottom: 1rem;
+  //   right: 25%;
+  //   width: 0; 
+  //   height: 0; 
+  //   border-left: 5px solid transparent;
+  //   border-right: 5px solid transparent;
+    
+  //   border-top: 7px solid $jobseeker-red-darker;
+  // }
 }
 .tooltip-max {
-  height: 2rem;
-  width: 7.6rem;
+  position: absolute;
+  top: -1rem;
   font-weight: 700;
-  font-size: 1.4rem;
-  padding: 1.2rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  background-color: $jobseeker-red-darker;
-  color: $white;
-  letter-spacing: 1px;
-
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: 1rem;
-    left: 25%;
-    width: 0; 
-    height: 0; 
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    
-    border-top: 7px solid $jobseeker-red-darker;
-  }
+  font-size: 1.6rem;
+  color: $jobseeker-red-darker;
 }
 .bar-container {
-  width: 34rem;
+  width: 30rem;
   position: relative;
 }
 .tooltip-min-bar {

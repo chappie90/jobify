@@ -40,6 +40,13 @@ export class SearchBarComponent implements OnInit {
               private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.jobsSub = this.jobsService.getJobsUpdateListener()
+      .subscribe(
+        jobs => {
+          this.searchPristine = false;
+       //   console.log(document.getElementById('jobs-list').scrollTop);
+        }
+    );
     // this.titlesSub = this.jobsService.getAutoCompleteTitles().subscribe(response => {
     //   this.titles = response.jobs.jobs.map(t => t.job_title);
     // });
@@ -103,6 +110,10 @@ export class SearchBarComponent implements OnInit {
         let title = params.title;
         let location = params.location;
         let date = params.date;
+        let type = params.type;
+        let fullTime, partTime, contract, temporary, apprenticeship, volunteer;
+        let salaryMin = params.salaryMin;
+        let salaryMax = params.salaryMax;
         let pageNumber = params.pageNumber;
         if (!title) {
           title = '';
@@ -113,19 +124,50 @@ export class SearchBarComponent implements OnInit {
         if (!date) {
           date = 'all-time';
         }
+        if (!type) {
+          type = [];
+        }
+        fullTime = type.includes('fullTime') ? true : '';
+        partTime = type.includes('partTime') ? true : '';
+        contract = type.includes('contract') ? true : '';
+        temporary = type.includes('temporary') ? true : '';
+        apprenticeship = type.includes('apprenticeship') ? true : '';
+        volunteer = type.includes('volunteer') ? true : '';
+        if (!salaryMin) {
+          salaryMin = 0;
+        }
+        if (!salaryMax) {
+          salaryMax = 300000;
+        }
         if (!pageNumber) {
           pageNumber = 1;
         }
         const jobsQueryData = { 
           title: title, 
           location: location, 
-          date: date 
+          date: date,
+          full: fullTime,
+          part: partTime,
+          contract: contract,
+          temporary: temporary,
+          apprenticeship: apprenticeship,
+          volunteer: volunteer,
+          salaryMin: salaryMin,
+          salaryMax: salaryMax
         }; 
         this.jobsService.getJobs(jobsQueryData, pageNumber);
         this.form.patchValue({
           'title': title,
           'location': location,
-          'date': date
+          'date': date,
+          'full': fullTime,
+          'part': partTime,
+          'contract': contract,
+          'temporary': temporary,
+          'apprenticeship': apprenticeship,
+          'volunteer': volunteer,
+          'salaryMin': salaryMin,
+          'salaryMax': salaryMax
         });
       }
     });
@@ -133,65 +175,134 @@ export class SearchBarComponent implements OnInit {
 
   ngAfterViewInit() { 
     this.dropDown();
-    this.rangeSlider();
-    const rangeMin = document.getElementById('lower');
-    const rangeMax = document.getElementById('upper');
-    const tooltipMin = document.querySelector('.tooltip-min-wrapper');
-    const tooltipMax = document.querySelector('.tooltip-max-wrapper');
+  //  this.rangeSlider();
+    /**
+     *
+      Potentially replace later with relative values to make responsive
+      Width of range controller - 30rem
+      Range min - 0
+      Range max - 300,000
+      Size of step - 10,000
+      Size of step in pixels - 1rem
+      Number of steps - 30
+      Calculate position of range input thumb:
+      (Input value / step size) * pixel value of step size
+      e.g. Left position of thumb is (90000 / 10000) * 1rem = 9rem
+     *
+    **/
+    const tooltipMin = document.querySelector('.tooltip-min');
+    const tooltipMax = document.querySelector('.tooltip-max');
     const tooltipMinBar = document.querySelector('.tooltip-min-bar');
     const tooltipMaxBar = document.querySelector('.tooltip-max-bar');
-    let ratioMin = (rangeMin.value - rangeMin.min) / (rangeMin.max - rangeMin.min);
-    let ratioMax = (rangeMax.value - rangeMax.min) / (rangeMax.max - rangeMax.min);
-
-    tooltipMin.style.left = ratioMin * 328 + 'px';
-    tooltipMax.style.right = ratioMax + 12 + 'px';
-
-    tooltipMinBar.style.left = ratioMin * 328 + 'px';
-    tooltipMaxBar.style.right = ratioMax + 12 + 'px';
+    let salaryMin = this.form.value.salaryMin;
+    let salaryMax = this.form.value.salaryMax;
+    let tooltipMinWidth = tooltipMin.offsetWidth / 10;
+    let tooltipMaxWidth = tooltipMax.offsetWidth / 10;
+    console.log(tooltipMinWidth);
+    console.log(tooltipMaxWidth);
+    const stepSize = 10000;
+    const rangeWidth = 30;
+    const thumbWidth = 2;
+    let positionMin = (salaryMin / stepSize);
+    let positionMax = rangeWidth - (salaryMax / stepSize);
+    tooltipMin.style.left = positionMin + 'rem';
+ //   tooltipMin.style.transform = `translate(${tooltipMinWidth / 2})`;
+    tooltipMax.style.right = positionMax + 'rem';
+    tooltipMinBar.style.left = positionMin + 'rem';
+    tooltipMinBar.style.right = positionMax + 'rem';
+    tooltipMaxBar.style.left = positionMin + 'rem';
+    tooltipMaxBar.style.right = positionMax + 'rem';
   }
 
   onSalaryMinChange(minValue, maxValue) {
     this.salaryMinVal = minValue.value;
     this.salaryMaxVal = maxValue.value;
-
-    const thumbSize = 15;
-    const tooltipMin = document.querySelector('.tooltip-min-wrapper');
-    const tooltipMax = document.querySelector('.tooltip-max-wrapper');
+    let salaryMin = this.salaryMinVal;
+    let salaryMax = this.salaryMaxVal;
+    const tooltipMin = document.querySelector('.tooltip-min');
+    const tooltipMax = document.querySelector('.tooltip-max');
     const tooltipMinBar = document.querySelector('.tooltip-min-bar');
     const tooltipMaxBar = document.querySelector('.tooltip-max-bar');
+    let tooltipMinWidth = tooltipMin.offsetWidth / 10;
+    let tooltipMaxWidth = tooltipMax.offsetWidth / 10;
+    const stepSize = 10000;
+    const rangeWidth = 30;
+    const thumbWidth = 2;
+    let positionMin = (salaryMin / stepSize);
+    let positionMax = rangeWidth - (salaryMax / stepSize);
+    tooltipMin.style.left = positionMin + 'rem';
+   // tooltipMin.style.transform = `translate(-20%)`;
+    tooltipMax.style.right = positionMax + 'rem';
+    tooltipMinBar.style.left = positionMin + 'rem';
+    tooltipMinBar.style.right = positionMax + 'rem';
+    tooltipMaxBar.style.left = positionMin + 'rem';
+    tooltipMaxBar.style.right = positionMax + 'rem';
 
-    let ratioMin = (this.salaryMinVal - minValue.min) / (minValue.max - minValue.min);
-    let ratioMax = (this.salaryMaxVal - maxValue.min) / (maxValue.max - maxValue.min);
-    tooltipMin.style.left = ratioMin * 328 + 'px';
-    tooltipMax.style.right = ratioMax + 12 + 'px';
+    salaryMin = parseInt(salaryMin);
+    salaryMax = parseInt(salaryMax);
 
-    tooltipMinBar.style.left = ratioMin * 328 + 'px';
-    tooltipMinBar.style.right = ratioMax + 12 + 'px';
+    if (salaryMax < salaryMin + 20000) {
+      this.salaryMinVal = salaryMax - 20000;
+        
+      if (salaryMin == 0) {
+        this.salaryMaxVal = 20000;
+      }
+    }
 
-    tooltipMaxBar.style.left = ratioMin * 328 + 'px'
-    tooltipMaxBar.style.right = ratioMax + 12 + 'px';
+    if (salaryMin > salaryMax - 20000) {
+      this.salaryMaxVal = salaryMin + 20000;
+        
+      if (salaryMax == 300000) {
+        this.salaryMinVal = 280000;
+      }
+
+     }
   }
 
   onSalaryMaxChange(maxValue, minValue) {
-    this.salaryMaxVal = maxValue.value;
     this.salaryMinVal = minValue.value;
-
-    const thumbSize = 15;
-    const tooltipMin = document.querySelector('.tooltip-min-wrapper');
-    const tooltipMax = document.querySelector('.tooltip-max-wrapper');
+    this.salaryMaxVal = maxValue.value;
+    let salaryMin = this.salaryMinVal;
+    let salaryMax = this.salaryMaxVal;
+    const tooltipMin = document.querySelector('.tooltip-min');
+    const tooltipMax = document.querySelector('.tooltip-max');
     const tooltipMinBar = document.querySelector('.tooltip-min-bar');
     const tooltipMaxBar = document.querySelector('.tooltip-max-bar');
-    
-    let ratioMin = (this.salaryMinVal - minValue.min) / (minValue.max - minValue.min);
-    let ratioMax = (this.salaryMaxVal - maxValue.min) / (maxValue.max - maxValue.min);
-    tooltipMin.style.left = ratioMin * 328 + 'px';
-    tooltipMax.style.right = ratioMax + 12 + 'px';
+    let tooltipMinWidth = tooltipMin.offsetWidth / 10;
+    let tooltipMaxWidth = tooltipMax.offsetWidth / 10;
+    const stepSize = 10000;
+    const rangeWidth = 30;
+    const thumbWidth = 2;
+    let positionMin = (salaryMin / stepSize);
+    let positionMax = rangeWidth - (salaryMax / stepSize);
+    tooltipMin.style.left = positionMin + 'rem';
+//    tooltipMin.style.transform = `translate(${tooltipMinWidth / 2}rem)`;
+    tooltipMax.style.right = positionMax + 'rem';
+    tooltipMinBar.style.left = positionMin + 'rem';
+    tooltipMinBar.style.right = positionMax + 'rem';
+    tooltipMaxBar.style.left = positionMin + 'rem';
+    tooltipMaxBar.style.right = positionMax + 'rem';
 
-    tooltipMinBar.style.left = ratioMin * 328 + 'px';
-    tooltipMinBar.style.right = ratioMax + 12 + 'px';
+    salaryMin = parseInt(salaryMin);
+    salaryMax = parseInt(salaryMax);
 
-    tooltipMaxBar.style.left = ratioMin * 328 + 'px'
-    tooltipMaxBar.style.right = ratioMax + 12 + 'px';
+
+    if (salaryMax < salaryMin + 20000) {
+      this.salaryMinVal = salaryMax - 20000;
+        
+      if (salaryMin == 0) {
+        this.salaryMaxVal = 20000;
+      }
+    }
+
+    if (salaryMin > salaryMax - 20000) {
+      this.salaryMaxVal = salaryMin + 20000;
+        
+      if (salaryMax == 300000) {
+        this.salaryMinVal = 300000 - 20000;
+      }
+
+     }
   }
 
   onSearch() {
@@ -231,8 +342,11 @@ export class SearchBarComponent implements OnInit {
     if (this.form.value.location) {
       queryParams = { ...queryParams, location: this.form.value.location };
     }
-    if (this.form.value.date) {
+    if (this.form.value.date && this.form.value.date !== 'all-time') {
       queryParams = { ...queryParams, date: this.form.value.date };
+    }
+    if (this.form.value.date === 'all-time') {
+      queryParams = { ...queryParams, date: null };
     }
     if (this.form.value.full) {
       type.push('fullTime');
@@ -258,10 +372,10 @@ export class SearchBarComponent implements OnInit {
       type.push('volunteer');
       queryParams = { ...queryParams, type: type };
     }
-    if (this.form.value.salaryMin) {
+    if (this.form.value.salaryMin && this.form.value.salaryMin !== 0) {
       queryParams = { ...queryParams, salaryMin: this.form.value.salaryMin };
     }
-    if (this.form.value.salaryMax) {
+    if (this.form.value.salaryMax && this.form.value.salaryMax != 300000) {
       queryParams = { ...queryParams, salaryMax: this.form.value.salaryMax };
     }
     this.router.navigate(
@@ -271,67 +385,6 @@ export class SearchBarComponent implements OnInit {
         queryParamsHandling: 'merge'
       }
     );
-  }
-
-  rangeSlider() {
-    //  // const thumbSize = -240;
-    // const thumbSize = 15;
-    // const rangeMin = document.getElementById('lower');
-    // const rangeMax = document.getElementById('upper');
-    // const tooltipMin = document.querySelector('.tooltip-min-wrapper');
-    // const tooltipMax = document.querySelector('.tooltip-max-wrapper');
-    // const tooltipMinBar = document.querySelector('.tooltip-min-bar');
-    // const tooltipMaxBar = document.querySelector('.tooltip-max-bar');
-
-    // let ratioMin;
-    // let ratioMax;
-
-  // rangeMin.addEventListener('input', e => {
-  //   ratioMin = (rangeMin.value - rangeMin.min) / (rangeMin.max - rangeMin.min);
-  //   ratioMax = (rangeMax.value - rangeMax.min) / (rangeMax.max - rangeMax.min);
-  //   tooltipMin.style.left = ratioMin * 318 - 12 + 'px';
-  //   tooltipMinBar.style.left = ratioMin * 318 - 12 + 44 + 'px';
-  //   tooltipMinBar.style.right = tooltipMaxBar.style.left;
-  //   console.log(tooltipMaxBar.style.left);
-  // });
-  // rangeMax.addEventListener('input', e => {
-  //   ratioMax = (rangeMax.value - rangeMax.min) / (rangeMax.max - rangeMax.min);
-  //   ratioMin = (rangeMin.value - rangeMin.min) / (rangeMin.max - rangeMin.min);
-  //   tooltipMax.style.left = ratioMax * 318 + 15 + 'px';
-  //   // tooltipMaxBar.style.left = ratioMin * 321 - 5 + 'px';
-  //   // tooltipMaxBar.style.right = ratioMax * 335 + 'px';
-  // });
-    let lowerSlider = document.querySelector('#lower');
-    let upperSlider = document.querySelector('#upper');
-    let lowerVal = parseInt(lowerSlider.value);
-    let upperVal = parseInt(upperSlider.value);
-
-    upperSlider.oninput = function() {
-       lowerVal = parseInt(lowerSlider.value);
-       upperVal = parseInt(upperSlider.value);
-       
-       if (upperVal < lowerVal + 4) {
-          lowerSlider.value = upperVal - 4;
-          
-          if (lowerVal == lowerSlider.min) {
-             upperSlider.value = 4;
-          }
-       }
-    };
-
-    lowerSlider.oninput = function() {
-       lowerVal = parseInt(lowerSlider.value);
-       upperVal = parseInt(upperSlider.value);
-       
-       if (lowerVal > upperVal - 4) {
-          upperSlider.value = lowerVal + 4;
-          
-          if (upperVal == upperSlider.max) {
-             lowerSlider.value = parseInt(upperSlider.max) - 4;
-          }
-
-       }
-    };
   }
 
   dropDown() {

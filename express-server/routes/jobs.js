@@ -68,6 +68,16 @@ router.post('', (req, res, next) => {
   let salaryMin = req.body.form.salaryMin;
   let salaryMax = req.body.form.salaryMax;
 
+
+  console.log(title);
+  console.log(location);
+  console.log(date);
+  console.log(fullTime);
+  console.log(partTime);
+  console.log(contract);
+  console.log(temporary);
+  console.log(apprenticeship);
+  console.log(volunteer);
   console.log(salaryMin);
   console.log(salaryMax);
 

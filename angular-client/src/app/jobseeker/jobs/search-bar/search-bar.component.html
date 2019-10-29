@@ -189,9 +189,11 @@
                 type="range" 
                 min="0" 
                 max="300000"
+                step="10000"
                 id="lower" 
                 formControlName="salaryMin"
                 #salaryMin
+                [value]="salaryMinVal"
                 (input)="onSalaryMinChange(salaryMin, salaryMax)"
                 (change)="onSearch()" />
               <input 
@@ -199,9 +201,11 @@
                 type="range" 
                 min="0" 
                 max="300000" 
+                step="10000"
                 id="upper" 
                 formControlName="salaryMax" 
                 #salaryMax
+                [value]="salaryMaxVal"
                 (input)="onSalaryMaxChange(salaryMax, salaryMin)"
                 (change)="onSearch()"/>
             </span>
