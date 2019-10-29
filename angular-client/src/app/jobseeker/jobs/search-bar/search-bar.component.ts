@@ -29,6 +29,9 @@ export class SearchBarComponent implements OnInit {
   private filterTypeActive: boolean = false;
   private filterSalaryActive: boolean = false;
   private filtersCount: number = 0;
+  private filterDateCounted: boolean = false;
+  private filterTypeCounted: boolean = false;
+  private filterSalaryCounted: boolean = false;
   private titlesSub: Subscription;
   private jobsSub: Subscription;
   private titles: any;
@@ -198,8 +201,6 @@ export class SearchBarComponent implements OnInit {
     let salaryMax = this.form.value.salaryMax;
     let tooltipMinWidth = tooltipMin.offsetWidth / 10;
     let tooltipMaxWidth = tooltipMax.offsetWidth / 10;
-    console.log(tooltipMinWidth);
-    console.log(tooltipMaxWidth);
     const stepSize = 10000;
     const rangeWidth = 30;
     const thumbWidth = 2;
@@ -317,20 +318,33 @@ export class SearchBarComponent implements OnInit {
                               this.form.value.temporary ||
                               this.form.value.apprenticeship ||
                               this.form.value.volunteer;
-      this.filterSalaryActive = this.form.value.salaryMin || 
-                                this.form.value.salaryMax;
-      // if (this.filterDateActive) {
-      //   this.filtersCount++;
+      this.filterSalaryActive = this.form.value.salaryMin !== 0 || 
+                                this.form.value.salaryMax !== 300000; 
+      // const activeFilters = [this.filterDateActive, this.filterTypeActive, this.filterSalaryActive];
+      // if (!this.filtersCounted) {
+      //   activeFilters.forEach(filter => {
+      //     if (filter === true) {
+      //       this.filtersCount++;
+      //     }
+      //   });
       // }
-      // if (this.filterTypeActive) {
-      //   this.filtersCount++;
-      // }
-      // if (this.filterSalaryActive) {
-      //   this.filtersCount++;
-      // }
+      // this.filtersCounted = true;
+
+      if (this.filterDateActive && !this.filterDateCounted) {
+        this.filtersCount++;
+        this.filterDateCounted = true; 
+      }
+      if (this.filterTypeActive && !this.filterTypeCounted) {
+        this.filtersCount++;
+        this.filterTypeCounted = true; 
+      }
+      if (this.filterSalaryActive && !this.filterSalaryCounted) {
+        this.filtersCount++;
+        this.filterSalaryCounted = true;
+      }
+
       this.jobsService.getJobs(this.form.value, 1);
       this.searchPristine = false;
-   // }
 
     // Add search query parameters
     // Make sure all browsers support object spread operator
@@ -409,7 +423,6 @@ export class SearchBarComponent implements OnInit {
   }
 
   onClearFilters() {
-    // refactor!
     this.form.patchValue({
       'date': 'all-time',
       'full': '',
@@ -424,6 +437,10 @@ export class SearchBarComponent implements OnInit {
     this.filterDateActive = false;
     this.filterTypeActive = false;
     this.filterSalaryActive = false;
+    this.filterDateCounted = false;
+    this.filterTypeCounted = false;
+    this.filterSalaryCounted = false;
+    this.filtersCount = 0;
   }
 
   // cities = [
