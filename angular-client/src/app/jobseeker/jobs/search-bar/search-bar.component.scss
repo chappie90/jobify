@@ -358,8 +358,8 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
 }
 
 .range-container {
-  width: 40rem;
-  height: 10rem;
+  width: 42rem;
+  height: 13rem;
 
   input[type=range] {
       position: absolute;
@@ -475,4 +475,103 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
   height: .8rem;
   background-color: $jobseeker-red-darker;
   z-index: 2;
+}
+.axis {
+  position: absolute;
+  bottom: 0;
+  height: 1rem;
+  width: 34rem;
+}
+.unit {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  width: 1px;
+  height: 80%;
+  background-color: $grey-dark;
+  color: $grey-dark;
+  font-size: 1.1rem;
+
+  &:first-of-type {
+    left: 1px;
+ //   height: 100%;
+    transform: translateY(-50%);
+
+    &:before {
+      content: '0K';
+      position: absolute;
+      bottom: -2rem;
+      left: -.6rem;
+    }
+  }
+  &:nth-of-type(2) {
+    transform: translateX(56.5px) translateY(-50%);
+   // background-color: $grey-medium;
+
+     &:before {
+      content: '50K';
+      position: absolute;
+      bottom: -2rem;
+    //  font-size: 1rem;
+      left: -.6rem;
+    }
+  }
+  &:nth-of-type(3) {
+    transform: translateX(113px) translateY(-50%);
+//   background-color: $grey-medium;
+
+    &:before {
+      content: '100K';
+      position: absolute;
+      bottom: -2rem;
+   //   font-size: 1rem;
+      left: -.6rem;
+    }
+  }
+  &:nth-of-type(4) {
+    transform: translateX(169.5px) translateY(-50%);
+//    height: 100%;
+
+    &:before {
+      content: '150K';
+      position: absolute;
+      bottom: -2rem;
+      left: -.6rem;
+    }
+  }
+  &:nth-of-type(5) {
+    transform: translateX(226px) translateY(-50%);
+//    background-color: $grey-medium;
+
+    &:before {
+      content: '200K';
+      position: absolute;
+      bottom: -2rem;
+  //    font-size: 1rem;
+      left: -.6rem;
+    }
+  }
+  &:nth-of-type(6) {
+    transform: translateX(282.5px) translateY(-50%);
+//    background-color: $grey-medium;
+
+    &:before {
+      content: '250K';
+      position: absolute;
+      bottom: -2rem;
+      left: -.6rem;
+    //  font-size: 1rem;
+    }
+  }
+  &:nth-of-type(7) {
+    transform: translateX(338px) translateY(-50%);
+  //  height: 100%;
+
+    &:before {
+      content: '300K';
+      position: absolute;
+      bottom: -2rem;
+      left: -.6rem;
+    }
+  }
 }
