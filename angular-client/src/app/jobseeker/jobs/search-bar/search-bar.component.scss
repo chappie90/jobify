@@ -1,5 +1,17 @@
 @import '~src/styles.scss';
 
+@keyframes range {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(-5deg); }
+  20% { transform: rotate(-15deg); }
+  30% { transform: rotate(-20deg); }
+  40% { transform: rotate(-25deg); }
+  85% { transform: rotate(-15deg); }
+  90% { transform: rotate(-10deg); }
+  95% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg);  }
+}
+
 .search {
   margin-top: 13rem;
   padding: 0 3rem;
@@ -310,7 +322,7 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
   width: 34rem;
   height: 100%;
   margin: 0;
-  padding: 0 2px;
+ // padding: 0 2px;
   overflow: hidden;
   border: 0;
   border-radius: 1px;
@@ -351,7 +363,7 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
   position: relative;
   height: 5rem;
   top: 3rem;
-  width: 100%;
+  width: 34rem;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -413,7 +425,7 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
   background-color: $grey-dark;
   color: $white;
   letter-spacing: 1px;
-  transition: width .2s;
+  transition: width .2s, transform .2s;
 
   &::before {
     content: '';
@@ -429,6 +441,9 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
 }
 .tooltip-small {
   width: 3.6rem;
+}
+.tooltip-rotate {
+  transform: rotate(-10deg);
 }
 .tooltip-max {
   height: 2rem;
@@ -459,23 +474,19 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
   }
 }
 .bar-container {
-  width: 30rem;
+  width: 32.4rem;
   position: relative;
 }
 .tooltip-min-bar {
   position: absolute;
   top: 2.1rem;
   z-index: 2;
-  right: 3rem;
-  left: 3rem;
   height: .8rem;
   background-color: $jobseeker-red-darker;
 }
 .tooltip-max-bar {
   position: absolute;
   top: 2.1rem;
-  right: 3rem;
-  left: 3rem;
   height: .8rem;
   background-color: $jobseeker-red-darker;
   z-index: 2;

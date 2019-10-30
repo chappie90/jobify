@@ -182,7 +182,8 @@
               <div class="tooltip-min-wrapper">
                 <span 
                   class="tooltip-min"
-                  [ngClass]="{'tooltip-small': salaryMinVal == 0}">£{{ salaryMinVal | number }}</span>
+                  [ngClass]="{'tooltip-small': salaryMinVal == 0, 
+                  'tooltip-rotate': salaryMinVal > 100000}">£{{ salaryMinVal | number }}</span>
               </div>
               <div class="tooltip-max-wrapper">
                 <span 
@@ -198,7 +199,7 @@
                 formControlName="salaryMin"
                 #salaryMin
                 [value]="salaryMinVal"
-                (input)="onSalaryMinChange(salaryMin, salaryMax)"
+                (input)="onSalaryMinChange(salaryMin, salaryMax);"
                 (change)="onSearch()" />
               <input 
                 class="range-input" 

@@ -180,6 +180,15 @@ export class SearchBarComponent implements OnInit {
 
   ngAfterViewInit() { 
     this.dropDown();
+    const tooltip = document.querySelector('.tooltip-min');
+    const thumb = document.querySelector('.range-input');
+    thumb.addEventListener('input', function() {
+      tooltip.classList.add('tooltip-rotate');
+    });
+    thumb.addEventListener('change', function() {
+      tooltip.classList.remove('tooltip-rotate');
+    });
+
     /**
      *
       Potentially replace later with relative values to make responsive
@@ -194,6 +203,8 @@ export class SearchBarComponent implements OnInit {
       e.g. Left position of thumb is (90000 / 10000) * 1rem = 9rem
      *
     **/
+    const lower = document.querySelector('#lower');
+    const upper = document.querySelector('#upper');
     const tooltipMin = document.querySelector('.tooltip-min');
     const tooltipMax = document.querySelector('.tooltip-max');
     const tooltipMinBar = document.querySelector('.tooltip-min-bar');
@@ -203,12 +214,15 @@ export class SearchBarComponent implements OnInit {
     let tooltipMinWidth = tooltipMin.offsetWidth / 10;
     let tooltipMaxWidth = tooltipMax.offsetWidth / 10;
     const stepSize = 10000;
-    const rangeWidth = 30;
-    const thumbWidth = 2;
-    let positionMin = (salaryMin / stepSize);
-    let positionMax = rangeWidth - (salaryMax / stepSize);
+    const rangeWidth = 32.4;
+    const thumbWidth = 1.6;
+    salaryMin = parseInt(salaryMin);
+    salaryMax = parseInt(salaryMax);
+    let positionMin = (salaryMin / stepSize) * 1.08;
+    let positionMax = rangeWidth - (salaryMax / stepSize) * 1.08;
     tooltipMin.style.left = positionMin + 'rem';
- //   tooltipMin.style.transform = `translate(${tooltipMinWidth / 2})`;
+    tooltipMin.style.transform = `translate(calc(-25% + .35rem))`;
+    tooltipMax.style.transform = `translate(calc(25% - .35rem))`;
     tooltipMax.style.right = positionMax + 'rem';
     tooltipMinBar.style.left = positionMin + 'rem';
     tooltipMinBar.style.right = positionMax + 'rem';
@@ -221,6 +235,8 @@ export class SearchBarComponent implements OnInit {
     this.salaryMaxVal = maxValue.value;
     let salaryMin = this.salaryMinVal;
     let salaryMax = this.salaryMaxVal;
+    const lower = document.querySelector('#lower');
+    const upper = document.querySelector('#upper');
     const tooltipMin = document.querySelector('.tooltip-min');
     const tooltipMax = document.querySelector('.tooltip-max');
     const tooltipMinBar = document.querySelector('.tooltip-min-bar');
@@ -228,26 +244,26 @@ export class SearchBarComponent implements OnInit {
     let tooltipMinWidth = tooltipMin.offsetWidth / 10;
     let tooltipMaxWidth = tooltipMax.offsetWidth / 10;
     const stepSize = 10000;
-    const rangeWidth = 30;
-    const thumbWidth = 2;
-    let positionMin = (salaryMin / stepSize);
-    let positionMax = rangeWidth - (salaryMax / stepSize);
+    const rangeWidth = 32.4;
+    const thumbWidth = 1.6;
+    salaryMin = parseInt(salaryMin);
+    salaryMax = parseInt(salaryMax);
+    let positionMin = (salaryMin / stepSize) * 1.08;
+    let positionMax = rangeWidth - (salaryMax / stepSize) * 1.08;
     tooltipMin.style.left = positionMin + 'rem';
-   // tooltipMin.style.transform = `translate(-20%)`;
+    tooltipMin.style.transform = `translate(calc(-25% + .35rem))`;
+    tooltipMax.style.transform = `translate(calc(25% - .35rem))`;
     tooltipMax.style.right = positionMax + 'rem';
     tooltipMinBar.style.left = positionMin + 'rem';
     tooltipMinBar.style.right = positionMax + 'rem';
     tooltipMaxBar.style.left = positionMin + 'rem';
     tooltipMaxBar.style.right = positionMax + 'rem';
 
-    salaryMin = parseInt(salaryMin);
-    salaryMax = parseInt(salaryMax);
-
     if (salaryMax < salaryMin + 14000) {
       this.salaryMinVal = salaryMax - 14000;
         
       if (salaryMin == 0) {
-        this.salaryMaxVal = 14000;
+         upper.value = 14000;
       }
     }
 
@@ -255,7 +271,7 @@ export class SearchBarComponent implements OnInit {
       this.salaryMaxVal = salaryMin + 14000;
         
       if (salaryMax == 300000) {
-        this.salaryMinVal = 300000 - 14000;
+        lower.value = salaryMax - 14000;
       }
     }
   }
@@ -265,6 +281,8 @@ export class SearchBarComponent implements OnInit {
     this.salaryMaxVal = maxValue.value;
     let salaryMin = this.salaryMinVal;
     let salaryMax = this.salaryMaxVal;
+      const lower = document.querySelector('#lower');
+    const upper = document.querySelector('#upper');
     const tooltipMin = document.querySelector('.tooltip-min');
     const tooltipMax = document.querySelector('.tooltip-max');
     const tooltipMinBar = document.querySelector('.tooltip-min-bar');
@@ -272,12 +290,13 @@ export class SearchBarComponent implements OnInit {
     let tooltipMinWidth = tooltipMin.offsetWidth / 10;
     let tooltipMaxWidth = tooltipMax.offsetWidth / 10;
     const stepSize = 10000;
-    const rangeWidth = 30;
-    const thumbWidth = 2;
-    let positionMin = (salaryMin / stepSize);
-    let positionMax = rangeWidth - (salaryMax / stepSize);
+    const rangeWidth = 32.4;
+    const thumbWidth = 1.6;
+    let positionMin = (salaryMin / stepSize) * 1.08;
+    let positionMax = rangeWidth - (salaryMax / stepSize) * 1.08;
     tooltipMin.style.left = positionMin + 'rem';
-//    tooltipMin.style.transform = `translate(${tooltipMinWidth / 2}rem)`;
+    tooltipMin.style.transform = `translate(calc(-25% + .35rem))`;
+    tooltipMax.style.transform = `translate(calc(25% - .35rem))`;
     tooltipMax.style.right = positionMax + 'rem';
     tooltipMinBar.style.left = positionMin + 'rem';
     tooltipMinBar.style.right = positionMax + 'rem';
@@ -290,17 +309,17 @@ export class SearchBarComponent implements OnInit {
 
     if (salaryMax < salaryMin + 14000) {
       this.salaryMinVal = salaryMax - 14000;
-        
+
       if (salaryMin == 0) {
-        this.salaryMaxVal = 14000;
+          upper.value = 14000;
       }
     }
-
+    
     if (salaryMin > salaryMax - 14000) {
       this.salaryMaxVal = salaryMin + 14000;
         
       if (salaryMax == 300000) {
-        this.salaryMinVal = 300000 - 14000;
+        lower.value = salaryMax - 14000;
       }
     }
   }
@@ -458,6 +477,7 @@ export class SearchBarComponent implements OnInit {
     });
     this.jobsService.getJobs(this.form.value, pageNumber );
   }
+
 
   // cities = [
   //   'Birmingham', 
