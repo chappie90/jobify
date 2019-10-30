@@ -180,7 +180,6 @@ export class SearchBarComponent implements OnInit {
 
   ngAfterViewInit() { 
     this.dropDown();
-  //  this.rangeSlider();
     /**
      *
       Potentially replace later with relative values to make responsive
@@ -402,6 +401,8 @@ export class SearchBarComponent implements OnInit {
     );
   }
 
+
+
   dropDown() {
     let filtersArray = document.querySelectorAll('.search__filters-item-title');
     for (let i = 0; i < filtersArray.length; i++) {
@@ -442,6 +443,20 @@ export class SearchBarComponent implements OnInit {
     this.filterTypeCounted = false;
     this.filterSalaryCounted = false;
     this.filtersCount = 0;
+    let pageNumber: string = this.route.snapshot.queryParamMap.get('pageNumber');
+    if (!pageNumber) {
+      pageNumber = 1
+    }
+    this.router.navigate([], {
+      queryParams: {
+        date: null,
+        type: null,
+        salaryMin: null,
+        salaryMax: null
+      },
+      queryParamsHandling: 'merge'
+    });
+    this.jobsService.getJobs(this.form.value, pageNumber );
   }
 
   // cities = [
