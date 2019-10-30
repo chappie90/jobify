@@ -413,6 +413,7 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
   background-color: $grey-dark;
   color: $white;
   letter-spacing: 1px;
+  transition: width .2s;
 
   &::before {
     content: '';
@@ -425,6 +426,9 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
     border-right: 5px solid transparent; 
     border-top: 7px solid $grey-dark;
   }
+}
+.tooltip-small {
+  width: 3.6rem;
 }
 .tooltip-max {
   height: 2rem;

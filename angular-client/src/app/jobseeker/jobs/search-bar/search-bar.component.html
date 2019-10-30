@@ -180,10 +180,13 @@
                 <div class="tooltip-max-bar"></div>
               </div>
               <div class="tooltip-min-wrapper">
-                <span class="tooltip-min">£{{ salaryMinVal | number }}</span>
+                <span 
+                  class="tooltip-min"
+                  [ngClass]="{'tooltip-small': salaryMinVal == 0}">£{{ salaryMinVal | number }}</span>
               </div>
               <div class="tooltip-max-wrapper">
-                <span class="tooltip-max">£{{ salaryMaxVal | number }}</span>
+                <span 
+                  class="tooltip-max">£{{ salaryMaxVal | number }}</span>
               </div>
               <input 
                 class="range-input" 

@@ -244,22 +244,21 @@ export class SearchBarComponent implements OnInit {
     salaryMin = parseInt(salaryMin);
     salaryMax = parseInt(salaryMax);
 
-    if (salaryMax < salaryMin + 20000) {
-      this.salaryMinVal = salaryMax - 20000;
+    if (salaryMax < salaryMin + 14000) {
+      this.salaryMinVal = salaryMax - 14000;
         
       if (salaryMin == 0) {
-        this.salaryMaxVal = 20000;
+        this.salaryMaxVal = 14000;
       }
     }
 
-    if (salaryMin > salaryMax - 20000) {
-      this.salaryMaxVal = salaryMin + 20000;
+    if (salaryMin > salaryMax - 14000) {
+      this.salaryMaxVal = salaryMin + 14000;
         
       if (salaryMax == 300000) {
-        this.salaryMinVal = 280000;
+        this.salaryMinVal = 300000 - 14000;
       }
-
-     }
+    }
   }
 
   onSalaryMaxChange(maxValue, minValue) {
@@ -290,22 +289,21 @@ export class SearchBarComponent implements OnInit {
     salaryMax = parseInt(salaryMax);
 
 
-    if (salaryMax < salaryMin + 20000) {
-      this.salaryMinVal = salaryMax - 20000;
+    if (salaryMax < salaryMin + 14000) {
+      this.salaryMinVal = salaryMax - 14000;
         
       if (salaryMin == 0) {
-        this.salaryMaxVal = 20000;
+        this.salaryMaxVal = 14000;
       }
     }
 
-    if (salaryMin > salaryMax - 20000) {
-      this.salaryMaxVal = salaryMin + 20000;
+    if (salaryMin > salaryMax - 14000) {
+      this.salaryMaxVal = salaryMin + 14000;
         
       if (salaryMax == 300000) {
-        this.salaryMinVal = 300000 - 20000;
+        this.salaryMinVal = 300000 - 14000;
       }
-
-     }
+    }
   }
 
   onSearch() {
