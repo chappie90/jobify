@@ -264,6 +264,8 @@ export class SearchBarComponent implements OnInit {
         
       if (salaryMin == 0) {
          upper.value = 14000;
+         this.salaryMinVal = 0;
+         tooltipMax.style.right = 31.3 + 'rem';
       }
     }
 
@@ -272,6 +274,8 @@ export class SearchBarComponent implements OnInit {
         
       if (salaryMax == 300000) {
         lower.value = salaryMax - 14000;
+        this.salaryMaxVal = 300000;
+        tooltipMin.style.left = 31.3 + 'rem';
       }
     }
   }
@@ -312,6 +316,8 @@ export class SearchBarComponent implements OnInit {
 
       if (salaryMin == 0) {
           upper.value = 14000;
+          this.salaryMinVal = 0;
+          tooltipMax.style.right = 31.3 + 'rem';
       }
     }
     
@@ -320,6 +326,8 @@ export class SearchBarComponent implements OnInit {
         
       if (salaryMax == 300000) {
         lower.value = salaryMax - 14000;
+        this.salaryMaxVal = 300000;
+        tooltipMin.style.left = 31.3 + 'rem';
       }
     }
   }
