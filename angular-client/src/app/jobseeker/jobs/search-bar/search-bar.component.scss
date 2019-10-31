@@ -1,15 +1,19 @@
 @import '~src/styles.scss';
 
-@keyframes range {
-  0% { transform: rotate(0deg); }
-  10% { transform: rotate(-5deg); }
-  20% { transform: rotate(-15deg); }
-  30% { transform: rotate(-20deg); }
-  40% { transform: rotate(-25deg); }
-  85% { transform: rotate(-15deg); }
-  90% { transform: rotate(-10deg); }
-  95% { transform: rotate(-5deg); }
-  100% { transform: rotate(0deg);  }
+// shake anim
+@keyframes shake {
+  from {
+    transform: scale(1, 1);
+  }
+  33% {
+    transform: scale(1, 1.2);
+  }
+  66% {
+    transform: scale(1.2, 1);
+  }
+  to {
+    transform: scale(1, 1);
+  }
 }
 
 .search {
@@ -442,8 +446,8 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
 .tooltip-small {
   width: 3.6rem;
 }
-.tooltip-rotate {
-  transform: rotate(-10deg);
+.tooltip-full {
+  width: 15.5rem;
 }
 .tooltip-max {
   height: 2rem;
@@ -590,3 +594,43 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
     }
   }
 }
+
+// .dots{
+//   list-style-type:none;
+//   background:white;
+//   -webkit-filter:blur(5px) contrast(10);
+//   padding-top:20px;
+//   padding-bottom:20px;
+//   padding-left:20px;
+//   margin-left:-10px;
+//   padding-right:10px;
+//   position:relative;
+// }
+// .dot{
+//   display:inline-block;
+//   vertical-align:middle;
+//   border-radius:100%;
+//   width:30px;
+//   height:30px;
+//   background:black;
+//   margin-left:5px;
+//   margin-right:5px;
+//   cursor:pointer;
+//   color:white;
+//   position:relative;
+//   z-index:2;
+// }
+// .select{
+//   display:block;
+//   border-radius:100%;
+//   width:40px;
+//   height:40px;
+//   background:black;
+//   //opacity:0.6;
+//   //transition:transform 300ms ease-in-out;
+//   position:absolute;
+//   z-index:3;
+//   top:15px;
+//   left:0px;
+//   pointer-events:none;
+// }

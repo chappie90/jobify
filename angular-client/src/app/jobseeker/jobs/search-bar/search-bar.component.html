@@ -182,8 +182,7 @@
               <div class="tooltip-min-wrapper">
                 <span 
                   class="tooltip-min"
-                  [ngClass]="{'tooltip-small': salaryMinVal == 0, 
-                  'tooltip-rotate': salaryMinVal > 100000}">£{{ salaryMinVal | number }}</span>
+                  [ngClass]="{'tooltip-small': salaryMinVal == 0}">£{{ salaryMinVal | number }}</span>
               </div>
               <div class="tooltip-max-wrapper">
                 <span 
@@ -237,4 +236,12 @@
       </li>
     </ul>
   </form>
-</div>
+<!-- <ul class="dots">
+  <li class="select"></li>
+  <li class="dot"></li>
+  <li class="dot"></li>
+  <li class="dot"></li>
+  <li class="dot"></li>
+  <li class="dot"></li>
+</ul>
+</div> -->

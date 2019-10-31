@@ -35,11 +35,57 @@ export class PaginationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.buildPagination();
     this.route.queryParams.subscribe(params => {
-      this.formData = {
-        title: params.title,
-        location: params.location
-      };
+        let title = params.title;
+        let location = params.location;
+        let date = params.date;
+        let type = params.type;
+        let fullTime, partTime, contract, temporary, apprenticeship, volunteer;
+        let salaryMin = params.salaryMin;
+        let salaryMax = params.salaryMax;
+        let pageNumber = params.pageNumber;
+        if (!title) {
+          title = '';
+        }
+        if (!location) {
+          location = '';
+        }
+        if (!date) {
+          date = 'all-time';
+        }
+        if (!type) {
+          type = [];
+        }
+        fullTime = type.includes('fullTime') ? true : '';
+        partTime = type.includes('partTime') ? true : '';
+        contract = type.includes('contract') ? true : '';
+        temporary = type.includes('temporary') ? true : '';
+        apprenticeship = type.includes('apprenticeship') ? true : '';
+        volunteer = type.includes('volunteer') ? true : '';
+        if (!salaryMin) {
+          salaryMin = 0;
+        }
+        if (!salaryMax) {
+          salaryMax = 300000;
+        }
+        if (!pageNumber) {
+          pageNumber = 1;
+        }
+        this.formData = { 
+          title: title, 
+          location: location, 
+          date: date,
+          full: fullTime,
+          part: partTime,
+          contract: contract,
+          temporary: temporary,
+          apprenticeship: apprenticeship,
+          volunteer: volunteer,
+          salaryMin: salaryMin,
+          salaryMax: salaryMax
+        }; 
     });
+
+    console.log(this.formData);
     
     this.selectedPage = this.pages[0];
     this.jobsSub = this.jobsService.getJobsUpdateListener()

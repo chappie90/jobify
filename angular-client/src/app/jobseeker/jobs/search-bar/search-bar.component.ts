@@ -180,15 +180,43 @@ export class SearchBarComponent implements OnInit {
 
   ngAfterViewInit() { 
     this.dropDown();
-    const tooltip = document.querySelector('.tooltip-min');
-    const thumb = document.querySelector('.range-input');
-    thumb.addEventListener('input', function() {
-      tooltip.classList.add('tooltip-rotate');
-    });
-    thumb.addEventListener('change', function() {
-      tooltip.classList.remove('tooltip-rotate');
-    });
 
+  //   const dotsArr = document.querySelectorAll('.dot');
+  //   for (let i = 0; i < dotsArr.length; i++) {
+  //     dotsArr[i].addEventListener('mouseover', function() {
+  //       let rect = dotsArr[i].offsetLeft;
+  //       console.log(rect);
+  //     });
+  //   }
+
+  //   $(".dot").hover(function(){
+  //   var cur=$(this);
+  //   console.log(cur);
+  //   var dest=cur.position().left;
+  //   console.log(dest);
+  //   var t=0.6;
+  //   TweenMax.to($(".select"),t,{x:dest,ease:Back.easeOut})
+  // });
+  // var lastPos=$(".select").position().left;
+  // function updateScale(){
+  //   var pos=$(".select").position().left;
+    
+  //   var speed=Math.abs(pos-lastPos);
+  //   var d=44;
+  //   var offset=-20;
+  //   var hd=d/2;
+  //   var scale=(offset+pos)%d;
+  //   if(scale>hd){
+  //     scale=hd-(scale-hd);
+  //   }
+  //   scale=1-((scale/hd)*0.35);
+  //   TweenMax.to($(".select"),0.1,{scaleY:scale,scaleX:1+(speed*0.06)})
+    
+  //   lastPos=pos;
+  //   requestAnimationFrame(updateScale);
+  // }
+  // requestAnimationFrame(updateScale);
+  // $(".dot:eq(0)").trigger("mouseover");
     /**
      *
       Potentially replace later with relative values to make responsive
