@@ -105,6 +105,32 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
     }
   }
 
+  .input-autocomplete {
+    position: absolute;
+    top: 3.5rem;
+    left: 0;
+    width: 20rem;
+
+    .list {
+      list-style-type: none;
+      background-color: $white;
+      border-radius: 4px;
+      border: 1px solid $grey-medium;
+      -webkit-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+      -moz-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+      box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
+    }
+
+    .item {
+      padding: 1rem 2rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $grey-medium;
+      }
+    }
+  }
+
   &__input-label {
     position: absolute;
     top: -3rem;

@@ -19,6 +19,7 @@
           name="title"
           formControlName="title"
           placeholder="Job title"
+          (change)="onTitleComplete()"
           id="title"/>
     </div>
     <div class="search__input-group" [ngClass]="{'search__input-group--pristine': jobsSearch}">
@@ -33,7 +34,15 @@
           name="location"
           formControlName="location"
           id="location"
+          (input)="onLocationComplete($event.target.value)"
           placeholder="Location"/>
+        <div *ngIf="locationComplete" class="input-autocomplete">
+          <ul class="list">
+            <li class="item" *ngFor="let loc of locationComplete">
+              {{ loc }} 
+            </li>
+          </ul>
+        </div>
     </div>
     <button 
       class="button search__button"

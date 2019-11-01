@@ -23,6 +23,7 @@ export class SearchBarComponent implements OnInit {
   private loading: boolean;
   protected city: string;
   private title: string;
+  private locationComplete: any;
   private jobsSearch: boolean = false;
   private searchPristine: boolean = true;
   private openDropdown: boolean = false;
@@ -381,6 +382,14 @@ export class SearchBarComponent implements OnInit {
     }
   }
 
+  onLocationComplete(val) {
+    this.locationComplete = this.cities.filter(city =>  city.toUpperCase().includes(val.toUpperCase()));
+    if (!val) {
+      this.locationComplete = null;
+    }
+    this.locationComplete = this.locationComplete.slice(0, 5);
+  }
+
   onSearch() {
     this.loading = true;
     if (this.form.invalid) {
@@ -543,22 +552,22 @@ export class SearchBarComponent implements OnInit {
   }
 
 
-  // cities = [
-  //   'Birmingham', 
-  //   'Bradford', 
-  //   'Bristol', 
-  //   'Edinburgh', 
-  //   'Glasgow', 
-  //   'Leeds', 
-  //   'Liverpool', 
-  //   'London', 
-  //   'Manchester',
-  //   'Newcastle',
-  //   'Nottingham',
-  //   'Portsmouth',
-  //   'Sheffield',
-  //   'Southhampton'
-  // ];
+  cities = [
+    'Birmingham', 
+    'Bradford', 
+    'Bristol', 
+    'Edinburgh', 
+    'Glasgow', 
+    'Leeds', 
+    'Liverpool', 
+    'London', 
+    'Manchester',
+    'Newcastle',
+    'Nottingham',
+    'Portsmouth',
+    'Sheffield',
+    'Southhampton'
+  ];
 
   // getTitles(title) {
   //   this.jobsService.getJobTitles(title);

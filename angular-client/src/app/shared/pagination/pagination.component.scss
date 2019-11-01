@@ -11,7 +11,7 @@
   &__item {
     display: inline-block;
     cursor: pointer;
-    margin: 0 .6rem;
+    margin: 0 .5rem;
   }
   &__active-item {
     background-color: $jobseeker-red-dark;
@@ -35,7 +35,7 @@
 
   &__link {
     display: block;
-    padding: .4rem .8rem;
+    padding: .4rem .6rem;
     font-size: 1.4rem;
     font-weight: 700;
   }
