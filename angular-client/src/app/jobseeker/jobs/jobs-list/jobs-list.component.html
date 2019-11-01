@@ -12,7 +12,7 @@
           <h3 class="heading-small">{{ job.title }}</h3>
           <h4 class="jobs-list__company-title">{{ job.company}}</h4>
           <h5 class="heading-extra-small">{{ job.location }}</h5>
-          <h5 class="heading-extra-small">{{ job.datePosted }}</h5>
+          <h5 class="heading-extra-small">{{ job.datePosted | date }}</h5>
         </div>
       </div>
       <div class="jobs-list__like-container">
