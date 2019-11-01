@@ -11,8 +11,8 @@
   &__item {
     display: inline-block;
     cursor: pointer;
+    margin: 0 .6rem;
   }
-
   &__active-item {
     background-color: $jobseeker-red-dark;
     color: $white;
@@ -39,4 +39,7 @@
     font-size: 1.4rem;
     font-weight: 700;
   }
+}
+.item-no-margin {
+  margin: 0;
 }
