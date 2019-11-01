@@ -3,19 +3,20 @@
 .pagination {
 
   &__list {
-    margin: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
   }
 
   &__item {
     display: inline-block;
-    margin: 0 .4rem;
     cursor: pointer;
   }
 
   &__active-item {
     background-color: $jobseeker-red-dark;
     color: $white;
-   border-radius: 4px;
+    border-radius: 4px;
   }
 
   // &__left-chevron {
