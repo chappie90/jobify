@@ -65,21 +65,9 @@ router.post('', (req, res, next) => {
   }
 
   // SALARY RANGE SEARCH FILTER
-  let salaryMin = req.body.form.salaryMin;
-  let salaryMax = req.body.form.salaryMax;
+  let salaryMin = parseInt(req.body.form.salaryMin);
+  let salaryMax = parseInt(req.body.form.salaryMax);
 
-
-  console.log(title);
-  console.log(location);
-  console.log(date);
-  console.log(fullTime);
-  console.log(partTime);
-  console.log(contract);
-  console.log(temporary);
-  console.log(apprenticeship);
-  console.log(volunteer);
-  console.log(salaryMin);
-  console.log(salaryMax);
 
   const pageSize = 20;
   let jobsQuery;
