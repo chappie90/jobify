@@ -184,6 +184,18 @@ export class SearchBarComponent implements OnInit {
       this.filterSalaryActive = this.form.value.salaryMin !== 0 || 
                                 this.form.value.salaryMax !== 300000; 
       }
+       if (this.filterDateActive && !this.filterDateCounted) {
+        this.filtersCount++;
+        this.filterDateCounted = true; 
+      }
+      if (this.filterTypeActive && !this.filterTypeCounted) {
+        this.filtersCount++;
+        this.filterTypeCounted = true; 
+      }
+      if (this.filterSalaryActive && !this.filterSalaryCounted) {
+        this.filtersCount++;
+        this.filterSalaryCounted = true;
+      }
     });
   }
 
