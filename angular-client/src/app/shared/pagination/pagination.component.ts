@@ -22,6 +22,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
   private previousPage: number;
   private firstPage: number;
   private lastPage: number;
+  private pageNumber;
   private jobsSub: Subscription;
   private pageSub: Subscription;
   private searchTitle: string;
@@ -42,7 +43,11 @@ export class PaginationComponent implements OnInit, OnDestroy {
         let fullTime, partTime, contract, temporary, apprenticeship, volunteer;
         let salaryMin = params.salaryMin;
         let salaryMax = params.salaryMax;
-        let pageNumber = params.pageNumber;
+        this.pageNumber = params.page;
+        if (!this.pageNumber) {
+          this.pageNumber = 1;
+        }
+        this.selectedPage = this.pageNumber;
         if (!title) {
           title = '';
         }
@@ -67,9 +72,6 @@ export class PaginationComponent implements OnInit, OnDestroy {
         if (!salaryMax) {
           salaryMax = 300000;
         }
-        if (!pageNumber) {
-          pageNumber = 1;
-        }
         this.formData = { 
           title: title, 
           location: location, 
@@ -84,10 +86,8 @@ export class PaginationComponent implements OnInit, OnDestroy {
           salaryMax: salaryMax
         }; 
     });
-
-    console.log(this.formData);
     
-    this.selectedPage = this.pages[0];
+  // this.selectedPage = 5;
     this.jobsSub = this.jobsService.getJobsUpdateListener()
       .subscribe(
         jobs => {
@@ -162,8 +162,29 @@ export class PaginationComponent implements OnInit, OnDestroy {
 
   onGetPage(page, index, previousPage, nextPage) {
     // REPLACE GET JOBS ARGUMENTS WITH QUERY PARAMS
+    let queryParams: Params = {};
+    let pageNum;
+    if (page) {
+      pageNum = page;
+    }
+    if (page === 1) {
+      pageNum = null;
+    }
+    if (index === 8) {
+      pageNum = previousPage + 1;
+    }
+    if (index === 1 && page === this.moreJobs) {
+      pageNum = nextPage - 1;
+    }
+    queryParams = { ...queryParams, page: pageNum };
+    this.router.navigate(
+      [],
+      {
+        queryParams: queryParams,
+        queryParamsHandling: 'merge'
+      }
+    );
 
-    
     if (index === 8) {
       this.firstPage = previousPage - 3;
       this.nextPage = previousPage + 1;
