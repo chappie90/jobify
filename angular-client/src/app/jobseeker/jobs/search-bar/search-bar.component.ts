@@ -174,6 +174,15 @@ export class SearchBarComponent implements OnInit {
           'salaryMin': salaryMin,
           'salaryMax': salaryMax
         });
+      this.filterDateActive = this.form.value.date !== 'all-time' ? true : false;
+      this.filterTypeActive = this.form.value.full || 
+                              this.form.value.part ||
+                              this.form.value.contract ||
+                              this.form.value.temporary ||
+                              this.form.value.apprenticeship ||
+                              this.form.value.volunteer;
+      this.filterSalaryActive = this.form.value.salaryMin !== 0 || 
+                                this.form.value.salaryMax !== 300000; 
       }
     });
   }
