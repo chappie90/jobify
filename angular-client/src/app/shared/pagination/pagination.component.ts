@@ -36,6 +36,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.buildPagination();
     this.route.queryParams.subscribe(params => {
+      console.log('changed');
         let title = params.title;
         let location = params.location;
         let date = params.date;
@@ -98,7 +99,10 @@ export class PaginationComponent implements OnInit, OnDestroy {
           this.pages = [...Array(this.numberPages).keys()].map(x => ++x);
           this.pagesOutput = [];
           let lastPage = this.pages.slice(-1).pop();
-          if (this.selectedPage <= 8) {
+          if (this.pages.length < 10) {
+            this.pagesOutput = this.pages;
+          } else {
+            if (this.selectedPage <= 8) {
             let pagesRange = this.pages.slice(0, 8);
             for (let i = 0; i < pagesRange.length; i++) {
               this.pagesOutput.push(pagesRange[i]);
@@ -122,6 +126,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
             this.pagesOutput.push(this.moreJobs);
             this.pagesOutput.push(this.pages.slice(-1).pop()); 
           }
+          }
         }
       );
   }
@@ -134,7 +139,10 @@ export class PaginationComponent implements OnInit, OnDestroy {
           this.pages = [...Array(this.numberPages).keys()].map(x => ++x);
           this.pagesOutput = [];
           let lastPage = this.pages.slice(-1).pop();
-          if (this.selectedPage <= 8) {
+          if (this.pages.length < 10) {
+            this.pagesOutput = this.pages;
+          } else {
+             if (this.selectedPage <= 8) {
             let pagesRange = this.pages.slice(0, 8);
             for (let i = 0; i < pagesRange.length; i++) {
               this.pagesOutput.push(pagesRange[i]);
@@ -157,6 +165,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
             }
             this.pagesOutput.push(this.moreJobs);
             this.pagesOutput.push(this.pages.slice(-1).pop()); 
+          }
           }
   }
 
@@ -185,18 +194,22 @@ export class PaginationComponent implements OnInit, OnDestroy {
       }
     );
 
-    if (index === 8) {
-      this.firstPage = previousPage - 3;
-      this.nextPage = previousPage + 1;
-      this.lastPage = this.nextPage + 2;
-      this.jobsService.getJobs(this.formData, this.nextPage);
-    } else if (index === 1 && page === this.moreJobs) {
-      this.firstPage = nextPage - 4;
-      this.nextPage = nextPage - 1;
-      this.lastPage = nextPage + 2;
-      this.jobsService.getJobs(this.formData, this.nextPage);
+    if (this.pages.length < 10) {
+      this.jobsService.getJobs(this.formData, page);
     } else {
-      this.jobsService.getJobs(this.formData, page);  
+      if (index === 8) {
+        this.firstPage = previousPage - 3;
+        this.nextPage = previousPage + 1;
+        this.lastPage = this.nextPage + 2;
+        this.jobsService.getJobs(this.formData, this.nextPage);
+      } else if (index === 1 && page === this.moreJobs) {
+        this.firstPage = nextPage - 4;
+        this.nextPage = nextPage - 1;
+        this.lastPage = nextPage + 2;
+        this.jobsService.getJobs(this.formData, this.nextPage);
+      } else {
+        this.jobsService.getJobs(this.formData, page);  
+      }
     }
   }
 

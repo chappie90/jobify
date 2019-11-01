@@ -260,8 +260,8 @@ export class SearchBarComponent implements OnInit {
     const tooltipMaxBar = document.querySelector('.tooltip-max-bar');
     let salaryMin = this.form.value.salaryMin;
     let salaryMax = this.form.value.salaryMax;
-    let tooltipMinWidth = tooltipMin.offsetWidth / 10;
-    let tooltipMaxWidth = tooltipMax.offsetWidth / 10;
+    // let tooltipMinWidth = tooltipMin.offsetWidth / 10;
+    // let tooltipMaxWidth = tooltipMax.offsetWidth / 10;
     const stepSize = 10000;
     const rangeWidth = 32.4;
     const thumbWidth = 1.6;
@@ -290,8 +290,8 @@ export class SearchBarComponent implements OnInit {
     const tooltipMax = document.querySelector('.tooltip-max');
     const tooltipMinBar = document.querySelector('.tooltip-min-bar');
     const tooltipMaxBar = document.querySelector('.tooltip-max-bar');
-    let tooltipMinWidth = tooltipMin.offsetWidth / 10;
-    let tooltipMaxWidth = tooltipMax.offsetWidth / 10;
+    // let tooltipMinWidth = tooltipMin.offsetWidth / 10;
+    // let tooltipMaxWidth = tooltipMax.offsetWidth / 10;
     const stepSize = 10000;
     const rangeWidth = 32.4;
     const thumbWidth = 1.6;
@@ -340,8 +340,8 @@ export class SearchBarComponent implements OnInit {
     const tooltipMax = document.querySelector('.tooltip-max');
     const tooltipMinBar = document.querySelector('.tooltip-min-bar');
     const tooltipMaxBar = document.querySelector('.tooltip-max-bar');
-    let tooltipMinWidth = tooltipMin.offsetWidth / 10;
-    let tooltipMaxWidth = tooltipMax.offsetWidth / 10;
+    // let tooltipMinWidth = tooltipMin.offsetWidth / 10;
+    // let tooltipMaxWidth = tooltipMax.offsetWidth / 10;
     const stepSize = 10000;
     const rangeWidth = 32.4;
     const thumbWidth = 1.6;
@@ -426,21 +426,24 @@ export class SearchBarComponent implements OnInit {
     // Make sure all browsers support object spread operator
     let queryParams: Params = {};
     let type = [];
-    if (this.form.value.title) {
-      queryParams = { ...queryParams, title: this.form.value.title };
-    }
-    if (this.form.value.location) {
-      queryParams = { ...queryParams, location: this.form.value.location };
-    }
-    if (this.form.value.date && this.form.value.date !== 'all-time') {
-      queryParams = { ...queryParams, date: this.form.value.date };
-    }
-    if (this.form.value.date === 'all-time') {
-      queryParams = { ...queryParams, date: null };
-    }
+    queryParams = { ...queryParams, title: this.form.value.title ? this.form.value.title : null };
+    queryParams = { ...queryParams, location: this.form.value.location ? this.form.value.location: null };
+    queryParams = {
+      ...queryParams, 
+      date: this.form.value.date && this.form.value.date !== 'all-time' ?
+            this.form.value.date : null
+    };  
     if (this.form.value.full) {
       type.push('fullTime');
       queryParams = { ...queryParams, type: type };
+    } else {
+      // Why does this work for all job types?
+      type =  type.filter(x => x !== 'fullTime');
+      if (type.length === 0) {
+        queryParams = { ...queryParams, type: null };
+      } else {
+        queryParams = { ...queryParams, type: type };
+      }
     }
     if (this.form.value.part) {
       type.push('partTime');
@@ -462,12 +465,16 @@ export class SearchBarComponent implements OnInit {
       type.push('volunteer');
       queryParams = { ...queryParams, type: type };
     }
-    if (this.form.value.salaryMin && this.form.value.salaryMin !== 0) {
-      queryParams = { ...queryParams, salaryMin: this.form.value.salaryMin };
-    }
-    if (this.form.value.salaryMax && this.form.value.salaryMax != 300000) {
-      queryParams = { ...queryParams, salaryMax: this.form.value.salaryMax };
-    }
+    queryParams = { 
+      ...queryParams, 
+      salaryMin: this.form.value.salaryMin !== 0 ? 
+        this.form.value.salaryMin : null 
+    };
+    queryParams = { 
+      ...queryParams, 
+      salaryMax: this.form.value.salaryMax !== 300000 ? 
+        this.form.value.salaryMax : null 
+    };
     this.router.navigate(
       ['/jobs/search'],
       {
