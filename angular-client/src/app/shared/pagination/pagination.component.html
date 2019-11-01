@@ -3,7 +3,7 @@
   <li 
     *ngFor="let page of pagesOutput; let index = index" 
     class="pagination__item"
-    [class.pagination__active-item]="page === selectedPage"
+    [class.pagination__active-item]="page == selectedPage"
     [ngClass]="{'item-no-margin': selectedPage > 10}"
     (click)="onGetPage(page, index, pagesOutput[index - 1], pagesOutput[index + 1])">
     <a class="pagination__link">{{ page }}</a>

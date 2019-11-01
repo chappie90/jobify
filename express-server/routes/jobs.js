@@ -103,7 +103,6 @@ router.post('', (req, res, next) => {
       return jobsQueryCount;
     })
     .then(count => {
-      console.log(count);
       res.status(200).json({
         message: 'Jobs sent from server successfully',
         jobs: fetchedJobs,

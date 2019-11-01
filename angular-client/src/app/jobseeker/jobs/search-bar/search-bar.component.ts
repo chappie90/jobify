@@ -119,7 +119,7 @@ export class SearchBarComponent implements OnInit {
         let fullTime, partTime, contract, temporary, apprenticeship, volunteer;
         let salaryMin = params.salaryMin;
         let salaryMax = params.salaryMax;
-        let pageNumber = params.pageNumber;
+        let pageNumber = params.page;
         if (!title) {
           title = '';
         }

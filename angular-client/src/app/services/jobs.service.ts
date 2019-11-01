@@ -40,8 +40,6 @@ export class JobsService {
   }
 
   getJobs(form: any, page: number) {
-    console.log('testy test');
-    console.log(form);
     const searchData = { form: form, page: page };
     // let queryParams = `?page=${page}`;
     // if (title) {
@@ -58,6 +56,7 @@ export class JobsService {
     )
     .pipe(
       map(jobsData => {
+        console.log(jobsData);
         const authData = this.authService.getAuthData();
         let likedJobs;
         let appliedJobs;
