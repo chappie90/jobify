@@ -1,20 +1,34 @@
 @import '~src/styles.scss';
 
 // shake anim
-@keyframes shake {
-  from {
-    transform: scale(1, 1);
+@keyframes checkbox {
+  0% {
+    transform: translateY(-50%) scale(1, 1);
   }
-  33% {
-    transform: scale(1, 1.2);
+  50% {
+    transform: translateY(-50%) scale(1.4, 1.4);
   }
-  66% {
-    transform: scale(1.2, 1);
+  75% {
+    transform: translateY(-50%) scale(0.7, 0.7);
   }
-  to {
-    transform: scale(1, 1);
+  100% {
+    transform: translateY(-50%) scale(1, 1);
   }
 }
+
+@keyframes radio {
+  0% {
+    border: 1px solid $grey-dark;
+  }
+  50% {
+    border: 8px solid $grey-dark;
+  }
+  100% {
+    border: 5px solid $grey-dark;
+  }
+}
+
+
 
 .search {
   margin-top: 13rem;
@@ -239,13 +253,20 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
     top: -9999px;
     left: -9999px;
 
-    &:checked + .search__input-label--filter-date::before,
-    &:checked + .search__input-label--filter-type::before,
-    &:checked + .search__input-label--filter-salary::before {
+    &:checked + .search__input-label--filter-date::before {
+      animation-name: radio;
+      animation-duration: .5s;
+      animation-timing-function: ease;
       border: 5px solid $grey-dark;
     }
+    &:checked + .search__input-label--filter-type::before {
+      background-color: $grey-dark;
+      animation-name: checkbox;
+      animation-duration: .5s;
+      animation-timing-function: ease;
+    }
   }
-  
+
   &__input--filter,
   &__input-label--filter {
     cursor: pointer;
@@ -289,6 +310,16 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
       border: 1px solid $grey-dark;
       border-radius: 4px;
       transition: all .3s;
+    }
+
+    &::after {
+      content: 'L';
+      position: absolute;
+      left: -1.6rem;
+      font-size: 1.4rem;
+      color: $white;
+      display: inline-block;
+      transform: scaleX(-1) rotate(-35deg);
     }
   }
 
