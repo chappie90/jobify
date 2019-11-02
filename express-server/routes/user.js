@@ -231,7 +231,9 @@ router.post('/google-login', (req, res, next) => {
   verify().catch(console.error);
 });
 
-router.patch('/like', checkAuth, (req, res, next) =>{
+router.patch('/like', 
+  // checkAuth, 
+  (req, res, next) =>{
   const jobId = req.body.jobId;
   const userId = req.body.userId;
   const likedJobs = req.body.likedJobs;
