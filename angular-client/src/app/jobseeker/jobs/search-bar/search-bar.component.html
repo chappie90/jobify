@@ -19,6 +19,7 @@
           name="title"
           formControlName="title"
           placeholder="Job title"
+          (blur)="onTitleOut()"
           (input)="onTitleComplete($event.target.value)"
           id="title"/>
         <div *ngIf="titlesComplete" class="input-autocomplete titles-autocomplete">
@@ -26,7 +27,7 @@
             <li 
               class="item" 
               *ngFor="let title of titlesComplete"
-              (click)="onSuggestClick(title)">
+              (mousedown)="onSuggestTitleClick(title)">
               {{ title }} 
             </li>
           </ul>
@@ -45,6 +46,7 @@
           name="location"
           formControlName="location"
           id="location"
+          (blur)="onLocationOut()"
           (input)="onLocationComplete($event.target.value)"
           placeholder="Location"/>
         <div *ngIf="locationComplete" class="input-autocomplete">
@@ -52,7 +54,7 @@
             <li 
               class="item" 
               *ngFor="let loc of locationComplete"
-              (click)="onSuggestClick(loc)">
+              (mousedown)="onSuggestClick(loc)">
               {{ loc }} 
             </li>
           </ul>

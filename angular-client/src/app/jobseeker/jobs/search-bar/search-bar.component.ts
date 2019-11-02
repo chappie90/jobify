@@ -398,8 +398,23 @@ export class SearchBarComponent implements OnInit {
     this.locationComplete = null;
   }
 
+  onLocationOut() {
+    this.locationComplete = null;
+  }
+
   onTitleComplete(val) {
      this.jobsService.getJobTitles(val);
+  }
+
+  onSuggestTitleClick(el) {
+    this.form.patchValue({
+      title: el
+    });
+    this.titlesComplete = null;
+  }
+
+  onTitleOut() {
+    this.titlesComplete = null;
   }
 
   onKey(e) {
