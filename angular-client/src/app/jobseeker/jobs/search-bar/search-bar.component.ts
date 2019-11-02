@@ -337,7 +337,7 @@ export class SearchBarComponent implements OnInit {
     this.salaryMaxVal = maxValue.value;
     let salaryMin = this.salaryMinVal;
     let salaryMax = this.salaryMaxVal;
-      const lower = document.querySelector('#lower');
+    const lower = document.querySelector('#lower');
     const upper = document.querySelector('#upper');
     const tooltipMin = document.querySelector('.tooltip-min');
     const tooltipMax = document.querySelector('.tooltip-max');
@@ -431,6 +431,9 @@ export class SearchBarComponent implements OnInit {
           if (this.locationCount === this.locationComplete.length + 1) {
             this.locationCount = 0;
           }
+          if (this.locationCount === 0) {
+            this.locationCount = 1;
+          }
         break;
 
         case 38: // up
@@ -440,6 +443,10 @@ export class SearchBarComponent implements OnInit {
           if (this.locationCount === 0) {
             this.locationCount = this.locationComplete.length + 1;
           }
+          if (this.locationCount === 6) {
+            this.locationCount = 5;
+          }
+        break;
       }
     }
   }
