@@ -164,7 +164,7 @@ router.post('/my-jobs', (req, res, next) => {
     });
   }
   if (type === 'applied') {
-    Job.find({ _id: { $in: myJobs } })
+    Job.find({ _id: { $in: myJobs.map(job => job.jobId) }})
     .then(myJobsData => {
       res.status(200).json({
         type: type,
@@ -178,7 +178,6 @@ router.post('/my-jobs', (req, res, next) => {
       });
     });
   }
-
 });
 
 module.exports = router;
