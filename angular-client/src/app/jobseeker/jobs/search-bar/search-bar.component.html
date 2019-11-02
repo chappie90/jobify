@@ -1,5 +1,5 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
-<div class="search" [ngClass]="{'search--pristine': !jobsSearch}">
+<div (window:keydown)="onKey($event)" class="search" [ngClass]="{'search--pristine': !jobsSearch}">
   <div class="search__bg"></div>
   <form 
     class="search__form" 
@@ -49,10 +49,11 @@
           (input)="onLocationComplete($event.target.value)"
           placeholder="Location"/>
         <div *ngIf="locationComplete" class="input-autocomplete">
-          <ul  (window:keydown)="onKey($event)" class="list">
+          <ul class="list">
             <li 
               class="item" 
-              *ngFor="let loc of locationComplete"
+              [ngClass]="{'item-hover': i === locationCount - 1 }"
+              *ngFor="let loc of locationComplete; let i = index"
               (mousedown)="onSuggestClick(loc)">
               {{ loc }} 
             </li>

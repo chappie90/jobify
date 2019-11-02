@@ -129,6 +129,10 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
         background-color: $grey-medium;
       }
     }
+
+    .item-hover {
+      background-color: $grey-medium;
+    }
   }
 
   .titles-autocomplete {

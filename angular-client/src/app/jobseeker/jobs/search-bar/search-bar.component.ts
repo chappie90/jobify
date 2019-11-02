@@ -393,6 +393,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   onSuggestClick(el) {
+    console.log(el);
     this.form.patchValue({
       location: el
     });
@@ -401,6 +402,7 @@ export class SearchBarComponent implements OnInit {
 
   onLocationOut() {
     this.locationComplete = null;
+    this.locationCount = null;
   }
 
   onTitleComplete(val) {
@@ -420,12 +422,11 @@ export class SearchBarComponent implements OnInit {
 
   onKey(e) {
     if (this.locationComplete) {
-      if (!this.locationCount) {
-        this.locationCount = 0;
-      }
+      this.locationCount = this.locationCount ? this.locationCount : 0;
+      console.log(this.locationCount);
       this.locationComplete[this.locationCount];
       this.locationCount++;
-      if (this.locationCount === this.locationComplete.length) {
+      if (this.locationCount === this.locationComplete.length + 1) {
         this.locationCount = 0;
       }
     }
