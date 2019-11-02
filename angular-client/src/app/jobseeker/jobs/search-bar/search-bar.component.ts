@@ -37,10 +37,11 @@ export class SearchBarComponent implements OnInit {
   private titlesSub: Subscription;
   private jobsSub: Subscription;
   private titlesSub: Subscription;
-  private titlesComplete: any;
+  private titleComplete: any;
   private salaryMinVal: number;
   private salaryMaxVal: number;
   private locationCount: number;
+  private titleCount: number;
 
   constructor(private jobsService: JobsService,
               private router: Router,
@@ -56,7 +57,7 @@ export class SearchBarComponent implements OnInit {
         }
     );
     this.titlesSub = this.jobsService.getAutoCompleteTitles().subscribe(response => {
-      this.titlesComplete = response.jobs.map(t => t.job_title);
+      this.titleComplete = response.jobs.map(t => t.job_title);
     });
     this.salaryMinVal = 0;
     this.salaryMaxVal = 300000;
@@ -385,6 +386,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   onLocationComplete(val) {
+    this.locationCount = null;
     this.locationComplete = this.cities.filter(city =>  city.toUpperCase().includes(val.toUpperCase()));
     if (!val || this.locationComplete.length === 0) {
       this.locationComplete = null;
@@ -398,6 +400,12 @@ export class SearchBarComponent implements OnInit {
       location: el
     });
     this.locationComplete = null;
+    this.locationCount = null;
+  }
+
+  onLocationFocus() {
+    console.log('fds');
+    return;
   }
 
   onLocationOut() {
@@ -413,11 +421,11 @@ export class SearchBarComponent implements OnInit {
     this.form.patchValue({
       title: el
     });
-    this.titlesComplete = null;
+    this.titleComplete = null;
   }
 
   onTitleOut() {
-    this.titlesComplete = null;
+    this.titleComplete = null;
   }
 
   onKey(e) {
@@ -445,6 +453,35 @@ export class SearchBarComponent implements OnInit {
           }
           if (this.locationCount === 6) {
             this.locationCount = 5;
+          }
+        break;
+      }
+    }
+
+     if (this.titleComplete) {
+      switch (e.which) {
+        case 40: // down 
+          this.titleCount = this.titleCount ? this.titleCount : 0;
+          this.titleComplete[this.titleCount];
+          console.log(this.titleComplete);
+          this.titleCount++;
+          if (this.titleCount === this.titleComplete.length + 1) {
+            this.titleCount = 0;
+          }
+          if (this.titleCount === 0) {
+            this.titleCount = 1;
+          }
+        break;
+
+        case 38: // up
+          this.titleCount = this.titleCount ? this.titleCount : 0;
+          this.titleComplete[this.titleCount];
+          this.titleCount--;
+          if (this.titleCount === 0) {
+            this.titleCount = this.titleComplete.length + 1;
+          }
+          if (this.titleCount === 6) {
+            this.titleCount = 5;
           }
         break;
       }

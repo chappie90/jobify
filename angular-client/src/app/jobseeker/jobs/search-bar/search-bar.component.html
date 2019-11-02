@@ -22,11 +22,12 @@
           (blur)="onTitleOut()"
           (input)="onTitleComplete($event.target.value)"
           id="title"/>
-        <div *ngIf="titlesComplete" class="input-autocomplete titles-autocomplete">
+        <div *ngIf="titleComplete" class="input-autocomplete titles-autocomplete">
           <ul class="list">
             <li 
               class="item" 
-              *ngFor="let title of titlesComplete"
+              [ngClass]="{'item-hover': i === titleCount - 1 }"
+              *ngFor="let title of titleComplete; let i = index"
               (mousedown)="onSuggestTitleClick(title)">
               {{ title }} 
             </li>
@@ -47,6 +48,7 @@
           id="location"
           (blur)="onLocationOut()"
           (input)="onLocationComplete($event.target.value)"
+          (focus)="onLocationFocus()"
           placeholder="Location"/>
         <div *ngIf="locationComplete" class="input-autocomplete">
           <ul class="list">
