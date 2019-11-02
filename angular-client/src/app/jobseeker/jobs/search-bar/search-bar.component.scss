@@ -253,7 +253,7 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
   }
 
   &__filters-content {
-      display: none;
+      visibility: hidden;
       position: absolute;
       top: 3.1rem;
       right: 0;
@@ -322,7 +322,6 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
       height: 1.8rem;
       border: 1px solid $grey-dark;
       border-radius: 50%;
-      transition: all .3s;
     }
   }
 
@@ -339,7 +338,6 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
       height: 1.8rem;
       border: 1px solid $grey-dark;
       border-radius: 4px;
-      transition: all .3s;
     }
 
     &::after {
@@ -458,7 +456,7 @@ clip-path: polygon(0 84%, 100% 18%, 100% 100%, 0% 100%);
 }
 
 .open-dropdown {
-  display: block;
+  visibility: visible;
 }
 
 .filter-active {
