@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { JobsService } from '../../../services/jobs.service';
@@ -20,7 +21,8 @@ export class SavedJobsComponent implements OnInit, OnDestroy {
 
   constructor(private jobsService: JobsService,
               private authService: AuthService,
-              private userService: UserService) { }
+              private userService: UserService,
+              private router: Router) {}
 
   ngOnInit() {
     const likedJobs = JSON.parse(this.authService.getAuthData().likedJobs);
@@ -42,6 +44,18 @@ export class SavedJobsComponent implements OnInit, OnDestroy {
         // setTimeout(() => {
         //   this.showSaveNotification = false;
         // }, 3000);
+      }
+    );
+  }
+
+  onApply(job) {
+    console.log(job);
+    const queryParams: Params = { jobId: job._id };        
+    this.router.navigate(
+      ['/apply'],
+      {
+        queryParams: queryParams,
+        queryParamsHandling: 'merge'
       }
     );
   }

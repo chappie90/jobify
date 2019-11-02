@@ -33,6 +33,17 @@
 .heading-extra-small {
   color: $grey;
 }
+.btn-container {
+  display: flex;
+  align-items: center;
+}
+.apply-btn {
+  color: $white;
+  background-color: $employer-green;
+  padding: .6rem 1rem;
+  border-radius: 4px;
+  margin: 0 1rem;
+}
 .remove::after {
   display: inline-block;
   content: '\00d7';
