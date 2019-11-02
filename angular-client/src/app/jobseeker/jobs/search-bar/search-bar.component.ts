@@ -516,14 +516,23 @@ export class SearchBarComponent implements OnInit {
       if (this.filterDateActive && !this.filterDateCounted) {
         this.filtersCount++;
         this.filterDateCounted = true; 
+      } else if (!this.filterDateActive && this.filterDateCounted) {
+        this.filtersCount--;
+        this.filterDateCounted = false;
       }
       if (this.filterTypeActive && !this.filterTypeCounted) {
         this.filtersCount++;
         this.filterTypeCounted = true; 
+      } else if (!this.filterTypeActive && this.filterTypeCounted) {
+        this.filtersCount--;
+        this.filterTypeCounted = false;
       }
       if (this.filterSalaryActive && !this.filterSalaryCounted) {
         this.filtersCount++;
         this.filterSalaryCounted = true;
+      } else if (!this.filterSalaryActive && this.filterSalaryCounted) {
+        this.filtersCount--;
+        this.filterSalaryCounted = false;
       }
 
       this.jobsService.getJobs(this.form.value, 1);
@@ -590,8 +599,6 @@ export class SearchBarComponent implements OnInit {
       }
     );
   }
-
-
 
   dropDown() {
     let filtersArray = document.querySelectorAll('.search__filters-item-title');
