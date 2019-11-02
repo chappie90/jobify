@@ -422,12 +422,24 @@ export class SearchBarComponent implements OnInit {
 
   onKey(e) {
     if (this.locationComplete) {
-      this.locationCount = this.locationCount ? this.locationCount : 0;
-      console.log(this.locationCount);
-      this.locationComplete[this.locationCount];
-      this.locationCount++;
-      if (this.locationCount === this.locationComplete.length + 1) {
-        this.locationCount = 0;
+
+      switch (e.which) {
+        case 40: // down 
+          this.locationCount = this.locationCount ? this.locationCount : 0;
+          this.locationComplete[this.locationCount];
+          this.locationCount++;
+          if (this.locationCount === this.locationComplete.length + 1) {
+            this.locationCount = 0;
+          }
+        break;
+
+        case 38: // up
+          this.locationCount = this.locationCount ? this.locationCount : 0;
+          this.locationComplete[this.locationCount];
+          this.locationCount--;
+          if (this.locationCount === 0) {
+            this.locationCount = this.locationComplete.length + 1;
+          }
       }
     }
   }
