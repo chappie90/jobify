@@ -36,7 +36,8 @@ export class SearchBarComponent implements OnInit {
   private filterSalaryCounted: boolean = false;
   private titlesSub: Subscription;
   private jobsSub: Subscription;
-  private titles: any;
+  private titlesSub: Subscription;
+  private titlesComplete: any;
   private salaryMinVal: number;
   private salaryMaxVal: number;
 
@@ -53,9 +54,9 @@ export class SearchBarComponent implements OnInit {
        //   console.log(document.getElementById('jobs-list').scrollTop);
         }
     );
-    // this.titlesSub = this.jobsService.getAutoCompleteTitles().subscribe(response => {
-    //   this.titles = response.jobs.jobs.map(t => t.job_title);
-    // });
+    this.titlesSub = this.jobsService.getAutoCompleteTitles().subscribe(response => {
+      this.titlesComplete = response.jobs.map(t => t.job_title);
+    });
     this.salaryMinVal = 0;
     this.salaryMaxVal = 300000;
     this.router.events.subscribe((event: Event) => {
@@ -384,10 +385,27 @@ export class SearchBarComponent implements OnInit {
 
   onLocationComplete(val) {
     this.locationComplete = this.cities.filter(city =>  city.toUpperCase().includes(val.toUpperCase()));
-    if (!val) {
+    if (!val || this.locationComplete.length === 0) {
       this.locationComplete = null;
     }
     this.locationComplete = this.locationComplete.slice(0, 5);
+  }
+
+  onSuggestClick(el) {
+    this.form.patchValue({
+      location: el
+    });
+    this.locationComplete = null;
+  }
+
+  onTitleComplete(val) {
+     this.jobsService.getJobTitles(val);
+  }
+
+  onKey(e) {
+    if (locationComplete) {
+
+    }
   }
 
   onSearch() {
@@ -568,21 +586,5 @@ export class SearchBarComponent implements OnInit {
     'Sheffield',
     'Southhampton'
   ];
-
-  // getTitles(title) {
-  //   this.jobsService.getJobTitles(title);
-  // }
-
-  // titleChanged(title) {
-  //   this.form.patchValue({
-  //     'title': title
-  //   });
-  // }
-
-  // cityChanged(city) {
-  //   this.form.patchValue({
-  //     'location': city
-  //   });
-  // }
 
 }

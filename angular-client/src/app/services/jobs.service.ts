@@ -160,7 +160,7 @@ export class JobsService {
     this.http.post<any>(
       API_URL + '/titles', titleData
     ).subscribe(response => {
-      this.titlesUpdated.next({ jobs: response });
+      this.titlesUpdated.next({ jobs: response.jobs });
     });
   }
 

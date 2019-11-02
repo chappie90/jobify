@@ -113,13 +113,7 @@ router.post('', (req, res, next) => {
 });
 
 router.post('/titles', (req, res, next) => {
-  // Job.find({ job_title: { $regex: req.body.title, $options: 'i' } }).limit(10)
-   Job.aggregate(
-      [
-        { '$group': { '_id': '$job_title', 'job_title': { $regex: req.body.title, $options: 'i' }} },
-        { '$limit': 10 }
-      ]
-    )
+   Job.find({ job_title: { $regex: req.body.title, $options: 'i' } }, { job_title: 1, _id: 0 }).limit(5)
     .then(jobs => {
       res.status(200).json({
         jobs: jobs
