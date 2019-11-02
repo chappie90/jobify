@@ -40,6 +40,7 @@ export class SearchBarComponent implements OnInit {
   private titlesComplete: any;
   private salaryMinVal: number;
   private salaryMaxVal: number;
+  private locationCount: number;
 
   constructor(private jobsService: JobsService,
               private router: Router,
@@ -418,8 +419,15 @@ export class SearchBarComponent implements OnInit {
   }
 
   onKey(e) {
-    if (locationComplete) {
-
+    if (this.locationComplete) {
+      if (!this.locationCount) {
+        this.locationCount = 0;
+      }
+      this.locationComplete[this.locationCount];
+      this.locationCount++;
+      if (this.locationCount === this.locationComplete.length) {
+        this.locationCount = 0;
+      }
     }
   }
 

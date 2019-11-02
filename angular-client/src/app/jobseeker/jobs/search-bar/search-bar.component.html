@@ -40,7 +40,6 @@
         [ngClass]="{'search__input-label--pristine': !jobsSearch}">Search city</label>
       <div class="search__input-icon search__input-icon--location"></div>
         <input
-          (keydown)="onKey($event)"
           class="search__form-input"
           type="text"
           name="location"
@@ -50,7 +49,7 @@
           (input)="onLocationComplete($event.target.value)"
           placeholder="Location"/>
         <div *ngIf="locationComplete" class="input-autocomplete">
-          <ul class="list">
+          <ul  (window:keydown)="onKey($event)" class="list">
             <li 
               class="item" 
               *ngFor="let loc of locationComplete"
