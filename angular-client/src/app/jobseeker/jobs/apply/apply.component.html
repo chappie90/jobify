@@ -1,5 +1,6 @@
 <div class="container">
   <div class="application">
+    <img (click)="goBack()" class="back-btn" src="./assets/images/back-arrow.svg"/>
     <h2 class="heading-medium">{{ job.job_title }}</h2>
     <h3 class="heading-small margin-bottom">{{ job.company_name }} - {{ job.location }}</h3>
     <p class="margin-bottom">Signed in as <span class="bold">{{ userEmail }}</span></p>

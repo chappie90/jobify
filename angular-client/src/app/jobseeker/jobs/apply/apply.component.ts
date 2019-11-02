@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
 
 import { Job } from '../job.model';
@@ -29,7 +30,8 @@ export class ApplyComponent implements OnInit, OnDestroy {
               private userService: UserService,
               private authService: AuthService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private location: Location) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -111,6 +113,10 @@ export class ApplyComponent implements OnInit, OnDestroy {
                               this.job.company_name,
                               this.job.location,
                               this.job.salary);
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   ngOnDestroy() {
