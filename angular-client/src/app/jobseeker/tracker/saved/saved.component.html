@@ -3,16 +3,16 @@
     <li 
       class="item"  
       *ngFor="let job of savedJobs">
-      <div class="info-conainer">
+      <div class="info-container">
         <div class="item-left">
-      <!--    <img src="./assets/images/1.png" class="jobs-list__img" /> -->
+          <img src="{{'./assets/images/company-logos/' + job.company_logo}}" class="company-logo" />
         </div>
         <div class="item-right">
-          <h3 class="heading-small">{{ job.job_title }}</h3>
-          <h4 class="company-title">{{ job.company_name}}</h4>
+          <h3 class="heading-small job-title">{{ job.job_title }}</h3>
+          <h3 class="heading-small company-title">{{ job.company_name}}</h3>
           <h5 class="heading-extra-small">{{ job.location }}</h5>
-          <h5 class="heading-extra-small">{{ job.date_posted }}</h5>
-        </div>
+          <h5 class="heading-extra-small">{{ job.date_posted | date }}</h5>
+        </div> 
       </div>
       <span (click)="onRemove(job)" class="remove"></span>
     </li>

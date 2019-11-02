@@ -109,7 +109,6 @@ export class JobsItemComponent implements OnInit, OnDestroy {
   }
 
   onSaveJob(jobId) {
-    console.log(jobId);
     if (this.isAuthenticated === false) {
       this.showModal = true;
     }

@@ -28,6 +28,7 @@ export class SavedJobsComponent implements OnInit, OnDestroy {
     this.jobsSub = this.jobsService.getMyJobsUpdateListener().subscribe(
       myJobsData => {
         if (myJobsData.type === 'saved') {
+          console.log(myJobsData);
           this.savedJobs = myJobsData.jobs;
         }
       }
