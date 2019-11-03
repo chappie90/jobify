@@ -28,7 +28,14 @@ export class AppliedJobsComponent implements OnInit, OnDestroy {
     this.jobsSub = this.jobsService.getMyJobsUpdateListener().subscribe(
       myJobsData => {
         if (myJobsData.type === 'applied') {
-          this.appliedJobs = myJobsData.jobs;
+          this.appliedJobs = myJobsData.jobs.map(job => {
+           let appliedDate = myJobsData.appliedJobs.filter(x => x.jobId == job._id);
+           appliedDate = appliedDate[0].applyDate;
+            return {
+              ...job,
+              appliedDate: appliedDate
+            }
+          });
         }
       }
     );

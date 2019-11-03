@@ -144,13 +144,13 @@ export class JobsService {
     if (jobs.type === 'applied') {
       fetchMyJobs = { type: 'applied', myJobs: jobs.myJobs };
     }
-    this.http.post<{ type: string; myJobs: any }>(
+    this.http.post<{ type: string; myJobs: any, applied: any }>(
       API_URL + '/my-jobs', fetchMyJobs
     ).subscribe(response => {
-      console.log(response);
       this.myJobsUpdated.next({
         type: response.type,
-        jobs: [...response.myJobs]
+        jobs: [...response.myJobs],
+        appliedJobs: response.appliedJobs
       });
     });
   }

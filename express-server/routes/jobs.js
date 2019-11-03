@@ -166,9 +166,11 @@ router.post('/my-jobs', (req, res, next) => {
   if (type === 'applied') {
     Job.find({ _id: { $in: myJobs.map(job => job.jobId) }})
     .then(myJobsData => {
+      console.log(myJobs);
       res.status(200).json({
         type: type,
-        myJobs: myJobsData
+        myJobs: myJobsData,
+        appliedJobs: myJobs
       });
     })
     .catch(err => {
