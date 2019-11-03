@@ -1,5 +1,9 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
-<div (window:keydown)="onKey($event)" class="search" [ngClass]="{'search--pristine': !jobsSearch}">
+<div 
+  (window:keydown)="onKeyDown($event)" 
+  (window:keyup)="onKeyUp($event)"
+  class="search" 
+  [ngClass]="{'search--pristine': !jobsSearch}">
   <div class="search__bg"></div>
   <form 
     class="search__form" 

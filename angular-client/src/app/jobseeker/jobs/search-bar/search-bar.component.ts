@@ -395,7 +395,6 @@ export class SearchBarComponent implements OnInit {
   }
 
   onSuggestClick(el) {
-    console.log(el);
     this.form.patchValue({
       location: el
     });
@@ -404,7 +403,6 @@ export class SearchBarComponent implements OnInit {
   }
 
   onLocationFocus() {
-    console.log('fds');
     return;
   }
 
@@ -428,13 +426,44 @@ export class SearchBarComponent implements OnInit {
     this.titleComplete = null;
   }
 
-  onKey(e) {
+  onKeyUp(e) {
+    if (this.locationComplete) {
+      switch (e.keyCode) {
+        case 13: // enter
+          e.preventDefault();
+          const loc = this.locationComplete[this.locationCount - 1];
+          this.form.patchValue({
+            location: loc
+          });
+          this.locationComplete = null;
+          this.locationCount = null;
+        break;
+      }
+    }
+
+    if (this.titleComplete) {
+      switch (e.keyCode) {
+        case 13: // enter
+          e.preventDefault();
+          const title = this.titleComplete[this.titleCount - 1];
+          this.form.patchValue({
+            title: title
+          });
+          this.titleComplete = null;
+          this.titleCount = null;
+        break;
+      }
+    }
+  }
+
+  onKeyDown(e) {
     if (this.locationComplete) {
 
       switch (e.which) {
         case 40: // down 
           this.locationCount = this.locationCount ? this.locationCount : 0;
           this.locationComplete[this.locationCount];
+          console.log(this.locationComplete[this.locationCount]);
           this.locationCount++;
           if (this.locationCount === this.locationComplete.length + 1) {
             this.locationCount = 0;
