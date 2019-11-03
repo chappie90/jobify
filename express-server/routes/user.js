@@ -263,28 +263,29 @@ router.patch('/like',
       });
     });
 });
-// router.post(
-//   '/like/remove',
-//   // checkAuth,
-//   (req, res, next) => {
-//     const skillId = req.body.skillId;
-//     const userId = req.body.userId;
-//     User.findByIdAndUpdate(
-//       { _id: userId },
-//       { $pull: { 'profile.skills': { _id: skillId } } },
-//       { new: true }
-//     ).then(response => {
-//       res.status(200).json({
-//         message: 'Skill removed'
-//       });
-//     }).catch(err => {
-//       console.log(err);
-//       res.status(401).json({
-//         message: 'Could not remove skill'
-//       });
-//     });
-//   }
-// );
+router.post(
+  '/like/remove',
+  // checkAuth,
+  (req, res, next) => {
+    const jobId = req.body.jobId;
+    const userId = req.body.userId;
+    User.findByIdAndUpdate(
+      { _id: userId },
+      { $pull: { 'myJobs.saved': { _id: jobId } } },
+      { new: true }
+    ).then(response => {
+      console.log(response);
+      res.status(200).json({
+        jobId: jobId
+      });
+    }).catch(err => {
+      console.log(err);
+      res.status(401).json({
+        message: 'Could not remove skill'
+      });
+    });
+  }
+);
 
 router.post(
   '/cv/upload',

@@ -15,6 +15,7 @@ import { Job } from '../../jobs/job.model';
 export class SavedJobsComponent implements OnInit, OnDestroy {
   private jobsSub: Subscription;
   private userSub: Subscription;
+  private savedJobsSub: Subscription;
   private savedJobs: Job[];
   private jobStatus: boolean;
   private userId: string;
@@ -32,6 +33,14 @@ export class SavedJobsComponent implements OnInit, OnDestroy {
         if (myJobsData.type === 'saved') {
           console.log(myJobsData);
           this.savedJobs = myJobsData.jobs;
+        }
+      }
+    );
+    this.savedJobsSub = this.userService.getSavedJobsUpdateListener().subscribe(
+      jobUpdate => {
+        if (jobUpdate) {
+          const likedJobs = JSON.parse(this.authService.getAuthData().likedJobs);
+          this.jobsService.getMyJobs({ type: 'saved', myJobs: likedJobs });
         }
       }
     );
@@ -64,10 +73,15 @@ export class SavedJobsComponent implements OnInit, OnDestroy {
     console.log(job);
     const jobId = job._id;
     this.userId = this.authService.getAuthData().userId;
-    const jobStatus = true;
-    let newLikedJobs = this.likedJobs.filter(id => id !== job._id);
-    this.userService.likeJob(jobId, jobStatus, newLikedJobs, this.userId);
+    // const jobStatus = true;
+    // let newLikedJobs = this.likedJobs.filter(id => id !== job._id);
+    // this.userService.likeJob(jobId, jobStatus, newLikedJobs, this.userId);
+    this.userService.removeSavedJob(jobId, this.userId);
   }
+  // onRemoveSkill(skill) {
+  //   this.userService.removeSkill(skill._id, this.userId);
+  // }
+
 
   ngOnDestroy() {
     if (this.jobsSub) {

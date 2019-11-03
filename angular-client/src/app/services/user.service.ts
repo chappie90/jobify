@@ -17,6 +17,7 @@ export class UserService {
   private userEducationUpdated = new Subject<boolean>();
   private userExperienceUpdated = new Subject<boolean>();
   private skillsUpdated = new Subject<boolean>();
+  private savedJobsUpdated = new Subject<boolean>();
   private applyStatus: boolean;
 
   constructor(private http: HttpClient,
@@ -25,7 +26,6 @@ export class UserService {
 
   likeJob(jobId: string, jobStatus: boolean, likedJobs: any, userId: string) {
     const likeJobData = { likedJobs: likedJobs, userId: userId, jobId: jobId, jobStatus: jobStatus };
-    console.log(likeJobData);
     // this.http.patch<{ user: any; likedJobs: any; jobStatus: boolean; jobId: string; updatedJobId: string }>
     this.http.patch<any> 
       (API_URL + '/like', likeJobData).subscribe(
@@ -39,18 +39,18 @@ export class UserService {
       );
   }
 
-  // removeSkill(skillId: string, userId: string) {
-  //   const skillsData = { skillId: skillId, userId: userId };
-  //   this.http.post<any>(
-  //     API_URL + '/profile/skills/remove', skillsData
-  //   ).subscribe(response => {
-  //     const oldSkills = JSON.parse(localStorage.getItem('skills'));
-  //     let newSkills = oldSkills.filter(skill => skill._id !== skillId);
-  //     newSkills = JSON.stringify(newSkills);
-  //     localStorage.setItem('skills', newSkills);
-  //     this.skillsUpdated.next(true);
-  //   });
-  // }
+  removeSavedJob(jobId: string, userId: string) {
+    const jobData = { jobId: jobId, userId: userId };
+    this.http.post<any>(
+      API_URL + '/like/remove', jobData
+    ).subscribe(response => {
+      const oldSavedJobs = JSON.parse(localStorage.getItem('likedJobs'));
+      let newSavedJobs = oldSavedJobs.filter(job => job !== response.jobId);
+      newSavedJobs = JSON.stringify(newSavedJobs);
+      localStorage.setItem('likedJobs', newSavedJobs);
+      this.savedJobsUpdated.next(true);
+    });
+  }
 
   uploadCv(cv: File, userId: string) {
     let cvData = new FormData();
@@ -214,7 +214,7 @@ export class UserService {
     });
   }
 
-   getUserEducationUpdateListener() {
+  getUserEducationUpdateListener() {
     return this.userEducationUpdated.asObservable();
   }
 
@@ -224,6 +224,10 @@ export class UserService {
 
   getSkillsUpdateListener() {
     return this.skillsUpdated.asObservable();
+  }
+
+  getSavedJobsUpdateListener() {
+    return this.savedJobsUpdated.asObservable();
   }
 
   getNotificationsUpdateListener() {
