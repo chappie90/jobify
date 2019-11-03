@@ -1,4 +1,12 @@
 <div class="container">
+  <ul class="list">
+    <li class="item" (click)="applyTab = true">
+      <a class="link" [ngClass]="{'link-active': applyTab}">Application</a>
+    </li>
+    <li class="item" (click)="applyTab = false">
+      <a class="link" [ngClass]="{'link-active': !applyTab}">Job Details</a>
+    </li>
+  </ul>
   <div class="application">
     <img (click)="goBack()" class="back-btn" src="./assets/images/back-arrow.svg"/>
     <h2 class="heading-medium">{{ job.job_title }}</h2>

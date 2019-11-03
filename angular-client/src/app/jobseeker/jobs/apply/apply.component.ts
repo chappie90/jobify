@@ -22,6 +22,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
   cvPreview: string;
   private userId: string;
   private userEmail: string;
+  private applyTab: boolean;
   private authDataAppliedJobs: string;
   private formSubmitted: boolean;
   private cvSelected: boolean;
@@ -34,6 +35,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
               private location: Location) { }
 
   ngOnInit() {
+    this.applyTab = true;
     this.route.queryParams.subscribe(params => {
       const jobId = params.jobId;
       this.jobsService.getJobById(jobId);

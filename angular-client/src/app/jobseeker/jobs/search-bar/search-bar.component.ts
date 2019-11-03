@@ -427,10 +427,10 @@ export class SearchBarComponent implements OnInit {
   }
 
   onKeyUp(e) {
+    e.preventDefault();
     if (this.locationComplete) {
       switch (e.keyCode) {
-        case 13: // enter
-          e.preventDefault();
+        case 13: // enter         
           const loc = this.locationComplete[this.locationCount - 1];
           this.form.patchValue({
             location: loc
@@ -444,7 +444,6 @@ export class SearchBarComponent implements OnInit {
     if (this.titleComplete) {
       switch (e.keyCode) {
         case 13: // enter
-          e.preventDefault();
           const title = this.titleComplete[this.titleCount - 1];
           this.form.patchValue({
             title: title
