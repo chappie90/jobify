@@ -43,6 +43,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
     this.jobSub = this.jobsService.getJobUpdateListener()
       .subscribe(job => {
        this.job = job;
+       console.log(this.job);
       });
     this.form = new FormGroup({
       'name': new FormControl(null, {

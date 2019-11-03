@@ -7,7 +7,7 @@
       <a class="link" [ngClass]="{'link-active': !applyTab}">Job Details</a>
     </li>
   </ul>
-  <div class="application">
+  <div *ngIf="applyTab" class="application">
     <img (click)="goBack()" class="back-btn" src="./assets/images/back-arrow.svg"/>
     <h2 class="heading-medium">{{ job.job_title }}</h2>
     <h3 class="heading-small margin-bottom">{{ job.company_name }} - {{ job.location }}</h3>
@@ -84,5 +84,33 @@
           type="submit"
           class="button submit-btn">Submit application</button>
     </form>
+  </div>
+  <div *ngIf="!applyTab" class="jobs-item">
+    <div class="jobs-item__header">
+      <img src="{{'./assets/images/company-logos/' + job.company_logo}}" class="company-logo" />
+      <div class="jobs-item__header--left">
+        <h2 class="heading-medium">{{ job.job_title }}</h2>
+        <h3 class="heading-small">{{ job.company_name }}</h3>
+        <h3>£{{ job.salary_min }} - {{ job.salary_max }}</h3>
+      </div>
+      <div class="jobs-item__header--right">
+        <h3 class="jobs-item__heading-small">Location</h3>
+        <h3 class="jobs-item__heading-small--bold">{{ job.location }}</h3>
+        <h3 class="jobs-item__heading-small">Job type</h3>
+        <h3 class="jobs-item__heading-small--bold">{{ job.job_type }}</h3>
+        <h3 class="jobs-item__heading-small">Date posted</h3>
+        <h3 class="jobs-item__heading-small--bold">{{ job.date_posted }}</h3>
+        <h3 class="jobs-item__heading-small">Industry</h3>
+        <h3 class="jobs-item__heading-small--bold">{{ job.industry }}</h3>
+      </div>
+    </div>
+    <div class="jobs-item__body">
+      <h3 class="jobs-item__heading-medium--bold">Job Overview</h3>
+      <p>{{ job.job_overview }}</p>
+      <h3 class="jobs-item__heading-medium--bold">Responsibilities and Duties</h3>
+      <p>{{ job.job_responsibilities }}</p>
+      <h3 class="jobs-item__heading-medium--bold">Qualifications</h3>
+      <p>{{ job.job_qualifications }}</p>  
+    </div>
   </div>
 </div>
