@@ -32,6 +32,7 @@
 }
 .heading-extra-small {
   color: $grey;
+  font-weight: 400;
 }
 .btn-container {
   display: flex;
@@ -43,21 +44,29 @@
   padding: .6rem 1rem;
   border-radius: 4px;
   margin: 0 1rem;
+  font-weight: 400;
 }
-.remove::after {
-  display: inline-block;
-  content: '\00d7';
-  font-size: 3rem;
-  font-weight: lighter;
-  color: $grey;
-  border-radius: 50%;
-  width: 3.5rem;
-  height: 3.5rem;
-  text-align: center;
-  cursor: pointer;
-  transition: all .3s;
+.remove-btn {
+  color: $white;
+  background-color: $grey-dark;
+  padding: .6rem 1rem;
+  border-radius: 4px;
+  font-weight: 400;
 }
-.remove:hover::after {
-  background-color: $grey-medium;
-  color: $grey-dark;
-}
+// .remove::after {
+//   display: inline-block;
+//   content: '\00d7';
+//   font-size: 3rem;
+//   font-weight: lighter;
+//   color: $grey;
+//   border-radius: 50%;
+//   width: 3.5rem;
+//   height: 3.5rem;
+//   text-align: center;
+//   cursor: pointer;
+//   transition: all .3s;
+// }
+// .remove:hover::after {
+//   background-color: $grey-medium;
+//   color: $grey-dark;
+// }

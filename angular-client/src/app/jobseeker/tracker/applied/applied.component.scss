@@ -13,7 +13,24 @@
   border-radius: 4px;
   margin-bottom: 2rem;
 }
-
+.info-container {
+  display: flex;
+}
+.company-logo {
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+  margin-right: 1.5rem;
+}
 .heading-extra-small {
   color: $grey;
+  font-weight: 400;
+}
+.job-title {
+  color: $jobseeker-red-dark;
+  font-weight: 400;
+}
+.company-title {
+  margin-bottom: 1rem;
+  font-weight: 400;
 }
