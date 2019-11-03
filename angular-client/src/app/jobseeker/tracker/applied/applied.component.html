@@ -14,7 +14,12 @@
           <h5 class="heading-extra-small">{{ job.date_posted | date }}</h5>
         </div>
       </div>
-      <span class="applied">Applied on {{ job.appliedDate | date }}</span>
+      <div class="applied-wrapper">
+        <img 
+            src="./assets/images/check-symbol.svg" 
+            class="check-icon" />
+        <span class="applied">Applied on {{ job.appliedDate | date }}</span>
+      </div>
     </li>
   </ul>
 </div>

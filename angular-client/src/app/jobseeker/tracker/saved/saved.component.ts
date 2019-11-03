@@ -61,6 +61,7 @@ export class SavedJobsComponent implements OnInit, OnDestroy {
   }
 
   onRemove(job) {
+    console.log(job);
     const jobId = job._id;
     this.userId = this.authService.getAuthData().userId;
     const jobStatus = true;

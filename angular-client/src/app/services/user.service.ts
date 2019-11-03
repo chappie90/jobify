@@ -25,6 +25,7 @@ export class UserService {
 
   likeJob(jobId: string, jobStatus: boolean, likedJobs: any, userId: string) {
     const likeJobData = { likedJobs: likedJobs, userId: userId, jobId: jobId, jobStatus: jobStatus };
+    console.log(likeJobData);
     // this.http.patch<{ user: any; likedJobs: any; jobStatus: boolean; jobId: string; updatedJobId: string }>
     this.http.patch<any> 
       (API_URL + '/like', likeJobData).subscribe(
@@ -37,6 +38,19 @@ export class UserService {
         }
       );
   }
+
+  // removeSkill(skillId: string, userId: string) {
+  //   const skillsData = { skillId: skillId, userId: userId };
+  //   this.http.post<any>(
+  //     API_URL + '/profile/skills/remove', skillsData
+  //   ).subscribe(response => {
+  //     const oldSkills = JSON.parse(localStorage.getItem('skills'));
+  //     let newSkills = oldSkills.filter(skill => skill._id !== skillId);
+  //     newSkills = JSON.stringify(newSkills);
+  //     localStorage.setItem('skills', newSkills);
+  //     this.skillsUpdated.next(true);
+  //   });
+  // }
 
   uploadCv(cv: File, userId: string) {
     let cvData = new FormData();

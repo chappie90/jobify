@@ -238,12 +238,10 @@ router.patch('/like',
   const userId = req.body.userId;
   const likedJobs = req.body.likedJobs;
   const jobStatus = req.body.jobStatus;
+  console.log(likedJobs);
   User.findByIdAndUpdate(
     { _id: userId }, 
-    { myJobs: { 
-        saved: likedJobs
-      }
-    },
+    { 'myJobs.saved': likedJobs },
     {new: true}
   ).then(user => {
       if (user) {
@@ -265,6 +263,28 @@ router.patch('/like',
       });
     });
 });
+// router.post(
+//   '/like/remove',
+//   // checkAuth,
+//   (req, res, next) => {
+//     const skillId = req.body.skillId;
+//     const userId = req.body.userId;
+//     User.findByIdAndUpdate(
+//       { _id: userId },
+//       { $pull: { 'profile.skills': { _id: skillId } } },
+//       { new: true }
+//     ).then(response => {
+//       res.status(200).json({
+//         message: 'Skill removed'
+//       });
+//     }).catch(err => {
+//       console.log(err);
+//       res.status(401).json({
+//         message: 'Could not remove skill'
+//       });
+//     });
+//   }
+// );
 
 router.post(
   '/cv/upload',
@@ -340,7 +360,7 @@ router.post(
       const appliedNotification = `Congratulations! You have successfully applied for the role of ${jobTitle}!`;
       User.findByIdAndUpdate(
           { _id: userId }, 
-          { myJobs: { applied: appliedJobs},
+          { 'myJobs.applied': appliedJobs,
             $inc: { newNotifications: 1 },
             $push: { notifications: { 
                                       date: new Date(), 

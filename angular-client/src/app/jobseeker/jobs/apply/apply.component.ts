@@ -35,6 +35,7 @@ export class ApplyComponent implements OnInit, OnDestroy {
               private location: Location) { }
 
   ngOnInit() {
+    // Nora is annoying me!
     this.applyTab = true;
     this.route.queryParams.subscribe(params => {
       const jobId = params.jobId;
