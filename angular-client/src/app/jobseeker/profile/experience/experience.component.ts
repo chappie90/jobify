@@ -51,12 +51,13 @@ export class ExperienceComponent implements OnInit {
     this.experienceArray = JSON.parse(localStorage.getItem('experience'));
     this.experienceArray.map(
             item => {
-              let fromDate = new Date(item.from);
-              let toDate = new Date(item.to);
+              console.log(item.to_date)
+              let fromDate = new Date(item.from_date);
+              let toDate = item.to_date ? new Date(item.to_date) : 'Present';
               return {
                 ...item,
-                from: fromDate,
-                to: toDate
+                from_date: fromDate,
+                to_date: toDate
               }
             }
     );
@@ -69,12 +70,12 @@ export class ExperienceComponent implements OnInit {
           this.experienceArray = JSON.parse(localStorage.getItem('experience'));
           this.experienceArray.map(
             item => {
-              let fromDate = new Date(item.from);
-              let toDate = new Date(item.to);
+              let fromDate = new Date(item.from_date);
+              let toDate = item.to_date ? new Date(item.to_date) : 'Present';
               return {
                 ...item,
-                  from: fromDate,
-                  to: toDate
+                  from_date: fromDate,
+                  to_date: toDate
                 }
             }
           );

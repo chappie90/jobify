@@ -95,7 +95,6 @@ export class EducationComponent implements OnInit {
     if (this.form.invalid) {    
       return;
     }
-    console.log(this.educationArray);
     if (this.educationArray.length !== 0 && !this.currentForm) {
       this.formGroupId = this.educationArray.length + 1;  
     } else if (this.educationArray.length !== 0) {

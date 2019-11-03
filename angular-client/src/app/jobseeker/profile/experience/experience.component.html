@@ -99,10 +99,9 @@
           src="./assets/images/check-symbol.svg" 
           class="check-icon" />
           <div class="experience-details">
-            <span class="experience-field">{{ e.title }}</span>
+            <span class="experience-field title">{{ e.title }}</span>
             <span class="experience-field">{{ e.company }}, {{ e.location }}</span>
-            <span class="experience-field">{{ e.description }}</span>
-            <span class="experience-field date">{{ e.from | date: 'longDate' }} - {{ e.to | date: 'longDate' }}</span>
+            <span class="experience-field date">{{ e.from_date | date: 'longDate' }} - {{ e.to_date | date: 'longDate' }}</span>
             <span class="experience-field">{{ e.description }}</span>
           </div>
           <span 

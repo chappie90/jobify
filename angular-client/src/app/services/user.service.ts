@@ -142,6 +142,7 @@ export class UserService {
 
   updateExperience(formGroupId: string, formData: any,userId: string) {
     const experienceData = { formGroupId: formGroupId, formData: formData, userId: userId };
+    console.log(experienceData);  
     this.http.post<any>(
       API_URL + '/profile/experience', experienceData
     ).subscribe(response => {
