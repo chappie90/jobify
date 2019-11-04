@@ -116,6 +116,7 @@ export class EducationComponent implements OnInit {
   onFormEdit(e) {
     this.editMode = !this.editMode;
     if (this.editMode) {
+      console.log(e);
       this.currentForm = e._id;
       let fromDate = new Date(e.from_date).toISOString().substring(0, 10);
       let toDate = new Date(e.to_date).toISOString().substring(0, 10);

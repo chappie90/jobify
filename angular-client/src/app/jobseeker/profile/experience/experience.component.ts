@@ -118,16 +118,17 @@ export class ExperienceComponent implements OnInit {
   onFormEdit(e) {
     this.editMode = !this.editMode;
     if (this.editMode) {
+      console.log(e);
       this.currentForm = e._id;
-      let fromDate = new Date(e.from).toISOString().substring(0, 10);
-      let toDate = new Date(e.to).toISOString().substring(0, 10);
+      let fromDate = new Date(e.from_date).toISOString().substring(0, 10);
+      let toDate = new Date(e.to_date).toISOString().substring(0, 10);
       this.form.patchValue({
         'title': e.title,
         'company': e.company,
         'location': e.location,
         'description': e.description,
-        'from': fromDate,
-        'to': toDate,
+        'from_date': fromDate,
+        'to_date': toDate,
         'currentRole': e.currentRole
       });
     }
