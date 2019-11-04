@@ -1,5 +1,5 @@
 <div class="container">
-  <button type="button" class="add-btn" (click)="onAddExperience()">Add Experience<span> +</span></button>
+  <button type="button" class="add-btn" (click)="onAddExperience()">Add Experience</button>
   <form
     *ngIf="editMode" 
     [formGroup]="form" 
@@ -96,9 +96,10 @@
       <li 
         class="item"
         *ngFor="let e of experienceArray; let i = index">
-         <img 
+         <!-- <img 
           src="./assets/images/check-symbol.svg" 
-          class="check-icon" />
+          class="check-icon" /> -->
+          <img src="./assets/images/work-2.svg" class="icon" />
           <div class="experience-details">
             <span class="experience-field title">{{ e.title }}</span>
             <span class="experience-field">{{ e.company }}, {{ e.location }}</span>
