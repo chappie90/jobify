@@ -131,7 +131,7 @@
   right: 4.5rem;
   cursor: pointer;
   border-radius: 50%;
-  background-color: $grey;
+  // background-color: $grey;
   transition: all .3s;
 
   &:hover {
@@ -146,6 +146,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.edit-icon-wrapper-edit-mode {
+  background-color: $grey;
 }
 .delete-icon-wrapper {
   width: 3.4rem;

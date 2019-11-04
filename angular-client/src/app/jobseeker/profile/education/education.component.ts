@@ -18,11 +18,13 @@ export class EducationComponent implements OnInit {
   educationArray: any;
   editMode: boolean;
   currentForm: string;
+ // imgArr: any;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService) {}
 
   ngOnInit() {
+   // this.imgArr = ['scholarship-4.svg', 'scholarship-4.svg', 'school.svg'];
     this.form = new FormGroup({
       school: new FormControl(null, {
          validators: [Validators.required]
@@ -104,6 +106,9 @@ export class EducationComponent implements OnInit {
       this.formGroupId = 1;
       this.editMode = true;
     }
+    console.log(this.formGroupId);
+    console.log(this.educationArray);
+    console.log(this.currentForm);
     let formGroupData = this.form.value;
     this.userService.updateEducation(this.formGroupId, formGroupData, this.userId);
   }

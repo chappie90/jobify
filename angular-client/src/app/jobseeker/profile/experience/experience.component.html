@@ -7,7 +7,8 @@
     (submit)="onFormSubmit()">
         <span 
           (click)="onFormEdit()" 
-          class="edit-icon-wrapper"> 
+          class="edit-icon-wrapper"
+          [ngClass]="{'edit-icon-wrapper-edit-mode': editMode}"> 
           <img src="./assets/images/edit-3.svg" class="edit-icon" />
         </span>
         <div class="row">

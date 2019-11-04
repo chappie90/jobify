@@ -86,9 +86,8 @@
       <li 
         class="item"
         *ngFor="let e of educationArray; let i = index">
-         <img 
-          src="./assets/images/check-symbol.svg" 
-          class="check-icon" />
+          <!-- img src="./assets/images/{{imgArr[i]}}" class="icon" /> -->
+          <img src="./assets/images/hat.svg" class="icon" />
           <div class="education-details">
             <span class="education-field school">{{ e.school }}</span>
             <span class="education-field">{{ e.degree }}, {{ e.field_study }}, {{ e.grade }}</span>

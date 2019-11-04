@@ -238,7 +238,6 @@ router.patch('/like',
   const userId = req.body.userId;
   const likedJobs = req.body.likedJobs;
   const jobStatus = req.body.jobStatus;
-  console.log(likedJobs);
   User.findByIdAndUpdate(
     { _id: userId }, 
     { 'myJobs.saved': likedJobs },
@@ -274,7 +273,6 @@ router.post(
       { $pull: { 'myJobs.saved': { _id: jobId } } },
       { new: true }
     ).then(response => {
-      console.log(response);
       res.status(200).json({
         jobId: jobId
       });
@@ -636,7 +634,6 @@ router.post(
       { $pull: { 'profile.education': { _id: formGroupId  } } },
       { new: true }
     ).then(user => {
-      console.log(user);
       res.status(200).json({
         education: user.profile.education
       });
@@ -656,13 +653,14 @@ router.post(
     const formGroupId = req.body.formGroupId;
     const formData = req.body.formData;
     const userId = req.body.userId;
+    console.log(formGroupId);
     User.find(
       { _id: userId,
         'profile.education.id': formGroupId 
       }
     ).then(user => {
-      console.log('test');
       if (user.length !== 0) {
+        console.log('exists');
         User.findOneAndUpdate(
           { _id: userId, 'profile.education.id': formGroupId },
           {
@@ -687,6 +685,7 @@ router.post(
           });
         });
       } else {
+        console.log('add new');
         User.findOneAndUpdate(
           { _id: userId },
           { $addToSet: {
@@ -739,7 +738,6 @@ router.post(
       },
       { new: true }
     ).then(user => {
-      console.log(user);
       res.status(200).json({
         skills: user.profile.skills
       });
@@ -785,7 +783,6 @@ router.post(
       { new: true }
     ).then(user => {
       if (user) {
-        console.log(user);
         res.status(200).json({
           notifications: user.notifications,
           newNotifications: user.newNotifications
