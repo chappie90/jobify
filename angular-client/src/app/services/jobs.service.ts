@@ -21,7 +21,7 @@ export class JobsService {
   private jobSelected = new Subject<{ job: Job }>();
   private jobUpdated = new Subject<{ job: Job }>();
   private titlesUpdated = new Subject<{ jobs: any }>();
-
+  
   constructor(private http: HttpClient,
               private authService: AuthService) {}
 

@@ -1,1 +1,45 @@
 @import '~src/styles.scss';
+
+.container {
+  padding: 12rem 2rem 3rem;
+}
+.card {
+  margin: auto;
+  width: 40rem;
+  height: 23rem;
+  background-color: $employer-green;
+  border-radius: 14px;
+}
+.chip {
+  position: relative;
+  top: 6rem;
+  left: 3rem;
+  background-color: #ffcc00;
+  width: 6rem;
+  height: 4.5rem;
+  border-radius: 15%;
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+}
+.chip-left-pattern {
+  height: 70%;
+  width: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-right: 4px solid #de9703;
+}
+.chip-right-pattern {
+  height: 70%;
+  width: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-left: 4px solid #de9703;
+}
+.chip-line {
+  height: 4px;
+  width: 100%;
+  background-color: #de9703;
+}

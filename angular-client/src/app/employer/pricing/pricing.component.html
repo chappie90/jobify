@@ -1,1 +1,26 @@
-<h1>Pricing component</h1>
+<div class="container">
+  <div class="card">
+    <div class="chip">
+      <div class="chip-left-pattern">
+        <span class="chip-line"></span>
+        <span class="chip-line"></span>
+        <span class="chip-line"></span>
+      </div>
+      <div class="chip-right-pattern">
+        <span class="chip-line"></span>
+        <span class="chip-line"></span>
+        <span class="chip-line"></span>
+      </div>
+    </div>
+  </div>
+  <form #checkout="ngForm" (ngSubmit)="onSubmit(checkout)" class="checkout">
+    <div class="form-row">
+      <label for="card-info">Card Info</label>
+      <div id="card-info" #cardInfo></div>
+
+      <div id="card-errors" role="alert" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <button type="submit">Pay $777</button>
+  </form>
+</div>

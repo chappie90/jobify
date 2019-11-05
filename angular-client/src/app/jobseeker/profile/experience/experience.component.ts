@@ -10,17 +10,17 @@ import { UserService } from '../../../services/user.service';
   selector: 'app-experience',
   templateUrl: './experience.component.html',
   styleUrls: ['./experience.component.scss'],
-  animations: [
-    trigger('slideInOut', [
-      transition(':enter', [
-        style({transform: 'translateY(-100%)'}),
-        animate('200ms ease-in', style({transform: 'translateY(0%)'}))
-      ]),
-      transition(':leave', [
-        animate('200ms ease-in', style({transform: 'translateY(-100%)'}))
-      ])
-    ])
-  ]
+  // animations: [
+  //   trigger('slideInOut', [
+  //     transition(':enter', [
+  //       style({transform: 'translateX(-20rem)'}),
+  //       animate('100ms ease-in', style({transform: 'translateX(0)'}))
+  //     ]),
+  //     transition(':leave', [
+  //       animate('100ms ease-in', style({transform: 'translateX(-20rem)'}))
+  //     ])
+  //   ])
+  // ]
 })
 export class ExperienceComponent implements OnInit {
   form: FormGroup;

@@ -1,25 +1,15 @@
 @import '~src/styles.scss';
 
-// @keyframes slide-right {
-//     0% {
-//         opacity: 0;
-//         transform: translateX(-5rem);
-//     }
-//     100% {
-//         opacity: 1;
-//         transform: translateX(0);
-//     }
-// }
-// @keyframes slide-away {
-//     0% {
-//         opacity: 1;
-//         transform: translateX(0);
-//     }
-//     100% {
-//         opacity: 0;
-//         transform: translateX(20rem);
-//     }
-// }
+@keyframes slide-right {
+    0% {
+        opacity: 0;
+        transform: translateX(-5rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 .container {
   display: flex;
   align-items: flex-start;
@@ -45,7 +35,7 @@
   -webkit-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
   -moz-box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
   box-shadow: 4px 4px 14px -1px rgba(0,0,0,0.26);
-  transition: all .5s;
+   animation: slide-right .4s ease;
 }
 
 .row {
@@ -131,10 +121,6 @@
   color: $grey;
   font-size: 1.5rem;
   margin-bottom: 2.5rem;
-}
-.icon {
-  width: 5rem;
-  margin-right: 3rem;
 }
 .edit-icon-wrapper {
   width: 3.4rem;
@@ -234,4 +220,8 @@
     opacity: 0;
     transition: all .3s;
   } 
+}
+.icon {
+  width: 5rem;
+  margin-right: 3.5rem;
 }

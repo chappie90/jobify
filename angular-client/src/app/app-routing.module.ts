@@ -49,11 +49,10 @@ const routes: Routes = [
     { path: 'saved', component: SavedJobsComponent }
   ] },
   { path: 'account', component: AccountComponent },
-  { path: 'employer', component: EmployerComponent, children: [
-    { path: 'products', component: ProductsComponent },
-    { path: 'pricing', component: PricingComponent },
-    { path: 'post-job', component: PostJobComponent }
-  ] }
+  { path: 'employer', component: EmployerComponent },
+  { path: 'employer/products', component: ProductsComponent },
+  { path: 'employer/pricing', component: PricingComponent },
+  { path: 'employer/post-job', component: PostJobComponent }
 ];
 
 @NgModule({

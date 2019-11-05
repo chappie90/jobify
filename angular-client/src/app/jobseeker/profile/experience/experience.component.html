@@ -4,7 +4,6 @@
     [formGroup]="form" 
     class="edit-form-group"
     *ngIf="editMode" 
-    [@slideInOut]
     (submit)="onFormSubmit()">
         <span 
           (click)="onFormEdit()" 
@@ -92,7 +91,9 @@
          </div>
             <button  type="submit" class="submit-btn">Save Experience</button>
   </form>
-  <div *ngIf="!editMode" class="experience-timeline">
+  <div 
+    *ngIf="!editMode"
+    class="experience-timeline">
     <ul class="list">
       <li 
         class="item"
