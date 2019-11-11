@@ -5,6 +5,7 @@ const serveIndex = require('serve-index');
 
 const userRoutes = require('./routes/user');
 const jobsRoutes = require('./routes/jobs');
+const employerRoutes = require('./routes/employer');
 
 const app = express();
 
@@ -30,6 +31,6 @@ mongoose.connect('mongodb+srv://stoyangarov:' + process.env.MONGO_ATLAS_PW + '@e
   
   app.use('/api/jobs', jobsRoutes);
   app.use('/api/user', userRoutes);
-
+  app.use('/api/employer', employerRoutes);
 
 module.exports = app;
