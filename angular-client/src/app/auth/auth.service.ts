@@ -57,20 +57,46 @@ export class AuthService {
         date.getTime() + tokenExpiration * 1000
       );
       this.saveAuthData(this.token, 
-                            tokenExpireDate, 
-                            this.userId, 
-                            this.userEmail, 
-                            userType,
-                            likedJobs, 
-                            appliedJobs, 
-                            notifications,
-                            newNotifications,
-                            cv,
-                            cvName,
-                            summary,
-                            experience,
-                            education,
-                            avatar);
+                        tokenExpireDate, 
+                        this.userId, 
+                        this.userEmail, 
+                        userType,
+                        likedJobs, 
+                        appliedJobs, 
+                        notifications,
+                        newNotifications,
+                        cv,
+                        cvName,
+                        summary,
+                        experience,
+                        education,
+                        avatar);
+      this.router.navigate(['/']);
+    }
+  }
+
+  newEmployerSession(employerData: any) {
+    console.log(employerData);
+    this.token = employerData.token;
+    if (this.token) {
+      const tokenExpiration = employerData.expiresIn;
+      this.logoutOnTokenExpire(tokenExpiration);
+      this.isAuthenticated = true;
+      this.authStatusListener.next(true);
+      this.userId = employerData.employerId;
+      this.userEmail = employerData.employerEmail;
+      const userType = employerData.userType;
+      const postedJobs = JSON.stringify(employerData.postedJobs);
+      const date = new Date();
+      const tokenExpireDate = new Date(
+        date.getTime() + tokenExpiration * 10000
+      );
+      this.saveEmployerAuthData(this.token,
+                                tokenExpireDate,
+                                this.userId,
+                                this.userEmail,
+                                userType,
+                                postedJobs);
       this.router.navigate(['/']);
     }
   }
@@ -88,7 +114,12 @@ export class AuthService {
     this.http.post<any>
     (API_URL + route, userData).subscribe(
       response => {
-        this.newUserSession(response); 
+        if (response.userType === 'employer') {
+          this.newEmployerSession(response);
+        }
+        if (response.userType === 'jobseeker') {
+          this.newUserSession(response); 
+        }
       },
       error => {
         // console.log(error);
@@ -102,7 +133,6 @@ export class AuthService {
     this.http.post<any>
       (API_URL + '/user' + '/login', loginData).subscribe(
       response => {
-        console.log(response);
         this.newUserSession(response);
       },
       error => {
@@ -171,6 +201,20 @@ export class AuthService {
     localStorage.setItem('experience', experience);
     localStorage.setItem('education', education);
     localStorage.setItem('avatar', avatar);
+  }
+
+  saveEmployerAuthData(token: string,
+                       tokenExpirationDate: Date,
+                       userId: string,
+                       userEmail: string,
+                       userType: string,
+                       postedJobs) {
+    localStorage.setItem('token', token);
+    localStorage.setItem('tokenExpirationDate', tokenExpirationDate.toISOString());
+    localStorage.setItem('userId', userId);
+    localStorage.setItem('userEmail', userEmail);
+    localStorage.setItem('userType', userType);
+    localStorage.setItem('postedJobs', postedJobs);
   }
 
   getAuthData() {
