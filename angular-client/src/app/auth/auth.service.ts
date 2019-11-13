@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { User } from './user.model';
 
-const API_URL = environment.API + '/user'; 
+const API_URL = environment.API; 
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -75,11 +75,18 @@ export class AuthService {
     }
   }
 
-  createUser(email: string, password: string, type: string) {
-    const userData = { email: email, password: password, type: type };
+  createUser(email: string, password: string, type: string, company: string, ...args) {
+    let route;
+    if (type === 'jobseeker') {
+      route = '/user/signup';
+    }
+    if (type === 'employer') {
+      route = '/employer/signup';
+    }
+    const userData = { email: email, password: password, type: type, company: company };
     // this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any}>
     this.http.post<any>
-    (API_URL + '/signup', userData).subscribe(
+    (API_URL + route, userData).subscribe(
       response => {
         this.newUserSession(response); 
       },
@@ -93,7 +100,7 @@ export class AuthService {
   login(email: string, password: string) {
     const loginData = { email: email, password: password };
     this.http.post<any>
-      (API_URL + '/login', loginData).subscribe(
+      (API_URL + '/user' + '/login', loginData).subscribe(
       response => {
         console.log(response);
         this.newUserSession(response);
@@ -107,7 +114,7 @@ export class AuthService {
   googleSignIn(email: string, token: string, type: string) {
     const googleSigninData = { email: email, token: token, type: 'jobseeker' };
     this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any }>
-      (API_URL + '/google-login', googleSigninData).subscribe(
+      (API_URL + '/user' + '/google-login', googleSigninData).subscribe(
         response => {
           this.newUserSession(response);
         },

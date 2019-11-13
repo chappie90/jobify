@@ -116,7 +116,7 @@ export class SignupFormComponent implements OnInit, AfterViewInit, OnDestroy {
       this.formSubmitted = true;
       return;
     }
-    this.authService.createUser(form.value.email, form.value.password, 'employer');
+    this.authService.createUser(form.value.email, form.value.password, 'employer', form.value.company);
   }
 
   ngAfterViewInit() {

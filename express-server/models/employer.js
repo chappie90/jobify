@@ -13,6 +13,6 @@ const employerSchema = mongoose.Schema({
   ],
 });
 
-employerSchema.plungin(uniqueValidator);
+employerSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('Employer', employerSchema);
