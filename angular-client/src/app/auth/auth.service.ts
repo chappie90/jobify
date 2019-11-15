@@ -71,7 +71,7 @@ export class AuthService {
                         experience,
                         education,
                         avatar);
-      this.router.navigate(['/']);
+      this.router.navigate(['/jobs']);
     }
   }
 
@@ -96,7 +96,7 @@ export class AuthService {
                                 this.userEmail,
                                 userType,
                                 postedJobs);
-      this.router.navigate(['/']);
+      this.router.navigate(['/employer/post-job']);
     }
   }
 
