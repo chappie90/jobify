@@ -32,7 +32,7 @@ export class AuthService {
     return this.authStatusListener.asObservable();
   }
 
-  newUserSession(userData: any) {
+  newJobseekerSession(userData: any) {
     this.token = userData.token;
     if (this.token) {
       const tokenExpiration = userData.expiresIn;
@@ -56,7 +56,7 @@ export class AuthService {
       const tokenExpireDate = new Date(
         date.getTime() + tokenExpiration * 1000
       );
-      this.saveAuthData(this.token, 
+      this.saveJobseekerAuthData(this.token, 
                         tokenExpireDate, 
                         this.userId, 
                         this.userEmail, 
@@ -117,7 +117,7 @@ export class AuthService {
           this.newEmployerSession(response);
         }
         if (response.userType === 'jobseeker') {
-          this.newUserSession(response); 
+          this.newJobseekerSession(response); 
         }
       },
       error => {
@@ -132,7 +132,7 @@ export class AuthService {
     this.http.post<any>
       (API_URL + '/user' + '/login', loginData).subscribe(
       response => {
-        this.newUserSession(response);
+        this.newJobseekerSession(response);
       },
       error => {
         this.authStatusListener.next(false);
@@ -145,7 +145,7 @@ export class AuthService {
     this.http.post<{ token: string; expiresIn: number; userId: string; likedJobs: any; appliedJobs: any; notifications: any }>
       (API_URL + '/user' + '/google-login', googleSigninData).subscribe(
         response => {
-          this.newUserSession(response);
+          this.newJobseekerSession(response);
         },
         error => {
           this.authStatusListener.next(false);
@@ -170,7 +170,7 @@ export class AuthService {
     }, duration * 1000);
   }
 
-  saveAuthData(token: string, 
+  saveJobseekerAuthData(token: string, 
               tokenExpirationDate: Date, 
               userId: string, 
               userEmail: string, 
