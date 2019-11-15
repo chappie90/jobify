@@ -23,7 +23,6 @@ router.post('/signup', (req, res, next) => {
       });
       employer.save()
         .then(newEmployer => {
-          console.log(newEmployer);
           let token = jwt.sign(
             { email: newEmployer.email, employerId: newEmployer._id },
             process.env.JWT_KEY,

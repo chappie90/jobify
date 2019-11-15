@@ -76,7 +76,6 @@ export class AuthService {
   }
 
   newEmployerSession(employerData: any) {
-    console.log(employerData);
     this.token = employerData.token;
     if (this.token) {
       const tokenExpiration = employerData.expiresIn;
@@ -257,11 +256,13 @@ export class AuthService {
   }
 
   clearAuthData() {
+    // All user types data
     localStorage.removeItem('token');
     localStorage.removeItem('tokenExpirationDate');
     localStorage.removeItem('userId');
     localStorage.removeItem('userEmail');
     localStorage.removeItem('userType');
+    // Jobseeker user data
     localStorage.removeItem('likedJobs');
     localStorage.removeItem('appliedJobs');
     localStorage.removeItem('notifications');
@@ -272,6 +273,9 @@ export class AuthService {
     localStorage.removeItem('experience');
     localStorage.removeItem('education');
     localStorage.removeItem('avatar');
+    localStorage.removeItem('skills');
+    // Employer user data
+    localStorage.removeItem('postedJobs');
   }
 
 
