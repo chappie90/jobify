@@ -1,2 +1,2 @@
 # jobify
-Angular and Express jobs advertising platform
+Angular (Typescript) and Express jobs advertising platform
